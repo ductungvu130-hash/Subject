@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+/* Highlights */
+.highlights {
+    width: 550px;
+    /* border: 1px solid red; */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 40px;
+}
+.highlights > h5,
+.highlights > h1,
+.grey-time-sport {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.highlights > h5 > a {
+    text-decoration: none;
+    color: rgb(11, 98, 228);
+}
+.highlights > h1 > i {
+    color: rgb(166, 168, 167);
+}
+.highlights > h1 > a {
+    text-decoration: none;
+    color: #000;
+}
+.time {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: rgb(166, 168, 167);
+}
+.sport-type {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: gray;
+}
+.news > ul > li > a {
+    text-decoration: none;
+    color: #000;
+}
+.news > ul {
+    padding-bottom: 0px;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-right: 15px;
+    border-top: 1px dashed gray;
+    line-height: 30px;
+    margin-bottom: 0px;
+}
+.news > ul > li > a > i {
+    color: rgb(166, 168, 167);
+}
+
+/* Deals */
+.deal {
+    width: 550px;
+    /* border: 1px solid red; */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+.deal > h1 > a {
+    text-decoration: none;
+    color: #000;
+}
+.deal > h1 {
+    margin: 0;
+}
+img {
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 50%;
+}
+.deal > div {
+    display: flex;
+    align-items: center;
+}
+.deal > div > a {
+    color: rgb(28, 121, 241);
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: 700;
+}
+.deal > div > p {
+    color: rgb(166, 168, 167);
+}

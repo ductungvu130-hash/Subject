@@ -1,0 +1,309 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "VDT_Y[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Y[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Y[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Y[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Y[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Y[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Y[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Y[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_S[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A0[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A1[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A2[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A3[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_S[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_S[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A6[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A7[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A4[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A5[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A0[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A3[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A6[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A7[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A4[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A5[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A0[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A3[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A6[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A7[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A4[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A5[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A0[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A3[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A6[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A7[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A4[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A5[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A0[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A3[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A6[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A7[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A4[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A5[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A0[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A3[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A6[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A7[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A4[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A5[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A0[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A3[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A6[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A7[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A4[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A5[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A0[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A3[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A6[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A7[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A4[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A5[0]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student List</title>
+        <style>
+            main {
+                width: 250px;
+                padding: 10px 0 0 50px; 
+            }
+            .each-item {
+                margin-bottom: 20px;
+                display: flex;
+                gap: 5px;
+            }
+            button {
+                width: 100%;
+            }
+            table,
+            th,
+            td {
+                border: 1px solid #000;
+                border-collapse: collapse;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h2>Student Management</h2>
+            <div class="all-buttons">
+                <div class="each-item">
+                    <button onclick="reload()">Reset Table</button>
+                </div>
+
+                <div class="each-item">
+                    <input type="text" placeholder="Add head" id="newStudentHead" />
+                    <button onclick="add('head')">ADD</button>
+                </div>
+
+                <div class="each-item">
+                    <input type="text" placeholder="Add tail" id="newStudentTail" />
+                    <button onclick="add('tail')">ADD</button>
+                </div>
+
+                <div class="each-item">
+                    <input type="text" placeholder="Change name at index 2" id="changeName" />
+                    <button onclick="change()">CHANGE</button>
+                </div>
+
+                <div class="each-item">
+                    <input type="text" placeholder="Search name" id="searchName" />
+                    <button onclick="search()">SEARCH</button>
+                </div>
+
+                <div class="each-item">
+                    <button onclick="erase()">Delete name at index 4</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <th>#</th>
+                    <th>Name</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </main>
+
+        <script>
+            let students = ["AAAAAA", "DDDDDD", "BBBBBB", "EEEEEE", "CCCCCC"];
+
+            function reload(data = students) {
+                data.sort((a, b) => a.localeCompare(b));
+                const tbody = document.querySelector("tbody");
+                tbody.innerHTML = "";
+                for (let index in data) {
+                    let row = `<tr><td>${index}</td><td>${data[index]}</td></tr>`;
+                    tbody.innerHTML += row;
+                }
+            }
+
+            function add(position) {
+                if (position === "head") {
+                    let name = document.getElementById("newStudentHead").value.trim();
+                    students.unshift(name);
+                    document.getElementById("newStudentHead").value = "";
+                } else {
+                    let name = document.getElementById("newStudentTail").value.trim();
+                    students.push(name);
+                    document.getElementById("newStudentTail").value = "";
+                }
+                reload();
+            }
+
+            function change() {
+                let name = document.getElementById("changeName").value.trim();
+                if (name === "" || students.length <= 2) return;
+                students[2] = name;
+                document.getElementById("changeName").value = "";
+                reload();
+            }
+
+            function search() {
+                let keyword = document.getElementById("searchName").value.trim().toLowerCase();
+                if (!keyword) return;
+                let result = students.filter((name) => name.toLowerCase().includes(keyword));
+                document.getElementById("searchName").value = "";
+                reload(result);
+            }
+
+            function erase() {
+                if (students.length > 4) {
+                    students.splice(4, 1);
+                    reload();
+                }
+            }
+
+            reload();
+        </script>
+    </body>
+</html>

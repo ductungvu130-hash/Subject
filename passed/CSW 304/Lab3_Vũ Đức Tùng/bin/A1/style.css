@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.table{
+    width: 500px;
+    border: 1px;
+    background-color: #EEEEEE ;
+    margin: 5px;
+    border: 2px solid rgb(182, 179, 179);
+}
+
+th, td{
+    padding: 3px ;
+    padding-right: 20px;
+    text-align: left;
+
+}
+
+.greendot{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: green;
+    display: inline-block;
+}
+
+.id{
+    margin-top: 5px;
+    margin-left: 5px;
+    font-weight: 600;
+    color: grey;
+}
+
+.time{
+    color: grey;
+}
+.action{
+    color: grey;
+}
+.headtable{
+    padding: auto;
+    margin: auto;
+    align-self: left;
+}
+
+.active{
+    color: red;
+    font-weight: bold;
+}
+
+.email{
+    color: #7E57FD;
+}
+
+.name{
+    text-decoration: none;
+    color: #7E57FD;
+
+}
+
+.status{
+    color: #FF8800;
+    font-weight: bold;
+}
+
+.headtable{
+    font-style: italic;
+}
+
+.link{
+    text-decoration: none;
+    color: #7E57FD;
+}

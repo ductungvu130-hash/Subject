@@ -1,0 +1,280 @@
+﻿  Andre van der Hoek
+  Calvin Lee
+  Emily Oh Navarro
+An
+Bat dau luot choi moi tu day
+Bat dau nhanh moi tu day
+Biet coding standard
+Bo chon tat ca
+Chao mung!
+Checklist:
+Chi ph\u00ED
+Chon nguoi tham gia
+Chon tat ca
+Chon vai tro de choi:
+Chon vai tro hanh dong
+Coding standard:
+Cong cu lap trinh:
+Cong cu ngon ngu:
+Cong cu quan ly cau hinh:
+Cong cu refactor:
+Cong cu test tu dong:
+Cong cu testing:
+Cong cu thiet ke:
+Cong cu thu thap yeu cau:
+Cong cu yeu cau:
+CRC card:
+Da khoi tao
+Da mua
+Da uu tien
+Dai dien khach hang:
+Dang chon user story cho iteration
+Dang dac ta yeu cau
+Dang duoc inspection
+Dang duoc su dung
+Dang hoc coding standard
+Dang inspection code
+Đang inspection code
+Dang kiem thu chap nhan
+Đang kiểm thử hệ thống
+Đang làm thiết kế
+Đang làm yêu cầu
+Dang lap trinh
+Dang lap trinh cap doi
+Dang lap trinh he thong
+Dang meeting voi khach hang
+Dang nghi benh
+Đang nghỉ giải lao
+Đang phân tích độ khó
+Đang phân tích rủi ro
+Dang phat trien code
+Dang phat trien component
+Dang phat trien prototype
+Dang phat trien prototype kien truc
+Dang refactor
+Đang review kế hoạch kiểm thử hệ thống
+Đang review thiết kế
+Đang review yêu cầu
+Đang sửa code
+Đang sửa kế hoạch kiểm thử hệ thống
+Đang sửa thiết kế
+Đang sửa yêu cầu
+Đang tạo kế hoạch kiểm thử hệ thống
+Đang tạo kiểm thử chấp nhận
+Đang tạo kiểm thử đơn vị
+Dang tao tac vu lap trinh
+Đang tạo thiết kế
+Đang tạo user story
+Đang tạo yêu cầu
+Dang test don vi va sua loi
+Dang thao luan
+Dang thiet ke
+Dang thiet ke he thong
+Dang tich hop
+Dang tich hop cap doi
+Đang tích hợp code
+Dang tich hop component
+Đang tìm bug
+Đang viết code
+Dang viet huong dan nguoi dung
+Danh gia pha Khoi dau
+Danh gia pha Lam ro
+Danh gia pha Xay dung
+Diem
+Diem dung san pham
+Diem hoan thien san pham
+Diem lich trinh
+Do chinh xac
+Do hoan thien
+Do hoan thien dac ta
+Do hoan thien lap trinh
+Do kem linh hoat
+Do kem linh hoat da biet
+Do kho lap trinh
+Do kho lap trinh ban dau
+Do kho lap trinh da biet
+Do kho thiet ke
+Do kho thiet ke ban dau
+Do kho thiet ke da biet
+Do kho tich hop
+Do kho tich hop ban dau
+Do kho tich hop da biet
+Do kho yeu cau
+Do kho yeu cau ban dau
+Do kho yeu cau da biet
+Do thi doi tuong:
+Do thi hanh dong:
+Dong
+Dong y
+Du an phan mem Scootie:
+Du an phan mem:
+Du an:
+Du lieu nhap khong hop le -- vui long thu lai!
+Dung hanh dong
+Duoc chon de lap trinh
+Duoc chon de prototype
+Duoc gan vao pha Khoi dau
+Duoc gan vao pha Lam ro
+Duoc gan vao pha Xay dung
+Framework test don vi:
+Gia tri
+Gia tri da biet
+Giang vien huong dan:
+Hai long
+Hanh dong:
+He so giam loi
+He so loi lap trinh
+He so tang nang suat
+He so toc do lap trinh
+He so toc do prototype
+Hien
+Hien thuoc tinh:
+Hoat dong hien tai:
+http://www.ics.uci.edu/~emilyo/SimSE
+Huong dan nguoi dung:
+Huy
+IDE:
+Iteration hien tai
+Ke hoach du an:
+Ke hoach iteration hien tai:
+Ke hoach pha:
+Ke hoach release:
+Ke hoach test he thong:
+Ket thuc:
+Kha nang sua doi
+Kha nang thay doi
+Kha nang thay doi da biet
+Khach hang dang danh gia prototype
+Khach hang:
+Kich hoat:
+Kiem thu chap nhan:
+Kiểm thử chức năng và sửa lỗi
+Kiem thu don vi:
+Kinh nghiem coding
+Kinh nghiem du an
+Kinh nghiem inspection
+Kinh nghiem phan tich rui ro
+Kinh nghiem phat trien phan mem
+Kinh nghiem testing
+Kinh nghiem thiet ke
+Kinh nghiem yeu cau
+Ky nang kien truc
+Ky nang lap trinh
+Ky nang quan ly du an
+Ky nang test
+Ky nang thiet ke va phat trien
+Ky nang yeu cau
+Ky su phan mem:
+Lap ke hoach pha Chuyen giao
+Lap ke hoach pha Lam ro
+Lap ke hoach pha Xay dung
+Lap trinh
+Lap trinh vien chinh:
+Lap trinh vien dong gop:
+Lap trinh vien:
+Luong gio
+Ma nguon:
+Met
+Mo ta
+Mo ta hanh dong:
+Mo ta:
+Module:
+Moi truong mo phong giao duc quy trinh cong nghe phan mem
+Moi truong thiet ke:
+Muc hai long khach hang
+Muc rui ro uu tien
+Nang luong
+Nang suat meeting
+Nang suat meeting toi da
+Ngan sach
+Ngan sach cong cu goi y
+Ngan sach goi y pha Khoi dau
+Ngan sach goi y pha Lam ro
+Ngan sach goi y pha Xay dung
+Nguoi tham gia:
+Pha
+Pha hien tai
+Phan tich
+Phan tich mo phong
+Phan tich rui ro
+Ph\u1EA7n tr\u0103m da danh gia
+Ph\u1EA7n tr\u0103m da lap trinh
+Ph\u1EA7n tr\u0103m da refactor
+Ph\u1EA7n tr\u0103m da test
+Ph\u1EA7n tr\u0103m da tich hop
+Ph\u1EA7n tr\u0103m ho\u00E0n th\u00E0nh
+Ph\u1EA7n tr\u0103m sai
+Ph\u1EA7n tr\u0103m yeu cau da prototype
+Prototype kien truc:
+Prototype:
+Quan ly:
+Ranh
+Rule huy:
+Rule kich hoat:
+Rule trung gian:
+So CRC card da xong
+So defect chua phat hien
+So defect da phat hien
+So dong
+So loi ch\u01B0a bi\u1EBFt
+So loi da biet
+So nhip thay doi
+So test da chay
+So test that bai
+So trang
+So use case hien co
+So use case khi nop
+So user story da dac ta
+So user story da implement
+So user story da tich hop
+So yeu cau chua tim ra
+So yeu cau da dac ta
+So yeu cau da tim ra
+Tai lieu thiet ke:
+Tai lieu yeu cau:
+Tam trang
+Tao do thi doi tuong
+Tao do thi hanh dong
+Tao do thi tong hop
+Tao do thi:
+Ten
+Ten cong ty
+Tham gia hanh dong
+Thiet ke
+Thiet ke:
+Thoi gian da dung
+Thoi gian da qua
+Thoi gian du kien
+Thoi gian duoc cap
+Thoi gian hien tai
+Tien da chi
+Tien da chi cho cong cu
+Tien da chi pha Khoi dau
+Tien da chi pha Lam ro
+Tien da chi pha Xay dung
+Tien do lap trinh
+Tien do phan tich do kho
+Tien do phan tich rui ro
+Tien do thiet ke
+Tien do tich hop
+Tien do yeu cau
+Tien lang phi
+Tong hai long
+Tong quan cong cu
+Tong quan du an
+Tong quan khach hang
+Tong quan nhan vien
+Tong quan san pham
+Tong so yeu cau
+Tong use case uoc tinh
+Trinh xem nhieu dong thoi gian
+Trong meeting lap ke hoach iteration
+Trong meeting lap ke hoach release
+Trong meeting yeu cau
+Use case:
+User story:
+Vui long nhap so nguyen duong cho so nhip dong ho
+Vuot ngan sach
+Vuot thoi gian
+Xem rule:
+Yeu cau

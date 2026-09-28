@@ -1,0 +1,88 @@
+<mxfile host="65bd71144e">
+    <diagram id="CPKRLO2zQG2x6UzT4Fd-" name="Page-1">
+        <mxGraphModel dx="998" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="750" y="120" width="290" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="6" vertex="1">
+                    <mxGeometry y="26" width="290" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="-id : String&lt;div&gt;-name : String&lt;/div&gt;&lt;div&gt;-email : String&lt;/div&gt;&lt;div&gt;-borrowedBooks : ArrayList&amp;lt;Book&amp;gt;&lt;/div&gt;&lt;div&gt;-privateRecords : ArrayList&amp;lt;BorrowingRecord&amp;gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="6" vertex="1">
+                    <mxGeometry y="34" width="290" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="+User(id : String, name : String, email : String)&lt;div&gt;+borrow(book : Book, borrowDate : localDate, dueDate : LocalDate) : void&lt;/div&gt;&lt;div&gt;+getOverdueBooks() : int&lt;/div&gt;&lt;div&gt;+getPrivateRecords() : ArrayList&amp;lt;BorrowingRecord&amp;gt;&lt;/div&gt;&lt;div&gt;+toString() : String&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="6" vertex="1">
+                    <mxGeometry y="158" width="290" height="132" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Book" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="135" y="690" width="290" height="270" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="-isbn : String&lt;div&gt;-title : String&lt;/div&gt;&lt;div&gt;-isAvailable : boolean&lt;/div&gt;&lt;div&gt;-quantity : int&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="10" vertex="1">
+                    <mxGeometry y="26" width="290" height="84" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="10" vertex="1">
+                    <mxGeometry y="110" width="290" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="+Book(title : String, isbn : String, quantity : int)&lt;div&gt;+getIsbn() : String&lt;/div&gt;&lt;div&gt;+getTitle() : String&lt;/div&gt;&lt;div&gt;+isAvailable() : boolean&lt;/div&gt;&lt;div&gt;+setAvailable(available : boolean): void&amp;nbsp;&lt;/div&gt;&lt;div&gt;+getQuantity() : int&lt;/div&gt;&lt;div&gt;+setQuantity(quantity : int) : void&lt;/div&gt;&lt;div&gt;+checkIsAvailable() : boolean&lt;/div&gt;&lt;div&gt;+toString() : String&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="10" vertex="1">
+                    <mxGeometry y="118" width="290" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="BorrowingRecord" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="10" y="120" width="520" height="310" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="-user : User&lt;div&gt;-book : Book&lt;/div&gt;&lt;div&gt;-borrowingDate : LocalDate&lt;/div&gt;&lt;div&gt;-dueDate : LocalDate&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="14" vertex="1">
+                    <mxGeometry y="26" width="520" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="14" vertex="1">
+                    <mxGeometry y="100" width="520" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="+BorrowingRecord(user : User, book : Book, borrowingDate : LocalDate,dueDate : LocalDate)&lt;div&gt;+getUser() : User&lt;/div&gt;&lt;div&gt;+setUser(user : User) : void&lt;/div&gt;&lt;div&gt;+getBook() : Book&lt;/div&gt;&lt;div&gt;+setBook(book : Book) : Book&lt;/div&gt;&lt;div&gt;+getBorrowingDate() : LocalDate&lt;/div&gt;&lt;div&gt;+set&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;BorrowingDate(borrowingDate : LocalDate) : void&lt;/span&gt;&lt;/div&gt;&lt;div&gt;+getDueDate() : LocalDate&lt;/div&gt;&lt;div&gt;+setDueDate(dueDate : LocalDate) : void&lt;/div&gt;&lt;div&gt;+toString() : String&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="14" vertex="1">
+                    <mxGeometry y="108" width="520" height="202" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="Administrator" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="630" y="620" width="350" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="-books : ArrayList&amp;lt;Book&amp;gt;&lt;div&gt;-users : ArrayList&amp;lt;User&amp;gt;&lt;/div&gt;&lt;div&gt;-records : ArrayList&amp;lt;BorrowingRecord&amp;gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="18" vertex="1">
+                    <mxGeometry y="26" width="350" height="94" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="18" vertex="1">
+                    <mxGeometry y="120" width="350" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="+Administrator()&lt;div&gt;+addBook() : void&lt;/div&gt;&lt;div&gt;+removeBook(book : Book) : void&lt;/div&gt;&lt;div&gt;+addUser(user : User) : void&lt;/div&gt;&lt;div&gt;+removeUser(user : User) : void&lt;/div&gt;&lt;div&gt;+checkAvailable(target : User, bookTarget : Book) : boolean&lt;/div&gt;&lt;div&gt;+updateRecords() : void&lt;/div&gt;&lt;div&gt;+printAllUser() : void&lt;/div&gt;&lt;div&gt;+printAllBook() : void&lt;/div&gt;&lt;div&gt;+printAllRecord() : void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="18" vertex="1">
+                    <mxGeometry y="128" width="350" height="172" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;entryX=-0.017;entryY=0.835;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.003;exitY=0.124;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="17" target="7" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="180" y="580" as="sourcePoint"/>
+                        <mxPoint x="340" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.485;exitY=1.033;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="17" target="10" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="280" y="600" as="sourcePoint"/>
+                        <mxPoint x="440" y="600" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;entryX=0.067;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.965;exitY=0.999;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="17" target="18" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="380" y="550" as="sourcePoint"/>
+                        <mxPoint x="540" y="550" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="28" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;entryX=0.019;entryY=0.063;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.002;exitY=0.07;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="13" target="21" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="440" y="640" as="sourcePoint"/>
+                        <mxPoint x="600" y="640" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="29" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;exitX=0.496;exitY=0.991;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.551;entryY=-0.005;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="9" target="18" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="400" y="580" as="sourcePoint"/>
+                        <mxPoint x="560" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.highlight{
+    width: 600px;
+    padding: 15px;
+    margin: auto;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6) ;
+}
+
+.link{
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    font-size:x-large;
+}
+.highlight >h5{
+    color: #3D8CBB;
+    padding: 5px;
+}
+
+.span1{
+    padding: 1px;
+    color: grey;
+    font-size: 12px;
+}
+
+.span2{
+    padding: 5px;
+    color: rgb(66, 65, 65);
+    font-size: 12px;
+}
+
+.info{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.news > ul{
+    border-top: 1px dashed gray;
+    padding-top: 10px;
+}
+
+ul li{
+    padding: 8px;
+    margin-left: 20px;
+}
+
+li a{
+    text-decoration: none;
+    color: black;
+}
+.deal{
+    width: 600px;
+    padding: 10px;
+    margin: auto;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6) ;
+}
+
+.deal h1 a{
+    
+    text-decoration: none;
+    color: black;
+    font-size:x-large;
+}
+
+.name a{
+    color: #74d2e5;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.avt{
+    margin-left: 5px;
+    border-radius: 50%;
+    width: 20px;
+    height: auto;
+    vertical-align: middle;
+}

@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OOD Exam — Factory Method & Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f7f4ef; --paper:#fdfcfa; --ink:#1a1714; --muted:#7a746c; --border:#ddd8d0;
+  --factory:#c4320a; --factory-light:#fff1ed; --factory-mid:#fed7aa;
+  --builder:#1d4ed8; --builder-light:#eff6ff; --builder-mid:#bfdbfe;
+  --code-bg:#1c1917; --code-text:#e7e5e4; --ok:#15803d; --warn:#b45309;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.75}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:210px;height:100vh;background:var(--paper);border-right:1px solid var(--border);padding:1.5rem 1rem;overflow-y:auto;z-index:100}
+.sidebar-logo{font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.sidebar-sub{font-size:.68rem;color:var(--muted);margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace}
+.nav-group-label{font-size:.62rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem;margin-top:1.2rem}
+.nav-link{display:block;font-size:.8rem;color:var(--muted);text-decoration:none;padding:.28rem .5rem;border-radius:4px;transition:all .15s;border-left:2px solid transparent}
+.nav-link:hover{color:var(--ink);background:var(--bg)}
+.nav-link.factory{border-left-color:var(--factory);color:var(--factory);font-weight:500}
+.nav-link.builder{border-left-color:var(--builder);color:var(--builder);font-weight:500}
+.sbadge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.12rem .4rem;border-radius:3px;margin-left:.3rem}
+.sf{background:var(--factory-mid);color:var(--factory)}
+.sb{background:var(--builder-mid);color:var(--builder)}
+
+/* MAIN */
+.main{margin-left:210px;min-height:100vh}
+
+/* HERO */
+.hero{background:var(--ink);color:#fdfcfa;padding:5rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(255,255,255,.018) 40px,rgba(255,255,255,.018) 41px);pointer-events:none}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#a8a29e;margin-bottom:1.2rem}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:300;line-height:1.08;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:#fb923c}
+.hero-scores{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.score-card{padding:.8rem 1.4rem;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.82rem}
+.score-card.f{background:var(--factory);color:white}
+.score-card.b{background:var(--builder);color:white}
+.score-card span{display:block;font-size:1.8rem;font-weight:700;line-height:1;margin-top:.2rem}
+
+/* SECTIONS */
+.section{padding:3.5rem 4rem;border-bottom:1px solid var(--border)}
+.section-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:.18em;margin-bottom:.7rem}
+.ef{color:var(--factory)}.eb{color:var(--builder)}
+.section h2{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:300;line-height:1.15;margin-bottom:1.3rem}
+.section h3{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:400;margin:2.2rem 0 .9rem}
+.section h4{font-size:.88rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin:1.3rem 0 .5rem}
+p{margin-bottom:.9rem;color:#3a3530}
+
+/* CALLOUTS */
+.callout{border-radius:6px;padding:1.1rem 1.4rem;margin:1.3rem 0;font-size:.88rem}
+.callout-f{background:var(--factory-light);border-left:3px solid var(--factory)}
+.callout-b{background:var(--builder-light);border-left:3px solid var(--builder)}
+.callout-warn{background:#fffbeb;border-left:3px solid var(--warn)}
+.callout-ok{background:#f0fdf4;border-left:3px solid var(--ok)}
+.callout strong{color:var(--ink)}
+.callout ul{padding-left:1.2rem;margin-top:.4rem}
+.callout li{margin:.25rem 0}
+
+/* CONCEPT GRID */
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:1.3rem 0}
+.concept-cell{background:var(--paper);padding:1.1rem 1.3rem}
+.concept-cell h4{font-size:.75rem;font-family:'JetBrains Mono',monospace;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;margin-top:0}
+.cell-f h4{color:var(--factory)}.cell-b h4{color:var(--builder)}
+.concept-cell p{font-size:.85rem;margin:0;color:var(--muted)}
+
+/* UML */
+.uml-container{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:1.8rem;margin:1.3rem 0;overflow-x:auto}
+.uml-title{font-family:'JetBrains Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem}
+
+/* FLOW DIAGRAM */
+.flow-container{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:1.8rem;margin:1.3rem 0;overflow-x:auto}
+.flow-title{font-family:'JetBrains Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;margin-bottom:1rem}
+.flow-title.ft{color:var(--factory)}.flow-title.fb{color:var(--builder)}
+
+/* CODE */
+.code-block{background:var(--code-bg);border-radius:8px;overflow:hidden;margin:1.3rem 0;font-size:.79rem}
+.code-header{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1rem;background:#292524;border-bottom:1px solid #3c3835}
+.code-filename{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#a8a29e}
+.code-dots{display:flex;gap:.4rem}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot:nth-child(1){background:#ef4444}.dot:nth-child(2){background:#f59e0b}.dot:nth-child(3){background:#22c55e}
+pre{padding:1.3rem 1.2rem;overflow-x:auto;color:var(--code-text);line-height:1.65}
+code{font-family:'JetBrains Mono',monospace}
+.kw{color:#c084fc}.cls{color:#67e8f9}.str{color:#86efac}.cmt{color:#57534e;font-style:italic}
+.fn{color:#fde68a}.num{color:#fb923c}.ann{color:#f0abfc}
+
+/* PARTICIPANTS TABLE */
+.participants{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem}
+.participants th{background:var(--bg);padding:.5rem .8rem;text-align:left;font-size:.73rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
+.participants td{padding:.55rem .8rem;border-bottom:1px solid var(--border);vertical-align:top}
+.participants code{background:var(--bg);padding:.1rem .35rem;border-radius:3px;font-size:.8em}
+
+/* COMPARE TABLE */
+.compare-table{width:100%;border-collapse:collapse;margin:1.3rem 0;font-size:.87rem}
+.compare-table th{padding:.65rem 1rem;text-align:left;border-bottom:2px solid var(--ink);font-weight:600;font-size:.76rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
+.compare-table td{padding:.55rem 1rem;border-bottom:1px solid var(--border);vertical-align:top}
+.compare-table tr:hover td{background:var(--bg)}
+.th-f{color:var(--factory)}.th-b{color:var(--builder)}
+
+/* VARIANT GRID */
+.variant-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.3rem 0}
+.variant-card{border:1px solid var(--border);border-radius:6px;padding:1.1rem;background:var(--paper)}
+.variant-card h4{margin-top:0;font-size:.84rem;margin-bottom:.4rem}
+.variant-card p{font-size:.82rem;color:var(--muted);margin:0}
+
+/* STEPS */
+.steps{margin:1.3rem 0}
+.step{display:flex;gap:1.1rem;margin-bottom:1.1rem;align-items:flex-start}
+.step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
+.step-num-f{background:var(--factory);color:white}.step-num-b{background:var(--builder);color:white}
+.step-body h4{margin-top:0;margin-bottom:.25rem;font-size:.88rem}
+.step-body p{margin:0;font-size:.85rem;color:var(--muted)}
+
+/* EXAM TIPS */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1.3rem 0}
+.tip-card{border-radius:8px;padding:1.2rem 1.4rem;border:1px solid}
+.tip-card-f{background:var(--factory-light);border-color:var(--factory)}
+.tip-card-b{background:var(--builder-light);border-color:var(--builder)}
+.tip-card-w{background:#fffbeb;border-color:#d97706}
+.tip-card-ok{background:#f0fdf4;border-color:#16a34a}
+.tip-card h4{font-size:.82rem;font-weight:700;margin-bottom:.5rem;margin-top:0;text-transform:uppercase;letter-spacing:.05em;font-family:'JetBrains Mono',monospace}
+.tip-card-f h4{color:var(--factory)}.tip-card-b h4{color:var(--builder)}
+.tip-card-w h4{color:#92400e}.tip-card-ok h4{color:#166534}
+.tip-card ul{padding-left:1.1rem;font-size:.83rem}
+.tip-card li{margin:.3rem 0}
+
+.divider{border:none;border-top:1px solid var(--border);margin:1.8rem 0}
+
+/* SECTION HIGHLIGHT BAND */
+.band-f{background:var(--factory-light);border-top:3px solid var(--factory);border-bottom:1px solid var(--factory-mid)}
+.band-b{background:var(--builder-light);border-top:3px solid var(--builder);border-bottom:1px solid var(--builder-mid)}
+
+@media(max-width:768px){.sidebar{display:none}.main{margin-left:0}.section{padding:2rem 1.5rem}.hero{padding:3rem 1.5rem}.variant-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">OOD Exam</div>
+  <div class="sidebar-sub">Cuối kì · Design Patterns</div>
+
+  <div class="nav-group-label">Factory Method <span class="sbadge sf">70đ</span></div>
+  <a class="nav-link factory" href="#fm-overview">Tổng quan</a>
+  <a class="nav-link" href="#fm-flow">Nguyên lý hoạt động</a>
+  <a class="nav-link" href="#fm-participants">Các thành phần</a>
+  <a class="nav-link" href="#fm-uml">UML cấu trúc</a>
+  <a class="nav-link" href="#fm-variants">Biến thể</a>
+  <a class="nav-link" href="#fm-code-shape">Ví dụ 1 — Shape</a>
+  <a class="nav-link" href="#fm-code-notify">Ví dụ 2 — Notification</a>
+  <a class="nav-link" href="#fm-uml-full">UML đầy đủ</a>
+  <a class="nav-link" href="#fm-principles">Nguyên lý OOD</a>
+  <a class="nav-link" href="#fm-tips">⚡ Lưu ý thi</a>
+
+  <div class="nav-group-label">Builder <span class="sbadge sb">30đ</span></div>
+  <a class="nav-link builder" href="#b-overview">Tổng quan</a>
+  <a class="nav-link" href="#b-flow">Nguyên lý hoạt động</a>
+  <a class="nav-link" href="#b-participants">Các thành phần</a>
+  <a class="nav-link" href="#b-uml">UML</a>
+  <a class="nav-link" href="#b-code-house">Ví dụ 1 — House</a>
+  <a class="nav-link" href="#b-code-pizza">Ví dụ 2 — Pizza</a>
+  <a class="nav-link" href="#b-vs">So sánh</a>
+  <a class="nav-link" href="#b-tips">⚡ Lưu ý thi</a>
+</nav>
+
+<main class="main">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">OOD · Cuối kì · Design Patterns</div>
+  <h1>Factory Method<br>&amp; <em>Builder</em></h1>
+  <p style="color:#a8a29e;max-width:520px;font-size:.98rem">Nguyên lý hoạt động · UML · Code Java đầy đủ · Lưu ý thi quan trọng</p>
+  <div class="hero-scores">
+    <div class="score-card f">Factory Method<span>70đ</span></div>
+    <div class="score-card b">Builder<span>30đ</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FACTORY METHOD
+═══════════════════════════════════════ -->
+
+<section class="section" id="fm-overview">
+  <p class="section-eyebrow ef">Factory Method · 70 điểm</p>
+  <h2>Factory Method Pattern — Tổng quan</h2>
+  <p><strong>Định nghĩa (GoF):</strong> Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.</p>
+  <div class="callout callout-f">
+    <strong>Một câu nhớ mãi:</strong> Factory Method = <em>"Tôi cần tạo object, nhưng để subclass quyết định tạo loại nào."</em><br>
+    Creator khai báo factory method → ConcreteCreator override và trả về ConcreteProduct tương ứng.
+  </div>
+  <div class="concept-grid">
+    <div class="concept-cell cell-f"><h4>Pattern type</h4><p>Creational — kiểm soát cách tạo object</p></div>
+    <div class="concept-cell cell-f"><h4>Also known as</h4><p>Virtual Constructor</p></div>
+    <div class="concept-cell cell-f"><h4>Keyword</h4><p><code>abstract</code> method trả về kiểu Product interface</p></div>
+    <div class="concept-cell cell-f"><h4>Khi nào dùng</h4><p>Không biết trước loại object cần tạo; muốn subclass kiểm soát</p></div>
+  </div>
+</section>
+
+<!-- FLOW DIAGRAM -->
+<section class="section" id="fm-flow">
+  <p class="section-eyebrow ef">Factory Method</p>
+  <h2>Nguyên lý hoạt động — Flow Diagram</h2>
+  <p>Sơ đồ dưới đây mô tả luồng hoạt động của Factory Method: từ lúc Client gọi factory đến khi object được tạo và sử dụng.</p>
+
+  <div class="flow-container">
+    <div class="flow-title ft">🔄 Factory Method — Luồng hoạt động (Shape example)</div>
+    <svg viewBox="0 0 860 520" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;font-size:11px">
+
+      <!-- ── Swimlanes ── -->
+      <rect x="0" y="0" width="860" height="520" fill="#fdfcfa"/>
+      <!-- Lane headers -->
+      <rect x="0" y="0" width="200" height="40" fill="#fff1ed" rx="0"/>
+      <rect x="210" y="0" width="200" height="40" fill="#fef3c7" rx="0"/>
+      <rect x="420" y="0" width="200" height="40" fill="#fef3c7" rx="0"/>
+      <rect x="630" y="0" width="230" height="40" fill="#eff6ff" rx="0"/>
+      <!-- Lane labels -->
+      <text x="100" y="25" text-anchor="middle" font-weight="bold" fill="#c4320a">Client</text>
+      <text x="310" y="25" text-anchor="middle" font-weight="bold" fill="#92400e">Creator (abstract)</text>
+      <text x="520" y="25" text-anchor="middle" font-weight="bold" fill="#92400e">ConcreteCreator</text>
+      <text x="745" y="25" text-anchor="middle" font-weight="bold" fill="#1d4ed8">ConcreteProduct</text>
+      <!-- Lane dividers -->
+      <line x1="205" y1="0" x2="205" y2="520" stroke="#ddd8d0" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="415" y1="0" x2="415" y2="520" stroke="#ddd8d0" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="625" y1="0" x2="625" y2="520" stroke="#ddd8d0" stroke-width="1" stroke-dasharray="4,3"/>
+
+      <!-- Step 1: Client creates ConcreteCreator -->
+      <rect x="20" y="65" width="165" height="40" rx="4" fill="white" stroke="#c4320a" stroke-width="1.5"/>
+      <text x="102" y="82" text-anchor="middle" fill="#c4320a">new CircleFactory()</text>
+      <text x="102" y="97" text-anchor="middle" fill="#888" font-size="10">Client khởi tạo factory</text>
+      <!-- arrow to ConcreteCreator -->
+      <line x1="185" y1="85" x2="430" y2="85" stroke="#c4320a" stroke-width="1.5" marker-end="url(#arr-f)"/>
+      <defs><marker id="arr-f" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#c4320a"/></marker></defs>
+      <!-- ConcreteCreator box -->
+      <rect x="430" y="65" width="180" height="40" rx="4" fill="white" stroke="#92400e" stroke-width="1.5"/>
+      <text x="520" y="82" text-anchor="middle" fill="#92400e">CircleFactory</text>
+      <text x="520" y="97" text-anchor="middle" fill="#888" font-size="10">extends ShapeFactory</text>
+
+      <!-- Step 2: Client calls getShape() on Creator (via abstract) -->
+      <rect x="20" y="145" width="165" height="40" rx="4" fill="white" stroke="#c4320a" stroke-width="1.5"/>
+      <text x="102" y="165" text-anchor="middle" fill="#c4320a">factory.getShape()</text>
+      <line x1="185" y1="165" x2="280" y2="165" stroke="#c4320a" stroke-width="1.5" marker-end="url(#arr-f)"/>
+      <!-- Creator receives call -->
+      <rect x="225" y="145" width="180" height="40" rx="4" fill="#fff8f4" stroke="#92400e" stroke-width="1.5"/>
+      <text x="315" y="162" text-anchor="middle" fill="#92400e">ShapeFactory</text>
+      <text x="315" y="177" text-anchor="middle" fill="#888" font-size="10">getShape() {abstract}</text>
+
+      <!-- Step 3: Creator dispatches to ConcreteCreator's override -->
+      <line x1="405" y1="165" x2="430" y2="165" stroke="#92400e" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-d)"/>
+      <defs><marker id="arr-d" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#92400e"/></marker></defs>
+      <rect x="430" y="145" width="180" height="40" rx="4" fill="#fff8f4" stroke="#92400e" stroke-width="1.5"/>
+      <text x="520" y="162" text-anchor="middle" fill="#92400e">@Override getShape()</text>
+      <text x="520" y="177" text-anchor="middle" fill="#888" font-size="10">return new Circle()</text>
+      <!-- label on dispatch arrow -->
+      <text x="417" y="158" text-anchor="middle" fill="#888" font-size="9">dispatch</text>
+
+      <!-- Step 4: ConcreteCreator creates ConcreteProduct -->
+      <line x1="610" y1="165" x2="645" y2="165" stroke="#92400e" stroke-width="1.5" marker-end="url(#arr-b)"/>
+      <defs><marker id="arr-b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1d4ed8"/></marker></defs>
+      <!-- ConcreteProduct -->
+      <rect x="645" y="145" width="190" height="40" rx="4" fill="white" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="740" y="162" text-anchor="middle" fill="#1d4ed8">new Circle()</text>
+      <text x="740" y="177" text-anchor="middle" fill="#888" font-size="10">implements Shape</text>
+
+      <!-- Step 5: Circle returned up the chain -->
+      <line x1="645" y1="250" x2="430" y2="250" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-ret)"/>
+      <defs><marker id="arr-ret" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1d4ed8"/></marker></defs>
+      <rect x="645" y="230" width="190" height="40" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="740" y="247" text-anchor="middle" fill="#1d4ed8">Circle instance</text>
+      <text x="740" y="262" text-anchor="middle" fill="#888" font-size="10">returned to creator</text>
+
+      <rect x="430" y="230" width="180" height="40" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="520" y="252" text-anchor="middle" fill="#1d4ed8">Shape (interface)</text>
+
+      <line x1="430" y1="250" x2="225" y2="250" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-ret2)"/>
+      <defs><marker id="arr-ret2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1d4ed8"/></marker></defs>
+      <rect x="225" y="230" width="180" height="40" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="315" y="252" text-anchor="middle" fill="#1d4ed8">Shape returned</text>
+
+      <line x1="225" y1="250" x2="185" y2="250" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-ret3)"/>
+      <defs><marker id="arr-ret3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1d4ed8"/></marker></defs>
+
+      <!-- Step 6: Client uses Shape via interface -->
+      <rect x="20" y="315" width="165" height="40" rx="4" fill="white" stroke="#c4320a" stroke-width="1.5"/>
+      <text x="102" y="332" text-anchor="middle" fill="#c4320a">shape.draw()</text>
+      <text x="102" y="347" text-anchor="middle" fill="#888" font-size="10">uses via interface</text>
+      <!-- client connects back -->
+      <line x1="102" y1="250" x2="102" y2="315" stroke="#c4320a" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+      <line x1="185" y1="335" x2="645" y2="335" stroke="#c4320a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-f)"/>
+      <rect x="645" y="315" width="190" height="40" rx="4" fill="white" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="740" y="332" text-anchor="middle" fill="#1d4ed8">Drawing a Circle</text>
+      <text x="740" y="347" text-anchor="middle" fill="#888" font-size="10">Circle.draw() executes</text>
+
+      <!-- KEY POINTS -->
+      <rect x="20" y="400" width="820" height="100" rx="6" fill="#fff1ed" stroke="#c4320a" stroke-width="1"/>
+      <text x="40" y="420" font-weight="bold" fill="#c4320a" font-size="11">🔑 Điểm then chốt:</text>
+      <text x="40" y="440" fill="#3a3530" font-size="10">① Client chỉ biết Creator (ShapeFactory) và Product (Shape) — KHÔNG biết Circle hay CircleFactory cụ thể</text>
+      <text x="40" y="458" fill="#3a3530" font-size="10">② Polymorphism xảy ra ở factory method: cùng một lời gọi getShape() nhưng kết quả khác nhau tùy ConcreteCreator</text>
+      <text x="40" y="476" fill="#3a3530" font-size="10">③ Muốn thêm Triangle: thêm Triangle class + TriangleFactory class — KHÔNG sửa code Client hay Creator cũ (OCP)</text>
+      <text x="40" y="494" fill="#3a3530" font-size="10">④ Creator có thể có logic dùng kết quả factory method (template method pattern kết hợp)</text>
+    </svg>
+  </div>
+</section>
+
+<!-- PARTICIPANTS -->
+<section class="section" id="fm-participants">
+  <p class="section-eyebrow ef">Factory Method</p>
+  <h2>Các thành phần (Participants)</h2>
+  <table class="participants">
+    <thead><tr><th>Thành phần</th><th>Ví dụ Shape</th><th>Vai trò</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Product</strong></td><td><code>Shape</code> (interface)</td><td>Định nghĩa interface chung cho mọi object được tạo ra. Đây là kiểu trả về của factory method.</td></tr>
+      <tr><td><strong>ConcreteProduct</strong></td><td><code>Circle</code>, <code>Rectangle</code>, <code>Square</code></td><td>Hiện thực Product interface. Object thực sự được tạo ra bởi ConcreteCreator.</td></tr>
+      <tr><td><strong>Creator</strong></td><td><code>ShapeFactory</code> (abstract)</td><td>Khai báo factory method trả về kiểu Product. Có thể chứa business logic sử dụng kết quả factory method.</td></tr>
+      <tr><td><strong>ConcreteCreator</strong></td><td><code>CircleFactory</code>, <code>RectangleFactory</code>…</td><td>Override factory method để trả về instance của ConcreteProduct tương ứng.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-warn">
+    <strong>⚠️ Hay nhầm khi thi:</strong> Creator KHÔNG phải chỉ là factory — Creator thường có thêm business logic. Factory method là <em>một method</em> trong Creator, không phải toàn bộ class. Creator phụ thuộc vào <em>Product interface</em>, không phụ thuộc ConcreteProduct.
+  </div>
+</section>
+
+<!-- UML BASIC -->
+<section class="section" id="fm-uml">
+  <p class="section-eyebrow ef">Factory Method</p>
+  <h2>UML — Cấu trúc tổng quát</h2>
+  <div class="uml-container">
+    <div class="uml-title">📐 Factory Method — General Structure (GoF)</div>
+    <svg viewBox="0 0 820 430" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace">
+      <defs>
+        <marker id="tri-open" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="white" stroke="#1a1714" stroke-width="1"/></marker>
+        <marker id="tri-open2" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="white" stroke="#1a1714" stroke-width="1"/></marker>
+        <marker id="arr-open" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polyline points="0 0, 10 4, 0 8" fill="none" stroke="#1a1714" stroke-width="1.3"/></marker>
+      </defs>
+
+      <!-- Creator abstract -->
+      <rect x="30" y="50" width="230" height="115" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="30" y="50" width="230" height="32" fill="#fafaf9"/>
+      <text x="145" y="63" text-anchor="middle" font-size="10" fill="#666" font-style="italic">«abstract»</text>
+      <text x="145" y="77" text-anchor="middle" font-size="13" font-weight="bold" font-style="italic" fill="#1a1714">Creator</text>
+      <line x1="30" y1="82" x2="260" y2="82" stroke="#1a1714"/>
+      <text x="42" y="100" font-size="11" fill="#333">+ someOperation() : void</text>
+      <line x1="30" y1="107" x2="260" y2="107" stroke="#1a1714"/>
+      <text x="42" y="124" font-size="11" fill="#555" font-style="italic">+ factoryMethod() : Product</text>
+      <text x="42" y="138" font-size="9" fill="#999">  {abstract}</text>
+      <line x1="30" y1="145" x2="260" y2="145" stroke="#1a1714" stroke-dasharray="3,2"/>
+      <text x="42" y="157" font-size="9" fill="#999">uses → Product</text>
+
+      <!-- ConcreteCreatorA -->
+      <rect x="30" y="290" width="190" height="68" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="30" y="290" width="190" height="28" fill="white"/>
+      <text x="125" y="308" text-anchor="middle" font-size="12" font-weight="bold">ConcreteCreatorA</text>
+      <line x1="30" y1="318" x2="220" y2="318" stroke="#1a1714"/>
+      <text x="40" y="336" font-size="11">+ factoryMethod()</text>
+      <text x="40" y="350" font-size="9" fill="#888">  return new ProductA()</text>
+
+      <!-- ConcreteCreatorB -->
+      <rect x="240" y="290" width="190" height="68" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="240" y="290" width="190" height="28" fill="white"/>
+      <text x="335" y="308" text-anchor="middle" font-size="12" font-weight="bold">ConcreteCreatorB</text>
+      <line x1="240" y1="318" x2="430" y2="318" stroke="#1a1714"/>
+      <text x="250" y="336" font-size="11">+ factoryMethod()</text>
+      <text x="250" y="350" font-size="9" fill="#888">  return new ProductB()</text>
+
+      <!-- Inheritance: both concrete → Creator -->
+      <line x1="125" y1="290" x2="125" y2="210" stroke="#1a1714" stroke-width="1.3"/>
+      <line x1="125" y1="210" x2="145" y2="210" stroke="#1a1714" stroke-width="1.3"/>
+      <line x1="145" y1="210" x2="145" y2="165" stroke="#1a1714" stroke-width="1.3" marker-end="url(#tri-open)"/>
+      <line x1="335" y1="290" x2="335" y2="210" stroke="#1a1714" stroke-width="1.3"/>
+      <line x1="335" y1="210" x2="145" y2="210" stroke="#1a1714" stroke-width="1.3"/>
+      <text x="225" y="205" text-anchor="middle" font-size="9" fill="#888">extends</text>
+
+      <!-- Product interface -->
+      <rect x="560" y="50" width="230" height="68" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="560" y="50" width="230" height="32" fill="#eff6ff"/>
+      <text x="675" y="63" text-anchor="middle" font-size="10" fill="#1d4ed8" font-style="italic">«interface»</text>
+      <text x="675" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">Product</text>
+      <line x1="560" y1="82" x2="790" y2="82" stroke="#1a1714"/>
+      <text x="572" y="103" font-size="11">+ operation() : void</text>
+
+      <!-- ConcreteProductA -->
+      <rect x="480" y="290" width="185" height="58" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="480" y="290" width="185" height="28" fill="white"/>
+      <text x="572" y="308" text-anchor="middle" font-size="12" font-weight="bold">ConcreteProductA</text>
+      <line x1="480" y1="318" x2="665" y2="318" stroke="#1a1714"/>
+      <text x="492" y="338" font-size="11">+ operation() : void</text>
+
+      <!-- ConcreteProductB -->
+      <rect x="680" y="290" width="185" height="58" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="680" y="290" width="185" height="28" fill="white"/>
+      <text x="772" y="308" text-anchor="middle" font-size="12" font-weight="bold">ConcreteProductB</text>
+      <line x1="680" y1="318" x2="865" y2="318" stroke="#1a1714"/>
+      <text x="692" y="338" font-size="11">+ operation() : void</text>
+
+      <!-- Realization: ConcreteProducts → Product -->
+      <line x1="572" y1="290" x2="572" y2="225" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="572" y1="225" x2="675" y2="225" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="675" y1="225" x2="675" y2="118" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3" marker-end="url(#tri-open2)"/>
+      <line x1="772" y1="290" x2="772" y2="225" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="772" y1="225" x2="675" y2="225" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <text x="720" y="220" font-size="9" fill="#888">implements</text>
+
+      <!-- Creator depends on Product -->
+      <line x1="260" y1="90" x2="560" y2="90" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="5,3" marker-end="url(#arr-open)"/>
+      <text x="410" y="84" text-anchor="middle" font-size="9" fill="#888">«creates»</text>
+
+      <!-- Legend -->
+      <rect x="30" y="390" width="780" height="28" fill="#fafaf9" rx="3" stroke="#ddd8d0"/>
+      <line x1="50" y1="404" x2="85" y2="404" stroke="#1a1714" stroke-width="1.3"/>
+      <polygon points="85,404 77,400 77,408" fill="white" stroke="#1a1714" stroke-width="1"/>
+      <text x="91" y="408" font-size="9" fill="#555">Inheritance</text>
+      <line x1="180" y1="404" x2="215" y2="404" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="5,3"/>
+      <polygon points="215,404 207,400 207,408" fill="white" stroke="#1a1714" stroke-width="1"/>
+      <text x="221" y="408" font-size="9" fill="#555">Realization</text>
+      <line x1="320" y1="404" x2="355" y2="404" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="5,3"/>
+      <polyline points="355,400 365,404 355,408" fill="none" stroke="#1a1714" stroke-width="1.3"/>
+      <text x="371" y="408" font-size="9" fill="#555">Dependency (creates/uses)</text>
+    </svg>
+  </div>
+</section>
+
+<!-- VARIANTS -->
+<section class="section" id="fm-variants">
+  <p class="section-eyebrow ef">Factory Method</p>
+  <h2>Các biến thể</h2>
+  <div class="variant-grid">
+    <div class="variant-card"><h4>① Abstract Creator (chuẩn GoF)</h4><p>Creator là abstract class, <code>factoryMethod()</code> là abstract. Subclass bắt buộc override. <strong>Đây là dạng Lab 7 yêu cầu.</strong></p></div>
+    <div class="variant-card"><h4>② Default Implementation</h4><p>Creator là class thường, factory method có default implementation. Subclass có thể override hoặc không.</p></div>
+    <div class="variant-card"><h4>③ Parameterized Factory</h4><p>Factory method nhận tham số String/Enum để quyết định loại object. Dùng switch bên trong — <strong>vi phạm OCP</strong>.</p></div>
+    <div class="variant-card"><h4>④ Static Factory Method</h4><p>Method là static — không cần tạo factory object. Không phải Factory Method thuần túy vì không dùng polymorphism.</p></div>
+  </div>
+</section>
+
+<!-- CODE EXAMPLE 1: SHAPE -->
+<section class="section" id="fm-code-shape">
+  <p class="section-eyebrow ef">Factory Method · Ví dụ 1</p>
+  <h2>Ví dụ 1 — Shape Factory (Lab 7)</h2>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">Shape.java — Product interface</span></div>
+    <pre><code><span class="kw">public interface</span> <span class="cls">Shape</span> {
+    <span class="kw">void</span> <span class="fn">draw</span>();
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">Circle.java · Rectangle.java · Square.java — ConcreteProduct</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">Circle</span> <span class="kw">implements</span> <span class="cls">Shape</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.<span class="fn">println</span>(<span class="str">"Drawing a Circle"</span>); }
+}
+
+<span class="kw">public class</span> <span class="cls">Rectangle</span> <span class="kw">implements</span> <span class="cls">Shape</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.<span class="fn">println</span>(<span class="str">"Drawing a Rectangle"</span>); }
+}
+
+<span class="kw">public class</span> <span class="cls">Square</span> <span class="kw">implements</span> <span class="cls">Shape</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.<span class="fn">println</span>(<span class="str">"Drawing a Square"</span>); }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">ShapeFactory.java — Abstract Creator</span></div>
+    <pre><code><span class="kw">public abstract class</span> <span class="cls">ShapeFactory</span> {
+
+    <span class="kw">public abstract</span> <span class="cls">Shape</span> <span class="fn">getShape</span>();
+
+    <span class="kw">public void</span> <span class="fn">printShapeInfo</span>() {
+        <span class="cls">Shape</span> shape = <span class="fn">getShape</span>();
+        System.out.<span class="fn">print</span>(<span class="str">"Created: "</span>);
+        shape.<span class="fn">draw</span>();
+    }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">CircleFactory.java · RectangleFactory.java · SquareFactory.java — ConcreteCreator</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">CircleFactory</span> <span class="kw">extends</span> <span class="cls">ShapeFactory</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Shape</span> <span class="fn">getShape</span>() { <span class="kw">return new</span> <span class="cls">Circle</span>(); }
+}
+
+<span class="kw">public class</span> <span class="cls">RectangleFactory</span> <span class="kw">extends</span> <span class="cls">ShapeFactory</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Shape</span> <span class="fn">getShape</span>() { <span class="kw">return new</span> <span class="cls">Rectangle</span>(); }
+}
+
+<span class="kw">public class</span> <span class="cls">SquareFactory</span> <span class="kw">extends</span> <span class="cls">ShapeFactory</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Shape</span> <span class="fn">getShape</span>() { <span class="kw">return new</span> <span class="cls">Square</span>(); }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">Main.java — Client</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+        <span class="cls">ShapeFactory</span> factory = <span class="kw">new</span> <span class="cls">CircleFactory</span>();
+        factory.<span class="fn">getShape</span>().<span class="fn">draw</span>();
+
+        factory = <span class="kw">new</span> <span class="cls">RectangleFactory</span>();
+        factory.<span class="fn">getShape</span>().<span class="fn">draw</span>();
+
+        factory = <span class="kw">new</span> <span class="cls">SquareFactory</span>();
+        factory.<span class="fn">printShapeInfo</span>();
+    }
+}</code></pre>
+  </div>
+  <div class="callout callout-ok"><strong>Output:</strong><br>Drawing a Circle<br>Drawing a Rectangle<br>Created: Drawing a Square</div>
+</section>
+
+<!-- CODE EXAMPLE 2: NOTIFICATION -->
+<section class="section" id="fm-code-notify">
+  <p class="section-eyebrow ef">Factory Method · Ví dụ 2</p>
+  <h2>Ví dụ 2 — Notification Factory</h2>
+  <p>Bài toán: Hệ thống gửi thông báo qua nhiều kênh (Email, SMS, Push). Mỗi kênh có cách gửi khác nhau. Factory Method giúp thêm kênh mới mà không sửa code cũ.</p>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">Notification.java — Product</span></div>
+    <pre><code><span class="kw">public interface</span> <span class="cls">Notification</span> {
+    <span class="kw">void</span> <span class="fn">send</span>(<span class="cls">String</span> message);
+    <span class="cls">String</span> <span class="fn">getChannel</span>();
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">EmailNotification.java · SMSNotification.java · PushNotification.java — ConcreteProduct</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">EmailNotification</span> <span class="kw">implements</span> <span class="cls">Notification</span> {
+    <span class="kw">private final</span> <span class="cls">String</span> email;
+
+    <span class="kw">public</span> <span class="fn">EmailNotification</span>(<span class="cls">String</span> email) { <span class="kw">this</span>.email = email; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">send</span>(<span class="cls">String</span> message) {
+        System.out.<span class="fn">println</span>(<span class="str">"[EMAIL → "</span> + email + <span class="str">"] "</span> + message);
+    }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getChannel</span>() { <span class="kw">return</span> <span class="str">"Email"</span>; }
+}
+
+<span class="kw">public class</span> <span class="cls">SMSNotification</span> <span class="kw">implements</span> <span class="cls">Notification</span> {
+    <span class="kw">private final</span> <span class="cls">String</span> phone;
+
+    <span class="kw">public</span> <span class="fn">SMSNotification</span>(<span class="cls">String</span> phone) { <span class="kw">this</span>.phone = phone; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">send</span>(<span class="cls">String</span> message) {
+        System.out.<span class="fn">println</span>(<span class="str">"[SMS → "</span> + phone + <span class="str">"] "</span> + message);
+    }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getChannel</span>() { <span class="kw">return</span> <span class="str">"SMS"</span>; }
+}
+
+<span class="kw">public class</span> <span class="cls">PushNotification</span> <span class="kw">implements</span> <span class="cls">Notification</span> {
+    <span class="kw">private final</span> <span class="cls">String</span> deviceId;
+
+    <span class="kw">public</span> <span class="fn">PushNotification</span>(<span class="cls">String</span> deviceId) { <span class="kw">this</span>.deviceId = deviceId; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">send</span>(<span class="cls">String</span> message) {
+        System.out.<span class="fn">println</span>(<span class="str">"[PUSH → device:"</span> + deviceId + <span class="str">"] "</span> + message);
+    }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getChannel</span>() { <span class="kw">return</span> <span class="str">"Push"</span>; }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">NotificationFactory.java — Abstract Creator (with template method)</span></div>
+    <pre><code><span class="kw">public abstract class</span> <span class="cls">NotificationFactory</span> {
+
+    <span class="kw">public abstract</span> <span class="cls">Notification</span> <span class="fn">createNotification</span>();
+
+    <span class="kw">public void</span> <span class="fn">notify</span>(<span class="cls">String</span> message) {
+        <span class="cls">Notification</span> notification = <span class="fn">createNotification</span>();
+        System.out.<span class="fn">println</span>(<span class="str">"Sending via "</span> + notification.<span class="fn">getChannel</span>() + <span class="str">"..."</span>);
+        notification.<span class="fn">send</span>(message);
+    }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">EmailFactory.java · SMSFactory.java · PushFactory.java — ConcreteCreator</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">EmailFactory</span> <span class="kw">extends</span> <span class="cls">NotificationFactory</span> {
+    <span class="kw">private final</span> <span class="cls">String</span> email;
+    <span class="kw">public</span> <span class="fn">EmailFactory</span>(<span class="cls">String</span> email) { <span class="kw">this</span>.email = email; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Notification</span> <span class="fn">createNotification</span>() {
+        <span class="kw">return new</span> <span class="cls">EmailNotification</span>(email);
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">SMSFactory</span> <span class="kw">extends</span> <span class="cls">NotificationFactory</span> {
+    <span class="kw">private final</span> <span class="cls">String</span> phone;
+    <span class="kw">public</span> <span class="fn">SMSFactory</span>(<span class="cls">String</span> phone) { <span class="kw">this</span>.phone = phone; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Notification</span> <span class="fn">createNotification</span>() {
+        <span class="kw">return new</span> <span class="cls">SMSNotification</span>(phone);
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">PushFactory</span> <span class="kw">extends</span> <span class="cls">NotificationFactory</span> {
+    <span class="kw">private final</span> <span class="cls">String</span> deviceId;
+    <span class="kw">public</span> <span class="fn">PushFactory</span>(<span class="cls">String</span> deviceId) { <span class="kw">this</span>.deviceId = deviceId; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Notification</span> <span class="fn">createNotification</span>() {
+        <span class="kw">return new</span> <span class="cls">PushNotification</span>(deviceId);
+    }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">Main.java</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+        <span class="cls">NotificationFactory</span> factory;
+
+        factory = <span class="kw">new</span> <span class="cls">EmailFactory</span>(<span class="str">"alice@example.com"</span>);
+        factory.<span class="fn">notify</span>(<span class="str">"Your order has been placed!"</span>);
+
+        factory = <span class="kw">new</span> <span class="cls">SMSFactory</span>(<span class="str">"+84901234567"</span>);
+        factory.<span class="fn">notify</span>(<span class="str">"OTP: 482910"</span>);
+
+        factory = <span class="kw">new</span> <span class="cls">PushFactory</span>(<span class="str">"device-abc-123"</span>);
+        factory.<span class="fn">notify</span>(<span class="str">"You have a new message"</span>);
+    }
+}</code></pre>
+  </div>
+  <div class="callout callout-ok"><strong>Output:</strong><br>Sending via Email...<br>[EMAIL → alice@example.com] Your order has been placed!<br>Sending via SMS...<br>[SMS → +84901234567] OTP: 482910<br>Sending via Push...<br>[PUSH → device:device-abc-123] You have a new message</div>
+</section>
+
+<!-- FM UML FULL -->
+<section class="section" id="fm-uml-full">
+  <p class="section-eyebrow ef">Factory Method</p>
+  <h2>UML đầy đủ — Notification Factory</h2>
+  <div class="uml-container">
+    <div class="uml-title">📐 Notification Factory Method — Complete UML</div>
+    <svg viewBox="0 0 900 500" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace">
+      <defs>
+        <marker id="t1" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0,10 4,0 8" fill="white" stroke="#1a1714" stroke-width="1"/></marker>
+        <marker id="t2" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0,10 4,0 8" fill="white" stroke="#1a1714" stroke-width="1"/></marker>
+        <marker id="a1" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polyline points="0 0,10 4,0 8" fill="none" stroke="#1a1714" stroke-width="1.3"/></marker>
+      </defs>
+
+      <!-- Notification interface -->
+      <rect x="330" y="20" width="240" height="75" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="330" y="20" width="240" height="32" fill="#eff6ff"/>
+      <text x="450" y="33" text-anchor="middle" font-size="10" fill="#1d4ed8" font-style="italic">«interface»</text>
+      <text x="450" y="46" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">Notification</text>
+      <line x1="330" y1="52" x2="570" y2="52" stroke="#1a1714"/>
+      <text x="342" y="70" font-size="11">+ send(message : String) : void</text>
+      <text x="342" y="85" font-size="11">+ getChannel() : String</text>
+
+      <!-- EmailNotification -->
+      <rect x="60" y="215" width="200" height="72" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="60" y="215" width="200" height="28" fill="white"/>
+      <text x="160" y="233" text-anchor="middle" font-size="12" font-weight="bold">EmailNotification</text>
+      <line x1="60" y1="243" x2="260" y2="243" stroke="#1a1714"/>
+      <text x="72" y="260" font-size="10">– email : String</text>
+      <line x1="60" y1="265" x2="260" y2="265" stroke="#1a1714"/>
+      <text x="72" y="280" font-size="10">+ send(msg) / getChannel()</text>
+
+      <!-- SMSNotification -->
+      <rect x="330" y="215" width="195" height="72" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="330" y="215" width="195" height="28" fill="white"/>
+      <text x="427" y="233" text-anchor="middle" font-size="12" font-weight="bold">SMSNotification</text>
+      <line x1="330" y1="243" x2="525" y2="243" stroke="#1a1714"/>
+      <text x="342" y="260" font-size="10">– phone : String</text>
+      <line x1="330" y1="265" x2="525" y2="265" stroke="#1a1714"/>
+      <text x="342" y="280" font-size="10">+ send(msg) / getChannel()</text>
+
+      <!-- PushNotification -->
+      <rect x="598" y="215" width="205" height="72" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="598" y="215" width="205" height="28" fill="white"/>
+      <text x="700" y="233" text-anchor="middle" font-size="12" font-weight="bold">PushNotification</text>
+      <line x1="598" y1="243" x2="803" y2="243" stroke="#1a1714"/>
+      <text x="610" y="260" font-size="10">– deviceId : String</text>
+      <line x1="598" y1="265" x2="803" y2="265" stroke="#1a1714"/>
+      <text x="610" y="280" font-size="10">+ send(msg) / getChannel()</text>
+
+      <!-- Realization arrows → Notification -->
+      <line x1="160" y1="215" x2="160" y2="165" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="160" y1="165" x2="450" y2="165" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="450" y1="165" x2="450" y2="95" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3" marker-end="url(#t2)"/>
+      <line x1="427" y1="215" x2="427" y2="165" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="700" y1="215" x2="700" y2="165" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="700" y1="165" x2="450" y2="165" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+
+      <!-- NotificationFactory abstract -->
+      <rect x="330" y="365" width="240" height="80" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="330" y="365" width="240" height="32" fill="#fafaf9"/>
+      <text x="450" y="378" text-anchor="middle" font-size="10" fill="#555" font-style="italic">«abstract»</text>
+      <text x="450" y="392" text-anchor="middle" font-size="12" font-weight="bold" font-style="italic">NotificationFactory</text>
+      <line x1="330" y1="397" x2="570" y2="397" stroke="#1a1714"/>
+      <text x="342" y="415" font-size="11" font-style="italic">+ createNotification() : Notification</text>
+      <text x="342" y="430" font-size="9" fill="#888">+ notify(message : String) : void</text>
+
+      <!-- EmailFactory -->
+      <rect x="60" y="450" width="180" height="45" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="60" y="450" width="180" height="25" fill="white"/>
+      <text x="150" y="466" text-anchor="middle" font-size="12" font-weight="bold">EmailFactory</text>
+      <line x1="60" y1="475" x2="240" y2="475" stroke="#1a1714"/>
+      <text x="72" y="489" font-size="10">+ createNotification()</text>
+
+      <!-- SMSFactory -->
+      <rect x="350" y="450" width="160" height="45" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="350" y="450" width="160" height="25" fill="white"/>
+      <text x="430" y="466" text-anchor="middle" font-size="12" font-weight="bold">SMSFactory</text>
+      <line x1="350" y1="475" x2="510" y2="475" stroke="#1a1714"/>
+      <text x="362" y="489" font-size="10">+ createNotification()</text>
+
+      <!-- PushFactory -->
+      <rect x="625" y="450" width="160" height="45" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="625" y="450" width="160" height="25" fill="white"/>
+      <text x="705" y="466" text-anchor="middle" font-size="12" font-weight="bold">PushFactory</text>
+      <line x1="625" y1="475" x2="785" y2="475" stroke="#1a1714"/>
+      <text x="637" y="489" font-size="10">+ createNotification()</text>
+
+      <!-- Inheritance: factories → NotificationFactory -->
+      <line x1="150" y1="450" x2="150" y2="425" stroke="#1a1714" stroke-width="1.3"/>
+      <line x1="150" y1="425" x2="450" y2="425" stroke="#1a1714" stroke-width="1.3"/>
+      <polygon points="450,425 443,418 443,432" fill="white" stroke="#1a1714" stroke-width="1.3"/>
+      <line x1="430" y1="450" x2="430" y2="425" stroke="#1a1714" stroke-width="1.3"/>
+      <line x1="705" y1="450" x2="705" y2="425" stroke="#1a1714" stroke-width="1.3"/>
+      <line x1="705" y1="425" x2="450" y2="425" stroke="#1a1714" stroke-width="1.3"/>
+
+      <!-- creates dependency -->
+      <line x1="570" y1="385" x2="650" y2="385" stroke="#1a1714" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="650" y1="385" x2="650" y2="57" stroke="#1a1714" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="650" y1="57" x2="570" y2="57" stroke="#1a1714" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#a1)"/>
+      <text x="660" y="230" font-size="9" fill="#888" font-style="italic">«creates»</text>
+
+      <!-- labels -->
+      <text x="450" y="12" text-anchor="middle" font-size="9" fill="#1d4ed8">«Product»</text>
+      <text x="450" y="358" text-anchor="middle" font-size="9" fill="#c4320a">«Creator»</text>
+    </svg>
+  </div>
+</section>
+
+<!-- FM PRINCIPLES -->
+<section class="section" id="fm-principles">
+  <p class="section-eyebrow ef">Factory Method</p>
+  <h2>Nguyên lý OOD áp dụng</h2>
+  <table class="compare-table">
+    <thead><tr><th>Nguyên lý</th><th>Cách Factory Method áp dụng</th></tr></thead>
+    <tbody>
+      <tr><td><strong>OCP</strong><br><small>Open/Closed</small></td><td>Thêm loại Product mới chỉ cần thêm class ConcreteProduct + ConcreteCreator. Không sửa Creator hay Client cũ.</td></tr>
+      <tr><td><strong>DIP</strong><br><small>Dependency Inversion</small></td><td>Client phụ thuộc vào Creator (abstract) và Product (interface), KHÔNG phụ thuộc vào ConcreteProduct hay ConcreteCreator.</td></tr>
+      <tr><td><strong>SRP</strong><br><small>Single Responsibility</small></td><td>Mỗi ConcreteCreator chỉ chịu trách nhiệm tạo một loại Product. Creator chứa business logic riêng tách biệt.</td></tr>
+      <tr><td><strong>LSP</strong><br><small>Liskov Substitution</small></td><td>Mọi ConcreteCreator có thể thay thế Creator mà không làm vỡ chương trình. Mọi ConcreteProduct có thể thay thế Product.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- FM TIPS -->
+<section class="section band-f" id="fm-tips">
+  <p class="section-eyebrow ef">Factory Method · Thi</p>
+  <h2>⚡ Kiến thức quan trọng &amp; Lưu ý khi thi</h2>
+
+  <div class="tips-grid">
+    <div class="tip-card tip-card-f">
+      <h4>🔑 Nhớ 4 thành phần</h4>
+      <ul>
+        <li><strong>Product</strong> — interface/abstract cho object tạo ra</li>
+        <li><strong>ConcreteProduct</strong> — hiện thực Product</li>
+        <li><strong>Creator</strong> — abstract class, khai báo factory method</li>
+        <li><strong>ConcreteCreator</strong> — override factory method</li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-w">
+      <h4>⚠️ Những lỗi hay mắc</h4>
+      <ul>
+        <li>Quên <code>abstract</code> cho Creator class và factory method</li>
+        <li>ConcreteCreator dùng <code>implements</code> thay vì <code>extends</code></li>
+        <li>Trả về <code>ConcreteProduct</code> thay vì kiểu <code>Product</code></li>
+        <li>Quên <code>@Override</code> trên factory method</li>
+        <li>Nhầm Factory Method với Simple Factory (không có abstract)</li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-ok">
+      <h4>✅ Cấu trúc code đúng</h4>
+      <ul>
+        <li>Creator: <code>public abstract class</code></li>
+        <li>Factory method: <code>public abstract Product getX()</code></li>
+        <li>ConcreteCreator: <code>extends Creator</code></li>
+        <li>Override: trả về <code>new ConcreteProduct()</code></li>
+        <li>Client chỉ dùng biến kiểu <code>Creator</code> và <code>Product</code></li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-f">
+      <h4>📐 Vẽ UML đúng</h4>
+      <ul>
+        <li>2 hierarchy song song: Creator bên trái, Product bên phải</li>
+        <li>Creator → Product: dashed + open arrow (dependency/creates)</li>
+        <li>ConcreteCreator → Creator: solid + hollow triangle (extends)</li>
+        <li>ConcreteProduct → Product: dashed + hollow triangle (implements)</li>
+        <li>Ghi stereotype: <code>«abstract»</code>, <code>«interface»</code></li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-w">
+      <h4>⚠️ Khi đề yêu cầu thêm loại mới</h4>
+      <ul>
+        <li>Thêm <code>Triangle implements Shape</code></li>
+        <li>Thêm <code>TriangleFactory extends ShapeFactory</code></li>
+        <li>Override <code>getShape()</code> → <code>return new Triangle()</code></li>
+        <li>KHÔNG sửa ShapeFactory, Client, hay class cũ nào</li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-ok">
+      <h4>✅ Nguyên lý nào áp dụng?</h4>
+      <ul>
+        <li><strong>OCP</strong>: mở rộng không sửa code cũ</li>
+        <li><strong>DIP</strong>: client phụ thuộc abstraction</li>
+        <li>Factory Method = "Virtual Constructor"</li>
+        <li>Creator có thể chứa template method dùng factory method</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-f" style="margin-top:1.5rem">
+    <strong>📝 Template code nhanh cho thi — Factory Method:</strong><br><br>
+    <code style="font-family:'JetBrains Mono',monospace;font-size:.83rem;line-height:2">
+    interface Product { void doSomething(); }<br>
+    class ConcreteProductA implements Product { public void doSomething() { ... } }<br>
+    abstract class Creator { public abstract Product factoryMethod(); }<br>
+    class ConcreteCreatorA extends Creator { public Product factoryMethod() { return new ConcreteProductA(); } }
+    </code>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     BUILDER
+═══════════════════════════════════════ -->
+
+<section class="section" id="b-overview">
+  <p class="section-eyebrow eb">Builder Pattern · 30 điểm</p>
+  <h2>Builder Pattern — Tổng quan</h2>
+  <p><strong>Định nghĩa (GoF):</strong> Separate the construction of a complex object from its representation so that the same construction process can create different representations.</p>
+  <div class="callout callout-b">
+    <strong>Một câu nhớ mãi:</strong> Builder = <em>"Tôi cần xây object phức tạp theo nhiều bước, và muốn có thể tạo ra các phiên bản khác nhau bằng cùng quy trình."</em><br>
+    Director điều phối → Builder thực hiện từng bước → ConcreteBuilder tạo ra Product cụ thể.
+  </div>
+  <div class="concept-grid">
+    <div class="concept-cell cell-b"><h4>Pattern type</h4><p>Creational — xây object phức tạp từng bước</p></div>
+    <div class="concept-cell cell-b"><h4>Vấn đề</h4><p>Constructor quá nhiều tham số (Telescoping Constructor anti-pattern)</p></div>
+    <div class="concept-cell cell-b"><h4>Keyword</h4><p>Từng bước (step by step) · Method chaining · Director</p></div>
+    <div class="concept-cell cell-b"><h4>Khi nào dùng</h4><p>Object phức tạp, nhiều thuộc tính tuỳ chọn, nhiều "preset" khác nhau</p></div>
+  </div>
+</section>
+
+<!-- BUILDER FLOW -->
+<section class="section" id="b-flow">
+  <p class="section-eyebrow eb">Builder</p>
+  <h2>Nguyên lý hoạt động — Flow Diagram</h2>
+  <p>Sơ đồ dưới đây mô tả luồng hoạt động của Builder: Director điều phối thứ tự build, Builder thực hiện từng bước, cuối cùng trả về Product hoàn chỉnh.</p>
+
+  <div class="flow-container">
+    <div class="flow-title fb">🔄 Builder — Luồng hoạt động (House example)</div>
+    <svg viewBox="0 0 860 550" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;font-size:11px">
+      <defs>
+        <marker id="bf" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#1d4ed8"/></marker>
+        <marker id="bfg" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#16a34a"/></marker>
+        <marker id="bfo" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#92400e"/></marker>
+        <marker id="bfr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c4320a"/></marker>
+      </defs>
+
+      <!-- Swimlane headers -->
+      <rect x="0" y="0" width="215" height="40" fill="#fffbeb"/>
+      <rect x="225" y="0" width="195" height="40" fill="#eff6ff"/>
+      <rect x="430" y="0" width="215" height="40" fill="#eff6ff"/>
+      <rect x="655" y="0" width="205" height="40" fill="#f0fdf4"/>
+      <text x="107" y="25" text-anchor="middle" font-weight="bold" fill="#92400e">Client / Director</text>
+      <text x="322" y="25" text-anchor="middle" font-weight="bold" fill="#1d4ed8">Builder (interface)</text>
+      <text x="537" y="25" text-anchor="middle" font-weight="bold" fill="#1d4ed8">ConcreteBuilder</text>
+      <text x="757" y="25" text-anchor="middle" font-weight="bold" fill="#16a34a">Product (House)</text>
+      <line x1="220" y1="0" x2="220" y2="550" stroke="#ddd8d0" stroke-dasharray="4,3"/>
+      <line x1="425" y1="0" x2="425" y2="550" stroke="#ddd8d0" stroke-dasharray="4,3"/>
+      <line x1="650" y1="0" x2="650" y2="550" stroke="#ddd8d0" stroke-dasharray="4,3"/>
+
+      <!-- Step 1: Client sets builder on Director -->
+      <rect x="15" y="60" width="190" height="40" rx="4" fill="white" stroke="#92400e" stroke-width="1.5"/>
+      <text x="110" y="77" text-anchor="middle" fill="#92400e">new HouseDirector()</text>
+      <text x="110" y="92" text-anchor="middle" fill="#888" font-size="10">+ new WoodenHouseBuilder()</text>
+
+      <!-- Step 2: Client calls buildLuxuryHouse(builder) -->
+      <rect x="15" y="130" width="190" height="35" rx="4" fill="white" stroke="#92400e" stroke-width="1.5"/>
+      <text x="110" y="152" text-anchor="middle" fill="#92400e">buildLuxuryHouse(builder)</text>
+
+      <!-- Arrow to ConcreteBuilder -->
+      <line x1="205" y1="147" x2="435" y2="147" stroke="#92400e" stroke-width="1.5" marker-end="url(#bfo)"/>
+
+      <!-- Step 3: Director calls buildWalls() -->
+      <rect x="435" y="195" width="200" height="32" rx="4" fill="white" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="535" y="216" text-anchor="middle" fill="#1d4ed8">buildWalls("oak")</text>
+
+      <!-- call arrow from director -->
+      <line x1="110" y1="165" x2="110" y2="211" stroke="#92400e" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="110" y1="211" x2="435" y2="211" stroke="#92400e" stroke-width="1.5" marker-end="url(#bfo)"/>
+      <text x="260" y="206" text-anchor="middle" fill="#888" font-size="9">① buildWalls("oak")</text>
+
+      <!-- Step 4: buildRoof -->
+      <rect x="435" y="247" width="200" height="32" rx="4" fill="white" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="535" y="268" text-anchor="middle" fill="#1d4ed8">buildRoof("gabled")</text>
+      <line x1="110" y1="247" x2="435" y2="263" stroke="#92400e" stroke-width="1.5" marker-end="url(#bfo)"/>
+      <text x="260" y="253" text-anchor="middle" fill="#888" font-size="9">② buildRoof("gabled")</text>
+
+      <!-- Step 5: addWindows -->
+      <rect x="435" y="299" width="200" height="32" rx="4" fill="white" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="535" y="320" text-anchor="middle" fill="#1d4ed8">addWindows(8)</text>
+      <line x1="110" y1="299" x2="435" y2="315" stroke="#92400e" stroke-width="1.5" marker-end="url(#bfo)"/>
+      <text x="260" y="305" text-anchor="middle" fill="#888" font-size="9">③ addWindows(8)</text>
+
+      <!-- Step 6: addGarage -->
+      <rect x="435" y="351" width="200" height="32" rx="4" fill="white" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="535" y="372" text-anchor="middle" fill="#1d4ed8">addGarage()</text>
+      <line x1="110" y1="350" x2="435" y2="367" stroke="#92400e" stroke-width="1.5" marker-end="url(#bfo)"/>
+      <text x="260" y="356" text-anchor="middle" fill="#888" font-size="9">④ addGarage()</text>
+
+      <!-- Vertical line on Director side -->
+      <line x1="110" y1="165" x2="110" y2="370" stroke="#92400e" stroke-width="1" stroke-dasharray="2,2"/>
+
+      <!-- ConcreteBuilder builds internally each step -->
+      <rect x="660" y="195" width="185" height="188" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="752" y="215" text-anchor="middle" fill="#16a34a" font-weight="bold">House (building)</text>
+      <text x="670" y="238" fill="#555" font-size="10">walls = "Wooden oak"</text>
+      <text x="670" y="256" fill="#555" font-size="10">roof = "Wooden gabled"</text>
+      <text x="670" y="274" fill="#555" font-size="10">windows = 8</text>
+      <text x="670" y="292" fill="#555" font-size="10">hasGarage = true</text>
+      <text x="670" y="315" fill="#999" font-size="9">← set after buildWalls</text>
+      <text x="670" y="330" fill="#999" font-size="9">← set after buildRoof</text>
+      <text x="670" y="345" fill="#999" font-size="9">← set after addWindows</text>
+      <text x="670" y="360" fill="#999" font-size="9">← set after addGarage</text>
+      <text x="670" y="376" fill="#16a34a" font-size="9" font-weight="bold">← state accumulated!</text>
+
+      <!-- Arrows from each step to House -->
+      <line x1="635" y1="211" x2="660" y2="211" stroke="#1d4ed8" stroke-width="1" marker-end="url(#bf)"/>
+      <line x1="635" y1="263" x2="660" y2="260" stroke="#1d4ed8" stroke-width="1" marker-end="url(#bf)"/>
+      <line x1="635" y1="315" x2="660" y2="310" stroke="#1d4ed8" stroke-width="1" marker-end="url(#bf)"/>
+      <line x1="635" y1="367" x2="660" y2="355" stroke="#1d4ed8" stroke-width="1" marker-end="url(#bf)"/>
+
+      <!-- Step 7: build() / getResult() -->
+      <rect x="15" y="415" width="190" height="35" rx="4" fill="white" stroke="#92400e" stroke-width="1.5"/>
+      <text x="110" y="437" text-anchor="middle" fill="#92400e">builder.build()</text>
+      <line x1="205" y1="432" x2="435" y2="432" stroke="#92400e" stroke-width="1.5" marker-end="url(#bfo)"/>
+      <rect x="435" y="415" width="200" height="35" rx="4" fill="white" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="535" y="437" text-anchor="middle" fill="#1d4ed8">return house</text>
+      <line x1="635" y1="432" x2="660" y2="390" stroke="#1d4ed8" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#bf)"/>
+
+      <!-- House returned to Client -->
+      <rect x="660" y="415" width="185" height="35" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+      <text x="752" y="437" text-anchor="middle" fill="#16a34a" font-weight="bold">House (complete!)</text>
+      <line x1="660" y1="432" x2="205" y2="432" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#bfg)"/>
+
+      <!-- KEY POINTS -->
+      <rect x="15" y="470" width="830" height="65" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+      <text x="35" y="490" font-weight="bold" fill="#1d4ed8" font-size="11">🔑 Điểm then chốt Builder:</text>
+      <text x="35" y="508" fill="#3a3530" font-size="10">① Builder tích lũy state qua nhiều bước — product được hoàn thiện dần, không phải một lần</text>
+      <text x="35" y="524" fill="#3a3530" font-size="10">② Director chỉ biết Builder interface — có thể đổi WoodenBuilder ↔ StoneBuilder mà Director không đổi</text>
+      <text x="35" y="540" fill="#3a3530" font-size="10">③ Method chaining: mỗi step trả về <code>this</code> → builder.buildWalls().buildRoof().addWindows(4).build()</text>
+    </svg>
+  </div>
+</section>
+
+<!-- BUILDER PARTICIPANTS -->
+<section class="section" id="b-participants">
+  <p class="section-eyebrow eb">Builder</p>
+  <h2>Các thành phần (Participants)</h2>
+  <table class="participants">
+    <thead><tr><th>Thành phần</th><th>Ví dụ House</th><th>Vai trò</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Product</strong></td><td><code>House</code></td><td>Object phức tạp cần xây dựng. Chứa nhiều thuộc tính. Không nhất thiết phải có interface chung giữa các Product khác nhau.</td></tr>
+      <tr><td><strong>Builder</strong> (interface)</td><td><code>HouseBuilder</code></td><td>Định nghĩa các bước xây dựng. Mỗi method build một phần của Product. Thường có <code>build()</code> hoặc <code>getResult()</code> trả về Product.</td></tr>
+      <tr><td><strong>ConcreteBuilder</strong></td><td><code>WoodenHouseBuilder</code>, <code>StoneHouseBuilder</code></td><td>Hiện thực các bước build theo cách riêng. Giữ state của product đang xây. Cung cấp <code>build()</code> trả về Product hoàn chỉnh.</td></tr>
+      <tr><td><strong>Director</strong> (optional)</td><td><code>HouseDirector</code></td><td>Điều phối thứ tự và tổ hợp các bước build. Tái sử dụng chuỗi bước cho nhiều preset. <strong>Client có thể không cần Director.</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-b">
+    <strong>💡 Director không bắt buộc:</strong> Client có thể gọi trực tiếp các bước của Builder theo thứ tự tuỳ ý. Director chỉ cần khi muốn tái sử dụng chuỗi bước (buildMinimalHouse, buildLuxuryHouse).
+  </div>
+</section>
+
+<!-- BUILDER UML -->
+<section class="section" id="b-uml">
+  <p class="section-eyebrow eb">Builder</p>
+  <h2>UML — Builder Pattern</h2>
+  <div class="uml-container">
+    <div class="uml-title">📐 Builder — House Example (Complete UML)</div>
+    <svg viewBox="0 0 880 480" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace">
+      <defs>
+        <marker id="bt1" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0,10 4,0 8" fill="white" stroke="#1a1714" stroke-width="1"/></marker>
+        <marker id="bt2" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0,10 4,0 8" fill="white" stroke="#1a1714" stroke-width="1"/></marker>
+        <marker id="ba1" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto"><polyline points="0 0,10 4,0 8" fill="none" stroke="#1a1714" stroke-width="1.3"/></marker>
+        <marker id="bdiam" markerWidth="14" markerHeight="10" refX="0" refY="5" orient="auto"><polygon points="0 5,7 0,14 5,7 10" fill="white" stroke="#1a1714" stroke-width="1"/></marker>
+      </defs>
+
+      <!-- Director -->
+      <rect x="20" y="80" width="195" height="95" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="20" y="80" width="195" height="28" fill="#fafaf9"/>
+      <text x="117" y="98" text-anchor="middle" font-size="13" font-weight="bold">HouseDirector</text>
+      <line x1="20" y1="108" x2="215" y2="108" stroke="#1a1714"/>
+      <text x="32" y="125" font-size="10">– builder : HouseBuilder</text>
+      <line x1="20" y1="130" x2="215" y2="130" stroke="#1a1714"/>
+      <text x="32" y="147" font-size="10">+ buildMinimalHouse(b)</text>
+      <text x="32" y="162" font-size="10">+ buildLuxuryHouse(b)</text>
+
+      <!-- HouseBuilder interface -->
+      <rect x="290" y="40" width="240" height="115" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="290" y="40" width="240" height="32" fill="#eff6ff"/>
+      <text x="410" y="52" text-anchor="middle" font-size="10" fill="#1d4ed8" font-style="italic">«interface»</text>
+      <text x="410" y="65" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">HouseBuilder</text>
+      <line x1="290" y1="72" x2="530" y2="72" stroke="#1a1714"/>
+      <text x="302" y="90" font-size="11">+ buildWalls(m : String) : HouseBuilder</text>
+      <text x="302" y="106" font-size="11">+ buildRoof(t : String) : HouseBuilder</text>
+      <text x="302" y="122" font-size="11">+ addWindows(n : int) : HouseBuilder</text>
+      <text x="302" y="138" font-size="11">+ addGarage() : HouseBuilder</text>
+      <text x="302" y="148" font-size="9" fill="#1d4ed8">+ build() : House</text>
+
+      <!-- House product -->
+      <rect x="670" y="60" width="190" height="105" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="670" y="60" width="190" height="28" fill="#fafaf9"/>
+      <text x="765" y="78" text-anchor="middle" font-size="13" font-weight="bold">House</text>
+      <line x1="670" y1="88" x2="860" y2="88" stroke="#1a1714"/>
+      <text x="682" y="105" font-size="10">– walls : String</text>
+      <text x="682" y="120" font-size="10">– roof : String</text>
+      <text x="682" y="135" font-size="10">– windows : int</text>
+      <text x="682" y="150" font-size="10">– hasGarage : boolean</text>
+      <line x1="670" y1="155" x2="860" y2="155" stroke="#1a1714"/>
+      <text x="682" y="170" font-size="10">+ setters... / toString()</text>
+
+      <!-- WoodenHouseBuilder -->
+      <rect x="160" y="295" width="225" height="115" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="160" y="295" width="225" height="28" fill="white"/>
+      <text x="272" y="313" text-anchor="middle" font-size="12" font-weight="bold">WoodenHouseBuilder</text>
+      <line x1="160" y1="323" x2="385" y2="323" stroke="#1a1714"/>
+      <text x="172" y="340" font-size="10">– house : House</text>
+      <line x1="160" y1="345" x2="385" y2="345" stroke="#1a1714"/>
+      <text x="172" y="362" font-size="10">+ buildWalls(m) : HouseBuilder</text>
+      <text x="172" y="377" font-size="10">+ buildRoof(t) : HouseBuilder</text>
+      <text x="172" y="392" font-size="10">+ addWindows(n) : HouseBuilder</text>
+      <text x="172" y="407" font-size="10">+ addGarage() / build()</text>
+
+      <!-- StoneHouseBuilder -->
+      <rect x="430" y="295" width="225" height="115" fill="white" stroke="#1a1714" stroke-width="1.5"/>
+      <rect x="430" y="295" width="225" height="28" fill="white"/>
+      <text x="542" y="313" text-anchor="middle" font-size="12" font-weight="bold">StoneHouseBuilder</text>
+      <line x1="430" y1="323" x2="655" y2="323" stroke="#1a1714"/>
+      <text x="442" y="340" font-size="10">– house : House</text>
+      <line x1="430" y1="345" x2="655" y2="345" stroke="#1a1714"/>
+      <text x="442" y="362" font-size="10">+ buildWalls(m) : HouseBuilder</text>
+      <text x="442" y="377" font-size="10">+ buildRoof(t) : HouseBuilder</text>
+      <text x="442" y="392" font-size="10">+ addWindows(n) : HouseBuilder</text>
+      <text x="442" y="407" font-size="10">+ addGarage() / build()</text>
+
+      <!-- Director uses Builder (hollow diamond + line) -->
+      <line x1="215" y1="128" x2="290" y2="110" stroke="#1a1714" stroke-width="1.3" marker-start="url(#bdiam)"/>
+      <text x="248" y="107" font-size="9" fill="#888">uses</text>
+
+      <!-- Realization: ConcreteBuilders → HouseBuilder -->
+      <line x1="272" y1="295" x2="272" y2="240" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="272" y1="240" x2="410" y2="240" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="410" y1="240" x2="410" y2="155" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3" marker-end="url(#bt1)"/>
+      <line x1="542" y1="295" x2="542" y2="240" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <line x1="542" y1="240" x2="410" y2="240" stroke="#1a1714" stroke-width="1.3" stroke-dasharray="6,3"/>
+      <text x="420" y="235" font-size="9" fill="#888">implements</text>
+
+      <!-- ConcreteBuilder creates House -->
+      <line x1="385" y1="355" x2="670" y2="130" stroke="#1a1714" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ba1)"/>
+      <text x="560" y="250" font-size="9" fill="#888" font-style="italic">«creates»</text>
+
+      <!-- Labels -->
+      <text x="117" y="72" text-anchor="middle" font-size="9" fill="#888">«Director»</text>
+      <text x="410" y="32" text-anchor="middle" font-size="9" fill="#1d4ed8">«Builder»</text>
+      <text x="765" y="52" text-anchor="middle" font-size="9" fill="#888">«Product»</text>
+      <text x="272" y="287" text-anchor="middle" font-size="9" fill="#888">«ConcreteBuilder»</text>
+    </svg>
+  </div>
+</section>
+
+<!-- BUILDER CODE 1: HOUSE -->
+<section class="section" id="b-code-house">
+  <p class="section-eyebrow eb">Builder · Ví dụ 1</p>
+  <h2>Ví dụ 1 — House Builder</h2>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">House.java — Product</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">House</span> {
+    <span class="kw">private</span> <span class="cls">String</span> walls;
+    <span class="kw">private</span> <span class="cls">String</span> roof;
+    <span class="kw">private int</span> windows;
+    <span class="kw">private boolean</span> hasGarage;
+
+    <span class="kw">public void</span> <span class="fn">setWalls</span>(<span class="cls">String</span> walls)    { <span class="kw">this</span>.walls = walls; }
+    <span class="kw">public void</span> <span class="fn">setRoof</span>(<span class="cls">String</span> roof)      { <span class="kw">this</span>.roof = roof; }
+    <span class="kw">public void</span> <span class="fn">setWindows</span>(<span class="kw">int</span> windows)  { <span class="kw">this</span>.windows = windows; }
+    <span class="kw">public void</span> <span class="fn">setHasGarage</span>(<span class="kw">boolean</span> g)  { <span class="kw">this</span>.hasGarage = g; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">toString</span>() {
+        <span class="kw">return</span> <span class="str">"House{walls='"</span> + walls + <span class="str">"', roof='"</span> + roof
+            + <span class="str">"', windows="</span> + windows + <span class="str">", garage="</span> + hasGarage + <span class="str">"}"</span>;
+    }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">HouseBuilder.java — Builder interface (with method chaining)</span></div>
+    <pre><code><span class="kw">public interface</span> <span class="cls">HouseBuilder</span> {
+    <span class="cls">HouseBuilder</span> <span class="fn">buildWalls</span>(<span class="cls">String</span> material);
+    <span class="cls">HouseBuilder</span> <span class="fn">buildRoof</span>(<span class="cls">String</span> type);
+    <span class="cls">HouseBuilder</span> <span class="fn">addWindows</span>(<span class="kw">int</span> count);
+    <span class="cls">HouseBuilder</span> <span class="fn">addGarage</span>();
+    <span class="cls">House</span> <span class="fn">build</span>();
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">WoodenHouseBuilder.java — ConcreteBuilder</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">WoodenHouseBuilder</span> <span class="kw">implements</span> <span class="cls">HouseBuilder</span> {
+    <span class="kw">private final</span> <span class="cls">House</span> house = <span class="kw">new</span> <span class="cls">House</span>();
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">HouseBuilder</span> <span class="fn">buildWalls</span>(<span class="cls">String</span> material) {
+        house.<span class="fn">setWalls</span>(<span class="str">"Wooden "</span> + material);
+        <span class="kw">return this</span>;
+    }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">HouseBuilder</span> <span class="fn">buildRoof</span>(<span class="cls">String</span> type) {
+        house.<span class="fn">setRoof</span>(<span class="str">"Wooden "</span> + type + <span class="str">" roof"</span>);
+        <span class="kw">return this</span>;
+    }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">HouseBuilder</span> <span class="fn">addWindows</span>(<span class="kw">int</span> count) {
+        house.<span class="fn">setWindows</span>(count);
+        <span class="kw">return this</span>;
+    }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">HouseBuilder</span> <span class="fn">addGarage</span>() {
+        house.<span class="fn">setHasGarage</span>(<span class="kw">true</span>);
+        <span class="kw">return this</span>;
+    }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">House</span> <span class="fn">build</span>() { <span class="kw">return</span> house; }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">HouseDirector.java — Director</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">HouseDirector</span> {
+    <span class="kw">public</span> <span class="cls">House</span> <span class="fn">buildMinimalHouse</span>(<span class="cls">HouseBuilder</span> builder) {
+        <span class="kw">return</span> builder.<span class="fn">buildWalls</span>(<span class="str">"pine"</span>).<span class="fn">buildRoof</span>(<span class="str">"flat"</span>).<span class="fn">addWindows</span>(<span class="num">2</span>).<span class="fn">build</span>();
+    }
+
+    <span class="kw">public</span> <span class="cls">House</span> <span class="fn">buildLuxuryHouse</span>(<span class="cls">HouseBuilder</span> builder) {
+        <span class="kw">return</span> builder.<span class="fn">buildWalls</span>(<span class="str">"oak"</span>).<span class="fn">buildRoof</span>(<span class="str">"gabled"</span>)
+                       .<span class="fn">addWindows</span>(<span class="num">8</span>).<span class="fn">addGarage</span>().<span class="fn">build</span>();
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+        <span class="cls">HouseDirector</span> director = <span class="kw">new</span> <span class="cls">HouseDirector</span>();
+
+        <span class="cls">House</span> minimal = director.<span class="fn">buildMinimalHouse</span>(<span class="kw">new</span> <span class="cls">WoodenHouseBuilder</span>());
+        System.out.<span class="fn">println</span>(minimal);
+
+        <span class="cls">House</span> luxury = director.<span class="fn">buildLuxuryHouse</span>(<span class="kw">new</span> <span class="cls">StoneHouseBuilder</span>());
+        System.out.<span class="fn">println</span>(luxury);
+
+        <span class="cls">House</span> custom = <span class="kw">new</span> <span class="cls">WoodenHouseBuilder</span>()
+            .<span class="fn">buildWalls</span>(<span class="str">"cedar"</span>).<span class="fn">addWindows</span>(<span class="num">4</span>).<span class="fn">build</span>();
+        System.out.<span class="fn">println</span>(custom);
+    }
+}</code></pre>
+  </div>
+  <div class="callout callout-ok"><strong>Output:</strong><br>House{walls='Wooden pine', roof='Wooden flat roof', windows=2, garage=false}<br>House{walls='Stone oak', roof='Stone gabled roof', windows=8, garage=true}<br>House{walls='Wooden cedar', roof='null', windows=4, garage=false}</div>
+</section>
+
+<!-- BUILDER CODE 2: PIZZA -->
+<section class="section" id="b-code-pizza">
+  <p class="section-eyebrow eb">Builder · Ví dụ 2</p>
+  <h2>Ví dụ 2 — Pizza Builder</h2>
+  <p>Bài toán: Hệ thống đặt pizza online. Mỗi pizza có đế, nước sốt, và nhiều topping tuỳ chọn. Builder giúp xây từng phần mà không cần constructor khổng lồ.</p>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">Pizza.java — Product</span></div>
+    <pre><code><span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="cls">Pizza</span> {
+    <span class="kw">private</span> <span class="cls">String</span> dough;
+    <span class="kw">private</span> <span class="cls">String</span> sauce;
+    <span class="kw">private</span> <span class="cls">List</span>&lt;<span class="cls">String</span>&gt; toppings = <span class="kw">new</span> <span class="cls">ArrayList</span>&lt;&gt;();
+    <span class="kw">private</span> <span class="cls">String</span> size;
+
+    <span class="kw">public void</span> <span class="fn">setDough</span>(<span class="cls">String</span> dough)       { <span class="kw">this</span>.dough = dough; }
+    <span class="kw">public void</span> <span class="fn">setSauce</span>(<span class="cls">String</span> sauce)       { <span class="kw">this</span>.sauce = sauce; }
+    <span class="kw">public void</span> <span class="fn">addTopping</span>(<span class="cls">String</span> topping)   { toppings.<span class="fn">add</span>(topping); }
+    <span class="kw">public void</span> <span class="fn">setSize</span>(<span class="cls">String</span> size)         { <span class="kw">this</span>.size = size; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">toString</span>() {
+        <span class="kw">return</span> size + <span class="str">" Pizza {"</span> + <span class="str">"dough="</span> + dough
+            + <span class="str">", sauce="</span> + sauce + <span class="str">", toppings="</span> + toppings + <span class="str">"}"</span>;
+    }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">PizzaBuilder.java — Builder interface</span></div>
+    <pre><code><span class="kw">public interface</span> <span class="cls">PizzaBuilder</span> {
+    <span class="cls">PizzaBuilder</span> <span class="fn">buildDough</span>(<span class="cls">String</span> type);
+    <span class="cls">PizzaBuilder</span> <span class="fn">buildSauce</span>(<span class="cls">String</span> sauce);
+    <span class="cls">PizzaBuilder</span> <span class="fn">addTopping</span>(<span class="cls">String</span> topping);
+    <span class="cls">PizzaBuilder</span> <span class="fn">setSize</span>(<span class="cls">String</span> size);
+    <span class="cls">Pizza</span> <span class="fn">build</span>();
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">MargheritaBuilder.java · PepperoniBuilder.java — ConcreteBuilder</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">MargheritaBuilder</span> <span class="kw">implements</span> <span class="cls">PizzaBuilder</span> {
+    <span class="kw">private final</span> <span class="cls">Pizza</span> pizza = <span class="kw">new</span> <span class="cls">Pizza</span>();
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">PizzaBuilder</span> <span class="fn">buildDough</span>(<span class="cls">String</span> type) {
+        pizza.<span class="fn">setDough</span>(<span class="str">"Thin "</span> + type); <span class="kw">return this</span>;
+    }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">PizzaBuilder</span> <span class="fn">buildSauce</span>(<span class="cls">String</span> sauce) {
+        pizza.<span class="fn">setSauce</span>(<span class="str">"Fresh "</span> + sauce); <span class="kw">return this</span>;
+    }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">PizzaBuilder</span> <span class="fn">addTopping</span>(<span class="cls">String</span> topping) {
+        pizza.<span class="fn">addTopping</span>(topping); <span class="kw">return this</span>;
+    }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">PizzaBuilder</span> <span class="fn">setSize</span>(<span class="cls">String</span> size) {
+        pizza.<span class="fn">setSize</span>(size); <span class="kw">return this</span>;
+    }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Pizza</span> <span class="fn">build</span>() { <span class="kw">return</span> pizza; }
+}
+
+<span class="kw">public class</span> <span class="cls">PepperoniBuilder</span> <span class="kw">implements</span> <span class="cls">PizzaBuilder</span> {
+    <span class="kw">private final</span> <span class="cls">Pizza</span> pizza = <span class="kw">new</span> <span class="cls">Pizza</span>();
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">PizzaBuilder</span> <span class="fn">buildDough</span>(<span class="cls">String</span> type) {
+        pizza.<span class="fn">setDough</span>(<span class="str">"Thick "</span> + type); <span class="kw">return this</span>;
+    }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">PizzaBuilder</span> <span class="fn">buildSauce</span>(<span class="cls">String</span> sauce) {
+        pizza.<span class="fn">setSauce</span>(<span class="str">"Spicy "</span> + sauce); <span class="kw">return this</span>;
+    }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">PizzaBuilder</span> <span class="fn">addTopping</span>(<span class="cls">String</span> topping) {
+        pizza.<span class="fn">addTopping</span>(topping); <span class="kw">return this</span>;
+    }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">PizzaBuilder</span> <span class="fn">setSize</span>(<span class="cls">String</span> size) {
+        pizza.<span class="fn">setSize</span>(size); <span class="kw">return this</span>;
+    }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Pizza</span> <span class="fn">build</span>() { <span class="kw">return</span> pizza; }
+}</code></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><div class="code-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="code-filename">PizzaDirector.java + Main.java</span></div>
+    <pre><code><span class="kw">public class</span> <span class="cls">PizzaDirector</span> {
+    <span class="kw">public</span> <span class="cls">Pizza</span> <span class="fn">buildClassicMargherita</span>(<span class="cls">PizzaBuilder</span> builder) {
+        <span class="kw">return</span> builder.<span class="fn">setSize</span>(<span class="str">"Medium"</span>)
+                       .<span class="fn">buildDough</span>(<span class="str">"crust"</span>)
+                       .<span class="fn">buildSauce</span>(<span class="str">"tomato"</span>)
+                       .<span class="fn">addTopping</span>(<span class="str">"mozzarella"</span>)
+                       .<span class="fn">addTopping</span>(<span class="str">"basil"</span>)
+                       .<span class="fn">build</span>();
+    }
+
+    <span class="kw">public</span> <span class="cls">Pizza</span> <span class="fn">buildLargePepperoni</span>(<span class="cls">PizzaBuilder</span> builder) {
+        <span class="kw">return</span> builder.<span class="fn">setSize</span>(<span class="str">"Large"</span>)
+                       .<span class="fn">buildDough</span>(<span class="str">"pan"</span>)
+                       .<span class="fn">buildSauce</span>(<span class="str">"marinara"</span>)
+                       .<span class="fn">addTopping</span>(<span class="str">"pepperoni"</span>)
+                       .<span class="fn">addTopping</span>(<span class="str">"cheese"</span>)
+                       .<span class="fn">addTopping</span>(<span class="str">"olives"</span>)
+                       .<span class="fn">build</span>();
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+        <span class="cls">PizzaDirector</span> director = <span class="kw">new</span> <span class="cls">PizzaDirector</span>();
+
+        <span class="cls">Pizza</span> m = director.<span class="fn">buildClassicMargherita</span>(<span class="kw">new</span> <span class="cls">MargheritaBuilder</span>());
+        System.out.<span class="fn">println</span>(m);
+
+        <span class="cls">Pizza</span> p = director.<span class="fn">buildLargePepperoni</span>(<span class="kw">new</span> <span class="cls">PepperoniBuilder</span>());
+        System.out.<span class="fn">println</span>(p);
+
+        <span class="cls">Pizza</span> custom = <span class="kw">new</span> <span class="cls">MargheritaBuilder</span>()
+            .<span class="fn">setSize</span>(<span class="str">"Small"</span>).<span class="fn">buildDough</span>(<span class="str">"gluten-free"</span>)
+            .<span class="fn">buildSauce</span>(<span class="str">"pesto"</span>).<span class="fn">addTopping</span>(<span class="str">"arugula"</span>).<span class="fn">build</span>();
+        System.out.<span class="fn">println</span>(custom);
+    }
+}</code></pre>
+  </div>
+  <div class="callout callout-ok"><strong>Output:</strong><br>Medium Pizza {dough=Thin crust, sauce=Fresh tomato, toppings=[mozzarella, basil]}<br>Large Pizza {dough=Thick pan, sauce=Spicy marinara, toppings=[pepperoni, cheese, olives]}<br>Small Pizza {dough=Thin gluten-free, sauce=Fresh pesto, toppings=[arugula]}</div>
+</section>
+
+<!-- BUILDER VS FACTORY -->
+<section class="section" id="b-vs">
+  <p class="section-eyebrow eb">So sánh</p>
+  <h2>Builder vs Factory Method</h2>
+  <table class="compare-table">
+    <thead><tr><th></th><th class="th-f">Factory Method</th><th class="th-b">Builder</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Câu hỏi trả lời</strong></td><td>Tạo loại object nào? (Which type?)</td><td>Xây object phức tạp thế nào? (How to construct?)</td></tr>
+      <tr><td><strong>Số bước</strong></td><td>Một bước — gọi factory method</td><td>Nhiều bước — gọi từng build method theo thứ tự</td></tr>
+      <tr><td><strong>Product</strong></td><td>Các loại khác nhau, thường đơn giản</td><td>Cùng kiểu, nhưng cấu hình phức tạp, nhiều thuộc tính</td></tr>
+      <tr><td><strong>Polymorphism</strong></td><td>Override factory method (inheritance)</td><td>Implement Builder interface (composition)</td></tr>
+      <tr><td><strong>Director</strong></td><td>Không có</td><td>Có thể có (tuỳ chọn)</td></tr>
+      <tr><td><strong>Method chaining</strong></td><td>Không điển hình</td><td>Rất phổ biến (return this)</td></tr>
+      <tr><td><strong>Ví dụ thực tế</strong></td><td>UI framework tạo button theo OS</td><td>StringBuilder, SQL query builder, HTTP request</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- BUILDER TIPS -->
+<section class="section band-b" id="b-tips">
+  <p class="section-eyebrow eb">Builder · Thi</p>
+  <h2>⚡ Kiến thức quan trọng &amp; Lưu ý khi thi</h2>
+
+  <div class="tips-grid">
+    <div class="tip-card tip-card-b">
+      <h4>🔑 Nhớ 4 thành phần</h4>
+      <ul>
+        <li><strong>Product</strong> — object phức tạp được xây dựng</li>
+        <li><strong>Builder</strong> — interface định nghĩa các bước</li>
+        <li><strong>ConcreteBuilder</strong> — hiện thực steps + giữ state</li>
+        <li><strong>Director</strong> — điều phối thứ tự (optional)</li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-w">
+      <h4>⚠️ Những lỗi hay mắc</h4>
+      <ul>
+        <li>Quên trả về <code>this</code> trong các build method</li>
+        <li>ConcreteBuilder không lưu state (house field)</li>
+        <li>Director nhận Product thay vì Builder</li>
+        <li>Quên method <code>build()</code> / <code>getResult()</code></li>
+        <li>Nhầm Builder với Factory (Builder = nhiều bước!)</li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-ok">
+      <h4>✅ Cấu trúc code đúng</h4>
+      <ul>
+        <li>Builder: <code>public interface</code>, mỗi method trả về <code>Builder</code></li>
+        <li>ConcreteBuilder: <code>implements Builder</code>, có <code>private Product p</code></li>
+        <li>Mỗi step: set thuộc tính product, <code>return this</code></li>
+        <li>Director: nhận <code>Builder</code> interface, không biết ConcreteBuilder</li>
+        <li><code>build()</code>: trả về <code>Product</code> hoàn chỉnh</li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-b">
+      <h4>📐 Vẽ UML đúng</h4>
+      <ul>
+        <li>Director ◇─── Builder (hollow diamond = aggregation)</li>
+        <li>ConcreteBuilder ──implements──▷ Builder (dashed + hollow triangle)</li>
+        <li>ConcreteBuilder ─────creates───▷ Product (dashed + open arrow)</li>
+        <li>Ghi <code>«interface»</code> cho Builder</li>
+        <li>Director KHÔNG trỏ trực tiếp vào Product hay ConcreteBuilder</li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-w">
+      <h4>⚠️ Director optional — câu trick</h4>
+      <ul>
+        <li>Đề hỏi "có cần Director không?" → KHÔNG bắt buộc</li>
+        <li>Client có thể gọi builder steps trực tiếp</li>
+        <li>Director chỉ hữu ích khi cần tái dùng chuỗi bước</li>
+        <li>Nếu đề yêu cầu Director → nhớ Director nhận Builder (interface), không nhận ConcreteBuilder</li>
+      </ul>
+    </div>
+    <div class="tip-card tip-card-ok">
+      <h4>✅ Nguyên lý áp dụng</h4>
+      <ul>
+        <li><strong>OCP</strong>: Thêm ConcreteBuilder mới không sửa Director</li>
+        <li><strong>SRP</strong>: Director chỉ biết thứ tự, Builder biết cách build</li>
+        <li><strong>DIP</strong>: Director phụ thuộc Builder interface</li>
+        <li>Builder giải quyết "Telescoping Constructor" anti-pattern</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-b" style="margin-top:1.5rem">
+    <strong>📝 Template code nhanh cho thi — Builder:</strong><br><br>
+    <code style="font-family:'JetBrains Mono',monospace;font-size:.83rem;line-height:2">
+    interface Builder { Builder stepA(); Builder stepB(); Product build(); }<br>
+    class ConcreteBuilder implements Builder {<br>
+    &nbsp;&nbsp;private Product p = new Product();<br>
+    &nbsp;&nbsp;public Builder stepA() { p.setA(...); return this; }<br>
+    &nbsp;&nbsp;public Builder stepB() { p.setB(...); return this; }<br>
+    &nbsp;&nbsp;public Product build() { return p; }<br>
+    }<br>
+    class Director { public Product make(Builder b) { return b.stepA().stepB().build(); } }
+    </code>
+  </div>
+</section>
+
+<footer style="text-align:center;padding:2.5rem;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border)">
+  <p>OOD Exam Study Guide · Factory Method &amp; Builder · CSE 203</p>
+  <p style="margin-top:.3rem">Eastern International University · 2024–2025</p>
+</footer>
+
+</main>
+<script>
+const links = document.querySelectorAll('.nav-link[href^="#"]');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.style.fontWeight = '');
+      const a = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+      if (a) a.style.fontWeight = '600';
+    }
+  });
+}, { threshold: 0.25 });
+document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

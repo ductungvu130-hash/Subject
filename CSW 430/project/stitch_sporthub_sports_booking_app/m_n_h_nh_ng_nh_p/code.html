@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SportHub - Đăng nhập</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001453",
+                    "on-primary-container": "#004b1e",
+                    "on-primary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface-container-high": "#e6e8ea",
+                    "on-error-container": "#93000a",
+                    "secondary": "#3755c3",
+                    "on-secondary-container": "#00217a",
+                    "primary-container": "#22c55e",
+                    "tertiary-container": "#ff8e4d",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "on-error": "#ffffff",
+                    "tertiary": "#9d4300",
+                    "inverse-on-surface": "#eff1f3",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-fixed": "#ffdbca",
+                    "primary-fixed": "#6bff8f",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-container": "#6d2d00",
+                    "background": "#f7f9fb",
+                    "on-primary-fixed": "#002109",
+                    "surface-dim": "#d8dadc",
+                    "outline-variant": "#bccbb9",
+                    "inverse-primary": "#4ae176",
+                    "secondary-fixed-dim": "#b8c4ff",
+                    "surface-tint": "#006e2f",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#191c1e",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "secondary-fixed": "#dde1ff",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-surface-variant": "#3d4a3d",
+                    "on-secondary-fixed-variant": "#173bab",
+                    "primary": "#006e2f",
+                    "on-primary-fixed-variant": "#005321",
+                    "outline": "#6d7b6c",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary-container": "#708cfd",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed": "#341100",
+                    "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "base": "4px",
+                    "sm": "12px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "xs": "8px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["44px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .login-card-shadow {
+            box-shadow: 0px 4px 12px rgba(30, 64, 175, 0.08);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        input:focus + label,
+        input:not(:placeholder-shown) + label {
+            transform: translateY(-24px) scale(0.85);
+            color: #006e2f;
+        }
+        .transition-all-custom {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col items-center justify-center p-margin-mobile">
+<!-- Background Atmospheric Effect -->
+<div class="fixed inset-0 overflow-hidden -z-10">
+<div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary-fixed-dim/20 blur-[100px]"></div>
+<div class="absolute top-[40%] -right-[5%] w-[40%] h-[40%] rounded-full bg-secondary-fixed-dim/20 blur-[100px]"></div>
+</div>
+<!-- Main Login Canvas -->
+<main class="w-full max-w-md bg-white rounded-xl login-card-shadow overflow-hidden flex flex-col p-8 sm:p-10 border border-outline-variant/30">
+<!-- Brand Header -->
+<div class="mb-lg">
+<h1 class="font-display-lg text-primary text-3xl mb-base">SportHub</h1>
+<h2 class="font-headline-lg-mobile text-on-surface">Chào mừng trở lại</h2>
+<p class="font-body-md text-on-surface-variant mt-xs">Hãy đăng nhập để tiếp tục hành trình tập luyện của bạn.</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-md" id="loginForm">
+<!-- Email Input -->
+<div class="relative flex flex-col">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">mail</span>
+<input class="peer w-full h-14 pl-12 pr-4 bg-surface-container-low border border-outline-variant rounded-xl focus:border-primary focus:ring-0 transition-all-custom font-body-lg text-on-surface" id="email" name="email" placeholder=" " type="email"/>
+<label class="absolute left-12 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none transition-all-custom font-body-lg bg-transparent" for="email">
+                        Email
+                    </label>
+</div>
+</div>
+<!-- Password Input -->
+<div class="relative flex flex-col">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">lock</span>
+<input class="peer w-full h-14 pl-12 pr-12 bg-surface-container-low border border-outline-variant rounded-xl focus:border-primary focus:ring-0 transition-all-custom font-body-lg text-on-surface" id="password" name="password" placeholder=" " type="password"/>
+<label class="absolute left-12 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none transition-all-custom font-body-lg" for="password">
+                        Mật khẩu
+                    </label>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface focus:outline-none transition-colors" id="togglePassword" type="button">
+<span class="material-symbols-outlined" id="eyeIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Forgot Password -->
+<div class="flex justify-end px-1">
+<a class="font-label-lg text-primary hover:underline transition-all" href="#">Quên mật khẩu?</a>
+</div>
+<!-- Submit Button -->
+<button class="w-full h-14 bg-primary text-on-primary font-title-lg rounded-xl shadow-lg shadow-primary/20 hover:bg-on-primary-fixed-variant active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-base" type="submit">
+                Đăng nhập
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="flex items-center my-lg gap-md">
+<div class="flex-1 h-[1px] bg-outline-variant/50"></div>
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest">Hoặc tiếp tục với</span>
+<div class="flex-1 h-[1px] bg-outline-variant/50"></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-xs h-12 bg-surface border border-outline-variant rounded-xl hover:bg-surface-container-high transition-colors active:scale-[0.97]">
+<img class="w-5 h-5" data-alt="A clean, minimalist vector icon representing the Google logo with its classic four colors on a white background, symbolizing modern digital authentication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOZcvwgAZXKA7iNTHM31tLmVeRM83oebLu9BEq_1_RKeMmDGUYTGFCfe2jesa_9X0K_PcGZyi3e3WU5ERfHCkcMFl4uNUanz6nmz_4vfdv5e6t980EILU4mETAiq4DxHUodN5hPtCHLPzhDNZRHIukm0Z_o2zs0yCGacoayH9MJ1pykthSosA5wP_FmwjKAGY3SOe_HW_qU_qCjbZce5jU6rTnOQQPE5txZznB3ZW5UZwVxYjPT05g"/>
+<span class="font-label-lg">Google</span>
+</button>
+<button class="flex items-center justify-center gap-xs h-12 bg-surface border border-outline-variant rounded-xl hover:bg-surface-container-high transition-colors active:scale-[0.97]">
+<img class="w-5 h-5" data-alt="A high-quality vector icon of the Facebook logo with its signature blue color, presented in a modern, flat design style for mobile app integration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC758vWEBTUdAcQgN5CLUixLCHSNZH6hdR7JWtPfhvGFLinW-X260AxcWYzjDFudfavQYpmM1pQYKm9QAzNRVSVe6K1KoY-0HP4UAL6tiXuDcMHmTI-Y8BV8GGMAY63d8BQA6vIYcWq36lKFauyffICJdQ1QsGBA1_22Z32VhfTj2ijlk0WdG-sneULiqGgxld60Hg1kaRZS4y-XHKEWLzH6U6QHaRNhN9xp_TDlqtVdLvssFrbUHjP"/>
+<span class="font-label-lg">Facebook</span>
+</button>
+</div>
+<!-- Registration Link -->
+<p class="mt-xl text-center font-body-md text-on-surface-variant">
+            Chưa có tài khoản? 
+            <a class="text-primary font-label-lg hover:underline transition-all" href="#">Đăng ký ngay</a>
+</p>
+</main>
+<!-- Decorative Sports Elements -->
+<div class="mt-lg flex items-center gap-md opacity-20">
+<span class="material-symbols-outlined text-4xl">sports_soccer</span>
+<span class="material-symbols-outlined text-4xl">sports_basketball</span>
+<span class="material-symbols-outlined text-4xl">sports_tennis</span>
+<span class="material-symbols-outlined text-4xl">fitness_center</span>
+</div>
+<script>
+        // Micro-interactions and UI Logic
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        toggleBtn.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            eyeIcon.innerText = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+
+        // Form Submission Interception
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            // Loading state
+            btn.innerHTML = `<span class="animate-spin material-symbols-outlined">progress_activity</span>`;
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                // Add a small success toast or redirect simulation
+                alert('Chào mừng quay trở lại với SportHub!');
+            }, 1500);
+        });
+
+        // Visual feedback on input focus
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.parentElement.classList.add('scale-[1.01]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Book Manangement System</title>
+        <!-- Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <div class="container-fluid px-4">
+                <h5 class="text-center header-text py-3 mb-0">BOOK MANAGEMENT SYSTEM</h5>
+                <div class="row mx-0">
+                    <div class="col-auto left-div py-3">
+                        <h4>Book Genre</h4>
+                        <ul id="book-genre" class="px-3">
+                            <li>All</li>
+                            <!-- <li>Action and Adventure</li>
+                            <li>Classics</li>
+                            <li>Comic Book or Graphic Novel</li>
+                            <li>Detective and Mystery</li> -->
+                        </ul>
+                    </div>
+                    <div class="col right-div p-3">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="mb-0">ADD A NEW BOOK</h6>
+                            </div>
+                        </div>
+                        <div class="row add-book">
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Book Title<span>*</span></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control" type="text" id="title-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Authors</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control" type="text" id="author-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Price</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control" type="text" id="price-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Quantity<span>*</span></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control" type="text" id="quantity-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Image Link</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input class="form-control" type="text" id="link-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Genre</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <select id="select-book" class="form-select">
+                                            <option selected value="">Choose...</option>
+                                            <!-- <option>Action and Adventure</option>
+                                            <option>Classics</option>
+                                            <option>Comic Book or Graphic Novel</option>
+                                            <option>Detective and Mystery</option> -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col-8">
+                                        <button type="button" class="btn btn-outline-primary px-3" id="add-btn">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-5 mb-3">
+                            <div class="card-body">
+                                <h3 class="mb-0">BOOK LIST</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <p>Showing in: list style</p>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-flex" role="search">
+                                    <input class="form-control" type="search" placeholder="Book Title" id="title-search" />
+                                    <button class="btn btn-outline-secondary" type="submit" id="search-btn">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 book-infor" id="book-infor">
+                            <!-- <div class="col-3 mb-3">
+                                <div class="card">
+                                    <img src="image/bookImg.PNG" class="card-img-top" />
+                                    <div class="card-body">
+                                        <h6 class="card-title">The Call of the Wild</h6>
+                                        <p class="card-text">Jack London</p>
+                                        <p class="card-text">Action and Adventure</p>
+                                        <p class="card-text">In stock: 1</p>
+                                        <p class="card-text">Price: $7</p>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            let bookGenre = ["Action and Adventure", "Classics", "Comic Book or Graphic Novel", "Detective and Mystery"];
+            let bookList = [
+                {
+                    Link: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-7.jpg.webp",
+                    Title: "The Call of the Wild",
+                    Author: "Jack London",
+                    Genre: "Action and Adventure",
+                    Quantity: "1",
+                    Price: "7",
+                },
+                {
+                    Link: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-9.jpg.webp",
+                    Title: "Beloved",
+                    Author: "Toni Morrison",
+                    Genre: "Classics",
+                    Quantity: "2",
+                    Price: "7",
+                },
+                {
+                    Link: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-7.jpg.webp",
+                    Title: "The Call of the Wild",
+                    Author: "Jack London",
+                    Genre: "Action and Adventure",
+                    Quantity: "1",
+                    Price: "7",
+                },
+                {
+                    Link: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-9.jpg.webp",
+                    Title: "Beloved",
+                    Author: "Toni Morrison",
+                    Genre: "Classics",
+                    Quantity: "2",
+                    Price: "7",
+                },
+                {
+                    Link: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-7.jpg.webp",
+                    Title: "The Call of the Wild",
+                    Author: "Jack London",
+                    Genre: "Action and Adventure",
+                    Quantity: "1",
+                    Price: "7",
+                },
+                {
+                    Link: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-9.jpg.webp",
+                    Title: "Beloved",
+                    Author: "Toni Morrison",
+                    Genre: "Classics",
+                    Quantity: "2",
+                    Price: "7",
+                },
+                {
+                    Link: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-7.jpg.webp",
+                    Title: "The Call of the Wild",
+                    Author: "Jack London",
+                    Genre: "Action and Adventure",
+                    Quantity: "1",
+                    Price: "7",
+                },
+                {
+                    Link: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-9.jpg.webp",
+                    Title: "Beloved",
+                    Author: "Toni Morrison",
+                    Genre: "Classics",
+                    Quantity: "2",
+                    Price: "7",
+                },
+            ];
+
+            showBookGenre();
+            function showBookGenre() {
+                for (let eachGenre of bookGenre) {
+                    $("#book-genre").append(`<li>${eachGenre}</li>`);
+                    $("#select-book").append(`<option value="${eachGenre}">${eachGenre}</option>`);
+                }
+            }
+
+            showBookList(bookList);
+            function showBookList(list) {
+                bookList.sort((a, b) => a.Title.localeCompare(b.Title));
+                let bookInfor = $("#book-infor").empty();
+                for (let eachBook of list) {
+                    let book = `<div class="col-3 mb-3">
+                                                <div class="card">
+                                                    <img src="${eachBook.Link}" class="card-img-top" />
+                                                    <div class="card-body">
+                                                        <h6 class="card-title" id="book-title">${eachBook.Title}</h6>
+                                                        <p class="card-text">${eachBook.Author}</p>
+                                                        <p class="card-text" id="book-genre">${eachBook.Genre}</p>
+                                                        <p class="card-text">In stock: ${eachBook.Quantity}</p>
+                                                        <p class="card-text">Price: $${eachBook.Price}</p>
+                                                    </div>
+                                                </div>
+                                            </div> `;
+                    bookInfor.append(book);
+                }
+            }
+
+            function checkAddition() {
+                let title = $("#title-input").val();
+                let quantity = +$("#quantity-input").val();
+                return title != "" && Number.isInteger(quantity) && quantity > 0;
+            }
+            $("#add-btn").on("click", function () {
+                if (!checkAddition()) {
+                    alert("Please complete all correct needed information!");
+                    return;
+                } else {
+                    let book = {
+                        Link: $("#link-input").val(),
+                        Title: $("#title-input").val(),
+                        Author: $("#author-input").val(),
+                        Genre: $("#select-book").val(),
+                        Quantity: $("#quantity-input").val(),
+                        Price: $("#price-input").val(),
+                    };
+                    bookList.push(book);
+                    showBookList(bookList);
+                    resetInput();
+                }
+            });
+
+            function resetInput() {
+                $("#link-input").val("");
+                $("#title-input").val("");
+                $("#author-input").val("");
+                $("#select-book").val("");
+                $("#quantity-input").val("");
+                $("#price-input").val("");
+                $("#title-search").val("");
+            }
+
+            $("#search-btn").on("click", function () {
+                let titleSearch = $("#title-search").val();
+                if (titleSearch === "") return;
+                let searchBook = [];
+                for (let eachBook of bookList) {
+                    if (eachBook.Title === titleSearch) {
+                        searchBook.push(eachBook);
+                    }
+                }
+                showBookList(searchBook);
+                resetInput();
+            });
+
+            $("#book-genre li").on("click", function () {
+                let genreLi = $(this).text();
+                let genreBook = [];
+                for (let eachBook of bookList) {
+                    if (eachBook.Genre === genreLi) {
+                        genreBook.push(eachBook);
+                    }
+                }
+                if (genreLi === "All") showBookList(bookList);
+                else showBookList(genreBook);
+            });
+        </script>
+    </body>
+</html>

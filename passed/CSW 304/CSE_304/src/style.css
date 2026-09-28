@@ -1,0 +1,234 @@
+:root{
+    --primary-color : #106A39 ;
+}
+
+
+.body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main-menu>li:hover a {
+    color: white;
+    background-color: var(--primary-color);
+}
+.main-menu > li:hover .sub-menu {
+    display: block;
+    background-color: #106a39;
+    color: #ffff;
+}
+.main-menu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.main-menu >li >a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 20px;
+}
+
+.sub-menu {
+    display: none;
+    padding: 5px;
+}
+
+.sub-menu > li {
+    border-top: 1px solid #ffff;
+}
+
+.logo-menu > img {
+    width: 100%;
+    margin: 0;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    padding-top: 7px;
+}
+
+header {
+    position: relative;
+}
+
+header a {
+    color: #ffff;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    margin: 0 10px;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+.top-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header .background-header {
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.main-menu > li {
+    position: relative;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main .introduction {
+    margin: 100px 0;
+    width: 100%;
+}
+
+main .introduction-girl {
+    margin-top: 60px;
+    padding-bottom: 10px;
+}
+
+main .introduction-man {
+    margin-top: 0px;
+}
+
+main img {
+    width: 100%;
+}
+
+.sliders {
+    background-repeat: no-repeat ;
+    background-position: center center;
+    background-size: cover;
+}
+
+main .support-service-group {
+    background-image: url(images/background-consultant.jpg);
+}
+
+.golf-service .overlay{
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+main .introduction .intro {
+    color: #106A39;
+}
+
+.content-golf-service-group {
+    padding: 20px 20px;
+    text-align: center;
+}
+
+
+.overlay-support-service-group {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 150px;
+    padding-bottom: 200px;
+    margin: 100px 0;
+}
+
+
+div{
+    box-sizing: border-box;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.golf-service .row{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+}
+
+
+
+main .otherService img {
+    width: 30%;
+    display: block;
+    padding: 20px 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main .support-service-group img {
+    padding-top: 80px;
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main .support-service-group h1 {
+    color: #ffff;
+    text-align: center;
+    padding: 20px;
+}
+
+main .support-service-group p {
+    color: #ffff;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    padding: 30px;
+    border-radius: 2%;
+}
+
+.contact-form input {
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    background: #f3f3f3;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.contact-form textarea {
+    border-radius: 20px;
+    height: 120px;
+    resize: none;
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    background: #f3f3f3;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 14px;
+    background-color: #004d1a;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.contact-form button:hover {
+    background-color: #004d1a;
+}

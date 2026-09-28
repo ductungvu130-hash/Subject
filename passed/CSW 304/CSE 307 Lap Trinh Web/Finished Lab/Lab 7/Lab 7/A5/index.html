@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=a, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <a href="https://eiu.edu.vn/">Click here to go EIU page</a>
+        <a href="https://getbootstrap.com/">Click here to go Bootstrap</a>
+    </main>
+    <script>
+        let newHref = "https://www.google.com/";
+        let allLinks = document.querySelectorAll("a");
+        for (let each of allLinks) {
+            each.href = newHref;
+        }
+    </script>
+</body>
+
+</html>

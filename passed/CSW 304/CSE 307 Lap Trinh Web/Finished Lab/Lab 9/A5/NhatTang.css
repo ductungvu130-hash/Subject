@@ -1,0 +1,489 @@
+.body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+.logo-menu {
+    display: block;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.logo-menu > img {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+}
+
+header {
+    position: relative;
+}
+
+header a {
+    color: #ffff;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    margin: 0 15px;
+    padding: 15px 0;
+    font-size: 15px;
+}
+
+.main-menu > li {
+    position: relative;
+}
+
+.sub-menu {
+    /* An menu */
+    display: none;
+    padding: 5px;
+}
+
+.sub-menu > li {
+    border-top: 1px solid #ffff;
+}
+
+.main-menu > li:hover,
+.main-menu > li:hover .sub-menu {
+    display: block;
+    background-color: #106a39;
+    color: #ffff;
+}
+
+.top-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header .background-header {
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+header .main-menu {
+    display: flex;
+}
+
+/* Main */
+
+main img {
+    width: 100%;
+}
+
+main .introduction-girl {
+    margin-top: 100px;
+    padding-bottom: 10px;
+}
+
+main .introduction-man {
+    margin-top: 0px;
+}
+
+main .golf-service-group {
+    background-image: url(images/background-service.jpg);
+}
+
+main .support-service-group {
+    background-image: url(images/background-consultant.jpg);
+}
+
+main .support-service-group img {
+    width: 100%;
+}
+
+/* Introduction */
+main .introduction {
+    margin: 100px 0;
+    width: 100%;
+}
+
+.introduction-content {
+    padding-top: 100px;
+}
+
+.introduction .first-introduction {
+    font-size: 20px;
+}
+
+main .introduction .first-introduction {
+    font-weight: 700;
+}
+
+main .introduction .cty-name {
+    color: #106a39;
+    padding-bottom: 10px;
+}
+
+/* Golf Service Group */
+.overlay-golf-service-group {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.golf-service-item {
+    box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+}
+
+.content-golf-service-group {
+    padding: 20px 20px;
+    text-align: center;
+}
+
+.content-golf-service-group h4 > a {
+    color: #111;
+    /* Xoa gach chan */
+    text-decoration: none;
+}
+
+.content-golf-service-group > h4,
+.content-golf-service-group p {
+    margin: 0 0;
+}
+
+main .golf-service-group .first-introduction {
+    color: #106a39;
+    font-weight: 650;
+    text-align: center;
+    font-size: 20px;
+}
+
+main .golf-service-group h1 {
+    text-align: center;
+}
+
+main .golf-service-group p {
+    text-align: center;
+}
+
+/* Other service group */
+.other-service-group {
+    padding: 80px 0;
+}
+
+.other-service-group .first-introduction {
+    font-size: 20px;
+}
+
+.other-service-group > div > div > div {
+    margin-bottom: 30px;
+}
+
+.other-service-group .other-services-item {
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.29);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.29);
+    height: 100%;
+    max-height: 300px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-other-service-group {
+    padding: 10px 0;
+}
+
+.other-service-group .other-services-item > div > p {
+    font-size: 17px;
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+}
+
+main .other-service-group .first-introduction {
+    color: #106a39;
+    font-weight: 650;
+    text-align: center;
+}
+
+main .other-service-group h1 {
+    text-align: center;
+}
+
+main .other-service-group p {
+    text-align: center;
+}
+
+main .other-service-group img {
+    width: 30%;
+    display: block;
+    padding: 20px 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Support Service Group */
+.overlay-support-service-group {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 150px;
+    padding-bottom: 200px;
+    margin: 100px 0;
+}
+
+main .support-service-group img {
+    padding-top: 80px;
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main .support-service-group h1 {
+    color: #ffff;
+    text-align: center;
+    padding: 20px;
+}
+
+main .support-service-group p {
+    color: #ffff;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    padding: 30px;
+    border-radius: 2%;
+}
+
+.contact-form input {
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    background: #f3f3f3;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.contact-form textarea {
+    border-radius: 20px;
+    height: 120px;
+    resize: none;
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    background: #f3f3f3;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 14px;
+    background-color: #004d1a;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.contact-form button:hover {
+    background-color: #004d1a;
+}
+
+/* News Group */
+.news-group {
+    padding: 50px 0;
+}
+
+.news-group > div > div > div {
+    margin-bottom: 50px;
+}
+main .news-group .update-news-text {
+    color: #106a39;
+    font-weight: 650;
+    font-size: 20px;
+}
+
+main .news-group .news-title {
+    width: 100%;
+    max-width: 100px;
+    font-size: 12px;
+    background-color: #b7b7b7;
+    color: #ffff;
+    padding: 2px 5px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.date {
+    color: gray;
+}
+
+.news-block-right a > img {
+    width: 100%;
+    height: 100%;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.news-group a {
+    text-decoration: none;
+    color: #111;
+}
+
+.news-block-right {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+a > .news-button {
+    display: block;
+    color: #004d1a;
+    background-color: #ffff;
+    border: 3px solid #004d1a;
+}
+
+/* Footer */
+footer {
+    color: #ffff;
+    background-color: #333333;
+    padding: 50px 0;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul li {
+    border-bottom: 1px solid grey;
+}
+
+footer ul li span {
+    color: #4caf50;
+    margin-right: 8px;
+    font-size: 30px;
+}
+
+footer p {
+    font-size: 18px;
+}
+
+.left-footer > img {
+    width: 100%;
+    max-width: 400px;
+    padding-bottom: 50px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left-footer > p {
+    padding-bottom: 50px;
+    padding-right: 20px;
+}
+
+footer .contact {
+    padding-right: 100px;
+}
+.footer-divide {
+    margin: 70px 0;
+}
+footer .contact {
+    margin-bottom: 40px;
+}
+
+.copyright-text {
+    margin-right: auto;
+}
+
+.social-icon > a {
+    color: #ffff;
+    padding: 5px;
+}
+
+.social-icon {
+    display: block;
+    text-align: right;
+}
+
+/* Line */
+.green-line-news {
+    width: 100px;
+    height: 5px;
+    background-color: #004d1a;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.green-line {
+    width: 100px;
+    height: 5px;
+    background-color: #004d1a;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grey-line {
+    width: 50px;
+    height: 3px;
+    background-color: gray;
+    margin: 10px 0;
+}
+
+@media (max-width: 767.98px) {
+    header .main-menu {
+        display: none;
+    }
+
+    .logo-menu > img {
+        display: block;
+        margin: 0 auto;
+    }
+    .news-block-right > div > div > a > img {
+        max-height: 100%;
+        height: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+    .social-icon,
+    .copyright-text {
+        text-align: center;
+    }
+}
+
+.button-up-down {
+    position: fixed;
+    bottom: 30px;
+    right: 15px;
+    background-color: #026a37;
+    color: #ffff;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 15px;
+    display: none;
+}
+.button-up-down:hover {
+    background-color: #555;
+}

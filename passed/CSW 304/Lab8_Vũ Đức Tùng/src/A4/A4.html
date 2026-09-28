@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Manage System</title>
+        <link rel ="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <h1>Student Manage System</h1>
+                    <div class="row">
+                        <div class="list col-2 py-2">
+                        <h3>Class List</h3>
+                        <ul id="class-list">
+                            <li value="">Lớp 1</li>
+                            <li value="">Lớp 2</li>
+                        </ul>
+                    </div>
+                    <div class="data col-10 p-1">
+                        <div class="row px-2 pt-2">
+                            <div class="col-sm-6 d-flex">
+                                <input type="text" id="keyword" class="form-control me-2" placeholder="Search by name..." />
+                                <button id="search" class="btn btn-secondary">Search</button>
+                            </div>
+                        </div>
+                        <div class="add-text">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        
+                                            <h5 class="mb-0">Edit student's information</h5>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-sm-2">
+                            
+                                    <input type="text" class="form-control" id="studentID" placeholder="Student ID" />
+                                </div>
+                                <div class="col-sm-3">
+                                    
+                                    <input type="text" class="form-control" id="studentName" placeholder="Student Name" />
+                                </div>
+                                <div class="col-sm-3">
+                                    
+                                    <input type="text" class="form-control" id="studentEmail" placeholder="Student Email" />
+                                </div>
+                                <div class="col-sm-2">
+                            
+                                    <select class="form-select" id="studentClass">
+                                        <option selected value="">Lớp 1</option>
+                                        <option selected value="">Lớp 2</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" id="add" class="submit-edit btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-information">
+                            <h5>Student list</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Student ID</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Class</th>
+                                        <th scope="col">Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+        crossorigin="anonymous"
+    />
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"
+    ></script>
+
+    <script src ="script.js"></script>
+
+    
+    </body>
+</html>

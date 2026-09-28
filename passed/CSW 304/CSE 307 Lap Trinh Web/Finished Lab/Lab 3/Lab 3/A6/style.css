@@ -1,0 +1,51 @@
+.ticket-table {
+    width: 300px;
+    background-color: rgb(230, 226, 226);
+}
+
+.ticket-id {
+    font-weight: 600;
+    color: grey;
+}
+
+.green-dot {
+    height: 10px;
+    width: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.name {
+    color: rgb(146, 89, 146);
+}
+
+.status-active {
+    font-weight: bold;
+    color: red;
+    display: block;
+}
+
+.email {
+    color: rgb(146, 89, 146);
+}
+
+.response-time {
+    font-weight: 530;
+    color: gray;
+}
+
+.last-action {
+    font-weight: 530;
+    color: gray;
+}
+
+.last-action-link {
+    color: rgb(146, 89, 146);
+    display: block;
+}
+
+.status {
+    font-weight: bold;
+    color: orange;
+}

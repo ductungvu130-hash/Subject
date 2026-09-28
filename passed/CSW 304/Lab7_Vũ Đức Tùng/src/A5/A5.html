@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Violet on Wednesday</title>
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <p><i class="fas fa-phone-alt"></i> Hotline: <span>09090909</span></p>
+                    </div>
+                    <div class="col-md-5">
+                        <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: <span>01 Nguyễn Cửu Vân, TP.HCM</span></p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p><a href="#">Đăng nhập</a> hoặc <a href="#">Đăng ký</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mid-header">
+            <div class="container">
+                <div class="row align-items-center mt-3 mb-3">
+                    <div class="col-md-3">
+                        <img src="Images/logo.png" alt="VOW Logo" style="max-height: 80px;"/>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search-box">
+                            <input type="text" placeholder="Tìm kiếm..." class="w-100">
+                            <i class="fas fa-search px-3"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-3 store d-flex">
+                        <div class="store-picture text-white">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="ml-2 mt-2">
+                            <h5 class="mb-0">Giỏ hàng</h5>
+                            <p class="card-text">0 sản phẩm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-header">
+            <div class="container">
+                <nav class="navbar navbar-expand-md p-0">
+                    <a class="navbar-brand" href="#">MENU</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="mainNav">
+                        <ul class="navbar-nav d-flex list-unstyled mb-0 w-100 justify-content-between">
+                            <li><a class="nav-link" href="#">Trang chủ</a></li>
+                            <li><a class="nav-link" href="#">Hoa sinh nhật</a></li>
+                            <li><a class="nav-link" href="#">Hoa Tình yêu</a></li>
+                            <li><a class="nav-link" href="#">Chủ đề</a></li>
+                            <li><a class="nav-link" href="#">Thiết kế</a></li>
+                            <li><a class="nav-link" href="#">Hoa chúc mừng</a></li>
+                            <li><a class="nav-link" href="#">Quà tặng</a></li>
+                            <li><a class="nav-link" href="#">Hoa văn phòng</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-8 san-pham-left left-col">
+                    <h2>Sản phẩm ưa chuộng</h2>
+                    <div class="row" id="popular-products">
+                        </div>
+                    <div class="quang-cao mt-3">
+                        <img src="Images/ads.png" alt="Ads" class="img-fluid w-100"/>
+                    </div>
+                </div>
+
+                <div class="col-md-4 san-pham-right right-col">
+                    <div class="promotion-products mb-4">
+                        <h2>Sản phẩm khuyến mãi</h2>
+                        <div id="promo-products">
+                            </div>
+                    </div>
+
+                    <div class="news">
+                        <h2>Tin tức</h2>
+                        <div id="news-list">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slogan">
+            <div class="all-thing container">
+                <div class="row">
+                    <div class="col-md-4 item d-flex flex-column align-items-center text-center">
+                        <div class="icons rounded-circle mb-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-truck fa-2x"></i>
+                        </div>
+                        <h6>GIAO HÀNG MIỄN PHÍ</h6>
+                    </div>
+                    <div class="col-md-4 item d-flex flex-column align-items-center text-center">
+                        <div class="icons rounded-circle mb-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-money-bill-wave fa-2x"></i>
+                        </div>
+                        <h6>THANH TOÁN LINH HOẠT</h6>
+                    </div>
+                    <div class="col-md-4 item d-flex flex-column align-items-center text-center">
+                        <div class="icons rounded-circle mb-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-headset fa-2x"></i>
+                        </div>
+                        <h6>HỖ TRỢ 24/7</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="information container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Hệ thống</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Hoa sinh nhật</a></li>
+                        <li><a href="#">Hoa cưới</a></li>
+                        <li><a href="#">Hoa chúc mừng</a></li>
+                        <li><a href="#">Chủ đề</a></li>
+                        <li><a href="#">Quà tặng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Công ty</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                        <li><a href="#">Chính sách ưu đãi</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>FAQS</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Hướng dẫn đặt hàng</a></li>
+                        <li><a href="#">Phương thức thanh toán</a></li>
+                        <li><a href="#">Phí vận chuyển</a></li>
+                        <li><a href="#">Ý nghĩa các loài hoa</a></li>
+                        <li><a href="#">Cách chăm sóc & bảo quản hoa</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Liên hệ</h5>
+                    <ul class="list-unstyled content">
+                        <li>Địa chỉ: 01 Nguyễn Cảnh Chân, TP. HCM</li>
+                        <li>Điện thoại: 0909.099.099</li>
+                        <li>Mọi ý kiến xin gửi về: support@vow.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p class="mb-0">© 2026 Violet on Wednesday. Đã đăng ký bản quyền.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const popularProductsData = [
+            { id: 1, name: "Khai trương hồng phát 1", price: 900000, category: "Khai Trương", image: "Images/product.png" },
+            { id: 2, name: "Khai trương hồng phát 2", price: 900000, category: "Khai Trương", image: "Images/product.png" },
+            { id: 3, name: "Hoa hồng tình yêu", price: 650000, category: "Tình Yêu", image: "Images/product.png" },
+            { id: 4, name: "Lẵng hoa chúc mừng", price: 1200000, category: "Chúc Mừng", image: "Images/product.png" },
+            { id: 5, name: "Khai trương hồng phát 3", price: 900000, category: "Khai Trương", image: "Images/product.png" },
+            { id: 6, name: "Bó hoa hướng dương", price: 450000, category: "Tốt Nghiệp", image: "Images/product.png" }
+        ];
+
+        const promoProductsData = [
+            { id: 7, name: "Bó hoa tulip giảm giá", price: 500000, category: "Khuyến mãi", image: "Images/product.png" },
+            { id: 8, name: "Giỏ hoa cẩm chướng", price: 600000, category: "Khuyến mãi", image: "Images/product.png" }
+        ];
+
+        const newsData = [
+            { id: 1, title: "Violet on Wednesday tuyển nhân viên", date: "17/10/2005", author: "Admin", image: "Images/news.png" },
+            { id: 2, title: "Khai trương chi nhánh quận 1", date: "20/11/2005", author: "Admin", image: "Images/news.png" }
+        ];
+   
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + ' đ';
+        }
+   
+        function renderPopularProducts() {
+            const container = document.getElementById("popular-products");
+            let htmlContent = "";
+
+            popularProductsData.forEach(product => {
+                
+                htmlContent += `
+                    <div class="col-md-4 mb-4 position-relative text-center">
+                        <div class="giam-gia">-10%</div>
+                        <a href="#"><img src="${product.image}" class="img-fluid border" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200'"/></a>
+                        <h6 class="mt-2"><a href="#" style="text-decoration:none; color:inherit;">${product.name}</a></h6>
+                        <h5>${formatCurrency(product.price)}</h5>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        function renderPromoProducts() {
+            const container = document.getElementById("promo-products");
+            let htmlContent = "";
+
+            promoProductsData.forEach(product => {
+               
+                htmlContent += `
+                    <div class="card-right">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <a href="#"><img src="${product.image}" class="img-fluid border" alt="${product.name}" onerror="this.src='https://via.placeholder.com/100'"/></a>
+                            </div>
+                            <div class="col-8">
+                                <div class="intro"><a href="#" style="text-decoration:none; color:inherit;">${product.name}</a></div>
+                                <p class="new-price mb-0">${formatCurrency(product.price)}</p>
+                            </div>
+                            <div class="giam-gia-duoi">HOT</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        function renderNews() {
+            const container = document.getElementById("news-list");
+            let htmlContent = "";
+
+            newsData.forEach(article => {
+               
+                htmlContent += `
+                    <div class="card-right">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <a href="#"><img src="${article.image}" class="img-fluid border" alt="${article.title}" onerror="this.src='https://via.placeholder.com/100'"/></a>
+                            </div>
+                            <div class="col-8">
+                                <div class="intro"><a href="#" style="text-decoration:none; color:inherit;">${article.title}</a></div>
+                                <div class="date"><i class="fas fa-calendar-alt"></i> ${article.date}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPopularProducts();
+            renderPromoProducts();
+            renderNews();
+        });
+    </script>
+</body>
+</html>

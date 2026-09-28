@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'VuDucTung';
+    src: url(./font/EdwardianScriptITC1.0.ttf) format(truetype);
+}
+
+.font1 {
+    font-family: 'VuDucTung', sans-serif;
+    color: #0094ff;
+}

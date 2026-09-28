@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Manage System</title>
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <h1>Student Manage System</h1>
+                <div class="row">
+                    <div class="col-2 py-2">
+                        <h2>Class List</h2>
+                        <ul id="class-list">
+                            <li value="">All</li>
+                        </ul>
+                    </div>
+                    <div class="col-10 p-1">
+                        <div class="add-text">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h5 class="mb-0">Edit student's information</h5>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="d-flex" role="search">
+                                                <input id="searchStudent" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                                                <button class="btn btn-outline-success" type="submit" onclick="searchStudent()">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-sm-2">
+                                    <label class="visually-hidden" for="studentID">Student ID</label>
+                                    <input type="text" class="form-control" id="studentID" placeholder="Student ID" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="visually-hidden" for="studentName">Student Name</label>
+                                    <input type="text" class="form-control" id="studentName" placeholder="Student Name" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="visually-hidden" for="studentEmail">Student Email</label>
+                                    <input type="text" class="form-control" id="studentEmail" placeholder="Student Email" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="visually-hidden" for="studentClass">Student Class</label>
+                                    <select class="form-select" id="studentClass">
+                                        <option selected value="">Class...</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="submit-edit btn btn-primary" value="update" onclick="insertOrEdit()">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-information">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Student ID</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Class</th>
+                                        <th scope="col">Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            let studentList = [];
+            let studentClass = [];
+            $(document).ready(function () {
+                $.get(
+                    "http://139.180.213.49/getdata-student.php",
+                    {
+                        Type: "Student",
+                    },
+                    function (data) {
+                        studentList = data;
+                        console.log(studentList);
+                        showStudent(studentList);
+                    },
+                    "json"
+                );
+                $.get(
+                    "http://139.180.213.49/getdata-student.php",
+                    {
+                        Type: "Class",
+                    },
+                    function (data) {
+                        studentClass = data;
+                        console.log(studentClass);
+                        for (let eachClass of studentClass) {
+                            $("#class-list").append(`<li value="${eachClass}">${eachClass}</li>`);
+                            $("#studentClass").append(`<option value="${eachClass}">${eachClass}</option>`);
+                        }
+                    },
+                    "json"
+                );
+            });
+
+            function insertOrEdit() {
+                let studentID = $("#studentID").val();
+                let studentName = $("#studentName").val();
+                let studentEmail = $("#studentEmail").val();
+                let studentClass = $("#studentClass").val();
+                $("#studentID").val("");
+                $("#studentName").val("");
+                $("#studentEmail").val("");
+                $("#studentClass").val("");
+                let newStudent = {
+                    ID: studentID,
+                    Name: studentName,
+                    Email: studentEmail,
+                    Class: studentClass,
+                };
+                if ($(".submit-edit").val() === "update") {
+                    studentList.unshift(newStudent);
+                } else {
+                    for (let i = 0; i < studentList.length; i++) {
+                        if (studentList[i].ID === studentID) {
+                            studentList[i] = newStudent;
+                            break;
+                        }
+                    }
+                    $(".submit-edit").val("update");
+                    $(".submit-edit").text("Update");
+                }
+                showStudent(studentList);
+            }
+
+            function showStudent(list) {
+                studentList.sort((a, b) => a.Name.localeCompare(b.Name));
+                let tbody = $(".table tbody").empty();
+                let index = 0;
+                for (let eachStudent of list) {
+                    let studentInfor = `<tr>
+                                            <td>${++index}</td>
+                                            <td>${eachStudent.Name}</td>
+                                            <td>${eachStudent.ID}</td>
+                                            <td>${eachStudent.Email}</td>
+                                            <td>${eachStudent.Class}</td>
+                                            <td>
+                                                <button type="button" class="edit-btn btn btn-success">Edit</button>
+                                                <button type="button" class="delete-btn btn btn-danger">Delete</button>
+                                            </td>
+                                        </tr>`;
+                    tbody.append(studentInfor);
+                }
+            }
+
+            $(document).on("click", ".edit-btn", function () {
+                let tr = $(this).closest("tr");
+                let studentName = tr.find("td:eq(1)").text();
+                let studentID = tr.find("td:eq(2)").text();
+                let studentEmail = tr.find("td:eq(3)").text();
+                let studentClass = tr.find("td:eq(4)").text();
+
+                $("#studentName").val(studentName);
+                $("#studentID").val(studentID);
+                $("#studentEmail").val(studentEmail);
+                $("#studentClass").val(studentClass);
+
+                $(".submit-edit").val("edit");
+                $(".submit-edit").text("Edit");
+            });
+
+            $(document).on("click", ".delete-btn", function () {
+                let tr = $(this).closest("tr");
+                let studentID = tr.find("td:eq(2)").text();
+                for (let i = 0; i < studentList.length; i++) {
+                    if (studentID == studentList[i].ID) {
+                        studentList.splice(i, 1);
+                        break;
+                    }
+                }
+                showStudent(studentList);
+            });
+
+            $(document).on("click", "#class-list li", function () {
+                let className = $(this).attr("value");
+                let chooseStudent = [];
+                for (let eachStudent of studentList) {
+                    if (eachStudent.Class === className) {
+                        chooseStudent.push(eachStudent);
+                    }
+                }
+                if (className === "") showStudent(studentList);
+                else showStudent(chooseStudent);
+            });
+
+            function searchStudent() {
+                let studentName = $("#searchStudent").val();
+                let sameNameList = [];
+                for (let eachStudent of studentList) {
+                    if (eachStudent.Name === studentName) {
+                        sameNameList.push(eachStudent);
+                    }
+                }
+                showStudent(sameNameList);
+            }
+        </script>
+    </body>
+</html>

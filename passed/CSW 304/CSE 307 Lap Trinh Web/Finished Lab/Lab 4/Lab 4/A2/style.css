@@ -1,0 +1,35 @@
+article {
+    width: 255px;
+    border: 1px solid blue;
+    padding: 15px;
+}
+img {
+    max-width: 100%;
+    max-height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.price {
+    color: red;
+    font-weight: 700;
+    margin: 0;
+}
+h4 > a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 200;
+}
+h4 {
+    margin: 15px 0;
+}
+.content {
+    margin: 15px 0;
+}
+.price > span {
+    font-size: 15px;
+    text-decoration: underline;
+}
+span {
+    font-weight: 600;
+}

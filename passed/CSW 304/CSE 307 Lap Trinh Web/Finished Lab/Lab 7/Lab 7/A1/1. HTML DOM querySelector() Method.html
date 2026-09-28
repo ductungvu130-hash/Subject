@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML DOM querySelector() Method</title>
+	<meta charset="utf-8">
+	<style>
+		a[target] {
+			background-color: yellow;
+		}
+
+		div {
+			border: 1px solid black;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h2 class="example">A heading with class="example"</h2>
+	<p class="example">A paragraph with class="example".</p>
+	<p class="example">A paragraph 2 with class="example".</p>
+	<h3>A h3 element</h3>
+
+	<p>Click the button to add a background color to the first p element in the document with class="example".</p>
+
+	<hr>
+	<p>The CSS selector a[target] makes sure that all links with a target attribute gets a yellow background:</p>
+
+	<a href="https://www.w3schools.com">w3schools.com</a>
+	<a href="http://www.disney.com" target="_blank">disney.com</a>
+	<a href="http://www.wikipedia.org" target="_top">wikipedia.org</a>
+	<p>Click the button to add a red border to the first link that has a target attribute.</p>
+
+	<hr>
+	<div>
+		<h3>H3 element</h3>
+		<p>I am a p element, my parent is a div element.</p>
+	</div>
+
+	<div>
+		<h3>H3 element</h3>
+		<p>I am a p element, my parent is also a div element.</p>
+	</div>
+
+	<p class="">Click the button to change a font size and a color of the first p element in the document where the parent is a div element.</p>
+	<hr>
+
+	<button>Change</button>
+
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

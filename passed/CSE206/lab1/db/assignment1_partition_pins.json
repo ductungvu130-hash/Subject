@@ -1,0 +1,29 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "AgreaterthanB",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_B[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_B[1]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

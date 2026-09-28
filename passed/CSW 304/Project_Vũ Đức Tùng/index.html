@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KidKinder - Kids Learning Center</title>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+        crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="top-menu">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="logo-link">
+                            <img src="images/teddy-bear.png" alt="KidKinder Logo" class="logo-img">
+                            <span class="logo-name">KidKinder</span>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-9">
+                        <button class="hamburger-btn" id="hamburger-btn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+
+                        <nav id="main-nav">
+                            <ul class="main-menu">
+                                <li><a href="#" class="active">Home</a></li>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#classes">Classes</a></li>
+                                <li><a href="#teachers">Teachers</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mobile-menu" id="mobile-menu">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#classes">Classes</a></li>
+                    <li><a href="#teachers">Teachers</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="hero-section">
+        <div class="hero-slider" id="hero-slider">
+
+
+            <div class="hero-slide active">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-7 col-12 hero-content">
+                            <p class="hero-subtitle">Kids Learning Center</p>
+                            <h1 class="hero-title">New Approach to Kids Education</h1>
+                            <p class="hero-desc">Sea ipsum kasd eirmod kasd magna, est sea et diam ipsum est amet sed sit. Ipsum dolor no justo dolor et, lorem ut dolor erat dolore sed ipsum at ipsum nonumy amet. Clita lorem dolore sed stet et est justo dolore.</p>
+                            <a href="#" class="btn-main">Learn More</a>
+                        </div>
+                        <div class="col-md-5 col-12">
+                            <div class="hero-img-wrap">
+                                <img src="images/header.png" alt="Kid reading" class="hero-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-slide">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-7 col-12 hero-content">
+                            <p class="hero-subtitle">Kids Learning Center</p>
+                            <h1 class="hero-title">New Approach to Kids Education</h1>
+                            <p class="hero-desc">Sea ipsum kasd eirmod kasd magna, est sea et diam ipsum est amet sed sit. Ipsum dolor no justo dolor et, lorem ut dolor erat dolore sed ipsum at ipsum nonumy amet. Clita lorem dolore sed stet et est justo dolore.</p>
+                            <a href="#" class="btn-main">Learn More</a>
+                        </div>
+                        <div class="col-md-5 col-12">
+                            <div class="hero-img-wrap">
+                                <img src="images/header.png" alt="Kid reading" class="hero-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="slider-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+        </div>
+    </section>
+
+
+    <main>
+
+
+        <section class="service-section" id="services">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4 col-12">
+                        <article class="service-card">
+                            <img src="images/fence.png" alt="Play Ground" class="service-icon">
+                            <div class="service-text">
+                                <h4>Play Ground</h4>
+                                <p>Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero lorem amet elitr vero...</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="service-card">
+                            <img src="images/drum.png" alt="Music and Dance" class="service-icon">
+                            <div class="service-text">
+                                <h4>Music and Dance</h4>
+                                <p>Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero lorem amet elitr vero...</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="service-card">
+                            <img src="images/drawing-pen.png" alt="Arts and Crafts" class="service-icon">
+                            <div class="service-text">
+                                <h4>Arts and Crafts</h4>
+                                <p>Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero lorem amet elitr vero...</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="service-card">
+                            <img src="images/car.png" alt="Safe Transportation" class="service-icon">
+                            <div class="service-text">
+                                <h4>Safe Transportation</h4>
+                                <p>Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero lorem amet elitr vero...</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="service-card">
+                            <img src="images/food.png" alt="Healthy food" class="service-icon">
+                            <div class="service-text">
+                                <h4>Healthy food</h4>
+                                <p>Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero lorem amet elitr vero...</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="service-card">
+                            <img src="images/backpack.png" alt="Educational Tour" class="service-icon">
+                            <div class="service-text">
+                                <h4>Educational Tour</h4>
+                                <p>Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero lorem amet elitr vero...</p>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-md-6 col-12">
+                        <img src="images/about-1.jpg" alt="About KidKinder" class="about-img">
+                    </div>
+
+                    <div class="col-md-6 col-12">
+                        <p class="about-subtitle">Learn About Us</p>
+                        <h2>Best School For Your Kids</h2>
+                        <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos,
+                            ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est dolor</p>
+
+                        <div class="row align-items-center">
+                            
+                            <div class="col-md-6 col-6">
+                                <img src="images/about-2.jpg" alt="Kids" class="about-small-img">
+                            </div>
+
+
+                            <div class="col-md-6 col-6">
+                                <ul class="about-list">
+                                    <li><i class="fa-solid fa-check"></i>Labore eos amet dolor amet diam</li>
+                                    <li><i class="fa-solid fa-check"></i>Etsea et sit dolor amet ipsum</li>
+                                    <li><i class="fa-solid fa-check"></i>Diam dolor diam elitripsum vero.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn-main-1">Learn More</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="classes-section" id="classes">
+            <div class="container">
+
+                <p class="popular-title">Popular Classes</p>
+                <h2 class="classes-heading">Classes for Your Kids</h2>
+
+                <div class="row">
+
+                    <div class="col-md-4 col-12">
+                        <article class="class-card">
+                            <a href="#">
+                                <img src="images/class-1.jpg" alt="Drawing Class">
+                            </a>
+                            <div class="class-body">
+                                <h4><a href="#">Drawing Class</a></h4>
+                                <p>Justo ea diam stet diam ipsum no sit, ipsum vero et et diam ipsum duo et no et,
+                                    ipsum ipsum erat duo amet clita duo</p>
+                                <dl class="class-info">
+                                    <dt>Age of Kids</dt>
+                                    <dd>3 - 6 Years</dd>
+                                    <dt>Total Seats</dt>
+                                    <dd>40 Seats</dd>
+                                    <dt>Class Time</dt>
+                                    <dd>08:00 - 10:00</dd>
+                                    <dt>Tution Fee</dt>
+                                    <dd>$290 / Month</dd>
+                                </dl>
+                                <a href="#" class="btn-main-1">Join Now</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="class-card">
+                            <a href="#">
+                                <img src="images/class-2.jpg" alt="Language Learning">
+                            </a>
+                            <div class="class-body">
+                                <h4><a href="#">Language Learning</a></h4>
+                                <p>Justo ea diam stet diam ipsum no sit, ipsum vero et et diam ipsum duo et no et,
+                                    ipsum ipsum erat duo amet clita duo</p>
+                                <dl class="class-info">
+                                    <dt>Age of Kids</dt>
+                                    <dd>3 - 6 Years</dd>
+                                    <dt>Total Seats</dt>
+                                    <dd>40 Seats</dd>
+                                    <dt>Class Time</dt>
+                                    <dd>08:00 - 10:00</dd>
+                                    <dt>Tution Fee</dt>
+                                    <dd>$290 / Month</dd>
+                                </dl>
+                                <a href="#" class="btn-main-1">Join Now</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="class-card">
+                            <a href="#">
+                                <img src="images/class-3.jpg" alt="Basic Science">
+                            </a>
+                            <div class="class-body">
+                                <h4><a href="#">Basic Science</a></h4>
+                                <p>Justo ea diam stet diam ipsum no sit, ipsum vero et et diam ipsum duo et no et,
+                                    ipsum ipsum erat duo amet clita duo</p>
+                                <dl class="class-info">
+                                    <dt>Age of Kids</dt>
+                                    <dd>3 - 6 Years</dd>
+                                    <dt>Total Seats</dt>
+                                    <dd>40 Seats</dd>
+                                    <dt>Class Time</dt>
+                                    <dd>08:00 - 10:00</dd>
+                                    <dt>Tution Fee</dt>
+                                    <dd>$290 / Month</dd>
+                                </dl>
+                                <a href="#" class="btn-main-1">Join Now</a>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="registration-section" id="contact">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-md-7 col-12">
+                        <p class="regist-title">Book a Seat</p>
+                        <h2>Book A Seat For Your Kid</h2>
+                        <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos,
+                            ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est dolor</p>
+                        <ul class="regist-list">
+                            <li><i class="fa-solid fa-check"></i> Labore eos amet dolor amet diam</li>
+                            <li><i class="fa-solid fa-check"></i> Etsea et sit dolor amet ipsum</li>
+                            <li><i class="fa-solid fa-check"></i> Diam dolor diam elitripsum vero.</li>
+                        </ul>
+                        <a href="#" class="btn-main-1">Book Now</a>
+                    </div>
+
+                    <div class="col-md-5 col-12">
+                        <div class="form-wrapper">
+                            <div class="form-header">
+                                <h3>Book A Seat</h3>
+                            </div>
+                            <div class="form-body">
+                                <form action="" method="post">
+                                    <input type="text" name="full_name" placeholder="Your Name" required>
+                                    <input type="email" name="email" placeholder="Your Email" required>
+                                    <div class="select-wrapper">
+                                        <select name="class" class="custom-select" required>
+                                            <option value="" disabled selected>Select A Class</option>
+                                            <option value="drawing">Drawing Class</option>
+                                            <option value="language">Language Learning</option>
+                                            <option value="science">Basic Science</option>
+                                        </select>
+                                        <i class="fas fa-angle-down icon-select"></i>
+                                    </div>
+                                    <button type="submit">Book Now</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+  
+        <section class="blog-section">
+            <div class="container">
+                <p class="blog-label">Latest Blog</p>
+                <h2 class="blog-heading">Latest Articles From Blog</h2>
+
+                <div class="row">
+
+                    <div class="col-md-4 col-12">
+                        <article class="blog-card">
+                            <a href="#">
+                                <img src="images/blog-1.jpg" alt="Blog 1">
+                            </a>
+                            <div class="blog-body">
+                                
+                                <h5><a href="#">Diam amet eos at no eos</a></h5>
+
+                                <div class="blog-meta">
+                                    <span><i class="fas fa-user icon-blog"></i> Admin</span>
+                                    <span><i class="fas fa-tag icon-blog"></i> Web Design</span>
+                                    <span><i class="fas fa-comment icon-blog"></i> 15</span>
+                                </div>
+
+                                <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                                <a href="#" class="btn-main-1">Read More</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="blog-card">
+                            <a href="#">
+                                <img src="images/blog-2.jpg" alt="Blog 2">
+                            </a>
+                            <div class="blog-body">
+                                <h5><a href="#">Diam amet eos at no eos</a></h5>
+                                 <div class="blog-meta">
+                                    <span><i class="fas fa-user icon-blog"></i> Admin</span>
+                                    <span><i class="fas fa-tag icon-blog"></i> Web Design</span>
+                                    <span><i class="fas fa-comment icon-blog"></i> 15</span>
+                                </div>
+                                <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                                <a href="#" class="btn-main-1">Read More</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-4 col-12">
+                        <article class="blog-card">
+                            <a href="#">
+                                <img src="images/blog-3.jpg" alt="Blog 3">
+                            </a>
+                            <div class="blog-body">
+                                <h5><a href="#">Diam amet eos at no eos</a></h5>
+                                  <div class="blog-meta">
+                                        <span><i class="fas fa-user icon-blog"></i> Admin</span>
+                                        <span><i class="fas fa-tag icon-blog"></i> Web Design</span>
+                                        <span><i class="fas fa-comment icon-blog"></i> 15</span>
+                                    </div>
+                                <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
+                                <a href="#" class="btn-main-1">Read More</a>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-field">
+            <div class="container">
+
+                <div class="footer-top">
+                    <div class="row">
+
+                        <div class="col-md-4 col-12">
+                            <a href="#" class="footer-logo-link">
+                                <img src="images/1teddy-bear.png" alt="KidKinder Logo" class="logo-img">
+                                <span class="logo-name">KidKinder</span>
+                            </a>
+                            <p>Labore dolor amet ipsum ea, erat sit ipsum duo eos. Volup amet ea dolor et magna dolor,
+                                elitr rebum duo est sed diam elitr. Stet elitr stet diam duo eos rebum ipsum diam ipsum elitr.</p>
+                            <div class="social-icons">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <h3>Get In Touch</h3>
+                            <dl class="footer-contact">
+                                <dt><i class="fas fa-map-marker-alt footer-icon"></i> Address</dt>
+                                <dd>123 Street, New York, USA</dd>
+                                <dt><i class="fas fa-envelope footer-icon"></i> Email</dt>
+                                <dd>info@example.com</dd>
+                                <dt><i class="fas fa-phone-alt footer-icon"></i> Phone</dt>
+                                <dd>+012 345 67890</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-2 col-12">
+                            <h3>Quick Links</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Our Classes</a></li>
+                                <li><a href="#">Our Teachers</a></li>
+                                <li><a href="#">Our Blog</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <h3>Newsletter</h3>
+                            <form class="newsletter-form" action="" method="post">
+                                <input type="text" name="name" placeholder="Your Name">
+                                <input type="email" name="email" placeholder="Your Email">
+                                <button type="submit">Submit Now</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>© <a href="#">Your Site Name</a>. All Rights Reserved. Designed by <a href="#">CSW 304</a></p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="back-to-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

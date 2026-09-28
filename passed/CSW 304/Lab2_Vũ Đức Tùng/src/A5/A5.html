@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+</head>
+    <body>
+        <form action="#" method="POST">
+            <table border = "1" cellpadding = "5px">
+                <colgroup>
+                    <col style= "width: 200px";/>
+                    <col style="width: 500px;"/>
+                </colgroup>
+
+                <tr>
+                    <th><label for = "fullname">Full Name*</label></th>
+                    <td><input type = "text" name = "fullname" id ="fullname" size ="70" required></td>
+                </tr>
+
+                <tr>
+                    <th><label for = "email">Email*</label></th>
+                    <td><input type = "email" name = "email" id ="email" size ="70" required></td>
+                </tr>
+
+                <tr>
+                    <th><label for = "password">Password*</label></th>
+                    <td><input type = "password" name = "password" id ="password" size ="70" placeholder="Enter your password" required></td>
+                </tr>
+
+                <tr>
+                    <th><label for = "confirmpassword">Confirm Password*</label></th>
+                    <td><input type = "password" name = "confirmpassword" id ="confirmpassword" size ="70" placeholder="Enter your password again" required></td>
+                </tr>
+
+                <tr>
+                    <th><label for = "phone">Phone number*</label></th>
+                    <td><input type = "number" name = "phone" id ="phone" size ="70" required ></td>
+                </tr>
+
+                <tr>
+                    <th><label for = "address">Address</label></th>
+                    <td><textarea name = "address" id ="address" rows="3" cols="60" > </textarea></td>
+                </tr>
+
+                <tr>
+                    <th><label for = "city">City</label></th>
+                    <td>
+                        <table>
+                            <tr>
+                                <td><input type = "text" name = "city" id ="city" size ="38" placeholder="Enter your city"></td>
+                                <td><b>State</b></td>
+                                <td><input type = "text" name = "state" id ="state" size ="20" placeholder="Enter your state"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><label for = "zip">Zip/Postal Code</label></th>
+                    <td><input type = "text" name = "zip" id ="zip" size ="70" placeholder="Enter your Zip/Postal Code"></td>
+                </tr>
+
+                <tr>
+                    <th><label for = "country">Country</label></th>
+                    <td>
+                        <select name = "country" id ="country">
+                            <option>[Select your country]</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><label for = "birthday">Birthday</label></th>
+                    <td><input type = "text" name = "birthday" id ="birthday" size ="70" placeholder="mm/dd/yyyy"></td>
+                </tr>
+
+                <tr>
+                    <th><label for = "gender">Gender</label></th>
+                    <td>
+                        <select name = "gender" id ="gender">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                </tr>
+            
+                <tr>
+                    <th>Starting date</th>
+                    <td>
+                        <input type="radio" name="starting_date" id="spring" value="spring">
+                        <label for="spring">Spring</label>
+                            
+                        &nbsp; &nbsp;
+
+                        <input type="radio" name="starting_date" id="summer" value="summer" checked>
+                        <label for="summer">Summer</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><label for = "comment">Comments</label></th>
+                    <td><textarea name = "comment" id ="comment" rows="3" cols="60" placeholder="Please send us more information"></textarea></td>
+                </tr>
+
+                <tr>
+                    <th colspan="2">
+                        <button type ="submit" name ="submit"><img src="image/5-Submit Button.png"/></button>
+                    </th>
+                </tr>
+                
+            </table>
+        </form>        
+    </body>
+</html>

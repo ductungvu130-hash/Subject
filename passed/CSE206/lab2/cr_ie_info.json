@@ -1,0 +1,22 @@
+{
+	"system" : {
+		"platform" : "windows64",
+		"os_name" : "Windows 10",
+		"os_version" : "10.0"
+	},
+	"error" : {
+		"executable" : "quartus",
+		"comment" : "not_applicable",
+		"error_message" : "end_of_selection <= m_data->get_end_time()",
+		"source_file" : "/quartus/db/vdb/vdb_channel.cpp",
+		"line" : "3740",
+		"stack_trace" : "\t0x7ffee8e6150c: db_vdb + 0x3150c (?create_level_collection@VDB_CHANNEL@@QEAAX_J0PEAVVDB_LEVEL_COLLECTION@@@Z + 0xcc)\n\t0x7ffee5fb2d47: edt_wedtq + 0x32d47 (?get_selection_prev_levels@WEDTQ_FRAME_WND@@QEAA_NPEAVQWidget@@PEAV?$list@PEAUWEDTQ_PREVIOUS_LEVELS@@V?$allocator@PEAUWEDTQ_PREVIOUS_LEVELS@@@std@@@std@@_N2@Z + 0x317)\n\t0x7ffee5feb63e: edt_wedtq + 0x6b63e (??0WEDTQ_OVERWRITE_COMMAND@@QEAA@W4DISPLAY_TYPE@VDB_VALUE@@PEAVWEDTQ_WAVEFORM_VIEW@@PEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4RADIX@2@_N@Z + 0x17e)\n\t0x7ffee5fd8318: edt_wedtq + 0x58318 (?update_overwrite_random_values@WEDTQ_WAVEFORM_VIEW@@QEAAXXZ + 0xd8)\n\t 0x521bd700: QtCore4 + 0x11d700 (?activate@QMetaObject@@SAXPEAVQObject@@PEBU1@HPEAPEAX@Z + 0x520)\n\t 0x50dda09f: QtGui4 + 0xa09f (?activate@QAction@@QEAAXW4ActionEvent@1@@Z + 0xdf)\n\t 0x511185b5: QtGui4 + 0x3485b5 (?click@QAbstractButton@@QEAAXXZ + 0x135)\n\t 0x51119499: QtGui4 + 0x349499 (?mouseReleaseEvent@QAbstractButton@@MEAAXPEAVQMouseEvent@@@Z + 0x59)\n\t 0x511c4e7e: QtGui4 + 0x3f4e7e (?mouseReleaseEvent@QToolButton@@MEAAXPEAVQMouseEvent@@@Z + 0xe)\n\t 0x50e31b84: QtGui4 + 0x61b84 (?event@QWidget@@MEAA_NPEAVQEvent@@@Z + 0xd4)\n\t 0x50df2c55: QtGui4 + 0x22c55 (?notify_helper@QApplicationPrivate@@QEAA_NPEAVQObject@@PEAVQEvent@@@Z + 0xf5)\n\t 0x50df184e: QtGui4 + 0x2184e (?notify@QApplication@@UEAA_NPEAVQObject@@PEAVQEvent@@@Z + 0x71e)\n\t 0x521aec4b: QtCore4 + 0x10ec4b (?notifyInternal@QCoreApplication@@AEAA_NPEAVQObject@@PEAVQEvent@@@Z + 0x7b)\n\t 0x50df5a9e: QtGui4 + 0x25a9e (?sendMouseEvent@QApplicationPrivate@@SA_NPEAVQWidget@@PEAVQMouseEvent@@00PEAPEAV2@AEAV?$QPointer@VQWidget@@@@_N@Z + 0x1de)\n\t 0x50e56940: QtGui4 + 0x86940 (?trUtf8@QScrollBar@@SA?AVQString@@PEBD0H@Z + 0x1440)\n\t 0x50e5a301: QtGui4 + 0x8a301 (?winMouseButtonUp@QApplication@@SAXXZ + 0x2761)\n\t0x7fff79487845: USER32 + 0x17845 (CallWindowProcW + 0x6a5)\n\t0x7fff7948539c: USER32 + 0x1539c (IsWindowUnicode + 0x3cc)\n\t 0x521d3982: QtCore4 + 0x133982 (?processEvents@QEventDispatcherWin32@@UEAA_NV?$QFlags@W4ProcessEventsFlag@QEventLoop@@@@@Z + 0x3e2)\n\t 0x50e52004: QtGui4 + 0x82004 (?openPopup@QApplicationPrivate@@QEAAXPEAVQWidget@@@Z + 0x204)\n\t 0x521abb7b: QtCore4 + 0x10bb7b (?exec@QEventLoop@@QEAAHV?$QFlags@W4ProcessEventsFlag@QEventLoop@@@@@Z + 0x22b)\n\t 0x521ae18f: QtCore4 + 0x10e18f (?exec@QCoreApplication@@SAHXZ + 0xdf)\n\t0x7ff6d432198b: quartus + 0x198b (?qgq_main@@YAHHPEAPEBD@Z + 0x8b)\n\t0x7fff587233a8: CCL_MSG + 0x133a8 (?msg_main_thread@@YAPEAXPEAX@Z + 0x18)\n\t0x7fff58724bae: CCL_MSG + 0x14bae (?msg_thread_wrapper@@YAPEAXP6APEAXPEAX@Z0@Z + 0x6e)\n\t0x7fff58976af0: ccl_mem + 0x16af0 (?mem_thread_wrapper@@YAPEAXP6APEAXPEAX@Z0@Z + 0x70)\n\t0x7fff58722c41: CCL_MSG + 0x12c41 (?msg_exe_main@@YAHHPEAPEBDP6AHH0@Z@Z + 0xa1)\n\t0x7ff6d4322777: quartus + 0x2777 (WinMain + 0x127)\n\t0x7ff6d4321f40: quartus + 0x1f40 (__tmainCRTStartup + 0x148)\n\t0x7fff7996e8d6: KERNEL32 + 0x2e8d6 (BaseThreadInitThunk + 0x16)\n\t0x7fff7ab4c53b: ntdll + 0x8c53b (RtlUserThreadStart + 0x2b)\n",
+		"subsystem" : "VDB"
+	},
+	"quartus" : {
+		"quartus_bits" : "64",
+		"version" : "19.1.0",
+		"build" : "670",
+		"edition" : "Lite Edition"
+	}
+}

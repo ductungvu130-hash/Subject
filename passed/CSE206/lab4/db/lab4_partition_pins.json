@@ -1,0 +1,33 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "VDT_B",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_A",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Y",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_X",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Clock",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Reset",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

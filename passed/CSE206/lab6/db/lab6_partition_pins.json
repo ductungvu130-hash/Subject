@@ -1,0 +1,181 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "VDT_OP[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_OP[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_OP[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RA[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RA[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RA[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RB[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RB[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RB[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RC[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RC[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_RC[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDTOffset_Q[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDTOffset_Q[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDTOffset_Q[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDTOffset_Q[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDTOffset_Q[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDTOffset_Q[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDTOffset_Q[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDTOffset_Q[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[22]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Clock",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Reset",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Enable",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[21]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[20]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[18]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[17]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[16]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[14]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[13]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[12]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[10]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[9]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[8]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VDT_Data[0]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

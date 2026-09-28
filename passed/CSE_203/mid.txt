@@ -1,0 +1,16 @@
+cách khai báo biến constant,
+static class, static members trên UML
+khai báo enum, 
+khai báo abtribution kiểu enum
+interface , 
+abstract class, method
+Encapsulation
+pass by value vs pass by reference
+public static final trên UML
+
+Arraylist add , remove
+
+3 kiểu dữ liệu : enum
+  	       : class
+	       : interface 
+

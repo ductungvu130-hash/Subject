@@ -1,0 +1,8 @@
+=== Trello Public Access ===
+Trello link for viewing (Submit this to lecturer):
+https://trello.com/b/0oMI6UIu/csw303project
+
+
+=== GitHub Repository ===
+Repository Link:
+https://github.com/Duong-Thai1/cse303-project-smartrouteVN

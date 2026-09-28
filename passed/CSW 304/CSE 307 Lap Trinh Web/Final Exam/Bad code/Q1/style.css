@@ -1,0 +1,37 @@
+.top-text {
+    color: #ffff;
+    background-color: #111111;
+    margin-left: -12px;
+    margin-right: -12px;
+    font-weight: 700;
+}
+.left-col {
+    background-color: #eeeeee;
+}
+.card {
+    background-color: #f7f7f7;
+}
+.infor-item p {
+    font-weight: 700;
+}
+.infor-item span {
+    color: red;
+}
+.infor-item input {
+    width: 100%;
+    padding: 5px 5px;
+}
+.infor-item select {
+    width: 100%;
+    padding: 5px 5px;
+}
+.search-box {
+    max-width: 350px;
+    width: 100%;
+}
+.card-title {
+    font-weight: 700;
+}
+.card-text {
+    margin-bottom: 10px;
+}

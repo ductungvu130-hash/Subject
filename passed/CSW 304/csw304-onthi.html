@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CSW 304 – Ôn Thi Cuối Kỳ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"/>
+  <style>
+    :root {
+      --eiu-red: #dc3545;
+      --eiu-blue: #0066cc;
+      --eiu-dark: #1a1a2e;
+      --eiu-panel: #16213e;
+      --eiu-accent: #e94560;
+      --eiu-text: #e0e0e0;
+      --eiu-muted: #9ca3af;
+      --eiu-card: #0f3460;
+      --eiu-border: #2d3561;
+      --eiu-success: #10b981;
+      --eiu-warn: #f59e0b;
+      --code-bg: #0d1117;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background: var(--eiu-dark);
+      color: var(--eiu-text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+    }
+
+    /* ── SIDEBAR ── */
+    #sidebar {
+      position: fixed; top: 0; left: 0;
+      width: 260px; height: 100vh;
+      background: var(--eiu-panel);
+      border-right: 1px solid var(--eiu-border);
+      overflow-y: auto; z-index: 100;
+      padding: 0 0 2rem;
+    }
+    #sidebar .logo {
+      padding: 1.25rem 1.5rem;
+      background: var(--eiu-accent);
+      font-weight: 700; font-size: 1.05rem;
+      letter-spacing: .5px;
+    }
+    #sidebar .logo span { font-size: .78rem; opacity: .85; display: block; font-weight: 400; }
+    .nav-group-title {
+      padding: .6rem 1.5rem .2rem;
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--eiu-muted);
+    }
+    #sidebar a {
+      display: block; padding: .45rem 1.5rem .45rem 2rem;
+      color: var(--eiu-text); text-decoration: none;
+      font-size: .88rem; border-left: 3px solid transparent;
+      transition: all .15s;
+    }
+    #sidebar a:hover, #sidebar a.active {
+      color: #fff; background: rgba(233,69,96,.12);
+      border-left-color: var(--eiu-accent);
+    }
+
+    /* ── MAIN ── */
+    #main { margin-left: 260px; padding: 2rem 2.5rem; }
+
+    /* ── SECTION TITLES ── */
+    .section-badge {
+      display: inline-block; padding: .2rem .75rem;
+      border-radius: 20px; font-size: .72rem;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .badge-layout  { background: rgba(16,185,129,.15); color: var(--eiu-success); }
+    .badge-jquery  { background: rgba(233,69,96,.15); color: var(--eiu-accent); }
+    .badge-exam    { background: rgba(245,158,11,.15); color: var(--eiu-warn); }
+    .badge-tip     { background: rgba(0,102,204,.2);  color: #60a5fa; }
+
+    h2.sec-title {
+      font-size: 1.6rem; font-weight: 800; margin-bottom: 1.5rem;
+      padding-bottom: .6rem; border-bottom: 2px solid var(--eiu-border);
+    }
+    h3.sub-title {
+      font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 .75rem;
+      color: #fff;
+    }
+
+    /* ── CARDS ── */
+    .study-card {
+      background: var(--eiu-panel);
+      border: 1px solid var(--eiu-border);
+      border-radius: 10px; padding: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .study-card h4 {
+      font-size: .95rem; font-weight: 700; margin-bottom: .75rem;
+      color: #fff;
+    }
+
+    /* ── CODE BLOCKS ── */
+    pre {
+      background: var(--code-bg) !important;
+      border: 1px solid var(--eiu-border);
+      border-radius: 8px; margin: .75rem 0;
+      overflow-x: auto;
+    }
+    pre code.hljs { padding: 1rem 1.25rem; font-size: .82rem; line-height: 1.6; }
+    .code-label {
+      background: var(--eiu-border); color: var(--eiu-muted);
+      font-size: .7rem; padding: .25rem .75rem;
+      border-radius: 6px 6px 0 0; display: inline-block;
+      font-family: monospace; margin-bottom: -1px;
+    }
+
+    /* ── LAYOUT PREVIEW ── */
+    .layout-preview {
+      background: #111827; border: 1px dashed var(--eiu-border);
+      border-radius: 8px; overflow: hidden; margin: .75rem 0;
+    }
+    .layout-preview .lp-header {
+      background: var(--eiu-card); padding: .5rem 1rem;
+      font-size: .75rem; color: var(--eiu-muted); font-family: monospace;
+    }
+    .layout-preview .lp-body { padding: .75rem 1rem; }
+    .lp-sidebar-demo {
+      background: rgba(233,69,96,.1);
+      border: 1px dashed rgba(233,69,96,.4);
+      border-radius: 4px; padding: .5rem;
+      font-size: .72rem; color: var(--eiu-accent); text-align: center;
+      min-height: 80px; display: flex; align-items: center; justify-content: center;
+    }
+    .lp-main-demo {
+      background: rgba(16,185,129,.08);
+      border: 1px dashed rgba(16,185,129,.4);
+      border-radius: 4px; padding: .5rem;
+      font-size: .72rem; color: var(--eiu-success); text-align: center;
+      min-height: 80px; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── JQUERY NOTES ── */
+    .jq-highlight {
+      background: rgba(245,158,11,.1);
+      border-left: 3px solid var(--eiu-warn);
+      border-radius: 0 6px 6px 0;
+      padding: .75rem 1rem; margin: .75rem 0;
+      font-size: .87rem;
+    }
+    .jq-highlight strong { color: var(--eiu-warn); }
+
+    .tip-box {
+      background: rgba(0,102,204,.12);
+      border-left: 3px solid #3b82f6;
+      border-radius: 0 6px 6px 0;
+      padding: .75rem 1rem; margin: .75rem 0;
+      font-size: .87rem; color: #93c5fd;
+    }
+
+    /* ── EXAM PATTERN ── */
+    .exam-pattern {
+      background: rgba(233,69,96,.07);
+      border: 1px solid rgba(233,69,96,.3);
+      border-radius: 8px; padding: 1rem 1.25rem;
+      margin: .75rem 0;
+    }
+    .exam-pattern .ep-title {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--eiu-accent); margin-bottom: .5rem;
+    }
+
+    /* ── MINI TABLE ── */
+    .ref-table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+    .ref-table th {
+      background: var(--eiu-card); padding: .5rem .75rem;
+      text-align: left; color: #fff; font-weight: 600;
+      border-bottom: 1px solid var(--eiu-border);
+    }
+    .ref-table td {
+      padding: .45rem .75rem; border-bottom: 1px solid var(--eiu-border);
+      vertical-align: top;
+    }
+    .ref-table td code {
+      background: #1f2937; padding: .1rem .35rem;
+      border-radius: 3px; font-size: .8rem;
+      color: #f9a8d4;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .sec-divider { border-color: var(--eiu-border); margin: 2.5rem 0; }
+
+    /* ── DEMO LIVE ── */
+    .live-demo {
+      background: #fff; border-radius: 8px; overflow: hidden;
+      border: 2px solid var(--eiu-border);
+    }
+    .live-demo-bar {
+      background: #e5e7eb; padding: .35rem .75rem;
+      font-size: .72rem; color: #4b5563; font-family: monospace;
+    }
+    .live-demo iframe {
+      border: none; width: 100%; display: block;
+    }
+
+    /* ── SCROLLBAR ── */
+    #sidebar::-webkit-scrollbar { width: 5px; }
+    #sidebar::-webkit-scrollbar-track { background: transparent; }
+    #sidebar::-webkit-scrollbar-thumb { background: var(--eiu-border); border-radius: 3px; }
+
+    @media (max-width: 768px) {
+      #sidebar { display: none; }
+      #main { margin-left: 0; padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+<nav id="sidebar">
+  <div class="logo">
+    📚 CSW 304
+    <span>Front-end Development – Ôn Thi Cuối Kỳ</span>
+  </div>
+
+  <div class="nav-group-title">Bootstrap Layout</div>
+  <a href="#bs-overview">Tổng quan Bootstrap 5</a>
+  <a href="#bs-grid">Grid System</a>
+  <a href="#bs-sidebar15">Layout Sidebar 1:5</a>
+  <a href="#bs-container1320">Container 1320px</a>
+  <a href="#bs-cards">Cards & Danh sách</a>
+  <a href="#bs-forms">Forms & Labels</a>
+  <a href="#bs-nav">Navbar</a>
+  <a href="#bs-patterns">Các mẫu layout thường gặp</a>
+
+  <div class="nav-group-title">jQuery Cơ Bản</div>
+  <a href="#jq-intro">jQuery là gì?</a>
+  <a href="#jq-selectors">Selectors</a>
+  <a href="#jq-events">Events</a>
+  <a href="#jq-dom">Thao tác DOM</a>
+  <a href="#jq-each">$.each – Duyệt mảng</a>
+  <a href="#jq-ajax">AJAX – GET & POST</a>
+  <a href="#jq-validation">Form Validation</a>
+
+  <div class="nav-group-title">Dạng Đề Thi</div>
+  <a href="#ex-shoppingcart">Giỏ hàng (Đề 1)</a>
+  <a href="#ex-flowershop">Cửa hàng hoa (Đề 2)</a>
+  <a href="#ex-rooms">Quản lý phòng (Đề 3)</a>
+
+  <div class="nav-group-title">Tham khảo nhanh</div>
+  <a href="#cheatsheet">Cheatsheet jQuery</a>
+</nav>
+
+<!-- ═══════════════════ MAIN ═══════════════════ -->
+<main id="main">
+
+  <!-- ────────── HERO ────────── -->
+  <div class="study-card" style="background: linear-gradient(135deg, var(--eiu-panel), #0f3460); border-color: var(--eiu-accent); margin-bottom: 2rem;">
+    <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <div style="font-size: 3rem;">🎓</div>
+      <div>
+        <div style="font-size: 1.4rem; font-weight: 800; color:#fff;">Tài liệu ôn thi CSW 304</div>
+        <div style="color: var(--eiu-muted); font-size: .9rem;">Front-end Development · Bootstrap 5 · jQuery · AJAX</div>
+        <div style="margin-top: .5rem;">
+          <span class="badge bg-danger me-1">Giỏ hàng</span>
+          <span class="badge bg-success me-1">Hoa / Sản phẩm</span>
+          <span class="badge bg-warning text-dark me-1">Quản lý phòng</span>
+          <span class="badge bg-info me-1">Form Validation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       PHẦN 1 – BOOTSTRAP LAYOUT
+  ════════════════════════════════════════════════ -->
+  <section id="bs-overview">
+    <div class="section-badge badge-layout">Bootstrap Layout</div>
+    <h2 class="sec-title">1 · Tổng quan Bootstrap 5</h2>
+
+    <div class="study-card">
+      <h4>📌 Cách include Bootstrap vào HTML</h4>
+      <div class="code-label">HTML – head</div>
+      <pre><code class="language-html">&lt;!-- CSS Bootstrap --&gt;
+&lt;link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/&gt;
+
+&lt;!-- jQuery (BẮT BUỘC có trước Bootstrap JS) --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- Bootstrap JS Bundle (bao gồm Popper) --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code></pre>
+
+      <div class="tip-box">
+        💡 <strong>Quy tắc:</strong> Luôn đặt CSS ở <code>&lt;head&gt;</code>, JS ở cuối <code>&lt;body&gt;</code> (trước thẻ <code>&lt;/body&gt;</code>). jQuery phải được load <strong>trước</strong> Bootstrap JS.
+      </div>
+    </div>
+
+    <div class="study-card">
+      <h4>📐 Cấu trúc HTML chuẩn Bootstrap</h4>
+      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="vi"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Tên trang&lt;/title&gt;
+  &lt;link rel="stylesheet" href="bootstrap.min.css"/&gt;
+  &lt;link rel="stylesheet" href="style.css"/&gt;  &lt;!-- CSS của mình --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- Nội dung ở đây --&gt;
+
+  &lt;script src="jquery.min.js"&gt;&lt;/script&gt;
+  &lt;script src="bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+  &lt;script src="script.js"&gt;&lt;/script&gt;  &lt;!-- JS của mình --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="bs-grid"/>
+
+  <!-- ── GRID ── -->
+  <section>
+    <div class="section-badge badge-layout">Grid System</div>
+    <h2 class="sec-title">2 · Grid System – Hệ thống cột</h2>
+
+    <div class="study-card">
+      <h4>📏 Nguyên lý: Container → Row → Col</h4>
+      <pre><code class="language-html">&lt;div class="container"&gt;       &lt;!-- giới hạn độ rộng + căn giữa --&gt;
+  &lt;div class="row"&gt;            &lt;!-- hàng ngang, dùng flexbox --&gt;
+    &lt;div class="col-md-4"&gt;...&lt;/div&gt;   &lt;!-- 4/12 = 1/3 màn hình --&gt;
+    &lt;div class="col-md-8"&gt;...&lt;/div&gt;   &lt;!-- 8/12 = 2/3 màn hình --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <table class="ref-table">
+        <tr><th>Class</th><th>Ý nghĩa</th><th>Dùng khi nào</th></tr>
+        <tr><td><code>col-2</code></td><td>2/12 cột, luôn luôn</td><td>Layout cố định</td></tr>
+        <tr><td><code>col-md-3</td><td>3/12 từ màn ≥768px</td><td>Responsive tablet</td></tr>
+        <tr><td><code>col-lg-4</code></td><td>4/12 từ màn ≥992px</td><td>Desktop</td></tr>
+        <tr><td><code>col</code></td><td>Chia đều tự động</td><td>Khi muốn bằng nhau</td></tr>
+      </table>
+
+      <div class="jq-highlight">
+        <strong>⚠ Quy tắc tổng = 12:</strong> Các <code>col-*</code> trong cùng 1 <code>row</code> phải cộng lại = 12.<br/>
+        Ví dụ: <code>col-md-2 + col-md-10</code> → tỉ lệ 1:5 (dạng đề hay ra nhất!)
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="bs-sidebar15"/>
+
+  <!-- ── SIDEBAR 1:5 ── -->
+  <section>
+    <div class="section-badge badge-exam">Hay ra trong đề</div>
+    <h2 class="sec-title">3 · Layout Sidebar 1:5 (Dạng đề thi số 1)</h2>
+
+    <div class="jq-highlight">
+      <strong>📋 Yêu cầu đề:</strong> "Layout: full width, maintaining a 1:5 ratio between the sidebar and main sections (using HTML table for layout is not allowed)"<br/>
+      → Dùng Bootstrap col-md-2 (sidebar) + col-md-10 (main)
+    </div>
+
+    <div class="study-card">
+      <h4>✅ Code mẫu – Sidebar 1:5</h4>
+      <div class="code-label">HTML + Bootstrap</div>
+      <pre><code class="language-html">&lt;div class="container-fluid"&gt;   &lt;!-- full width = container-fluid --&gt;
+  &lt;div class="row"&gt;
+
+    &lt;!-- SIDEBAR: 2/12 = tỉ lệ 1 --&gt;
+    &lt;div class="col-md-2" id="sidebar"&gt;
+      &lt;h5&gt;Danh mục&lt;/h5&gt;
+      &lt;ul class="list-unstyled"&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Mục 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Mục 2&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;!-- MAIN CONTENT: 10/12 = tỉ lệ 5 --&gt;
+    &lt;div class="col-md-10" id="main-content"&gt;
+      &lt;h2&gt;Nội dung chính&lt;/h2&gt;
+      &lt;p&gt;...&lt;/p&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <div class="layout-preview">
+        <div class="lp-header">Preview: container-fluid → row → col-md-2 + col-md-10</div>
+        <div class="lp-body">
+          <div class="row g-2">
+            <div class="col-md-2">
+              <div class="lp-sidebar-demo">SIDEBAR<br/><small>col-md-2</small><br/><small>(1 phần)</small></div>
+            </div>
+            <div class="col-md-10">
+              <div class="lp-main-demo">MAIN CONTENT<br/><small>col-md-10</small><br/><small>(5 phần)</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="bs-container1320"/>
+
+  <!-- ── CONTAINER 1320PX ── -->
+  <section>
+    <div class="section-badge badge-exam">Hay ra trong đề</div>
+    <h2 class="sec-title">4 · Container width 1320px (Dạng đề thi số 2)</h2>
+
+    <div class="jq-highlight">
+      <strong>📋 Yêu cầu đề:</strong> "Set the container width to 1320px. The use of HTML tables for layout is prohibited."
+    </div>
+
+    <div class="study-card">
+      <h4>✅ Cách tạo container 1320px</h4>
+      <div class="code-label">HTML</div>
+      <pre><code class="language-html">&lt;!-- Dùng class riêng của mình, KHÔNG dùng .container của Bootstrap --&gt;
+&lt;div class="my-container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-4"&gt;...&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;...&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <div class="code-label">CSS</div>
+      <pre><code class="language-css">.my-container {
+  width: 1320px;       /* đúng như đề yêu cầu */
+  max-width: 100%;     /* tránh bị tràn trên màn nhỏ */
+  margin: 0 auto;      /* căn giữa */
+  padding: 0 15px;
+}</code></pre>
+
+      <div class="tip-box">
+        💡 <strong>Lưu ý:</strong> Bootstrap 5 có sẵn <code>.container-xxl</code> width 1320px — có thể dùng thay thế! Kiểm tra xem đề có cho phép dùng class Bootstrap không.
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="bs-cards"/>
+
+  <!-- ── CARDS ── -->
+  <section>
+    <div class="section-badge badge-layout">Bootstrap Components</div>
+    <h2 class="sec-title">5 · Cards – Hiển thị danh sách sản phẩm</h2>
+
+    <div class="study-card">
+      <h4>🃏 Product Card mẫu</h4>
+      <pre><code class="language-html">&lt;div class="row row-cols-1 row-cols-md-3 g-3"&gt;
+  &lt;!-- g-3 = gap 3, row-cols-md-3 = 3 card / hàng --&gt;
+
+  &lt;div class="col"&gt;
+    &lt;div class="card h-100"&gt;
+      &lt;img src="anh.jpg" class="card-img-top" alt="Tên sản phẩm"/&gt;
+      &lt;div class="card-body"&gt;
+        &lt;h5 class="card-title"&gt;Tên sản phẩm&lt;/h5&gt;
+        &lt;p class="card-text text-danger fw-bold"&gt;250,000đ&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="card-footer"&gt;
+        &lt;button class="btn btn-primary w-100"&gt;Thêm vào giỏ&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+
+      <div class="tip-box">
+        💡 <strong>Khi render bằng jQuery:</strong> Không cần viết HTML tĩnh — jQuery sẽ tạo card này dynamically từ dữ liệu API. Xem phần AJAX phía dưới!
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="bs-forms"/>
+
+  <!-- ── FORMS ── -->
+  <section>
+    <div class="section-badge badge-layout">Forms</div>
+    <h2 class="sec-title">6 · Forms & Labels – Quy tắc bắt buộc</h2>
+
+    <div class="jq-highlight">
+      <strong>📋 Yêu cầu đề:</strong> "Correctly implement the label tags for form elements" → Mỗi input PHẢI có label đúng cách!
+    </div>
+
+    <div class="study-card">
+      <h4>✅ Form chuẩn Bootstrap 5 với Labels</h4>
+      <pre><code class="language-html">&lt;form id="myForm"&gt;
+
+  &lt;!-- Cách đúng: label for = input id --&gt;
+  &lt;div class="mb-3"&gt;
+    &lt;label for="fullName" class="form-label"&gt;Họ và tên&lt;/label&gt;
+    &lt;input type="text" class="form-control" id="fullName" name="fullName"
+           placeholder="Vui lòng nhập họ tên"/&gt;
+  &lt;/div&gt;
+
+  &lt;div class="mb-3"&gt;
+    &lt;label for="phone" class="form-label"&gt;Số điện thoại&lt;/label&gt;
+    &lt;input type="tel" class="form-control" id="phone" name="phone"
+           placeholder="Vui lòng nhập số điện thoại"/&gt;
+  &lt;/div&gt;
+
+  &lt;div class="mb-3"&gt;
+    &lt;label for="address" class="form-label"&gt;Địa chỉ&lt;/label&gt;
+    &lt;input type="text" class="form-control" id="address" name="address"
+           placeholder="Vui lòng nhập địa chỉ"/&gt;
+  &lt;/div&gt;
+
+  &lt;div class="mb-3"&gt;
+    &lt;label for="note" class="form-label"&gt;Ghi chú&lt;/label&gt;
+    &lt;textarea class="form-control" id="note" rows="3"&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+
+  &lt;button type="button" id="btnOrder" class="btn btn-danger"&gt;Đặt hàng&lt;/button&gt;
+
+&lt;/form&gt;</code></pre>
+
+      <div class="exam-pattern">
+        <div class="ep-title">🔴 Lỗi thường bị trừ điểm</div>
+        ❌ <code>&lt;input&gt;</code> không có <code>&lt;label&gt;</code><br/>
+        ❌ <code>label for</code> không khớp với <code>input id</code><br/>
+        ❌ Dùng <code>&lt;table&gt;</code> để tạo layout form<br/>
+        ✅ Luôn dùng: <code>&lt;label for="xxx"&gt;</code> + <code>&lt;input id="xxx"&gt;</code>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="bs-nav"/>
+
+  <!-- ── NAVBAR ── -->
+  <section>
+    <div class="section-badge badge-layout">Navigation</div>
+    <h2 class="sec-title">7 · Navbar – Thanh điều hướng</h2>
+
+    <div class="study-card">
+      <h4>✅ Navbar Bootstrap 5 chuẩn</h4>
+      <pre><code class="language-html">&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;CSW304Shop&lt;/a&gt;
+
+    &lt;!-- Nút hamburger (mobile) --&gt;
+    &lt;button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;!-- Menu items --&gt;
+    &lt;div class="collapse navbar-collapse" id="navMenu"&gt;
+      &lt;ul class="navbar-nav ms-auto"&gt;  &lt;!-- ms-auto = đẩy về phải --&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link active" href="#"&gt;Trang chủ&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Sản phẩm&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Liên hệ&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="bs-patterns"/>
+
+  <!-- ── LAYOUT PATTERNS ── -->
+  <section>
+    <div class="section-badge badge-exam">Tổng hợp các mẫu</div>
+    <h2 class="sec-title">8 · Các mẫu layout thường gặp trong đề CSW 304</h2>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>🏪 Mẫu 1: Shop + Sidebar</h4>
+          <div class="layout-preview">
+            <div class="lp-header">Navbar | container-fluid | row</div>
+            <div class="lp-body">
+              <div class="row g-1" style="font-size:.7rem;">
+                <div class="col-2"><div class="lp-sidebar-demo" style="min-height:120px;">Sidebar<br/>col-2<br/>(Danh mục, Filter)</div></div>
+                <div class="col-10"><div class="lp-main-demo" style="min-height:120px;">Product Grid<br/>col-10<br/>(row row-cols-3)</div></div>
+              </div>
+            </div>
+          </div>
+          <small style="color:var(--eiu-muted);">→ Đề 1 (shopping cart), Đề 3 (room)</small>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>🌸 Mẫu 2: Full-width Product Grid</h4>
+          <div class="layout-preview">
+            <div class="lp-header">Navbar | container(1320px) | header | filter-bar | grid</div>
+            <div class="lp-body">
+              <div class="row g-1" style="font-size:.7rem;">
+                <div class="col-12"><div style="background:rgba(233,69,96,.1);border:1px dashed rgba(233,69,96,.4);border-radius:4px;padding:.3rem;text-align:center;color:var(--eiu-accent);">Navbar full width</div></div>
+                <div class="col-12"><div style="background:rgba(245,158,11,.1);border:1px dashed rgba(245,158,11,.4);border-radius:4px;padding:.3rem;text-align:center;color:var(--eiu-warn);">Filter bar: Sắp xếp | Tìm kiếm</div></div>
+                <div class="col-4"><div class="lp-main-demo" style="min-height:60px;">Card</div></div>
+                <div class="col-4"><div class="lp-main-demo" style="min-height:60px;">Card</div></div>
+                <div class="col-4"><div class="lp-main-demo" style="min-height:60px;">Card</div></div>
+              </div>
+            </div>
+          </div>
+          <small style="color:var(--eiu-muted);">→ Đề 2 (flower shop)</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-1">
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>🛒 Mẫu 3: Table-based Cart</h4>
+          <pre style="margin:0;"><code class="language-html">&lt;table class="table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Sản phẩm&lt;/th&gt;
+      &lt;th&gt;SL&lt;/th&gt;
+      &lt;th&gt;Giá&lt;/th&gt;
+      &lt;th&gt;Xóa&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id="cartList"&gt;
+    &lt;!-- jQuery render vào đây --&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>📝 Mẫu 4: Form Đặt hàng</h4>
+          <pre style="margin:0;"><code class="language-html">&lt;section id="order-form"&gt;
+  &lt;h3&gt;Thông tin đặt hàng&lt;/h3&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;
+      &lt;!-- Họ tên + SĐT --&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-6"&gt;
+      &lt;!-- Địa chỉ + Ghi chú --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="btn btn-danger"&gt;Đặt hàng&lt;/button&gt;
+&lt;/section&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       PHẦN 2 – JQUERY
+  ════════════════════════════════════════════════ -->
+  <hr class="sec-divider" id="jq-intro"/>
+  <div class="section-badge badge-jquery">jQuery</div>
+  <h2 class="sec-title">9 · jQuery là gì? Tại sao dùng?</h2>
+
+  <div class="study-card">
+    <h4>💡 jQuery = viết ít, làm nhiều</h4>
+    <p style="color:var(--eiu-muted);">jQuery là thư viện JavaScript giúp:</p>
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:.75rem;text-align:center;">
+          <div style="font-size:1.5rem;">🎯</div>
+          <strong>Chọn phần tử</strong><br/>
+          <small style="color:var(--eiu-muted);">$('#id'), $('.class')</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div style="background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.3);border-radius:8px;padding:.75rem;text-align:center;">
+          <div style="font-size:1.5rem;">🖱️</div>
+          <strong>Xử lý sự kiện</strong><br/>
+          <small style="color:var(--eiu-muted);">.click(), .on()</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:.75rem;text-align:center;">
+          <div style="font-size:1.5rem;">🔄</div>
+          <strong>Gọi API</strong><br/>
+          <small style="color:var(--eiu-muted);">$.get(), $.post()</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div style="background:rgba(0,102,204,.1);border:1px solid rgba(0,102,204,.3);border-radius:8px;padding:.75rem;text-align:center;">
+          <div style="font-size:1.5rem;">🏗️</div>
+          <strong>Thao tác DOM</strong><br/>
+          <small style="color:var(--eiu-muted);">.html(), .append()</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-label" style="margin-top:1rem;">So sánh JS thuần vs jQuery</div>
+    <pre><code class="language-javascript">// ── JavaScript thuần ──
+document.getElementById('btn').addEventListener('click', function() {
+  document.getElementById('box').innerHTML = 'Hello!';
+});
+
+// ── jQuery (ngắn hơn rất nhiều) ──
+$('#btn').click(function() {
+  $('#box').html('Hello!');
+});</code></pre>
+  </div>
+
+  <div class="study-card">
+    <h4>⏰ Chờ trang load xong mới chạy jQuery</h4>
+    <pre><code class="language-javascript">// CÁC CÁCH VIẾT TƯƠNG ĐƯƠNG – đều đúng
+$(document).ready(function() {
+  // Mọi code jQuery viết trong đây
+});
+
+// Viết tắt phổ biến nhất:
+$(function() {
+  // Mọi code jQuery viết trong đây
+});</code></pre>
+    <div class="tip-box">
+      💡 <strong>Bắt buộc:</strong> Toàn bộ code jQuery phải nằm trong <code>$(function(){...})</code>. Nếu không, jQuery sẽ chạy trước khi HTML được tải và sẽ không tìm thấy phần tử nào!
+    </div>
+  </div>
+
+  <hr class="sec-divider" id="jq-selectors"/>
+
+  <!-- ── SELECTORS ── -->
+  <section>
+    <div class="section-badge badge-jquery">Selectors</div>
+    <h2 class="sec-title">10 · Selectors – Chọn phần tử HTML</h2>
+
+    <div class="study-card">
+      <table class="ref-table">
+        <tr><th>Selector</th><th>Ý nghĩa</th><th>Ví dụ HTML</th></tr>
+        <tr><td><code>$('#myId')</code></td><td>Chọn theo ID</td><td><code>&lt;div id="myId"&gt;</code></td></tr>
+        <tr><td><code>$('.myClass')</code></td><td>Chọn theo class</td><td><code>&lt;div class="myClass"&gt;</code></td></tr>
+        <tr><td><code>$('p')</code></td><td>Chọn tất cả thẻ p</td><td><code>&lt;p&gt;...&lt;/p&gt;</code></td></tr>
+        <tr><td><code>$('table tr')</code></td><td>Chọn tr trong table</td><td>Con cháu</td></tr>
+        <tr><td><code>$('input[name="abc"]')</code></td><td>Chọn theo attribute</td><td><code>name="abc"</code></td></tr>
+        <tr><td><code>$(this)</code></td><td>Phần tử đang được xử lý</td><td>Trong event handler</td></tr>
+      </table>
+
+      <pre><code class="language-javascript">$(function() {
+  var id    = $('#product-list');     // &lt;div id="product-list"&gt;
+  var cards = $('.product-card');     // tất cả class="product-card"
+  var btn   = $('button.btn-danger'); // button có class btn-danger
+  var inp   = $('input#fullName');    // input có id="fullName"
+});</code></pre>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="jq-events"/>
+
+  <!-- ── EVENTS ── -->
+  <section>
+    <div class="section-badge badge-jquery">Events</div>
+    <h2 class="sec-title">11 · Events – Xử lý sự kiện</h2>
+
+    <div class="study-card">
+      <h4>🖱️ Click event</h4>
+      <pre><code class="language-javascript">$(function() {
+
+  // Cách 1: .click()
+  $('#btnOrder').click(function() {
+    alert('Đặt hàng!');
+  });
+
+  // Cách 2: .on('click') – linh hoạt hơn
+  $('#btnOrder').on('click', function() {
+    alert('Đặt hàng!');
+  });
+
+  // ⭐ Quan trọng: Xử lý sự kiện trên phần tử được TẠO SAU (dynamically)
+  // Phải dùng $(document).on() hoặc parent cố định
+  $(document).on('click', '.btn-remove', function() {
+    // .btn-remove là button được jQuery tạo ra sau → phải dùng cách này!
+    $(this).closest('tr').remove(); // xóa hàng chứa button
+  });
+
+});</code></pre>
+    </div>
+
+    <div class="study-card">
+      <h4>⌨️ Keyup & Input event – thường dùng cho search</h4>
+      <pre><code class="language-javascript">$(function() {
+
+  // Khi người dùng gõ vào input tìm kiếm
+  $('#searchInput').on('keyup', function() {
+    var keyword = $(this).val().toLowerCase();
+    // logic lọc...
+  });
+
+  // Lấy giá trị input
+  var name  = $('#fullName').val();    // lấy value
+  var price = $('#price').val().trim(); // trim bỏ khoảng trắng
+
+  // Set giá trị
+  $('#fullName').val('Nguyễn Văn A');
+
+});</code></pre>
+    </div>
+
+    <div class="study-card">
+      <h4>🔁 Change event – thường dùng cho select/checkbox</h4>
+      <pre><code class="language-javascript">$(function() {
+  // Khi người dùng thay đổi giá trị select
+  $('#roomType').on('change', function() {
+    var type = $(this).val(); // lấy option đang được chọn
+    filterRoomsByType(type);
+  });
+});</code></pre>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="jq-dom"/>
+
+  <!-- ── DOM ── -->
+  <section>
+    <div class="section-badge badge-jquery">DOM Manipulation</div>
+    <h2 class="sec-title">12 · Thao tác DOM – Hay dùng nhất trong đề thi</h2>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>📝 Đọc/ghi nội dung</h4>
+          <pre><code class="language-javascript">// Đọc HTML bên trong
+$('#box').html();          // trả về HTML
+$('#box').text();          // trả về text (bỏ tag)
+
+// Ghi (ghi đè)
+$('#box').html('&lt;b&gt;Mới&lt;/b&gt;');
+$('#box').text('Chỉ text');
+
+// Thêm vào cuối
+$('#list').append('&lt;li&gt;Item&lt;/li&gt;');
+
+// Thêm vào đầu
+$('#list').prepend('&lt;li&gt;Đầu&lt;/li&gt;');
+
+// Xóa phần tử
+$('#box').remove();         // xóa luôn
+$('#list').empty();         // xóa nội dung bên trong</code></pre>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>🎨 CSS & Class</h4>
+          <pre><code class="language-javascript">// CSS động
+$('#btn').css('background-color', '#e0392b');
+$('#btn').css({'color': '#fff', 'padding': '10px'});
+
+// Class
+$('#btn').addClass('active');
+$('#btn').removeClass('active');
+$('#btn').toggleClass('active'); // bật/tắt
+
+// Kiểm tra
+$('#btn').hasClass('active'); // true/false
+
+// Ẩn/hiện
+$('#modal').show();
+$('#modal').hide();
+$('#modal').toggle();</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <h4>🧭 Duyệt cây DOM</h4>
+      <pre><code class="language-javascript">// $(this) bên trong event → là phần tử kích hoạt sự kiện
+$(document).on('click', '.btn-remove', function() {
+  var $btn = $(this);
+
+  // Tìm phần tử cha gần nhất có class/tag chỉ định
+  $btn.closest('tr');           // hàng &lt;tr&gt; chứa button
+  $btn.closest('.product-card'); // div.product-card cha
+
+  // Xóa hàng table chứa button remove
+  $btn.closest('tr').remove();
+
+  // Tìm phần tử con
+  $btn.closest('.card').find('.card-title').text();
+});</code></pre>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="jq-each"/>
+
+  <!-- ── $.EACH ── -->
+  <section>
+    <div class="section-badge badge-jquery">Vòng lặp</div>
+    <h2 class="sec-title">13 · $.each() – Duyệt mảng dữ liệu từ API</h2>
+
+    <div class="study-card">
+      <h4>🔄 Cách duyệt và render dữ liệu</h4>
+      <pre><code class="language-javascript">// Giả sử data là mảng trả về từ API:
+var products = [
+  { id: 1, name: "Hoa hồng", price: 250000, image: "hoa1.jpg" },
+  { id: 2, name: "Hoa cúc",  price: 180000, image: "hoa2.jpg" }
+];
+
+// Cách 1: $.each(array, function(index, item))
+$.each(products, function(i, product) {
+  var html = `
+    &lt;div class="col"&gt;
+      &lt;div class="card product-card"&gt;
+        &lt;img src="${product.image}" class="card-img-top"/&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h5 class="card-title"&gt;${product.name}&lt;/h5&gt;
+          &lt;p class="card-text text-danger"&gt;${product.price.toLocaleString()}đ&lt;/p&gt;
+          &lt;button class="btn btn-primary btn-remove" data-id="${product.id}"&gt;
+            Xóa ✕
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `;
+  $('#product-list').append(html);
+});
+
+// Cách 2: for...of (ES6, cũng được dùng)
+for (var product of products) {
+  $('#product-list').append(`&lt;div&gt;${product.name}&lt;/div&gt;`);
+}</code></pre>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="jq-ajax"/>
+
+  <!-- ── AJAX ── -->
+  <section>
+    <div class="section-badge badge-jquery">$.get / $.post – Quan trọng nhất!</div>
+    <h2 class="sec-title">14 · Gọi API với $.get() / $.post() – KHÔNG dùng $.ajax()</h2>
+
+    <div class="jq-highlight">
+      <strong>⭐ Đây là phần xuất hiện trong TẤT CẢ đề thi CSW 304 Quarter 1 & 2!</strong><br/>
+      $.get() và $.post() là 2 hàm "rút gọn" (shorthand) của $.ajax(), giúp viết code ngắn hơn và dễ đọc hơn.
+    </div>
+
+    <div class="study-card">
+      <h4>📐 Cú pháp chung</h4>
+      <pre><code class="language-javascript">// CÚ PHÁP $.get():
+$.get(url, data, successCallback, dataType);
+
+// CÚ PHÁP $.post():
+$.post(url, data, successCallback, dataType);
+
+//  url             → địa chỉ API
+//  data            → tham số gửi kèm (object {key: value})
+//  successCallback → function(response) chạy khi nhận được dữ liệu
+//  dataType        → kiểu dữ liệu trả về, thường là 'json'</code></pre>
+    </div>
+
+    <!-- GET -->
+    <div class="study-card">
+      <h4>🟢 GET Request – Lấy dữ liệu</h4>
+      <pre><code class="language-javascript">$.get(
+  'https://api.example.com/data',   // URL
+  { shoppingCart: 'All' },          // Parameters (?shoppingCart=All)
+  function(data) {                  // Callback khi thành công
+    console.log(data);
+    renderCart(data);
+  },
+  'json'                            // Dữ liệu trả về dạng JSON
+);
+
+function renderCart(response) {
+  $('#cart-list').empty();          // xóa dữ liệu cũ trước khi render
+  $.each(response, function(i, item) {
+    $('#cart-list').append(`
+      &lt;tr&gt;
+        &lt;td&gt;${item.name}&lt;/td&gt;
+        &lt;td&gt;${item.price}&lt;/td&gt;
+        &lt;td&gt;&lt;button class="btn-remove" data-id="${item.id}"&gt;✕&lt;/button&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    `);
+  });
+}</code></pre>
+    </div>
+
+    <!-- POST -->
+    <div class="study-card">
+      <h4>🔵 POST Request – Gửi dữ liệu lên server</h4>
+      <pre><code class="language-javascript">$('#btnOrder').click(function() {
+
+  // 1. Lấy giá trị form
+  var fullName     = $('#fullName').val().trim();
+  var phoneNumber  = $('#phone').val().trim();
+  var address      = $('#address').val().trim();
+  var note         = $('#note').val().trim();
+
+  // 2. Validate (kiểm tra bắt buộc theo đề)
+  if (!fullName || !phoneNumber || !address) {
+    alert('Vui lòng điền đầy đủ thông tin bắt buộc!');
+    return; // DỪNG lại, không gửi
+  }
+
+  // 3. Gửi POST request bằng $.post()
+  $.post(
+    'URL_TU_MOODLE',
+    {
+      fullName:    fullName,
+      phoneNumber: phoneNumber,
+      address:     address,
+      note:        note
+    },
+    function(response) {
+      // Đề yêu cầu: alert response từ server
+      alert(response.message || JSON.stringify(response));
+    },
+    'json'
+  );
+
+});</code></pre>
+    </div>
+
+    <!-- Gọi API khi trang load -->
+    <div class="study-card">
+      <h4>⏰ Gọi API ngay khi trang load (giống script.js mẫu)</h4>
+      <pre><code class="language-javascript">$(document).ready(function () {
+
+  let products = [];
+
+  // Gọi API ngay khi trang load xong
+  $.get(
+    'URL_TU_MOODLE',
+    { products: 'flower' },   // param theo đề
+    function (data) {
+      console.log(data);
+      products = data;
+      renderProducts(products);
+    },
+    'json'
+  );
+
+  function renderProducts(_data) {
+    $('#product-list').empty();  // PHẢI empty() trước!
+    for (let p of _data) {
+      $('#product-list').append(`
+        &lt;div class="col"&gt;
+          &lt;div class="card"&gt;
+            &lt;img src="${p.image}" class="card-img-top"/&gt;
+            &lt;div class="card-body"&gt;
+              &lt;h6&gt;${p.name}&lt;/h6&gt;
+              &lt;p class="text-danger"&gt;${p.price}đ&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      `);
+    }
+  }
+
+});</code></pre>
+      <div class="tip-box">
+        💡 Mẫu code trên dùng <code>for...of</code> để duyệt mảng, giống cách viết trong file script.js mẫu. <code>$.each()</code> và <code>for...of</code> đều dùng được, chọn 1 cách và dùng xuyên suốt bài làm.
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="jq-validation"/>
+
+  <!-- ── VALIDATION ── -->
+  <section>
+    <div class="section-badge badge-jquery">Form Validation</div>
+    <h2 class="sec-title">15 · Form Validation – Kiểm tra form</h2>
+
+    <div class="study-card">
+      <h4>✅ Validation cơ bản (Đề 1 – Warning dialog)</h4>
+      <pre><code class="language-javascript">$(function() {
+  $('#btnOrder').click(function() {
+
+    var name    = $('#fullName').val().trim();
+    var phone   = $('#phone').val().trim();
+    var address = $('#address').val().trim();
+
+    // Kiểm tra từng trường
+    if (!name) {
+      alert('Vui lòng nhập họ và tên!');
+      $('#fullName').focus();
+      return;
+    }
+    if (!phone) {
+      alert('Vui lòng nhập số điện thoại!');
+      return;
+    }
+    if (!address) {
+      alert('Vui lòng nhập địa chỉ!');
+      return;
+    }
+
+    // Nếu hợp lệ → gửi POST bằng $.post()
+    $.post('...', { name, phone, address }, function(res) {
+      alert(res.message);
+    }, 'json');
+  });
+});</code></pre>
+    </div>
+
+    <div class="study-card">
+      <h4>🔴 Validation nâng cao – Red border (Đề 3 – Room)</h4>
+      <div class="jq-highlight">
+        <strong>📋 Yêu cầu đề:</strong> "If a validation error occurs, a red border should be displayed around the invalid field along with the message: 'Please fill out this field.'"
+      </div>
+      <pre><code class="language-javascript">$(function() {
+
+  $('#btnAddRoom').click(function() {
+    var isValid = true;
+
+    // Reset trạng thái trước
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').remove();
+
+    // Kiểm tra Room Number
+    var roomNumber = $('#roomNumber').val().trim();
+    if (!roomNumber) {
+      showError('#roomNumber', 'Please fill out this field.');
+      isValid = false;
+    }
+
+    // Kiểm tra Price: không được rỗng VÀ phải là số
+    var price = $('#price').val().trim();
+    if (!price) {
+      showError('#price', 'Please fill out this field.');
+      isValid = false;
+    } else if (isNaN(price) || Number(price) &lt;= 0) {
+      showError('#price', 'Price must be a valid number.');
+      isValid = false;
+    }
+
+    if (isValid) {
+      // Gửi form
+      submitRoom(roomNumber, price);
+    }
+  });
+
+  // Helper function thêm viền đỏ + message
+  function showError(selector, message) {
+    $(selector)
+      .addClass('is-invalid')         // Bootstrap class → viền đỏ
+      .after(`&lt;div class="invalid-feedback"&gt;${message}&lt;/div&gt;`);
+  }
+
+  // Xóa lỗi khi người dùng gõ lại
+  $(document).on('input', '.form-control', function() {
+    $(this).removeClass('is-invalid');
+    $(this).next('.invalid-feedback').remove();
+  });
+
+});</code></pre>
+
+      <div class="tip-box">
+        💡 Bootstrap có sẵn class <code>.is-invalid</code> sẽ tự thêm viền đỏ cho input, và <code>.invalid-feedback</code> sẽ hiển thị text lỗi bên dưới. Không cần viết CSS thêm!
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       PHẦN 3 – DẠNG ĐỀ
+  ════════════════════════════════════════════════ -->
+  <hr class="sec-divider" id="ex-shoppingcart"/>
+  <div class="section-badge badge-exam">Dạng đề thực tế</div>
+  <h2 class="sec-title">16 · Đề 1 – Giỏ hàng (Shopping Cart)</h2>
+
+  <div class="exam-pattern">
+    <div class="ep-title">📋 Yêu cầu đề Quarter 1</div>
+    a) GET request với param <code>shoppingCart=All</code> → hiển thị vào "Thông tin giỏ hàng"<br/>
+    b) Nút remove (✕) → xóa sản phẩm khỏi giỏ<br/>
+    c) Form đặt hàng → POST request → validate 3 trường bắt buộc
+  </div>
+
+  <div class="study-card">
+    <h4>✅ Code đầy đủ Question 2 – Shopping Cart</h4>
+    <pre><code class="language-javascript">$(document).ready(function () {
+
+  let cartItems = [];
+
+  // ════ a) Lấy danh sách giỏ hàng khi trang load ════
+  $.get(
+    'URL_TU_MOODLE',
+    { shoppingCart: 'All' },
+    function (data) {
+      cartItems = data;
+      renderCart(cartItems);
+    },
+    'json'
+  );
+
+  // Render danh sách giỏ hàng vào bảng
+  function renderCart(items) {
+    $('#cartList').empty();
+
+    if (items.length === 0) {
+      $('#cartList').html('&lt;tr&gt;&lt;td colspan="5" class="text-center"&gt;Giỏ hàng trống&lt;/td&gt;&lt;/tr&gt;');
+      return;
+    }
+
+    for (let item of items) {
+      $('#cartList').append(`
+        &lt;tr data-id="${item.id}"&gt;
+          &lt;td&gt;&lt;img src="${item.image}" width="60"/&gt;&lt;/td&gt;
+          &lt;td&gt;${item.name}&lt;/td&gt;
+          &lt;td&gt;${item.quantity}&lt;/td&gt;
+          &lt;td&gt;${parseInt(item.price).toLocaleString()}đ&lt;/td&gt;
+          &lt;td&gt;
+            &lt;button class="btn btn-sm btn-danger btn-remove" data-id="${item.id}"&gt;✕&lt;/button&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      `);
+    }
+  }
+
+  // ════ b) Xóa sản phẩm ════
+  // Phải dùng $('#cartList').on() vì button được tạo DYNAMICALLY (giống script.js mẫu)
+  $('#cartList').on('click', '.btn-remove', function () {
+    let _id = $(this).attr('data-id');
+    for (let i in cartItems) {
+      if (cartItems[i].id == _id) {
+        cartItems.splice(i, 1);
+        break;
+      }
+    }
+    renderCart(cartItems);
+  });
+
+  // ════ c) Đặt hàng – POST bằng $.post() ════
+  $('#btnOrder').click(function () {
+    let fullName    = $('#fullName').val().trim();
+    let phoneNumber = $('#phone').val().trim();
+    let address     = $('#address').val().trim();
+    let note        = $('#note').val().trim();
+
+    // Validate 3 trường bắt buộc
+    if (!fullName || !phoneNumber || !address) {
+      alert('⚠ Vui lòng điền đầy đủ: Họ và tên, Số điện thoại, Địa chỉ!');
+      return;
+    }
+
+    $.post(
+      'URL_TU_MOODLE',
+      { fullName, phoneNumber, address, note },
+      function (response) {
+        alert(response.message || 'Đặt hàng thành công!');
+      },
+      'json'
+    );
+  });
+
+});</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="ex-flowershop"/>
+
+  <!-- ── FLOWER SHOP ── -->
+  <section>
+    <div class="section-badge badge-exam">Dạng đề thực tế</div>
+    <h2 class="sec-title">17 · Đề 2 – Cửa hàng hoa (Sorting + Filter)</h2>
+
+    <div class="exam-pattern">
+      <div class="ep-title">📋 Yêu cầu đề Quarter 2</div>
+      a) GET request với param <code>products=flower</code> → hiển thị product cards<br/>
+      b) Sorting: nút "Giá tăng dần" / "Giá giảm dần" → đổi màu nút + sort lại<br/>
+      c) Filter: input tìm kiếm + nút "Tìm" → lọc theo tên
+    </div>
+
+    <div class="study-card">
+      <h4>✅ Code đầy đủ Question 2 – Flower Shop</h4>
+      <pre><code class="language-javascript">$(document).ready(function () {
+
+  let allProducts = []; // Lưu toàn bộ dữ liệu gốc để sort/filter
+
+  // ════ a) Lấy dữ liệu flowers bằng $.get() ════
+  $.get(
+    'URL_TU_MOODLE',
+    { products: 'flower' },
+    function (data) {
+      allProducts = data;
+      renderProducts(allProducts);
+    },
+    'json'
+  );
+
+  function renderProducts(items) {
+    $('#product-list').empty();
+    for (let p of items) {
+      $('#product-list').append(`
+        &lt;div class="col"&gt;
+          &lt;div class="card h-100 product-card"&gt;
+            &lt;img src="${p.image}" class="card-img-top" alt="${p.name}"/&gt;
+            &lt;div class="card-body"&gt;
+              &lt;h6 class="card-title"&gt;${p.name}&lt;/h6&gt;
+              &lt;p class="text-danger fw-bold"&gt;${p.price.toLocaleString()}đ&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="card-footer"&gt;
+              &lt;button class="btn btn-outline-danger w-100"&gt;Thêm vào giỏ&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      `);
+    }
+  }
+
+  // ════ b) Sorting ════
+  $('#btnAsc').click(function() {
+    $(this).css('background-color', '#e0392b').css('color', '#fff');
+    $('#btnDesc').css('background-color', '').css('color', '');
+    let sorted = [...allProducts].sort((a, b) => a.price - b.price);
+    renderProducts(sorted);
+  });
+
+  $('#btnDesc').click(function() {
+    $(this).css('background-color', '#e0392b').css('color', '#fff');
+    $('#btnAsc').css('background-color', '').css('color', '');
+    let sorted = [...allProducts].sort((a, b) => b.price - a.price);
+    renderProducts(sorted);
+  });
+
+  // ════ c) Filter/Search (giống logic tìm kiếm trong script.js) ════
+  $('#btnSearch').click(function() {
+    let kw = $('#searchInput').val().toLowerCase().trim();
+    let _newList = [];
+    for (let p of allProducts) {
+      if ((p.name || '').toLowerCase().includes(kw)) {
+        _newList.push(p);
+      }
+    }
+    renderProducts(_newList);
+  });
+
+});</code></pre>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="ex-rooms"/>
+
+  <!-- ── ROOMS ── -->
+  <section>
+    <div class="section-badge badge-exam">Dạng đề thực tế</div>
+    <h2 class="sec-title">18 · Đề 3 – Quản lý phòng (Rooms)</h2>
+
+    <div class="exam-pattern">
+      <div class="ep-title">📋 Yêu cầu đề</div>
+      a) GET <code>GetRooms=All</code> và <code>RoomType</code> → hiển thị room list (sort ASC by price) + room types<br/>
+      b) Lọc phòng theo loại (filter by type)<br/>
+      c) Thêm phòng mới với validation (Room Number không rỗng, Price là số)<br/>
+      d) Filter theo giá: &lt;$15 / $15–$20 / &gt;$20
+    </div>
+
+    <div class="study-card">
+      <h4>✅ Code đầy đủ Question 2 – Rooms</h4>
+      <pre><code class="language-javascript">$(function() {
+
+  var allRooms     = [];
+  var allRoomTypes = [];
+
+  // ════ a) Load dữ liệu khi trang load ════
+  // Gọi 2 API song song
+  $.when(
+    $.ajax({ url: 'URL_TU_MOODLE', method: 'GET', data: { GetRooms: 'All' } }),
+    $.ajax({ url: 'URL_TU_MOODLE', method: 'GET', data: { RoomType: 'All' } })
+  ).then(function(roomsRes, typesRes) {
+    allRooms     = roomsRes[0];
+    allRoomTypes = typesRes[0];
+    renderRoomTypes(allRoomTypes);
+    renderRooms(sortByPrice(allRooms));
+  });
+
+  // Nếu không dùng $.when, có thể gọi lần lượt:
+  function loadAll() {
+    $.ajax({
+      url: 'URL', method: 'GET', data: { GetRooms: 'All' },
+      success: function(data) {
+        allRooms = data;
+        renderRooms(sortByPrice(data));
+      }
+    });
+    $.ajax({
+      url: 'URL', method: 'GET', data: { RoomType: 'All' },
+      success: function(data) {
+        allRoomTypes = data;
+        renderRoomTypes(data);
+        // Thêm vào select filter
+        $.each(data, function(i, t) {
+          $('#roomTypeSelect').append(`&lt;option value="${t.id}"&gt;${t.name}&lt;/option&gt;`);
+        });
+      }
+    });
+  }
+  loadAll();
+
+  // Sort tăng dần theo giá
+  function sortByPrice(rooms) {
+    return [...rooms].sort((a, b) => a.price - b.price);
+  }
+
+  function renderRoomTypes(types) {
+    $('#room-type-list').empty();
+    $.each(types, function(i, t) {
+      $('#room-type-list').append(`&lt;li class="list-group-item"&gt;${t.name}&lt;/li&gt;`);
+    });
+  }
+
+  function renderRooms(rooms) {
+    $('#room-list').empty();
+    $.each(rooms, function(i, r) {
+      $('#room-list').append(`
+        &lt;tr&gt;
+          &lt;td&gt;${r.roomNumber}&lt;/td&gt;
+          &lt;td&gt;${r.type}&lt;/td&gt;
+          &lt;td&gt;$${r.price}&lt;/td&gt;
+        &lt;/tr&gt;
+      `);
+    });
+  }
+
+  // ════ b) Filter theo loại phòng ════
+  $('#btnFilterType').click(function() {
+    var type = $('#roomTypeSelect').val();
+    if (!type || type === 'all') {
+      renderRooms(sortByPrice(allRooms));
+    } else {
+      var filtered = allRooms.filter(r => r.type === type);
+      renderRooms(sortByPrice(filtered));
+    }
+  });
+
+  // ════ c) Thêm phòng mới với validation ════
+  $('#btnAddRoom').click(function() {
+    var isValid = true;
+
+    // Reset
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').remove();
+
+    var roomNumber = $('#roomNumber').val().trim();
+    var price      = $('#roomPrice').val().trim();
+
+    // Validate Room Number
+    if (!roomNumber) {
+      $('#roomNumber').addClass('is-invalid')
+        .after('&lt;div class="invalid-feedback"&gt;Please fill out this field.&lt;/div&gt;');
+      isValid = false;
+    }
+
+    // Validate Price: bắt buộc + phải là số
+    if (!price) {
+      $('#roomPrice').addClass('is-invalid')
+        .after('&lt;div class="invalid-feedback"&gt;Please fill out this field.&lt;/div&gt;');
+      isValid = false;
+    } else if (isNaN(price) || Number(price) &lt;= 0) {
+      $('#roomPrice').addClass('is-invalid')
+        .after('&lt;div class="invalid-feedback"&gt;Price must be a valid number.&lt;/div&gt;');
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    // Gửi dữ liệu
+    $.ajax({
+      url: 'URL_TU_MOODLE', method: 'POST',
+      data: { roomNumber, price },
+      success: function(res) {
+        alert(res.message || 'Thêm phòng thành công!');
+        loadAll(); // reload lại danh sách
+      }
+    });
+  });
+
+  // Xóa lỗi khi gõ lại
+  $(document).on('input', '.form-control', function() {
+    $(this).removeClass('is-invalid');
+    $(this).next('.invalid-feedback').remove();
+  });
+
+  // ════ d) Filter theo giá ════
+  $('input[name="priceFilter"]').on('change', function() {
+    var val = $(this).val(); // 'lt15' | '15to20' | 'gt20'
+    var filtered;
+
+    if (val === 'lt15') {
+      filtered = allRooms.filter(r => r.price &lt; 15);
+    } else if (val === '15to20') {
+      filtered = allRooms.filter(r => r.price &gt;= 15 &amp;&amp; r.price &lt;= 20);
+    } else {
+      filtered = allRooms.filter(r => r.price &gt; 20);
+    }
+    renderRooms(sortByPrice(filtered));
+  });
+
+});</code></pre>
+    </div>
+  </section>
+
+  <hr class="sec-divider" id="cheatsheet"/>
+
+  <!-- ── CHEATSHEET ── -->
+  <section>
+    <div class="section-badge badge-tip">Tham khảo nhanh</div>
+    <h2 class="sec-title">19 · jQuery Cheatsheet – Xem trong phòng thi</h2>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>🎯 Selectors</h4>
+          <table class="ref-table">
+            <tr><th>Code</th><th>Chọn</th></tr>
+            <tr><td><code>$('#id')</code></td><td>Theo ID</td></tr>
+            <tr><td><code>$('.cls')</code></td><td>Theo class</td></tr>
+            <tr><td><code>$('tag')</code></td><td>Theo tag</td></tr>
+            <tr><td><code>$(this)</code></td><td>Phần tử hiện tại</td></tr>
+            <tr><td><code>.closest('tr')</code></td><td>Cha gần nhất</td></tr>
+            <tr><td><code>.find('.x')</code></td><td>Con cháu</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>🔄 DOM thường dùng</h4>
+          <table class="ref-table">
+            <tr><th>Code</th><th>Tác dụng</th></tr>
+            <tr><td><code>.html(str)</code></td><td>Ghi đè HTML</td></tr>
+            <tr><td><code>.append(str)</code></td><td>Thêm vào cuối</td></tr>
+            <tr><td><code>.empty()</code></td><td>Xóa nội dung</td></tr>
+            <tr><td><code>.remove()</code></td><td>Xóa phần tử</td></tr>
+            <tr><td><code>.val()</code></td><td>Lấy/set value input</td></tr>
+            <tr><td><code>.addClass()</code></td><td>Thêm class</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>📡 AJAX</h4>
+          <table class="ref-table">
+            <tr><th>Code</th><th>Tác dụng</th></tr>
+            <tr><td><code>$.ajax({url,method,data,success})</code></td><td>AJAX đầy đủ</td></tr>
+            <tr><td><code>$.get(url, data, fn)</code></td><td>GET ngắn gọn</td></tr>
+            <tr><td><code>method: 'GET'</code></td><td>Lấy dữ liệu</td></tr>
+            <tr><td><code>method: 'POST'</code></td><td>Gửi dữ liệu</td></tr>
+            <tr><td><code>success: fn(data)</code></td><td>Callback thành công</td></tr>
+            <tr><td><code>error: fn(xhr)</code></td><td>Callback lỗi</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="study-card h-100">
+          <h4>⚡ Events</h4>
+          <table class="ref-table">
+            <tr><th>Code</th><th>Sự kiện</th></tr>
+            <tr><td><code>.click(fn)</code></td><td>Click</td></tr>
+            <tr><td><code>.on('click', fn)</code></td><td>Click (flexible)</td></tr>
+            <tr><td><code>$(doc).on('click', '.cls', fn)</code></td><td>Dynamic element</td></tr>
+            <tr><td><code>.on('keyup', fn)</code></td><td>Gõ bàn phím</td></tr>
+            <tr><td><code>.on('change', fn)</code></td><td>Thay đổi select</td></tr>
+            <tr><td><code>.val().trim()</code></td><td>Lấy + bỏ khoảng trắng</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="study-card" style="margin-top:1.25rem;">
+      <h4>⚠️ Những lỗi hay gặp khi làm bài thi</h4>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="exam-pattern">
+            <div class="ep-title">❌ Lỗi phổ biến</div>
+            1. Dùng <code>$(document).ready</code> nhưng để code jQuery ngoài<br/>
+            2. Gán event cho dynamic element bằng <code>.click()</code> thay vì <code>$(document).on()</code><br/>
+            3. Quên <code>.trim()</code> khi kiểm tra input trống<br/>
+            4. Không <code>.empty()</code> trước khi render lại → bị duplicate<br/>
+            5. Quên <code>return</code> sau khi gặp lỗi validation
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="tip-box">
+            <strong>✅ Checklist trước khi nộp bài</strong><br/>
+            ☐ Có <code>$(function(){...})</code> bọc toàn bộ jQuery?<br/>
+            ☐ Mỗi input có label với <code>for</code> đúng id?<br/>
+            ☐ Không dùng table để layout?<br/>
+            ☐ Dynamic buttons dùng <code>$(document).on()</code>?<br/>
+            ☐ Validate trước khi POST?<br/>
+            ☐ <code>.empty()</code> trước khi render lại?
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="study-card" style="background: linear-gradient(135deg, #0f3460, #16213e); border-color: var(--eiu-accent); text-align:center; padding: 2rem;">
+      <div style="font-size: 2rem; margin-bottom: .5rem;">💪</div>
+      <div style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: .25rem;">Chúc Tùng thi tốt CSW 304!</div>
+      <div style="color: var(--eiu-muted); font-size: .9rem;">Bootstrap 5 · jQuery · AJAX · EIU · Quarter 2025-2026</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Syntax highlight
+  hljs.highlightAll();
+
+  // Active sidebar link on scroll
+  $(function() {
+    var sections = $('section[id], h2[id]').map(function() {
+      return this.id;
+    }).get().concat($('[id]').map(function(){return this.id;}).get());
+
+    $(window).on('scroll', function() {
+      var scrollPos = $(document).scrollTop() + 120;
+      $('[id]').each(function() {
+        var id = $(this).attr('id');
+        if (!id) return;
+        var top = $(this).offset().top;
+        if (top <= scrollPos) {
+          $('#sidebar a').removeClass('active');
+          $('#sidebar a[href="#' + id + '"]').addClass('active');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

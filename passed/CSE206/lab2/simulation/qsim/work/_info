@@ -1,0 +1,367 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/CSE206/lab2/simulation/qsim
+vassignment1
+Z1 !s110 1761009733
+!i10b 1
+!s100 HV^mQY:k4odPmEeo6UjR33
+IWbjf@ccF>Y<gjOmQ1]kgO1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1761009728
+Z3 8Assign1.vo
+Z4 FAssign1.vo
+Z5 L0 32
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1761009733.000000
+Z8 !s107 Assign1.vo|
+Z9 !s90 -work|work|Assign1.vo|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vassignment1_vlg_vec_tst
+R1
+!i10b 1
+!s100 Ph1376ISCTnX1lFS?JmaK2
+ICb:Yl6dKQ6Q_fHAa=k<ii0
+R2
+R0
+w1761009726
+8assign1.vwf.vt
+Fassign1.vwf.vt
+Z12 L0 30
+R6
+r1
+!s85 0
+31
+R7
+!s107 assign1.vwf.vt|
+!s90 -work|work|assign1.vwf.vt|
+!i113 1
+R10
+R11
+vassignment2a
+Z13 !s110 1761015210
+!i10b 1
+!s100 eA2UI`6HF8@@^46iINI5S1
+IN<9[ME2[`:WBJV36?[;KL2
+R2
+R0
+w1761015207
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z14 !s108 1761015210.000000
+R8
+R9
+!i113 1
+R10
+R11
+vassignment2a_vlg_vec_tst
+R13
+!i10b 1
+!s100 H]MW9hEXgDlJ=VdE64Df42
+IkVnP9o=m3WL;nchX7Pj720
+R2
+R0
+w1761015206
+8assign2a.vwf.vt
+Fassign2a.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R14
+!s107 assign2a.vwf.vt|
+!s90 -work|work|assign2a.vwf.vt|
+!i113 1
+R10
+R11
+vassignment2b
+!s110 1761016634
+!i10b 1
+!s100 ]mm36I_1AgO[bOnQNXzB70
+I0OQ1BP_OKeJFXlTX>NnkZ2
+R2
+R0
+w1761016634
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z15 !s108 1761016634.000000
+R8
+R9
+!i113 1
+R10
+R11
+vassignment2b_vlg_vec_tst
+!s110 1761016635
+!i10b 1
+!s100 2=PA2ml6IKH725eB]N@SH3
+I8i@7iY6kP0VcN58iD?n@o2
+R2
+R0
+w1761016633
+8assign2b.vwf.vt
+Fassign2b.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R15
+!s107 assign2b.vwf.vt|
+!s90 -work|work|assign2b.vwf.vt|
+!i113 1
+R10
+R11
+vassignment2c
+Z16 !s110 1761017478
+!i10b 1
+!s100 i6G]>J_lbn21QV^3Eh86D3
+IjIkbE5Mm?VnkW]^JU`9ki0
+R2
+R0
+w1761017478
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z17 !s108 1761017478.000000
+R8
+R9
+!i113 1
+R10
+R11
+vassignment2c_vlg_vec_tst
+R16
+!i10b 1
+!s100 ZIYe>KeiFN3b<;286bBz[3
+IG`jU=fI:XC]Kb]NONf7LW2
+R2
+R0
+w1761017477
+8assign2c.vwf.vt
+Fassign2c.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R17
+!s107 assign2c.vwf.vt|
+!s90 -work|work|assign2c.vwf.vt|
+!i113 1
+R10
+R11
+vassignment4a
+Z18 !s110 1761583496
+!i10b 1
+!s100 bH@25CT?eWMd000mh@a^=0
+IFBDAgVSffB1_I:n>DXNCP3
+R2
+R0
+w1761583496
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z19 !s108 1761583496.000000
+R8
+R9
+!i113 1
+R10
+R11
+vassignment4a_vlg_vec_tst
+R18
+!i10b 1
+!s100 oDzE]6>^LKoGi?Y3<FA7V1
+Ia9[E<5c8jd@J0]7QBRO:c3
+R2
+R0
+w1761583495
+8assign4a.vwf.vt
+Fassign4a.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R19
+!s107 assign4a.vwf.vt|
+!s90 -work|work|assign4a.vwf.vt|
+!i113 1
+R10
+R11
+vassignment4b
+Z20 !s110 1761583249
+!i10b 1
+!s100 dFnRMIg3H2XE82N?VJm=O3
+IMT>@957ASV_BFlT>P[=1e3
+R2
+R0
+Z21 w1761583248
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z22 !s108 1761583249.000000
+R8
+R9
+!i113 1
+R10
+R11
+vassignment4b_vlg_vec_tst
+R20
+!i10b 1
+!s100 :WTIdYWAWDW68^;i26XzM0
+I<G4Jba<dV>H@cBBgVRQ2c2
+R2
+R0
+R21
+8assign4b.vwf.vt
+Fassign4b.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R22
+!s107 assign4b.vwf.vt|
+!s90 -work|work|assign4b.vwf.vt|
+!i113 1
+R10
+R11
+vassignment5_b
+Z23 !s110 1761620515
+!i10b 1
+!s100 mgGkoi?SEkD16KoiV=jE21
+I31YCWUamii?bj8eaW;Iba2
+R2
+R0
+Z24 w1761620514
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z25 !s108 1761620515.000000
+R8
+R9
+!i113 1
+R10
+R11
+vassignment5_b_vlg_vec_tst
+R23
+!i10b 1
+!s100 ^]^X`G=<Y;BJ4gOReT14M1
+I54;@[@NRX6CmBc_7D4OkI3
+R2
+R0
+w1761620512
+8assign5b.vwf.vt
+Fassign5b.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R25
+!s107 assign5b.vwf.vt|
+!s90 -work|work|assign5b.vwf.vt|
+!i113 1
+R10
+R11
+vassignment5b
+Z26 !s110 1761588453
+!i10b 1
+!s100 S>Vj3>N30E`eKH4Ng2HM91
+Ia^@07]X>Za:Ub62CQ^6Ie0
+R2
+R0
+Z27 w1761588452
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z28 !s108 1761588453.000000
+R8
+R9
+!i113 1
+R10
+R11
+vassignment5b_vlg_vec_tst
+R26
+!i10b 1
+!s100 9Ze[=lUHJAggMjQHOMec^3
+ILlNIEizEgLaHkKhLc5n^J1
+R2
+R0
+R27
+8assign5a2.vwf.vt
+Fassign5a2.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R28
+!s107 assign5a2.vwf.vt|
+!s90 -work|work|assign5a2.vwf.vt|
+!i113 1
+R10
+R11
+vhard_block
+R23
+!i10b 1
+!s100 6T>o]HQ2[b^D`3[c0AK=S0
+I4BS4^>QfW_DEKHAh`IDNS0
+R2
+R0
+R24
+R3
+R4
+L0 232
+R6
+r1
+!s85 0
+31
+R25
+R8
+R9
+!i113 1
+R10
+R11

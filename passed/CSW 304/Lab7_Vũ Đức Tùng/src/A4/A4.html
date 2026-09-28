@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student List</title>
+        <style>
+            main {
+                width: 600px; 
+                padding: 10px 0 0 50px; 
+            }
+            .each-item {
+                margin-bottom: 20px;
+                display: flex;
+                gap: 5px;
+            }
+            button {
+                width: 100%;
+            }
+            table,
+            th,
+            td {
+                border: 1px solid #000;
+                border-collapse: collapse;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h2>Student Management</h2>
+            <div class="all-buttons">
+                <div class="each-item">
+                    <button onclick="reload()">Reset Table</button>
+                </div>
+
+                <div class="each-item">
+                    <input type="text" placeholder="Add head (Name)" id="newStudentHead" />
+                    <button onclick="add('head')">ADD</button>
+                </div>
+
+                <div class="each-item">
+                    <input type="text" placeholder="Add tail (Name)" id="newStudentTail" />
+                    <button onclick="add('tail')">ADD</button>
+                </div>
+
+                <div class="each-item">
+                    <input type="text" placeholder="New name for ID 2" id="changeName" />
+                    <button onclick="change()">CHANGE</button>
+                </div>
+
+                <div class="each-item">
+                    <input type="text" placeholder="Search name" id="searchName" />
+                    <button onclick="search()">SEARCH</button>
+                </div>
+
+                <div class="each-item">
+                    <button onclick="erase()">Delete student with ID 3</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Class</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </main>
+
+        <script>
+            let students = [
+                { id: 1, name: "Charlie", email: "charlie@email.com", phone: "555-1111", class: "Math 101" },
+                { id: 2, name: "Alice", email: "alice@email.com", phone: "555-2222", class: "Physics 201" },
+                { id: 3, name: "Bob", email: "bob@email.com", phone: "555-3333", class: "Chemistry 105" },
+                { id: 4, name: "Eve", email: "eve@email.com", phone: "555-4444", class: "Biology 110" },
+                { id: 5, name: "Diana", email: "diana@email.com", phone: "555-5555", class: "Math 101" }
+            ];
+
+            function reload(data = students) {
+                let sortedData = data.slice().sort((a, b) => a.name.localeCompare(b.name));
+                
+                const tbody = document.querySelector("tbody");
+                tbody.innerHTML = "";
+                
+                for (let i = 0; i < sortedData.length; i++) {
+                    let s = sortedData[i];
+                    let row = `<tr>
+                        <td>${s.id}</td>
+                        <td>${s.name}</td>
+                        <td>${s.email}</td>
+                        <td>${s.phone}</td>
+                        <td>${s.class}</td>
+                    </tr>`;
+                    tbody.innerHTML += row;
+                }
+            }
+
+            function add(position) {
+                let inputId = position === "head" ? "newStudentHead" : "newStudentTail";
+                let name = document.getElementById(inputId).value.trim();
+                if (!name) return;
+
+                let newStudent = {
+                    id: Date.now(),
+                    name: name,
+                    email: name.toLowerCase().replace(" ", "") + "@email.com",
+                    phone: "555-0000",
+                    class: "New Class"
+                };
+
+                if (position === "head") {
+                    students.unshift(newStudent);
+                } else {
+                    students.push(newStudent);
+                }
+                
+                document.getElementById(inputId).value = "";
+                reload();
+            }
+
+            function change() {
+                let name = document.getElementById("changeName").value.trim();
+                if (!name) return;
+                
+                let student = students.find((s) => s.id === 2);
+                if (student) {
+                    student.name = name;
+                }
+                
+                document.getElementById("changeName").value = "";
+                reload();
+            }
+
+            function search() {
+                let keyword = document.getElementById("searchName").value.trim().toLowerCase();
+                if (!keyword) {
+                    reload();
+                    return; 
+                }
+                
+                let result = students.filter((s) => s.name.toLowerCase().includes(keyword));
+                document.getElementById("searchName").value = "";
+                reload(result);
+            }
+
+            function erase() {
+                students = students.filter((s) => s.id !== 3);
+                reload();
+            }
+
+            reload();
+        </script>
+    </body>
+</html>

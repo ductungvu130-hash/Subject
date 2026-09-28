@@ -1,0 +1,15 @@
+\sigma_{salary \: \ge \: 10000 \: \wedge \: salary \: \le \: 20000 \: \wedge \: target\_archieved \: \ge \: sales\_target}\left( salesman \right)\\
+
+g_{\: avg\left( salary \right)}\left( salesman \right)\\
+
+\pi_{name}\left( \sigma_{salary \: = \: g_{ \: max\left( salary \right)}} \left( salesman \right)\right)\\
+
+\pi_{name}\left( \sigma_{salary \: = \: g_{ \: min\left( salary \right)}} \left( salesman \right)\right)\\
+
+g_{\: count\left( * \right)}\left( salesman \right)\\
+
+g_{\: sum\left( salary \right)}\left( salesman \right)\\
+
+\sigma_{target\_archieved \: \lt \: sales\_target}\left( salesman \right)\\
+
+\sigma_{salary \: \ge \: 10000 \: \wedge \: salary \: \le \: 20000 \: \wedge \: target\_archieved \: \ge \: sales\_target}\left( salesman \right)\\

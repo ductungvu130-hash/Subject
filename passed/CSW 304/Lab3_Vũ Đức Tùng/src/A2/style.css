@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.img{
+    width: 20px;
+    height: 10px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.IEtable{
+    width: 500px;
+    height: 150px;
+    margin: 20px;
+    border-collapse: collapse;
+}
+
+thead{
+    background-color: #57BA06 ;
+    color: #d9f2a6;
+    text-align: left;
+}
+
+th, td {
+    border-right: 1px solid rgb(172, 170, 170);
+}
+
+tr:last-child{
+    border-bottom: 1px solid rgb(172, 170, 170) ;
+}
+
+th:last-child, td:last-child {
+    border-right: none; 
+}
+
+
+.IEtable td , .IEtable th{
+    padding: 5px 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th{
+    padding: 2px;
+}
+
+tbody tr:nth-child(even) {
+    background: #ebe9d3;
+}
+
+input[type="checkbox"] {
+    width: 12px;
+    height: auto;
+    vertical-align: middle;
+}

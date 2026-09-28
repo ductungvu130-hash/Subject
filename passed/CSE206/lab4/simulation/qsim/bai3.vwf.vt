@@ -1,0 +1,94 @@
+// Copyright (C) 2019  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and any partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details, at
+// https://fpgasoftware.intel.com/eula.
+
+// *****************************************************************************
+// This file contains a Verilog test bench with test vectors .The test vectors  
+// are exported from a vector file in the Quartus Waveform Editor and apply to  
+// the top level entity of the current Quartus project .The user can use this   
+// testbench to simulate his design using a third-party simulation tool .       
+// *****************************************************************************
+// Generated on "11/07/2025 08:37:45"
+                                                                                
+// Verilog Test Bench (with test vectors) for design :                          assignment3
+// 
+// Simulation tool : 3rd Party
+// 
+
+`timescale 1 ps/ 1 ps
+module assignment3_vlg_vec_tst();
+// constants                                           
+// general purpose registers
+reg VDT_Clock;
+reg VDT_Reset;
+reg VDT_X;
+reg VDT_Y;
+// wires                                               
+wire VDT_A;
+wire VDT_B;
+
+// assign statements (if any)                          
+assignment3 i1 (
+// port map - connection between master ports and signals/registers   
+	.VDT_A(VDT_A),
+	.VDT_B(VDT_B),
+	.VDT_Clock(VDT_Clock),
+	.VDT_Reset(VDT_Reset),
+	.VDT_X(VDT_X),
+	.VDT_Y(VDT_Y)
+);
+initial 
+begin 
+#200000 $finish;
+end 
+
+// VDT_Clock
+always
+begin
+	VDT_Clock = 1'b0;
+	VDT_Clock = #5000 1'b1;
+	#5000;
+end 
+
+// VDT_Reset
+initial
+begin
+	VDT_Reset = 1'b0;
+end 
+
+// VDT_X
+initial
+begin
+	VDT_X = 1'b0;
+	VDT_X = #20000 1'b1;
+	VDT_X = #20000 1'b0;
+	VDT_X = #20000 1'b1;
+	VDT_X = #20000 1'b0;
+end 
+
+// VDT_Y
+initial
+begin
+	VDT_Y = 1'b0;
+	VDT_Y = #10000 1'b1;
+	VDT_Y = #10000 1'b0;
+	VDT_Y = #10000 1'b1;
+	VDT_Y = #10000 1'b0;
+	VDT_Y = #10000 1'b1;
+	VDT_Y = #10000 1'b0;
+	VDT_Y = #10000 1'b1;
+	VDT_Y = #10000 1'b0;
+end 
+endmodule
+

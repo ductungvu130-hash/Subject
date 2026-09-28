@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>SportHub - Danh sách sân</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001453",
+                    "on-primary-container": "#004b1e",
+                    "on-primary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface-container-high": "#e6e8ea",
+                    "on-error-container": "#93000a",
+                    "secondary": "#3755c3",
+                    "on-secondary-container": "#00217a",
+                    "primary-container": "#22c55e",
+                    "tertiary-container": "#ff8e4d",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "on-error": "#ffffff",
+                    "tertiary": "#9d4300",
+                    "inverse-on-surface": "#eff1f3",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-fixed": "#ffdbca",
+                    "primary-fixed": "#6bff8f",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-container": "#6d2d00",
+                    "background": "#f7f9fb",
+                    "on-primary-fixed": "#002109",
+                    "surface-dim": "#d8dadc",
+                    "outline-variant": "#bccbb9",
+                    "inverse-primary": "#4ae176",
+                    "secondary-fixed-dim": "#b8c4ff",
+                    "surface-tint": "#006e2f",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#191c1e",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "secondary-fixed": "#dde1ff",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-surface-variant": "#3d4a3d",
+                    "on-secondary-fixed-variant": "#173bab",
+                    "primary": "#006e2f",
+                    "on-primary-fixed-variant": "#005321",
+                    "outline": "#6d7b6c",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary-container": "#708cfd",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed": "#341100",
+                    "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "base": "4px",
+                    "sm": "12px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "xs": "8px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["44px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface dark:bg-on-background shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">location_on</span>
+<span class="font-title-lg text-title-lg-mobile text-on-surface">TP. Hồ Chí Minh</span>
+</div>
+<div class="font-display-lg text-display-lg-mobile text-primary dark:text-primary-fixed-dim font-bold">SportHub</div>
+<button class="active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-surface-variant">notifications</span>
+</button>
+</header>
+<!-- Quick Filters Area -->
+<div class="fixed top-16 left-0 w-full bg-surface z-40 py-3 border-b border-surface-container-high">
+<div class="flex overflow-x-auto px-margin-mobile gap-3 no-scrollbar">
+<!-- Sport Chips -->
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-full whitespace-nowrap active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">sports_soccer</span>
+<span class="font-label-lg text-label-lg">Bóng đá</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full whitespace-nowrap hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-[20px]">sports_tennis</span>
+<span class="font-label-lg text-label-lg">Cầu lông</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full whitespace-nowrap hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-[20px]">sports_basketball</span>
+<span class="font-label-lg text-label-lg">Bóng rổ</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full whitespace-nowrap hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-[20px]">pool</span>
+<span class="font-label-lg text-label-lg">Bơi lội</span>
+</button>
+<!-- Advanced Filter Button -->
+<button class="flex items-center justify-center p-2 bg-secondary-container text-on-secondary-container rounded-full min-w-[40px]">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</div>
+<!-- Main Content: Court List -->
+<main class="mt-36 px-margin-mobile flex flex-col gap-6">
+<!-- Court Card 1 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-[0px_4px_12px_rgba(30,64,175,0.08)] active:scale-[0.98] transition-transform duration-200 border border-outline-variant/30">
+<div class="relative h-48 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A professional green artificial turf soccer field captured from a low angle under bright stadium floodlights. The scene is crisp and high-contrast, emphasizing the vibrant green of the grass and the clean white boundary lines. The overall aesthetic is energetic and premium, with a soft cinematic blur in the background suggesting a high-end sporting facility at dusk." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGK6_R2bMmoA6jjF1PkX4SfYMwsuClji6opLVq5l_eyezfPuqW534tmbMZULfY2pbyuKo325GVaYvpTaabDot2I5iL21ON33A5dMISfExb2Svef5_xJEvP7l4ZBaVMEyPz2uJ8ETL3mltpzW2hz0RRgK8LVSEnYvvMwKWQvIwkUFS4AfmsZwRpAUZ91KeuHc3JK__Ho7m-rxECElbU6Hz5uU7b9gzpuLWElWer2w_k_xTmiSmbx6kF')"></div>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-500 text-[18px] fill-icon" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.8</span>
+</div>
+<div class="absolute bottom-3 left-3 bg-primary-container text-on-primary-container px-3 py-1 rounded-lg font-label-sm text-label-sm">
+                    Còn sân
+                </div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg text-on-surface leading-tight">Sân bóng Đại Thế Giới</h3>
+<span class="font-label-lg text-label-lg text-primary font-bold">300.000đ/giờ</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">105 Trần Hưng Đạo, Quận 5</span>
+</div>
+<div class="flex items-center justify-between mt-2 border-t border-surface-container pt-3">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+<span class="font-label-lg text-label-lg">2.5km</span>
+</div>
+<button class="bg-primary hover:bg-on-primary-fixed-variant text-on-primary px-5 py-2 rounded-full font-label-lg text-label-lg transition-colors shadow-sm">Đặt ngay</button>
+</div>
+</div>
+</article>
+<!-- Court Card 2 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-[0px_4px_12px_rgba(30,64,175,0.08)] active:scale-[0.98] transition-transform duration-200 border border-outline-variant/30">
+<div class="relative h-48 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="An indoor premium badminton court with professional blue flooring and bright LED overhead lighting. The space is clean and modern, featuring multiple courts with high-quality nets and clear boundary lines. The atmosphere is quiet, focused, and professional, utilizing a cool-toned color palette of deep blues and bright whites for a high-performance sporting environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBve8OajwxP_xp8ZJ5dDgHqNGVaWE9kMGA3q92HPWJwIWCSVpnH4YBWtSvduM8HeO-evfgqUOZwu8-j-a54xFdPsqJN6BWCnRaTNaaP03kskc4EjBBu6rNAs73PsYAXIHFO1ntqSozIIuj_8261CtUVG1LPx5C8OmAaoMTwALL10dbvmvN5xpB6NQv_07GxvsF0yOQ2r21NlDBkckPATe9UHXusI1c_oOR-sqlo2pfnoJKtq_eJdYNC')"></div>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-500 text-[18px] fill-icon" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.5</span>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg text-on-surface leading-tight">Clb Cầu Lông Tân Sơn</h3>
+<span class="font-label-lg text-label-lg text-primary font-bold">120.000đ/giờ</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">698/1 CMT8, Quận Tân Bình</span>
+</div>
+<div class="flex items-center justify-between mt-2 border-t border-surface-container pt-3">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+<span class="font-label-lg text-label-lg">4.2km</span>
+</div>
+<button class="bg-primary hover:bg-on-primary-fixed-variant text-on-primary px-5 py-2 rounded-full font-label-lg text-label-lg transition-colors shadow-sm">Đặt ngay</button>
+</div>
+</div>
+</article>
+<!-- Court Card 3 (Bento-like variation) -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-[0px_4px_12px_rgba(30,64,175,0.08)] active:scale-[0.98] transition-transform duration-200 border border-outline-variant/30">
+<div class="relative h-48 w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="An outdoor professional basketball court at sunset. The court has a high-grade dark grey surface with vibrant orange lines and a modern glass backboard hoop. The sky in the background is a mix of deep purple and warm orange, creating a dramatic, high-energy atmosphere. The lighting is low-key with a focus on the silhouette of the hoop against the glowing sky." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAEmqyY4CoyGPrKvDXfuH2Zhi-WJNNQ6m3IT5kebW3GpAavajQMyIbKxbI3Y2VR04qd8DzD8gxvotAkk5RcqHWCvoGgc_SrU0Kp6xe_WbgCnbHi-XRnGXZ7cO8YXfYvkwMxC4BrhxrrvBHQF_0xPMwijyOFW3xH2DQTZvvuLuyp-dC-hOhgDbqC2XYC17rnrx5MUBfCjVxSG2s5RMlXgoprxXK-C5Dq4a44ghEpggDEPXQqqkK51nI7')"></div>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-500 text-[18px] fill-icon" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.9</span>
+</div>
+<div class="absolute bottom-3 right-3 bg-error-container text-on-error-container px-3 py-1 rounded-lg font-label-sm text-label-sm">
+                    Hết chỗ
+                </div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg text-on-surface leading-tight">Basketball Zone Q.7</h3>
+<span class="font-label-lg text-label-lg text-primary font-bold">250.000đ/giờ</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Khu dân cư Him Lam, Quận 7</span>
+</div>
+<div class="flex items-center justify-between mt-2 border-t border-surface-container pt-3">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+<span class="font-label-lg text-label-lg">1.8km</span>
+</div>
+<button class="bg-surface-container-highest text-on-surface-variant px-5 py-2 rounded-full font-label-lg text-label-lg transition-colors cursor-not-allowed">Xem lịch</button>
+</div>
+</div>
+</article>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container dark:bg-inverse-surface rounded-t-xl shadow-[0px_-4px_12px_rgba(30,64,175,0.08)]">
+<!-- Trang chủ -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Trang chủ</span>
+</a>
+<!-- Tìm kiếm (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-container text-on-primary-container dark:text-primary-fixed rounded-full px-5 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined fill-icon" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-sm text-label-sm mt-1">Tìm kiếm</span>
+</a>
+<!-- Lịch đặt -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-label-sm text-label-sm mt-1">Lịch đặt</span>
+</a>
+<!-- Cá nhân -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Cá nhân</span>
+</a>
+</nav>
+<!-- Interactive script for demo micro-interactions -->
+<script>
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('click', function() {
+                // Placeholder for navigation to details
+                this.classList.add('opacity-80');
+                setTimeout(() => this.classList.remove('opacity-80'), 150);
+            });
+        });
+
+        const filterButtons = document.querySelectorAll('button.whitespace-nowrap');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                this.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                this.classList.add('bg-primary', 'text-on-primary');
+            });
+        });
+    </script>
+</body></html>

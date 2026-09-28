@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Patterns – Lab 7 Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e2a;
+    --border: #252a38;
+    --accent1: #7c6af7;
+    --accent2: #f97316;
+    --accent3: #22d3ee;
+    --accent4: #4ade80;
+    --accent5: #f472b6;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --code-bg: #090b10;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 30%, rgba(124,106,247,.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 70%, rgba(249,115,22,.13) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(34,211,238,.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent1);
+    border: 1px solid rgba(124,106,247,.4);
+    padding: .35rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    animation: fadeUp .6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    animation: fadeUp .7s .1s ease both;
+  }
+
+  .hero h1 span { color: var(--accent1); font-style: italic; }
+
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 540px;
+    animation: fadeUp .7s .2s ease both;
+  }
+
+  .nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    justify-content: center;
+    margin-top: 3rem;
+    animation: fadeUp .7s .35s ease both;
+  }
+
+  .nav-pills a {
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 500;
+    padding: .45rem 1.1rem;
+    border-radius: 2rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: var(--surface);
+    transition: all .2s;
+  }
+
+  .nav-pills a:hover { border-color: var(--accent1); color: var(--accent1); background: rgba(124,106,247,.1); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ── SECTION ── */
+  .section { padding: 5rem 0; border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .8rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── THEORY CARDS ── */
+  .theory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+  }
+
+  .theory-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .2s, transform .2s;
+  }
+
+  .theory-card:hover { border-color: var(--accent1); transform: translateY(-2px); }
+
+  .theory-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .theory-card:nth-child(1)::before { background: var(--accent1); }
+  .theory-card:nth-child(2)::before { background: var(--accent2); }
+  .theory-card:nth-child(3)::before { background: var(--accent3); }
+  .theory-card:nth-child(4)::before { background: var(--accent4); }
+  .theory-card:nth-child(5)::before { background: var(--accent5); }
+
+  .theory-card-icon { font-size: 2rem; margin-bottom: .8rem; }
+  .theory-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: .5rem; }
+  .theory-card p { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+  .theory-card .tag {
+    display: inline-block;
+    font-size: .7rem;
+    font-family: 'Space Mono', monospace;
+    padding: .2rem .6rem;
+    border-radius: 1rem;
+    margin-top: .8rem;
+  }
+
+  .tag-creational { background: rgba(124,106,247,.15); color: var(--accent1); }
+  .tag-structural  { background: rgba(34,211,238,.15);  color: var(--accent3); }
+  .tag-behavioral  { background: rgba(74,222,128,.15);  color: var(--accent4); }
+
+  /* ── EXERCISE ── */
+  .exercise { margin-top: 4rem; }
+
+  .ex-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .ex-num {
+    width: 3rem; height: 3rem;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .ex-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; }
+
+  /* pattern accent colors */
+  .ex-1 .ex-num { background: rgba(124,106,247,.2); color: var(--accent1); border: 2px solid var(--accent1); }
+  .ex-2 .ex-num { background: rgba(249,115,22,.2);  color: var(--accent2); border: 2px solid var(--accent2); }
+  .ex-3 .ex-num { background: rgba(34,211,238,.2);  color: var(--accent3); border: 2px solid var(--accent3); }
+  .ex-4 .ex-num { background: rgba(74,222,128,.2);  color: var(--accent4); border: 2px solid var(--accent4); }
+  .ex-5 .ex-num { background: rgba(244,114,182,.2); color: var(--accent5); border: 2px solid var(--accent5); }
+
+  /* ── UML ── */
+  .uml-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .uml-label {
+    font-family: 'Space Mono', monospace;
+    font-size: .7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-bottom: 1rem;
+  }
+
+  svg text { font-family: 'Space Mono', monospace; }
+
+  /* ── CODE ── */
+  .code-wrap {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .7rem 1.2rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .code-header span {
+    font-family: 'Space Mono', monospace;
+    font-size: .72rem;
+    color: var(--muted);
+  }
+
+  .code-dots { display: flex; gap: .4rem; }
+  .code-dot {
+    width: 11px; height: 11px; border-radius: 50%;
+  }
+  .code-dot:nth-child(1) { background: #ff5f57; }
+  .code-dot:nth-child(2) { background: #febc2e; }
+  .code-dot:nth-child(3) { background: #28c840; }
+
+  pre {
+    padding: 1.5rem;
+    overflow-x: auto;
+    font-size: .82rem;
+    line-height: 1.7;
+  }
+
+  code {
+    font-family: 'Space Mono', monospace;
+    color: #a9b1d6;
+  }
+
+  /* syntax highlight */
+  .kw { color: #bb9af7; }
+  .cls { color: #7dcfff; }
+  .str { color: #9ece6a; }
+  .cmt { color: #565f89; font-style: italic; }
+  .fn  { color: #73daca; }
+  .num { color: #ff9e64; }
+  .ann { color: #e0af68; }
+
+  /* ── EXPLAIN BOX ── */
+  .explain {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent1);
+    border-radius: 0 8px 8px 0;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: .92rem;
+  }
+
+  .explain.ex-2 { border-color: var(--accent2); }
+  .explain.ex-3 { border-color: var(--accent3); }
+  .explain.ex-4 { border-color: var(--accent4); }
+  .explain.ex-5 { border-color: var(--accent5); }
+
+  .explain h4 { font-weight: 600; margin-bottom: .6rem; font-size: .95rem; }
+  .explain ul { padding-left: 1.2rem; }
+  .explain li { margin: .3rem 0; font-size: .88rem; color: var(--muted); }
+  .explain li strong { color: var(--text); }
+
+  /* ── OUTPUT ── */
+  .output {
+    background: #050709;
+    border: 1px solid #1e2433;
+    border-radius: 8px;
+    padding: 1rem 1.4rem;
+    margin: 1rem 0;
+    font-family: 'Space Mono', monospace;
+    font-size: .8rem;
+    color: #4ade80;
+  }
+
+  .output-label {
+    color: var(--muted);
+    font-size: .7rem;
+    margin-bottom: .5rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ── TABS ── */
+  .tabs { display: flex; gap: .5rem; margin-bottom: -1px; flex-wrap: wrap; }
+
+  .tab {
+    font-family: 'Space Mono', monospace;
+    font-size: .72rem;
+    padding: .45rem 1rem;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    background: var(--surface);
+    color: var(--muted);
+    transition: all .15s;
+  }
+
+  .tab.active { background: var(--code-bg); color: var(--text); border-color: var(--border); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+    font-size: .82rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  .highlight-box {
+    background: rgba(124,106,247,.07);
+    border: 1px solid rgba(124,106,247,.2);
+    border-radius: 8px;
+    padding: 1rem 1.4rem;
+    margin: 1.5rem 0;
+    font-size: .88rem;
+  }
+
+  .key-concept {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: .8rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .key-concept:last-child { border-bottom: none; }
+  .key-concept .icon { font-size: 1.2rem; margin-top: .1rem; }
+  .key-concept-body h4 { font-size: .92rem; font-weight: 600; margin-bottom: .2rem; }
+  .key-concept-body p  { font-size: .84rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<div class="hero">
+  <div class="hero-badge">CSE 203 · OOD · Lab 7</div>
+  <h1>Design<br><span>Patterns</span></h1>
+  <p class="hero-sub">Học lý thuyết, đọc lời giải, xem UML — tất cả trong một trang.</p>
+  <nav class="nav-pills">
+    <a href="#theory">📚 Lý thuyết</a>
+    <a href="#ex1">① Singleton</a>
+    <a href="#ex2">② Factory</a>
+    <a href="#ex3">③ Decorator</a>
+    <a href="#ex4">④ Strategy</a>
+    <a href="#ex5">⑤ Observer</a>
+  </nav>
+</div>
+
+<!-- ══════════════ THEORY ══════════════ -->
+<section class="section" id="theory">
+<div class="container">
+  <p class="section-label">Kiến thức nền tảng</p>
+  <h2 class="section-title">Design Pattern là gì?</h2>
+
+  <p style="color:var(--muted);max-width:680px">
+    Design Pattern (mẫu thiết kế) là những <strong style="color:var(--text)">giải pháp tái sử dụng</strong>
+    được đúc kết từ kinh nghiệm thực tiễn để giải quyết các bài toán lập trình hướng đối tượng thường gặp.
+    Chúng không phải code có thể copy-paste — chúng là <em>bản thiết kế tư duy</em>.
+  </p>
+
+  <div style="margin:2rem 0">
+    <div class="key-concept">
+      <div class="icon">🏗️</div>
+      <div class="key-concept-body">
+        <h4>Creational Patterns (Mẫu Khởi tạo)</h4>
+        <p>Kiểm soát cách tạo đối tượng. Tách logic khởi tạo khỏi logic sử dụng. Ví dụ: <strong>Singleton, Factory, Builder, Prototype</strong>.</p>
+      </div>
+    </div>
+    <div class="key-concept">
+      <div class="icon">🔧</div>
+      <div class="key-concept-body">
+        <h4>Structural Patterns (Mẫu Cấu trúc)</h4>
+        <p>Xác định cách kết hợp các class/object thành cấu trúc lớn hơn. Ví dụ: <strong>Decorator, Adapter, Proxy, Facade</strong>.</p>
+      </div>
+    </div>
+    <div class="key-concept">
+      <div class="icon">🔄</div>
+      <div class="key-concept-body">
+        <h4>Behavioral Patterns (Mẫu Hành vi)</h4>
+        <p>Xác định cách giao tiếp và phân phối trách nhiệm giữa các object. Ví dụ: <strong>Strategy, Observer, Command, Iterator</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="theory-grid">
+    <div class="theory-card">
+      <div class="theory-card-icon">🔒</div>
+      <h3>Singleton</h3>
+      <p>Đảm bảo một class chỉ có <strong>duy nhất một instance</strong> trong toàn bộ chương trình và cung cấp điểm truy cập toàn cục.</p>
+      <span class="tag tag-creational">Creational</span>
+    </div>
+    <div class="theory-card">
+      <div class="theory-card-icon">🏭</div>
+      <h3>Factory Method</h3>
+      <p>Định nghĩa <strong>interface để tạo object</strong>, nhưng để subclass quyết định class nào sẽ được khởi tạo. Tách client khỏi chi tiết khởi tạo.</p>
+      <span class="tag tag-creational">Creational</span>
+    </div>
+    <div class="theory-card">
+      <div class="theory-card-icon">🎀</div>
+      <h3>Decorator</h3>
+      <p>Bổ sung hành vi cho object <strong>trong lúc runtime</strong> mà không sửa đổi class gốc — bằng cách "bọc" object vào decorator.</p>
+      <span class="tag tag-structural">Structural</span>
+    </div>
+    <div class="theory-card">
+      <div class="theory-card-icon">🎯</div>
+      <h3>Strategy</h3>
+      <p>Định nghĩa một <strong>nhóm thuật toán có thể hoán đổi</strong> cho nhau. Client chọn thuật toán tại runtime mà không ảnh hưởng code khác.</p>
+      <span class="tag tag-behavioral">Behavioral</span>
+    </div>
+    <div class="theory-card">
+      <div class="theory-card-icon">📡</div>
+      <h3>Observer</h3>
+      <p>Thiết lập quan hệ <strong>1-nhiều</strong>: khi một object thay đổi trạng thái, tất cả các object phụ thuộc sẽ được thông báo tự động.</p>
+      <span class="tag tag-behavioral">Behavioral</span>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:2.5rem">
+    💡 <strong>Nguyên tắc vàng:</strong> Các pattern đều tuân theo nguyên lý
+    <strong>OCP (Open/Closed Principle)</strong> — code mở cho mở rộng, đóng cho sửa đổi —
+    và <strong>DIP</strong> — phụ thuộc vào abstraction, không phụ thuộc vào implementation cụ thể.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ EX 1 — SINGLETON ══════════════ -->
+<section class="section ex-1" id="ex1">
+<div class="container">
+  <p class="section-label">Bài 1 · Creational Pattern</p>
+
+  <div class="ex-header exercise">
+    <div class="ex-num">01</div>
+    <h2 class="ex-title">Singleton Pattern — Logger</h2>
+  </div>
+
+  <div class="explain">
+    <h4>🧠 Phân tích bài toán</h4>
+    <ul>
+      <li><strong>Vấn đề:</strong> Ứng dụng cần một Logger duy nhất — nếu có nhiều instance thì log sẽ bị rời rạc, không nhất quán.</li>
+      <li><strong>Giải pháp Singleton:</strong> Ẩn constructor (private), giữ instance trong static field, chỉ cấp phát qua getInstance().</li>
+      <li><strong>Thread-safe:</strong> Dùng <code>synchronized</code> hoặc <em>double-checked locking</em> khi môi trường đa luồng.</li>
+    </ul>
+  </div>
+
+  <!-- UML -->
+  <div class="uml-wrap">
+    <div class="uml-label">📐 Class Diagram — Singleton</div>
+    <svg viewBox="0 0 500 260" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <!-- Logger class box -->
+      <rect x="150" y="30" width="200" height="190" rx="6" fill="#1a1e2a" stroke="#7c6af7" stroke-width="1.5"/>
+      <!-- class name header -->
+      <rect x="150" y="30" width="200" height="40" rx="6" fill="#2d2852"/>
+      <rect x="150" y="64" width="200" height="6" fill="#2d2852"/>
+      <text x="250" y="56" text-anchor="middle" fill="#7c6af7" font-size="13" font-weight="bold">Logger</text>
+
+      <!-- fields -->
+      <line x1="150" y1="70" x2="350" y2="70" stroke="#252a38"/>
+      <text x="165" y="92" fill="#565f89" font-size="10">— instance : Logger</text>
+      <text x="165" y="108" fill="#565f89" font-size="10">— logFile : String</text>
+
+      <!-- methods -->
+      <line x1="150" y1="118" x2="350" y2="118" stroke="#252a38"/>
+      <text x="165" y="140" fill="#73daca" font-size="10">— Logger()</text>
+      <text x="165" y="158" fill="#73daca" font-size="10">+ getInstance() : Logger</text>
+      <text x="165" y="176" fill="#73daca" font-size="10">+ log(message : String) : void</text>
+      <text x="165" y="194" fill="#73daca" font-size="10">+ getLogs() : List&lt;String&gt;</text>
+
+      <!-- underline for static -->
+      <line x1="162" y1="143" x2="228" y2="143" stroke="#73daca" stroke-width=".8"/>
+      <line x1="162" y1="161" x2="290" y2="161" stroke="#73daca" stroke-width=".8"/>
+
+      <!-- self-ref arrow -->
+      <path d="M350,100 Q430,100 430,140 Q430,180 350,170" fill="none" stroke="#7c6af7" stroke-width="1.2" stroke-dasharray="5,3"/>
+      <polygon points="350,170 356,165 356,175" fill="#7c6af7"/>
+      <text x="438" y="148" fill="#7c6af7" font-size="9" text-anchor="middle">1</text>
+      <text x="438" y="120" fill="#565f89" font-size="9" text-anchor="middle">instance</text>
+
+      <!-- note -->
+      <rect x="30" y="80" width="100" height="50" rx="4" fill="#13161e" stroke="#252a38" stroke-dasharray="4,2"/>
+      <text x="80" y="100" text-anchor="middle" fill="#565f89" font-size="9">«singleton»</text>
+      <text x="80" y="115" text-anchor="middle" fill="#565f89" font-size="9">Chỉ 1 instance</text>
+      <line x1="130" y1="110" x2="150" y2="120" stroke="#252a38" stroke-dasharray="3,2"/>
+    </svg>
+  </div>
+
+  <!-- Code -->
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+      <span>Logger.java</span>
+    </div>
+    <pre><code><span class="kw">import</span> java.time.LocalDateTime;
+<span class="kw">import</span> java.time.format.DateTimeFormatter;
+
+<span class="kw">public class</span> <span class="cls">Logger</span> {
+
+    <span class="cmt">// ① Static field giữ instance duy nhất</span>
+    <span class="kw">private static</span> <span class="cls">Logger</span> instance;
+
+    <span class="cmt">// ② Constructor private — không ai tạo trực tiếp được</span>
+    <span class="kw">private</span> <span class="fn">Logger</span>() {
+        System.out.<span class="fn">println</span>(<span class="str">"Logger đã được khởi tạo."</span>);
+    }
+
+    <span class="cmt">// ③ Điểm truy cập duy nhất — synchronized để thread-safe</span>
+    <span class="kw">public static synchronized</span> <span class="cls">Logger</span> <span class="fn">getInstance</span>() {
+        <span class="kw">if</span> (instance == <span class="kw">null</span>) {
+            instance = <span class="kw">new</span> <span class="cls">Logger</span>();
+        }
+        <span class="kw">return</span> instance;
+    }
+
+    <span class="cmt">// ④ Phương thức log với timestamp</span>
+    <span class="kw">public void</span> <span class="fn">log</span>(<span class="cls">String</span> message) {
+        <span class="cls">String</span> timestamp = <span class="cls">LocalDateTime</span>.<span class="fn">now</span>()
+            .<span class="fn">format</span>(<span class="cls">DateTimeFormatter</span>.<span class="fn">ofPattern</span>(<span class="str">"yyyy-MM-dd HH:mm:ss"</span>));
+        System.out.<span class="fn">println</span>(<span class="str">"["</span> + timestamp + <span class="str">"] "</span> + message);
+    }
+}</code></pre>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+      <span>Main.java</span>
+    </div>
+    <pre><code><span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+
+        <span class="cmt">// Lấy instance — Logger() chỉ được gọi lần đầu</span>
+        <span class="cls">Logger</span> logger1 = <span class="cls">Logger</span>.<span class="fn">getInstance</span>();
+        logger1.<span class="fn">log</span>(<span class="str">"Ứng dụng khởi động."</span>);
+
+        <span class="cls">Logger</span> logger2 = <span class="cls">Logger</span>.<span class="fn">getInstance</span>();
+        logger2.<span class="fn">log</span>(<span class="str">"Người dùng đã đăng nhập."</span>);
+
+        <span class="cmt">// Kiểm tra chỉ có 1 instance</span>
+        System.out.<span class="fn">println</span>(<span class="str">"Cùng một instance? "</span> + (logger1 == logger2));
+    }
+}</code></pre>
+  </div>
+
+  <div class="output-label">▶ Output mẫu</div>
+  <div class="output">
+Logger đã được khởi tạo.<br>
+[2024-10-15 09:23:01] Ứng dụng khởi động.<br>
+[2024-10-15 09:23:01] Người dùng đã đăng nhập.<br>
+Cùng một instance? true
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ EX 2 — FACTORY ══════════════ -->
+<section class="section ex-2" id="ex2">
+<div class="container">
+  <p class="section-label">Bài 2 · Creational Pattern</p>
+
+  <div class="ex-header exercise">
+    <div class="ex-num">02</div>
+    <h2 class="ex-title">Factory Method Pattern — Shape</h2>
+  </div>
+
+  <div class="explain ex-2">
+    <h4>🧠 Phân tích bài toán</h4>
+    <ul>
+      <li><strong>Vấn đề:</strong> Client cần tạo các hình dạng khác nhau nhưng không muốn biết chi tiết khởi tạo.</li>
+      <li><strong>Giải pháp:</strong> Mỗi loại hình có Factory riêng, implement method <code>getShape()</code> trừu tượng.</li>
+      <li><strong>Lợi ích:</strong> Thêm hình mới (Triangle…) chỉ cần thêm class, không sửa code cũ — tuân thủ OCP.</li>
+    </ul>
+  </div>
+
+  <!-- UML -->
+  <div class="uml-wrap">
+    <div class="uml-label">📐 Class Diagram — Factory Method</div>
+    <svg viewBox="0 0 780 380" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <!-- Shape interface -->
+      <rect x="300" y="10" width="180" height="60" rx="5" fill="#1a1e2a" stroke="#f97316" stroke-width="1.5"/>
+      <rect x="300" y="10" width="180" height="25" rx="5" fill="#2d1f0a"/>
+      <text x="390" y="27" text-anchor="middle" fill="#f97316" font-size="10">«interface»</text>
+      <text x="390" y="42" text-anchor="middle" fill="#f97316" font-size="12" font-weight="bold">Shape</text>
+      <line x1="300" y1="36" x2="480" y2="36" stroke="#252a38"/>
+      <text x="316" y="56" fill="#73daca" font-size="10">+ draw() : void</text>
+
+      <!-- Circle -->
+      <rect x="100" y="130" width="140" height="55" rx="5" fill="#1a1e2a" stroke="#f97316" stroke-width="1"/>
+      <rect x="100" y="130" width="140" height="22" rx="5" fill="#1a1e2a"/>
+      <text x="170" y="145" text-anchor="middle" fill="#7dcfff" font-size="12" font-weight="bold">Circle</text>
+      <line x1="100" y1="152" x2="240" y2="152" stroke="#252a38"/>
+      <text x="116" y="170" fill="#73daca" font-size="10">+ draw() : void</text>
+
+      <!-- Rectangle -->
+      <rect x="310" y="130" width="160" height="55" rx="5" fill="#1a1e2a" stroke="#f97316" stroke-width="1"/>
+      <rect x="310" y="130" width="160" height="22" rx="5" fill="#1a1e2a"/>
+      <text x="390" y="145" text-anchor="middle" fill="#7dcfff" font-size="12" font-weight="bold">Rectangle</text>
+      <line x1="310" y1="152" x2="470" y2="152" stroke="#252a38"/>
+      <text x="326" y="170" fill="#73daca" font-size="10">+ draw() : void</text>
+
+      <!-- Square -->
+      <rect x="540" y="130" width="140" height="55" rx="5" fill="#1a1e2a" stroke="#f97316" stroke-width="1"/>
+      <rect x="540" y="130" width="140" height="22" rx="5" fill="#1a1e2a"/>
+      <text x="610" y="145" text-anchor="middle" fill="#7dcfff" font-size="12" font-weight="bold">Square</text>
+      <line x1="540" y1="152" x2="680" y2="152" stroke="#252a38"/>
+      <text x="556" y="170" fill="#73daca" font-size="10">+ draw() : void</text>
+
+      <!-- Implement arrows -->
+      <line x1="170" y1="130" x2="340" y2="70" stroke="#f97316" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="340,70 330,75 337,82" fill="#f97316"/>
+      <line x1="390" y1="130" x2="390" y2="70" stroke="#f97316" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="390,70 385,78 395,78" fill="#f97316"/>
+      <line x1="610" y1="130" x2="440" y2="70" stroke="#f97316" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="440,70 448,75 441,82" fill="#f97316"/>
+
+      <!-- ShapeFactory abstract -->
+      <rect x="300" y="240" width="180" height="70" rx="5" fill="#1a1e2a" stroke="#e0af68" stroke-width="1.5"/>
+      <rect x="300" y="240" width="180" height="25" rx="5" fill="#231e0a"/>
+      <text x="390" y="255" text-anchor="middle" fill="#e0af68" font-size="10">«abstract»</text>
+      <text x="390" y="270" text-anchor="middle" fill="#e0af68" font-size="11" font-weight="bold">ShapeFactory</text>
+      <line x1="300" y1="266" x2="480" y2="266" stroke="#252a38"/>
+      <text x="316" y="285" fill="#73daca" font-size="10">+ getShape() : Shape</text>
+      <text x="316" y="300" fill="#565f89" font-size="9">  {abstract}</text>
+
+      <!-- Concrete factories -->
+      <rect x="50" y="330" width="140" height="40" rx="5" fill="#1a1e2a" stroke="#e0af68" stroke-width="1"/>
+      <text x="120" y="348" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">CircleFactory</text>
+      <text x="120" y="362" text-anchor="middle" fill="#73daca" font-size="9">+ getShape() : Shape</text>
+
+      <rect x="320" y="330" width="140" height="40" rx="5" fill="#1a1e2a" stroke="#e0af68" stroke-width="1"/>
+      <text x="390" y="348" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">RectangleFactory</text>
+      <text x="390" y="362" text-anchor="middle" fill="#73daca" font-size="9">+ getShape() : Shape</text>
+
+      <rect x="590" y="330" width="140" height="40" rx="5" fill="#1a1e2a" stroke="#e0af68" stroke-width="1"/>
+      <text x="660" y="348" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">SquareFactory</text>
+      <text x="660" y="362" text-anchor="middle" fill="#73daca" font-size="9">+ getShape() : Shape</text>
+
+      <!-- Factory arrows -->
+      <line x1="120" y1="330" x2="330" y2="310" stroke="#e0af68" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="330,310 322,305 325,315" fill="#e0af68"/>
+      <line x1="390" y1="330" x2="390" y2="310" stroke="#e0af68" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="390,310 385,317 395,317" fill="#e0af68"/>
+      <line x1="660" y1="330" x2="450" y2="310" stroke="#e0af68" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="450,310 457,305 454,315" fill="#e0af68"/>
+    </svg>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+      <span>Shape.java + Implementations + Factories + Main</span>
+    </div>
+    <pre><code><span class="cmt">// ① Interface Shape</span>
+<span class="kw">public interface</span> <span class="cls">Shape</span> {
+    <span class="kw">void</span> <span class="fn">draw</span>();
+}
+
+<span class="cmt">// ② Các class thực thi Shape</span>
+<span class="kw">public class</span> <span class="cls">Circle</span> <span class="kw">implements</span> <span class="cls">Shape</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.<span class="fn">println</span>(<span class="str">"Drawing a Circle"</span>); }
+}
+
+<span class="kw">public class</span> <span class="cls">Rectangle</span> <span class="kw">implements</span> <span class="cls">Shape</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.<span class="fn">println</span>(<span class="str">"Drawing a Rectangle"</span>); }
+}
+
+<span class="kw">public class</span> <span class="cls">Square</span> <span class="kw">implements</span> <span class="cls">Shape</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.<span class="fn">println</span>(<span class="str">"Drawing a Square"</span>); }
+}
+
+<span class="cmt">// ③ Abstract Factory</span>
+<span class="kw">public abstract class</span> <span class="cls">ShapeFactory</span> {
+    <span class="kw">public abstract</span> <span class="cls">Shape</span> <span class="fn">getShape</span>();
+}
+
+<span class="cmt">// ④ Concrete Factories</span>
+<span class="kw">public class</span> <span class="cls">CircleFactory</span> <span class="kw">extends</span> <span class="cls">ShapeFactory</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Shape</span> <span class="fn">getShape</span>() { <span class="kw">return new</span> <span class="cls">Circle</span>(); }
+}
+
+<span class="kw">public class</span> <span class="cls">RectangleFactory</span> <span class="kw">extends</span> <span class="cls">ShapeFactory</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Shape</span> <span class="fn">getShape</span>() { <span class="kw">return new</span> <span class="cls">Rectangle</span>(); }
+}
+
+<span class="kw">public class</span> <span class="cls">SquareFactory</span> <span class="kw">extends</span> <span class="cls">ShapeFactory</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">Shape</span> <span class="fn">getShape</span>() { <span class="kw">return new</span> <span class="cls">Square</span>(); }
+}
+
+<span class="cmt">// ⑤ Main</span>
+<span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+        <span class="cls">ShapeFactory</span> factory = <span class="kw">new</span> <span class="cls">CircleFactory</span>();
+        factory.<span class="fn">getShape</span>().<span class="fn">draw</span>();          <span class="cmt">// Drawing a Circle</span>
+
+        factory = <span class="kw">new</span> <span class="cls">RectangleFactory</span>();
+        factory.<span class="fn">getShape</span>().<span class="fn">draw</span>();          <span class="cmt">// Drawing a Rectangle</span>
+
+        factory = <span class="kw">new</span> <span class="cls">SquareFactory</span>();
+        factory.<span class="fn">getShape</span>().<span class="fn">draw</span>();          <span class="cmt">// Drawing a Square</span>
+    }
+}</code></pre>
+  </div>
+
+  <div class="output-label">▶ Output mẫu</div>
+  <div class="output">
+Drawing a Circle<br>
+Drawing a Rectangle<br>
+Drawing a Square
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ EX 3 — DECORATOR ══════════════ -->
+<section class="section ex-3" id="ex3">
+<div class="container">
+  <p class="section-label">Bài 3 · Structural Pattern</p>
+
+  <div class="ex-header exercise">
+    <div class="ex-num">03</div>
+    <h2 class="ex-title">Decorator Pattern — Coffee</h2>
+  </div>
+
+  <div class="explain ex-3">
+    <h4>🧠 Phân tích bài toán</h4>
+    <ul>
+      <li><strong>Vấn đề:</strong> Cà phê có nhiều lựa chọn thêm (milk, sugar, whipped cream). Nếu dùng kế thừa sẽ tạo ra bùng nổ class.</li>
+      <li><strong>Giải pháp Decorator:</strong> Bọc object Coffee trong các Decorator, mỗi lớp bọc thêm cost và description.</li>
+      <li><strong>Hình ảnh trực quan:</strong> Như bóc hành — mỗi lớp decorator là 1 lớp hành bao quanh object gốc.</li>
+      <li><strong>Điểm chính:</strong> BaseDecorator implement cùng interface Coffee → có thể bọc lồng nhau vô hạn.</li>
+    </ul>
+  </div>
+
+  <!-- UML -->
+  <div class="uml-wrap">
+    <div class="uml-label">📐 Class Diagram — Decorator</div>
+    <svg viewBox="0 0 760 400" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <!-- Coffee interface -->
+      <rect x="290" y="10" width="180" height="70" rx="5" fill="#1a1e2a" stroke="#22d3ee" stroke-width="1.5"/>
+      <rect x="290" y="10" width="180" height="25" rx="5" fill="#0a1e22"/>
+      <text x="380" y="27" text-anchor="middle" fill="#22d3ee" font-size="10">«interface»</text>
+      <text x="380" y="42" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="bold">Coffee</text>
+      <line x1="290" y1="36" x2="470" y2="36" stroke="#252a38"/>
+      <text x="306" y="57" fill="#73daca" font-size="10">+ getCost() : double</text>
+      <text x="306" y="72" fill="#73daca" font-size="10">+ getDescription() : String</text>
+
+      <!-- SimpleCoffee -->
+      <rect x="80" y="150" width="160" height="70" rx="5" fill="#1a1e2a" stroke="#22d3ee" stroke-width="1"/>
+      <text x="160" y="170" text-anchor="middle" fill="#7dcfff" font-size="12" font-weight="bold">SimpleCoffee</text>
+      <line x1="80" y1="178" x2="240" y2="178" stroke="#252a38"/>
+      <text x="96" y="194" fill="#73daca" font-size="9">+ getCost() : double</text>
+      <text x="96" y="208" fill="#73daca" font-size="9">+ getDescription() : String</text>
+
+      <!-- BaseDecorator -->
+      <rect x="390" y="140" width="200" height="95" rx="5" fill="#1a1e2a" stroke="#22d3ee" stroke-width="1.5"/>
+      <rect x="390" y="140" width="200" height="22" rx="5" fill="#0a1a22"/>
+      <text x="490" y="155" text-anchor="middle" fill="#22d3ee" font-size="10">«abstract»</text>
+      <text x="490" y="168" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="bold">BaseDecorator</text>
+      <line x1="390" y1="163" x2="590" y2="163" stroke="#252a38"/>
+      <text x="406" y="180" fill="#565f89" font-size="9">— coffee : Coffee</text>
+      <line x1="390" y1="188" x2="590" y2="188" stroke="#252a38"/>
+      <text x="406" y="202" fill="#73daca" font-size="9">+ getCost() : double</text>
+      <text x="406" y="216" fill="#73daca" font-size="9">+ getDescription() : String</text>
+      <text x="406" y="228" fill="#565f89" font-size="8">  {delegates to coffee}</text>
+
+      <!-- Concrete Decorators -->
+      <rect x="290" y="300" width="140" height="50" rx="5" fill="#1a1e2a" stroke="#22d3ee" stroke-width="1"/>
+      <text x="360" y="320" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">MilkDecorator</text>
+      <text x="360" y="336" text-anchor="middle" fill="#73daca" font-size="9">+ getCost() + 1.5</text>
+      <text x="360" y="348" text-anchor="middle" fill="#565f89" font-size="8">+ "Milk"</text>
+
+      <rect x="450" y="300" width="145" height="50" rx="5" fill="#1a1e2a" stroke="#22d3ee" stroke-width="1"/>
+      <text x="522" y="320" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">SugarDecorator</text>
+      <text x="522" y="336" text-anchor="middle" fill="#73daca" font-size="9">+ getCost() + 0.5</text>
+      <text x="522" y="348" text-anchor="middle" fill="#565f89" font-size="8">+ "Sugar"</text>
+
+      <rect x="610" y="300" width="145" height="50" rx="5" fill="#1a1e2a" stroke="#22d3ee" stroke-width="1"/>
+      <text x="682" y="314" text-anchor="middle" fill="#7dcfff" font-size="10" font-weight="bold">WhippedCream</text>
+      <text x="682" y="328" text-anchor="middle" fill="#7dcfff" font-size="10" font-weight="bold">Decorator</text>
+      <text x="682" y="342" text-anchor="middle" fill="#73daca" font-size="9">+ getCost() + 2.0</text>
+      <text x="682" y="354" text-anchor="middle" fill="#565f89" font-size="8">+ "Whipped Cream"</text>
+
+      <!-- Arrows: implement Coffee -->
+      <line x1="160" y1="150" x2="330" y2="80" stroke="#22d3ee" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="330,80 322,87 330,94" fill="#22d3ee"/>
+      <line x1="490" y1="140" x2="430" y2="80" stroke="#22d3ee" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="430,80 435,90 425,90" fill="#22d3ee"/>
+
+      <!-- BaseDecorator extends to concretes -->
+      <line x1="360" y1="300" x2="440" y2="235" stroke="#22d3ee" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="440,235 432,242 440,248" fill="#22d3ee"/>
+      <line x1="522" y1="300" x2="510" y2="235" stroke="#22d3ee" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="510,235 505,242 515,242" fill="#22d3ee"/>
+      <line x1="680" y1="300" x2="575" y2="235" stroke="#22d3ee" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="575,235 578,244 568,243" fill="#22d3ee"/>
+
+      <!-- composition arrow: BaseDecorator has Coffee -->
+      <line x1="390" y1="175" x2="240" y2="185" stroke="#22d3ee" stroke-width="1.2"/>
+      <text x="315" y="168" fill="#565f89" font-size="9">has-a</text>
+      <polygon points="240,185 248,180 248,190" fill="#22d3ee"/>
+      <circle cx="388" cy="175" r="4" fill="#22d3ee"/>
+    </svg>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+      <span>Coffee + Decorators + Main.java</span>
+    </div>
+    <pre><code><span class="cmt">// ① Interface gốc</span>
+<span class="kw">public interface</span> <span class="cls">Coffee</span> {
+    <span class="kw">double</span> <span class="fn">getCost</span>();
+    <span class="cls">String</span> <span class="fn">getDescription</span>();
+}
+
+<span class="cmt">// ② Component cơ bản</span>
+<span class="kw">public class</span> <span class="cls">SimpleCoffee</span> <span class="kw">implements</span> <span class="cls">Coffee</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public double</span> <span class="fn">getCost</span>() { <span class="kw">return</span> <span class="num">2.0</span>; }
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getDescription</span>() { <span class="kw">return</span> <span class="str">"Simple Coffee"</span>; }
+}
+
+<span class="cmt">// ③ BaseDecorator — wraps một Coffee</span>
+<span class="kw">public abstract class</span> <span class="cls">BaseDecorator</span> <span class="kw">implements</span> <span class="cls">Coffee</span> {
+    <span class="kw">protected</span> <span class="cls">Coffee</span> coffee;
+
+    <span class="kw">public</span> <span class="fn">BaseDecorator</span>(<span class="cls">Coffee</span> coffee) {
+        <span class="kw">this</span>.coffee = coffee;
+    }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public double</span> <span class="fn">getCost</span>() { <span class="kw">return</span> coffee.<span class="fn">getCost</span>(); }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getDescription</span>() { <span class="kw">return</span> coffee.<span class="fn">getDescription</span>(); }
+}
+
+<span class="cmt">// ④ Concrete Decorators</span>
+<span class="kw">public class</span> <span class="cls">MilkDecorator</span> <span class="kw">extends</span> <span class="cls">BaseDecorator</span> {
+    <span class="kw">public</span> <span class="fn">MilkDecorator</span>(<span class="cls">Coffee</span> c) { <span class="kw">super</span>(c); }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public double</span> <span class="fn">getCost</span>() { <span class="kw">return</span> <span class="kw">super</span>.<span class="fn">getCost</span>() + <span class="num">1.5</span>; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getDescription</span>() { <span class="kw">return</span> <span class="kw">super</span>.<span class="fn">getDescription</span>() + <span class="str">" + Milk"</span>; }
+}
+
+<span class="kw">public class</span> <span class="cls">SugarDecorator</span> <span class="kw">extends</span> <span class="cls">BaseDecorator</span> {
+    <span class="kw">public</span> <span class="fn">SugarDecorator</span>(<span class="cls">Coffee</span> c) { <span class="kw">super</span>(c); }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public double</span> <span class="fn">getCost</span>() { <span class="kw">return</span> <span class="kw">super</span>.<span class="fn">getCost</span>() + <span class="num">0.5</span>; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getDescription</span>() { <span class="kw">return</span> <span class="kw">super</span>.<span class="fn">getDescription</span>() + <span class="str">" + Sugar"</span>; }
+}
+
+<span class="kw">public class</span> <span class="cls">WhippedCreamDecorator</span> <span class="kw">extends</span> <span class="cls">BaseDecorator</span> {
+    <span class="kw">public</span> <span class="fn">WhippedCreamDecorator</span>(<span class="cls">Coffee</span> c) { <span class="kw">super</span>(c); }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public double</span> <span class="fn">getCost</span>() { <span class="kw">return</span> <span class="kw">super</span>.<span class="fn">getCost</span>() + <span class="num">2.0</span>; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getDescription</span>() { <span class="kw">return</span> <span class="kw">super</span>.<span class="fn">getDescription</span>() + <span class="str">" + Whipped Cream"</span>; }
+}
+
+<span class="cmt">// ⑤ Main — bọc lồng nhau như matryoshka</span>
+<span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+        <span class="cls">Coffee</span> coffee = <span class="kw">new</span> <span class="cls">SimpleCoffee</span>();
+        coffee = <span class="kw">new</span> <span class="cls">MilkDecorator</span>(coffee);
+        coffee = <span class="kw">new</span> <span class="cls">SugarDecorator</span>(coffee);
+
+        System.out.<span class="fn">println</span>(<span class="str">"Description: "</span> + coffee.<span class="fn">getDescription</span>());
+        System.out.<span class="fn">printf</span>(<span class="str">"Cost: $%.2f%n"</span>, coffee.<span class="fn">getCost</span>());
+    }
+}</code></pre>
+  </div>
+
+  <div class="output-label">▶ Output mẫu</div>
+  <div class="output">
+Description: Simple Coffee + Milk + Sugar<br>
+Cost: $4.00
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ EX 4 — STRATEGY ══════════════ -->
+<section class="section ex-4" id="ex4">
+<div class="container">
+  <p class="section-label">Bài 4 · Behavioral Pattern</p>
+
+  <div class="ex-header exercise">
+    <div class="ex-num">04</div>
+    <h2 class="ex-title">Strategy Pattern — Shopping Cart</h2>
+  </div>
+
+  <div class="explain ex-4">
+    <h4>🧠 Phân tích bài toán</h4>
+    <ul>
+      <li><strong>Vấn đề:</strong> ShoppingCart cần hỗ trợ nhiều phương thức thanh toán, và có thể thêm phương thức mới bất kỳ lúc nào.</li>
+      <li><strong>Giải pháp Strategy:</strong> Tách thuật toán thanh toán ra ngoài Cart — Cart giữ tham chiếu đến PaymentStrategy.</li>
+      <li><strong>Thay đổi runtime:</strong> Người dùng có thể đổi phương thức thanh toán trong lúc chạy chương trình.</li>
+      <li><strong>So sánh vs if-else:</strong> Không có if-else dài dòng trong Cart — mỗi strategy tự xử lý logic riêng.</li>
+    </ul>
+  </div>
+
+  <!-- UML -->
+  <div class="uml-wrap">
+    <div class="uml-label">📐 Class Diagram — Strategy</div>
+    <svg viewBox="0 0 760 360" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <!-- PaymentStrategy interface -->
+      <rect x="290" y="10" width="200" height="60" rx="5" fill="#1a1e2a" stroke="#4ade80" stroke-width="1.5"/>
+      <rect x="290" y="10" width="200" height="25" rx="5" fill="#0a1e12"/>
+      <text x="390" y="27" text-anchor="middle" fill="#4ade80" font-size="10">«interface»</text>
+      <text x="390" y="42" text-anchor="middle" fill="#4ade80" font-size="12" font-weight="bold">PaymentStrategy</text>
+      <line x1="290" y1="36" x2="490" y2="36" stroke="#252a38"/>
+      <text x="306" y="58" fill="#73daca" font-size="10">+ pay(amount : double) : void</text>
+
+      <!-- Concrete strategies -->
+      <rect x="50" y="150" width="165" height="60" rx="5" fill="#1a1e2a" stroke="#4ade80" stroke-width="1"/>
+      <text x="132" y="170" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">CreditCardPayment</text>
+      <line x1="50" y1="178" x2="215" y2="178" stroke="#252a38"/>
+      <text x="66" y="194" fill="#565f89" font-size="9">— cardNumber : String</text>
+      <text x="66" y="206" fill="#73daca" font-size="9">+ pay(amount) : void</text>
+
+      <rect x="295" y="150" width="200" height="60" rx="5" fill="#1a1e2a" stroke="#4ade80" stroke-width="1"/>
+      <text x="395" y="170" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">PaypalPayment</text>
+      <line x1="295" y1="178" x2="495" y2="178" stroke="#252a38"/>
+      <text x="311" y="194" fill="#565f89" font-size="9">— email : String</text>
+      <text x="311" y="206" fill="#73daca" font-size="9">+ pay(amount) : void</text>
+
+      <rect x="565" y="150" width="165" height="60" rx="5" fill="#1a1e2a" stroke="#4ade80" stroke-width="1"/>
+      <text x="647" y="170" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">CashPayment</text>
+      <line x1="565" y1="178" x2="730" y2="178" stroke="#252a38"/>
+      <text x="581" y="194" fill="#73daca" font-size="9">+ pay(amount) : void</text>
+
+      <!-- implement arrows -->
+      <line x1="132" y1="150" x2="335" y2="70" stroke="#4ade80" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="335,70 328,78 337,82" fill="#4ade80"/>
+      <line x1="395" y1="150" x2="390" y2="70" stroke="#4ade80" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="390,70 385,78 395,78" fill="#4ade80"/>
+      <line x1="647" y1="150" x2="447" y2="70" stroke="#4ade80" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="447,70 452,78 443,80" fill="#4ade80"/>
+
+      <!-- ShoppingCart -->
+      <rect x="250" y="270" width="240" height="80" rx="5" fill="#1a1e2a" stroke="#e0af68" stroke-width="1.5"/>
+      <text x="370" y="290" text-anchor="middle" fill="#e0af68" font-size="12" font-weight="bold">ShoppingCart</text>
+      <line x1="250" y1="296" x2="490" y2="296" stroke="#252a38"/>
+      <text x="266" y="312" fill="#565f89" font-size="9">— items : List&lt;ShoppingItem&gt;</text>
+      <text x="266" y="325" fill="#565f89" font-size="9">— strategy : PaymentStrategy</text>
+      <line x1="250" y1="330" x2="490" y2="330" stroke="#252a38"/>
+      <text x="266" y="344" fill="#73daca" font-size="9">+ addItem() | checkout() | setStrategy()</text>
+
+      <!-- ShoppingCart uses PaymentStrategy -->
+      <line x1="390" y1="270" x2="390" y2="70" stroke="#4ade80" stroke-width="1" stroke-dasharray="3,4"/>
+      <text x="400" y="185" fill="#565f89" font-size="9">uses</text>
+
+      <!-- ShoppingItem -->
+      <rect x="30" y="270" width="155" height="60" rx="5" fill="#1a1e2a" stroke="#252a38" stroke-width="1"/>
+      <text x="107" y="288" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">ShoppingItem</text>
+      <line x1="30" y1="295" x2="185" y2="295" stroke="#252a38"/>
+      <text x="46" y="311" fill="#565f89" font-size="9">— description : String</text>
+      <text x="46" y="323" fill="#565f89" font-size="9">— cost : double</text>
+
+      <line x1="185" y1="300" x2="250" y2="300" stroke="#e0af68" stroke-width="1"/>
+      <polygon points="250,300 244,296 244,304" fill="#e0af68"/>
+      <text x="210" y="293" fill="#565f89" font-size="9">1..*</text>
+    </svg>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+      <span>Strategy + ShoppingCart + Main.java</span>
+    </div>
+    <pre><code><span class="cmt">// ① ShoppingItem (data class)</span>
+<span class="kw">public class</span> <span class="cls">ShoppingItem</span> {
+    <span class="kw">private</span> <span class="cls">String</span> description;
+    <span class="kw">private double</span> cost;
+
+    <span class="kw">public</span> <span class="fn">ShoppingItem</span>(<span class="cls">String</span> description, <span class="kw">double</span> cost) {
+        <span class="kw">this</span>.description = description;
+        <span class="kw">this</span>.cost = cost;
+    }
+
+    <span class="kw">public double</span> <span class="fn">getCost</span>() { <span class="kw">return</span> cost; }
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getDescription</span>() { <span class="kw">return</span> description; }
+}
+
+<span class="cmt">// ② Strategy interface</span>
+<span class="kw">public interface</span> <span class="cls">PaymentStrategy</span> {
+    <span class="kw">void</span> <span class="fn">pay</span>(<span class="kw">double</span> amount);
+}
+
+<span class="cmt">// ③ Concrete Strategies</span>
+<span class="kw">public class</span> <span class="cls">CreditCardPayment</span> <span class="kw">implements</span> <span class="cls">PaymentStrategy</span> {
+    <span class="kw">private</span> <span class="cls">String</span> cardNumber;
+    <span class="kw">public</span> <span class="fn">CreditCardPayment</span>(<span class="cls">String</span> cardNumber) { <span class="kw">this</span>.cardNumber = cardNumber; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">pay</span>(<span class="kw">double</span> amount) {
+        System.out.<span class="fn">printf</span>(<span class="str">"Paid $%.2f using Credit Card (****%s)%n"</span>,
+            amount, cardNumber.<span class="fn">substring</span>(cardNumber.<span class="fn">length</span>() - <span class="num">4</span>));
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">PaypalPayment</span> <span class="kw">implements</span> <span class="cls">PaymentStrategy</span> {
+    <span class="kw">private</span> <span class="cls">String</span> email;
+    <span class="kw">public</span> <span class="fn">PaypalPayment</span>(<span class="cls">String</span> email) { <span class="kw">this</span>.email = email; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">pay</span>(<span class="kw">double</span> amount) {
+        System.out.<span class="fn">printf</span>(<span class="str">"Paid $%.2f via PayPal (%s)%n"</span>, amount, email);
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">CashPayment</span> <span class="kw">implements</span> <span class="cls">PaymentStrategy</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">pay</span>(<span class="kw">double</span> amount) {
+        System.out.<span class="fn">printf</span>(<span class="str">"Paid $%.2f in Cash%n"</span>, amount);
+    }
+}
+
+<span class="cmt">// ④ Context — ShoppingCart</span>
+<span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cls">ShoppingCart</span> {
+    <span class="kw">private</span> <span class="cls">List</span>&lt;<span class="cls">ShoppingItem</span>&gt; items = <span class="kw">new</span> <span class="cls">ArrayList</span>&lt;&gt;();
+    <span class="kw">private</span> <span class="cls">PaymentStrategy</span> strategy;
+
+    <span class="kw">public void</span> <span class="fn">setStrategy</span>(<span class="cls">PaymentStrategy</span> strategy) {
+        <span class="kw">this</span>.strategy = strategy;
+    }
+
+    <span class="kw">public void</span> <span class="fn">addItem</span>(<span class="cls">ShoppingItem</span> item) { items.<span class="fn">add</span>(item); }
+
+    <span class="kw">public void</span> <span class="fn">checkout</span>() {
+        <span class="kw">double</span> total = items.<span class="fn">stream</span>().<span class="fn">mapToDouble</span>(<span class="cls">ShoppingItem</span>::getCost).<span class="fn">sum</span>();
+        System.out.<span class="fn">printf</span>(<span class="str">"Total amount: $%.2f%n"</span>, total);
+        strategy.<span class="fn">pay</span>(total);
+    }
+}
+
+<span class="cmt">// ⑤ Main</span>
+<span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+        <span class="cls">ShoppingCart</span> cart = <span class="kw">new</span> <span class="cls">ShoppingCart</span>();
+        cart.<span class="fn">addItem</span>(<span class="kw">new</span> <span class="cls">ShoppingItem</span>(<span class="str">"Laptop"</span>, <span class="num">80.0</span>));
+        cart.<span class="fn">addItem</span>(<span class="kw">new</span> <span class="cls">ShoppingItem</span>(<span class="str">"Mouse"</span>, <span class="num">20.0</span>));
+
+        cart.<span class="fn">setStrategy</span>(<span class="kw">new</span> <span class="cls">CreditCardPayment</span>(<span class="str">"1234567890123456"</span>));
+        cart.<span class="fn">checkout</span>();
+
+        cart.<span class="fn">setStrategy</span>(<span class="kw">new</span> <span class="cls">PaypalPayment</span>(<span class="str">"user@email.com"</span>));
+        cart.<span class="fn">checkout</span>();
+    }
+}</code></pre>
+  </div>
+
+  <div class="output-label">▶ Output mẫu</div>
+  <div class="output">
+Total amount: $100.00<br>
+Paid $100.00 using Credit Card (****3456)<br>
+Total amount: $100.00<br>
+Paid $100.00 via PayPal (user@email.com)
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ EX 5 — OBSERVER ══════════════ -->
+<section class="section ex-5" id="ex5">
+<div class="container">
+  <p class="section-label">Bài 5 · Behavioral Pattern</p>
+
+  <div class="ex-header exercise">
+    <div class="ex-num">05</div>
+    <h2 class="ex-title">Observer Pattern — News Agency</h2>
+  </div>
+
+  <div class="explain ex-5">
+    <h4>🧠 Phân tích bài toán</h4>
+    <ul>
+      <li><strong>Vấn đề:</strong> NewsAgency cần thông báo tới nhiều subscriber khi có tin tức mới, nhưng không muốn biết cụ thể là ai đang đăng ký.</li>
+      <li><strong>Giải pháp Observer:</strong> Subject (NewsAgency) giữ danh sách Observer, gọi update() trên tất cả khi có sự kiện.</li>
+      <li><strong>Loose coupling:</strong> Subject chỉ biết Observer thông qua interface — có thể thêm/xóa subscriber bất kỳ lúc nào.</li>
+      <li><strong>Thực tế:</strong> Pattern này là nền tảng của event system, React state, RxJava, EventBus…</li>
+    </ul>
+  </div>
+
+  <!-- UML -->
+  <div class="uml-wrap">
+    <div class="uml-label">📐 Class Diagram — Observer</div>
+    <svg viewBox="0 0 760 370" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <!-- Observer interface -->
+      <rect x="520" y="10" width="200" height="60" rx="5" fill="#1a1e2a" stroke="#f472b6" stroke-width="1.5"/>
+      <rect x="520" y="10" width="200" height="25" rx="5" fill="#1e0a18"/>
+      <text x="620" y="27" text-anchor="middle" fill="#f472b6" font-size="10">«interface»</text>
+      <text x="620" y="42" text-anchor="middle" fill="#f472b6" font-size="12" font-weight="bold">Observer</text>
+      <line x1="520" y1="36" x2="720" y2="36" stroke="#252a38"/>
+      <text x="536" y="58" fill="#73daca" font-size="10">+ update(message : String) : void</text>
+
+      <!-- Subject class -->
+      <rect x="40" y="10" width="220" height="110" rx="5" fill="#1a1e2a" stroke="#f472b6" stroke-width="1.5"/>
+      <rect x="40" y="10" width="220" height="22" rx="5" fill="#1e0a18"/>
+      <text x="150" y="25" text-anchor="middle" fill="#f472b6" font-size="12" font-weight="bold">Subject</text>
+      <line x1="40" y1="32" x2="260" y2="32" stroke="#252a38"/>
+      <text x="56" y="49" fill="#565f89" font-size="9">— observers : List&lt;Observer&gt;</text>
+      <line x1="40" y1="56" x2="260" y2="56" stroke="#252a38"/>
+      <text x="56" y="72" fill="#73daca" font-size="9">+ addObserver(o : Observer)</text>
+      <text x="56" y="86" fill="#73daca" font-size="9">+ removeObserver(o : Observer)</text>
+      <text x="56" y="100" fill="#73daca" font-size="9">+ notifyObservers(msg : String)</text>
+
+      <!-- NewsAgency extends Subject -->
+      <rect x="80" y="200" width="180" height="60" rx="5" fill="#1a1e2a" stroke="#f472b6" stroke-width="1.5"/>
+      <rect x="80" y="200" width="180" height="22" rx="5" fill="#1a0d18"/>
+      <text x="170" y="215" text-anchor="middle" fill="#f472b6" font-size="12" font-weight="bold">NewsAgency</text>
+      <line x1="80" y1="222" x2="260" y2="222" stroke="#252a38"/>
+      <text x="96" y="238" fill="#73daca" font-size="9">+ publishNews(news : String)</text>
+      <text x="96" y="252" fill="#565f89" font-size="9">  calls notifyObservers(news)</text>
+
+      <!-- Concrete observers -->
+      <rect x="460" y="200" width="160" height="60" rx="5" fill="#1a1e2a" stroke="#f472b6" stroke-width="1"/>
+      <text x="540" y="220" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">EmailSubscriber</text>
+      <line x1="460" y1="228" x2="620" y2="228" stroke="#252a38"/>
+      <text x="476" y="244" fill="#565f89" font-size="9">— email : String</text>
+      <text x="476" y="257" fill="#73daca" font-size="9">+ update(message)</text>
+
+      <rect x="640" y="200" width="115" height="60" rx="5" fill="#1a1e2a" stroke="#f472b6" stroke-width="1"/>
+      <text x="697" y="220" text-anchor="middle" fill="#7dcfff" font-size="11" font-weight="bold">SMSSubscriber</text>
+      <line x1="640" y1="228" x2="755" y2="228" stroke="#252a38"/>
+      <text x="656" y="244" fill="#565f89" font-size="9">— phone : String</text>
+      <text x="656" y="257" fill="#73daca" font-size="9">+ update(msg)</text>
+
+      <!-- inheritance: NewsAgency extends Subject -->
+      <line x1="170" y1="200" x2="150" y2="120" stroke="#f472b6" stroke-width="1.3"/>
+      <polygon points="150,120 144,128 156,128" fill="none" stroke="#f472b6" stroke-width="1.3"/>
+
+      <!-- implement: EmailSubscriber, SMSSubscriber implement Observer -->
+      <line x1="540" y1="200" x2="580" y2="70" stroke="#f472b6" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="580,70 573,78 581,82" fill="#f472b6"/>
+      <line x1="697" y1="200" x2="670" y2="70" stroke="#f472b6" stroke-width="1" stroke-dasharray="5,3"/>
+      <polygon points="670,70 666,80 675,78" fill="#f472b6"/>
+
+      <!-- Subject observes Observer (association) -->
+      <line x1="260" y1="50" x2="520" y2="40" stroke="#f472b6" stroke-width="1"/>
+      <polygon points="520,40 513,35 513,45" fill="#f472b6"/>
+      <text x="380" y="38" fill="#565f89" font-size="9" text-anchor="middle">notifies  0..*</text>
+
+      <!-- NewsAgency notifyObservers flows down -->
+      <path d="M260,240 Q350,240 460,230" fill="none" stroke="#565f89" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+      <span>Observer + Subject + NewsAgency + Main.java</span>
+    </div>
+    <pre><code><span class="cmt">// ① Observer interface</span>
+<span class="kw">public interface</span> <span class="cls">Observer</span> {
+    <span class="kw">void</span> <span class="fn">update</span>(<span class="cls">String</span> message);
+}
+
+<span class="cmt">// ② Subject class — quản lý danh sách observers</span>
+<span class="kw">import</span> java.util.*;
+<span class="kw">public class</span> <span class="cls">Subject</span> {
+    <span class="kw">private</span> <span class="cls">List</span>&lt;<span class="cls">Observer</span>&gt; observers = <span class="kw">new</span> <span class="cls">ArrayList</span>&lt;&gt;();
+
+    <span class="kw">public void</span> <span class="fn">addObserver</span>(<span class="cls">Observer</span> o) { observers.<span class="fn">add</span>(o); }
+
+    <span class="kw">public void</span> <span class="fn">removeObserver</span>(<span class="cls">Observer</span> o) { observers.<span class="fn">remove</span>(o); }
+
+    <span class="kw">public void</span> <span class="fn">notifyObservers</span>(<span class="cls">String</span> message) {
+        <span class="kw">for</span> (<span class="cls">Observer</span> o : observers) {
+            o.<span class="fn">update</span>(message);
+        }
+    }
+}
+
+<span class="cmt">// ③ Concrete Observers</span>
+<span class="kw">public class</span> <span class="cls">EmailSubscriber</span> <span class="kw">implements</span> <span class="cls">Observer</span> {
+    <span class="kw">private</span> <span class="cls">String</span> email;
+    <span class="kw">public</span> <span class="fn">EmailSubscriber</span>(<span class="cls">String</span> email) { <span class="kw">this</span>.email = email; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">update</span>(<span class="cls">String</span> message) {
+        System.out.<span class="fn">println</span>(<span class="str">"Email Subscriber ["</span> + email + <span class="str">"]: "</span> + message);
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">SMSSubscriber</span> <span class="kw">implements</span> <span class="cls">Observer</span> {
+    <span class="kw">private</span> <span class="cls">String</span> phone;
+    <span class="kw">public</span> <span class="fn">SMSSubscriber</span>(<span class="cls">String</span> phone) { <span class="kw">this</span>.phone = phone; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">update</span>(<span class="cls">String</span> message) {
+        System.out.<span class="fn">println</span>(<span class="str">"SMS Subscriber ["</span> + phone + <span class="str">"]: "</span> + message);
+    }
+}
+
+<span class="cmt">// ④ NewsAgency — publisher</span>
+<span class="kw">public class</span> <span class="cls">NewsAgency</span> <span class="kw">extends</span> <span class="cls">Subject</span> {
+    <span class="kw">public void</span> <span class="fn">publishNews</span>(<span class="cls">String</span> news) {
+        System.out.<span class="fn">println</span>(<span class="str">"\n[NewsAgency] Publishing: "</span> + news);
+        <span class="fn">notifyObservers</span>(news);
+    }
+}
+
+<span class="cmt">// ⑤ Main</span>
+<span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="cls">String</span>[] args) {
+        <span class="cls">NewsAgency</span> agency = <span class="kw">new</span> <span class="cls">NewsAgency</span>();
+
+        <span class="cls">Observer</span> email = <span class="kw">new</span> <span class="cls">EmailSubscriber</span>(<span class="str">"alice@mail.com"</span>);
+        <span class="cls">Observer</span> sms   = <span class="kw">new</span> <span class="cls">SMSSubscriber</span>(<span class="str">"0901234567"</span>);
+
+        agency.<span class="fn">addObserver</span>(email);
+        agency.<span class="fn">addObserver</span>(sms);
+        agency.<span class="fn">publishNews</span>(<span class="str">"Breaking News! AI takes over the world!"</span>);
+
+        <span class="cmt">// Xóa 1 subscriber</span>
+        agency.<span class="fn">removeObserver</span>(sms);
+        agency.<span class="fn">publishNews</span>(<span class="str">"Second headline — SMS không còn nhận được."</span>);
+    }
+}</code></pre>
+  </div>
+
+  <div class="output-label">▶ Output mẫu</div>
+  <div class="output">
+[NewsAgency] Publishing: Breaking News! AI takes over the world!<br>
+Email Subscriber [alice@mail.com]: Breaking News! AI takes over the world!<br>
+SMS Subscriber [0901234567]: Breaking News! AI takes over the world!<br><br>
+[NewsAgency] Publishing: Second headline — SMS không còn nhận được.<br>
+Email Subscriber [alice@mail.com]: Second headline — SMS không còn nhận được.
+  </div>
+
+  <!-- Summary table -->
+  <div style="margin-top:3rem">
+    <p class="section-label">Tổng kết 5 pattern</p>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:.85rem">
+        <thead>
+          <tr style="background:var(--surface2)">
+            <th style="padding:.7rem 1rem;text-align:left;border-bottom:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em">PATTERN</th>
+            <th style="padding:.7rem 1rem;text-align:left;border-bottom:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em">LOẠI</th>
+            <th style="padding:.7rem 1rem;text-align:left;border-bottom:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em">MỤC TIÊU</th>
+            <th style="padding:.7rem 1rem;text-align:left;border-bottom:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em">TỪ KHÓA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.7rem 1rem;color:var(--accent1);font-weight:600">Singleton</td>
+            <td style="padding:.7rem 1rem;color:var(--muted)">Creational</td>
+            <td style="padding:.7rem 1rem">1 instance duy nhất</td>
+            <td style="padding:.7rem 1rem;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted)">private constructor, getInstance()</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.7rem 1rem;color:var(--accent2);font-weight:600">Factory Method</td>
+            <td style="padding:.7rem 1rem;color:var(--muted)">Creational</td>
+            <td style="padding:.7rem 1rem">Tách khởi tạo, mở rộng không sửa</td>
+            <td style="padding:.7rem 1rem;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted)">abstract getShape(), subclass decide</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.7rem 1rem;color:var(--accent3);font-weight:600">Decorator</td>
+            <td style="padding:.7rem 1rem;color:var(--muted)">Structural</td>
+            <td style="padding:.7rem 1rem">Thêm tính năng không kế thừa</td>
+            <td style="padding:.7rem 1rem;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted)">wraps object, same interface</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.7rem 1rem;color:var(--accent4);font-weight:600">Strategy</td>
+            <td style="padding:.7rem 1rem;color:var(--muted)">Behavioral</td>
+            <td style="padding:.7rem 1rem">Thuật toán hoán đổi runtime</td>
+            <td style="padding:.7rem 1rem;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted)">context has strategy, setStrategy()</td>
+          </tr>
+          <tr>
+            <td style="padding:.7rem 1rem;color:var(--accent5);font-weight:600">Observer</td>
+            <td style="padding:.7rem 1rem;color:var(--muted)">Behavioral</td>
+            <td style="padding:.7rem 1rem">Pub-sub, notify nhiều object</td>
+            <td style="padding:.7rem 1rem;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted)">Subject notifyAll, Observer.update()</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <p>CSE 203 · OOD · Lab 7 — Design Patterns Guide</p>
+  <p style="margin-top:.4rem;font-size:.75rem">EIU · Quarter 1, 2024-2025</p>
+</footer>
+
+</body>
+</html>

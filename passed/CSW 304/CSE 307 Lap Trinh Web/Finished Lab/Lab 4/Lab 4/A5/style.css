@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'NhatTang_Font1';
+    src: url(./font/NhatTang_Font1.ttf) format(truetype);
+}
+
+@font-face {
+    font-family: 'NhatTang_Font2';
+    src: url(./font/NhatTang_Font2.TTF) format(truetype);
+}
+
+.font1 {
+    font-family: 'NhatTang_Font1', sans-serif;
+    color: #0094ff;
+}
+
+.font2 {
+    font-family: 'NhatTang_Font2', sans-serif;
+    color: #0094ff;
+}

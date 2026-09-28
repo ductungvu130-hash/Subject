@@ -1,0 +1,865 @@
+|mux818
+VDT_Y[0] <= assignment5:inst2.VDT_Y[0]
+VDT_Y[1] <= assignment5:inst2.VDT_Y[1]
+VDT_Y[2] <= assignment5:inst2.VDT_Y[2]
+VDT_Y[3] <= assignment5:inst2.VDT_Y[3]
+VDT_Y[4] <= assignment5:inst2.VDT_Y[4]
+VDT_Y[5] <= assignment5:inst2.VDT_Y[5]
+VDT_Y[6] <= assignment5:inst2.VDT_Y[6]
+VDT_Y[7] <= assignment5:inst2.VDT_Y[7]
+VDT_S[0] => assignment6:inst1.VDT_S[0]
+VDT_S[0] => assignment6:inst.VDT_S[0]
+VDT_S[1] => assignment6:inst1.VDT_S[1]
+VDT_S[1] => assignment6:inst.VDT_S[1]
+VDT_S[2] => assignment5:inst2.VDT_S
+VDT_A4[0] => assignment6:inst1.VDT_A0[0]
+VDT_A4[1] => assignment6:inst1.VDT_A0[1]
+VDT_A4[2] => assignment6:inst1.VDT_A0[2]
+VDT_A4[3] => assignment6:inst1.VDT_A0[3]
+VDT_A4[4] => assignment6:inst1.VDT_A0[4]
+VDT_A4[5] => assignment6:inst1.VDT_A0[5]
+VDT_A4[6] => assignment6:inst1.VDT_A0[6]
+VDT_A4[7] => assignment6:inst1.VDT_A0[7]
+VDT_A5[0] => assignment6:inst1.VDT_A1[0]
+VDT_A5[1] => assignment6:inst1.VDT_A1[1]
+VDT_A5[2] => assignment6:inst1.VDT_A1[2]
+VDT_A5[3] => assignment6:inst1.VDT_A1[3]
+VDT_A5[4] => assignment6:inst1.VDT_A1[4]
+VDT_A5[5] => assignment6:inst1.VDT_A1[5]
+VDT_A5[6] => assignment6:inst1.VDT_A1[6]
+VDT_A5[7] => assignment6:inst1.VDT_A1[7]
+VDT_A6[0] => assignment6:inst1.VDT_A2[0]
+VDT_A6[1] => assignment6:inst1.VDT_A2[1]
+VDT_A6[2] => assignment6:inst1.VDT_A2[2]
+VDT_A6[3] => assignment6:inst1.VDT_A2[3]
+VDT_A6[4] => assignment6:inst1.VDT_A2[4]
+VDT_A6[5] => assignment6:inst1.VDT_A2[5]
+VDT_A6[6] => assignment6:inst1.VDT_A2[6]
+VDT_A6[7] => assignment6:inst1.VDT_A2[7]
+VDT_A7[0] => assignment6:inst1.VDT_A3[0]
+VDT_A7[1] => assignment6:inst1.VDT_A3[1]
+VDT_A7[2] => assignment6:inst1.VDT_A3[2]
+VDT_A7[3] => assignment6:inst1.VDT_A3[3]
+VDT_A7[4] => assignment6:inst1.VDT_A3[4]
+VDT_A7[5] => assignment6:inst1.VDT_A3[5]
+VDT_A7[6] => assignment6:inst1.VDT_A3[6]
+VDT_A7[7] => assignment6:inst1.VDT_A3[7]
+VDT_A0[0] => assignment6:inst.VDT_A0[0]
+VDT_A0[1] => assignment6:inst.VDT_A0[1]
+VDT_A0[2] => assignment6:inst.VDT_A0[2]
+VDT_A0[3] => assignment6:inst.VDT_A0[3]
+VDT_A0[4] => assignment6:inst.VDT_A0[4]
+VDT_A0[5] => assignment6:inst.VDT_A0[5]
+VDT_A0[6] => assignment6:inst.VDT_A0[6]
+VDT_A0[7] => assignment6:inst.VDT_A0[7]
+VDT_A1[0] => assignment6:inst.VDT_A1[0]
+VDT_A1[1] => assignment6:inst.VDT_A1[1]
+VDT_A1[2] => assignment6:inst.VDT_A1[2]
+VDT_A1[3] => assignment6:inst.VDT_A1[3]
+VDT_A1[4] => assignment6:inst.VDT_A1[4]
+VDT_A1[5] => assignment6:inst.VDT_A1[5]
+VDT_A1[6] => assignment6:inst.VDT_A1[6]
+VDT_A1[7] => assignment6:inst.VDT_A1[7]
+VDT_A2[0] => assignment6:inst.VDT_A2[0]
+VDT_A2[1] => assignment6:inst.VDT_A2[1]
+VDT_A2[2] => assignment6:inst.VDT_A2[2]
+VDT_A2[3] => assignment6:inst.VDT_A2[3]
+VDT_A2[4] => assignment6:inst.VDT_A2[4]
+VDT_A2[5] => assignment6:inst.VDT_A2[5]
+VDT_A2[6] => assignment6:inst.VDT_A2[6]
+VDT_A2[7] => assignment6:inst.VDT_A2[7]
+VDT_A3[0] => assignment6:inst.VDT_A3[0]
+VDT_A3[1] => assignment6:inst.VDT_A3[1]
+VDT_A3[2] => assignment6:inst.VDT_A3[2]
+VDT_A3[3] => assignment6:inst.VDT_A3[3]
+VDT_A3[4] => assignment6:inst.VDT_A3[4]
+VDT_A3[5] => assignment6:inst.VDT_A3[5]
+VDT_A3[6] => assignment6:inst.VDT_A3[6]
+VDT_A3[7] => assignment6:inst.VDT_A3[7]
+
+
+|mux818|assignment5:inst2
+VDT_Y[0] <= Y[0].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[1] <= Y[1].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[2] <= Y[2].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[3] <= Y[3].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[4] <= Y[4].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[5] <= Y[5].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[6] <= Y[6].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[7] <= Y[7].DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => assignment4:inst.VDT_S
+VDT_S => assignment4:inst1.VDT_S
+VDT_S => assignment4:inst2.VDT_S
+VDT_S => assignment4:inst3.VDT_S
+VDT_S => assignment4:inst4.VDT_S
+VDT_S => assignment4:inst6.VDT_S
+VDT_S => assignment4:inst7.VDT_S
+VDT_S => assignment4:inst5.VDT_S
+VDT_A1[0] => assignment4:inst5.VDT_A1
+VDT_A1[1] => assignment4:inst7.VDT_A1
+VDT_A1[2] => assignment4:inst6.VDT_A1
+VDT_A1[3] => assignment4:inst4.VDT_A1
+VDT_A1[4] => assignment4:inst3.VDT_A1
+VDT_A1[5] => assignment4:inst2.VDT_A1
+VDT_A1[6] => assignment4:inst1.VDT_A1
+VDT_A1[7] => assignment4:inst.VDT_A1
+VDT_A0[0] => assignment4:inst5.VDT_A0
+VDT_A0[1] => assignment4:inst7.VDT_A0
+VDT_A0[2] => assignment4:inst6.VDT_A0
+VDT_A0[3] => assignment4:inst4.VDT_A0
+VDT_A0[4] => assignment4:inst3.VDT_A0
+VDT_A0[5] => assignment4:inst2.VDT_A0
+VDT_A0[6] => assignment4:inst1.VDT_A0
+VDT_A0[7] => assignment4:inst.VDT_A0
+
+
+|mux818|assignment5:inst2|assignment4:inst
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment5:inst2|assignment4:inst1
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment5:inst2|assignment4:inst2
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment5:inst2|assignment4:inst3
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment5:inst2|assignment4:inst4
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment5:inst2|assignment4:inst6
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment5:inst2|assignment4:inst7
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment5:inst2|assignment4:inst5
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1
+VDT_Y[0] <= assignment5:inst2.VDT_Y[0]
+VDT_Y[1] <= assignment5:inst2.VDT_Y[1]
+VDT_Y[2] <= assignment5:inst2.VDT_Y[2]
+VDT_Y[3] <= assignment5:inst2.VDT_Y[3]
+VDT_Y[4] <= assignment5:inst2.VDT_Y[4]
+VDT_Y[5] <= assignment5:inst2.VDT_Y[5]
+VDT_Y[6] <= assignment5:inst2.VDT_Y[6]
+VDT_Y[7] <= assignment5:inst2.VDT_Y[7]
+VDT_S[0] => assignment5:inst.VDT_S
+VDT_S[0] => assignment5:inst1.VDT_S
+VDT_S[1] => assignment5:inst2.VDT_S
+VDT_A0[0] => assignment5:inst.VDT_A0[0]
+VDT_A0[1] => assignment5:inst.VDT_A0[1]
+VDT_A0[2] => assignment5:inst.VDT_A0[2]
+VDT_A0[3] => assignment5:inst.VDT_A0[3]
+VDT_A0[4] => assignment5:inst.VDT_A0[4]
+VDT_A0[5] => assignment5:inst.VDT_A0[5]
+VDT_A0[6] => assignment5:inst.VDT_A0[6]
+VDT_A0[7] => assignment5:inst.VDT_A0[7]
+VDT_A1[0] => assignment5:inst.VDT_A1[0]
+VDT_A1[1] => assignment5:inst.VDT_A1[1]
+VDT_A1[2] => assignment5:inst.VDT_A1[2]
+VDT_A1[3] => assignment5:inst.VDT_A1[3]
+VDT_A1[4] => assignment5:inst.VDT_A1[4]
+VDT_A1[5] => assignment5:inst.VDT_A1[5]
+VDT_A1[6] => assignment5:inst.VDT_A1[6]
+VDT_A1[7] => assignment5:inst.VDT_A1[7]
+VDT_A2[0] => assignment5:inst1.VDT_A0[0]
+VDT_A2[1] => assignment5:inst1.VDT_A0[1]
+VDT_A2[2] => assignment5:inst1.VDT_A0[2]
+VDT_A2[3] => assignment5:inst1.VDT_A0[3]
+VDT_A2[4] => assignment5:inst1.VDT_A0[4]
+VDT_A2[5] => assignment5:inst1.VDT_A0[5]
+VDT_A2[6] => assignment5:inst1.VDT_A0[6]
+VDT_A2[7] => assignment5:inst1.VDT_A0[7]
+VDT_A3[0] => assignment5:inst1.VDT_A1[0]
+VDT_A3[1] => assignment5:inst1.VDT_A1[1]
+VDT_A3[2] => assignment5:inst1.VDT_A1[2]
+VDT_A3[3] => assignment5:inst1.VDT_A1[3]
+VDT_A3[4] => assignment5:inst1.VDT_A1[4]
+VDT_A3[5] => assignment5:inst1.VDT_A1[5]
+VDT_A3[6] => assignment5:inst1.VDT_A1[6]
+VDT_A3[7] => assignment5:inst1.VDT_A1[7]
+
+
+|mux818|assignment6:inst1|assignment5:inst2
+VDT_Y[0] <= Y[0].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[1] <= Y[1].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[2] <= Y[2].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[3] <= Y[3].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[4] <= Y[4].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[5] <= Y[5].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[6] <= Y[6].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[7] <= Y[7].DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => assignment4:inst.VDT_S
+VDT_S => assignment4:inst1.VDT_S
+VDT_S => assignment4:inst2.VDT_S
+VDT_S => assignment4:inst3.VDT_S
+VDT_S => assignment4:inst4.VDT_S
+VDT_S => assignment4:inst6.VDT_S
+VDT_S => assignment4:inst7.VDT_S
+VDT_S => assignment4:inst5.VDT_S
+VDT_A1[0] => assignment4:inst5.VDT_A1
+VDT_A1[1] => assignment4:inst7.VDT_A1
+VDT_A1[2] => assignment4:inst6.VDT_A1
+VDT_A1[3] => assignment4:inst4.VDT_A1
+VDT_A1[4] => assignment4:inst3.VDT_A1
+VDT_A1[5] => assignment4:inst2.VDT_A1
+VDT_A1[6] => assignment4:inst1.VDT_A1
+VDT_A1[7] => assignment4:inst.VDT_A1
+VDT_A0[0] => assignment4:inst5.VDT_A0
+VDT_A0[1] => assignment4:inst7.VDT_A0
+VDT_A0[2] => assignment4:inst6.VDT_A0
+VDT_A0[3] => assignment4:inst4.VDT_A0
+VDT_A0[4] => assignment4:inst3.VDT_A0
+VDT_A0[5] => assignment4:inst2.VDT_A0
+VDT_A0[6] => assignment4:inst1.VDT_A0
+VDT_A0[7] => assignment4:inst.VDT_A0
+
+
+|mux818|assignment6:inst1|assignment5:inst2|assignment4:inst
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst2|assignment4:inst1
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst2|assignment4:inst2
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst2|assignment4:inst3
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst2|assignment4:inst4
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst2|assignment4:inst6
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst2|assignment4:inst7
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst2|assignment4:inst5
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst
+VDT_Y[0] <= Y[0].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[1] <= Y[1].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[2] <= Y[2].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[3] <= Y[3].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[4] <= Y[4].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[5] <= Y[5].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[6] <= Y[6].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[7] <= Y[7].DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => assignment4:inst.VDT_S
+VDT_S => assignment4:inst1.VDT_S
+VDT_S => assignment4:inst2.VDT_S
+VDT_S => assignment4:inst3.VDT_S
+VDT_S => assignment4:inst4.VDT_S
+VDT_S => assignment4:inst6.VDT_S
+VDT_S => assignment4:inst7.VDT_S
+VDT_S => assignment4:inst5.VDT_S
+VDT_A1[0] => assignment4:inst5.VDT_A1
+VDT_A1[1] => assignment4:inst7.VDT_A1
+VDT_A1[2] => assignment4:inst6.VDT_A1
+VDT_A1[3] => assignment4:inst4.VDT_A1
+VDT_A1[4] => assignment4:inst3.VDT_A1
+VDT_A1[5] => assignment4:inst2.VDT_A1
+VDT_A1[6] => assignment4:inst1.VDT_A1
+VDT_A1[7] => assignment4:inst.VDT_A1
+VDT_A0[0] => assignment4:inst5.VDT_A0
+VDT_A0[1] => assignment4:inst7.VDT_A0
+VDT_A0[2] => assignment4:inst6.VDT_A0
+VDT_A0[3] => assignment4:inst4.VDT_A0
+VDT_A0[4] => assignment4:inst3.VDT_A0
+VDT_A0[5] => assignment4:inst2.VDT_A0
+VDT_A0[6] => assignment4:inst1.VDT_A0
+VDT_A0[7] => assignment4:inst.VDT_A0
+
+
+|mux818|assignment6:inst1|assignment5:inst|assignment4:inst
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst|assignment4:inst1
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst|assignment4:inst2
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst|assignment4:inst3
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst|assignment4:inst4
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst|assignment4:inst6
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst|assignment4:inst7
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst|assignment4:inst5
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst1
+VDT_Y[0] <= Y[0].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[1] <= Y[1].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[2] <= Y[2].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[3] <= Y[3].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[4] <= Y[4].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[5] <= Y[5].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[6] <= Y[6].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[7] <= Y[7].DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => assignment4:inst.VDT_S
+VDT_S => assignment4:inst1.VDT_S
+VDT_S => assignment4:inst2.VDT_S
+VDT_S => assignment4:inst3.VDT_S
+VDT_S => assignment4:inst4.VDT_S
+VDT_S => assignment4:inst6.VDT_S
+VDT_S => assignment4:inst7.VDT_S
+VDT_S => assignment4:inst5.VDT_S
+VDT_A1[0] => assignment4:inst5.VDT_A1
+VDT_A1[1] => assignment4:inst7.VDT_A1
+VDT_A1[2] => assignment4:inst6.VDT_A1
+VDT_A1[3] => assignment4:inst4.VDT_A1
+VDT_A1[4] => assignment4:inst3.VDT_A1
+VDT_A1[5] => assignment4:inst2.VDT_A1
+VDT_A1[6] => assignment4:inst1.VDT_A1
+VDT_A1[7] => assignment4:inst.VDT_A1
+VDT_A0[0] => assignment4:inst5.VDT_A0
+VDT_A0[1] => assignment4:inst7.VDT_A0
+VDT_A0[2] => assignment4:inst6.VDT_A0
+VDT_A0[3] => assignment4:inst4.VDT_A0
+VDT_A0[4] => assignment4:inst3.VDT_A0
+VDT_A0[5] => assignment4:inst2.VDT_A0
+VDT_A0[6] => assignment4:inst1.VDT_A0
+VDT_A0[7] => assignment4:inst.VDT_A0
+
+
+|mux818|assignment6:inst1|assignment5:inst1|assignment4:inst
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst1|assignment4:inst1
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst1|assignment4:inst2
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst1|assignment4:inst3
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst1|assignment4:inst4
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst1|assignment4:inst6
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst1|assignment4:inst7
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst1|assignment5:inst1|assignment4:inst5
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst
+VDT_Y[0] <= assignment5:inst2.VDT_Y[0]
+VDT_Y[1] <= assignment5:inst2.VDT_Y[1]
+VDT_Y[2] <= assignment5:inst2.VDT_Y[2]
+VDT_Y[3] <= assignment5:inst2.VDT_Y[3]
+VDT_Y[4] <= assignment5:inst2.VDT_Y[4]
+VDT_Y[5] <= assignment5:inst2.VDT_Y[5]
+VDT_Y[6] <= assignment5:inst2.VDT_Y[6]
+VDT_Y[7] <= assignment5:inst2.VDT_Y[7]
+VDT_S[0] => assignment5:inst.VDT_S
+VDT_S[0] => assignment5:inst1.VDT_S
+VDT_S[1] => assignment5:inst2.VDT_S
+VDT_A0[0] => assignment5:inst.VDT_A0[0]
+VDT_A0[1] => assignment5:inst.VDT_A0[1]
+VDT_A0[2] => assignment5:inst.VDT_A0[2]
+VDT_A0[3] => assignment5:inst.VDT_A0[3]
+VDT_A0[4] => assignment5:inst.VDT_A0[4]
+VDT_A0[5] => assignment5:inst.VDT_A0[5]
+VDT_A0[6] => assignment5:inst.VDT_A0[6]
+VDT_A0[7] => assignment5:inst.VDT_A0[7]
+VDT_A1[0] => assignment5:inst.VDT_A1[0]
+VDT_A1[1] => assignment5:inst.VDT_A1[1]
+VDT_A1[2] => assignment5:inst.VDT_A1[2]
+VDT_A1[3] => assignment5:inst.VDT_A1[3]
+VDT_A1[4] => assignment5:inst.VDT_A1[4]
+VDT_A1[5] => assignment5:inst.VDT_A1[5]
+VDT_A1[6] => assignment5:inst.VDT_A1[6]
+VDT_A1[7] => assignment5:inst.VDT_A1[7]
+VDT_A2[0] => assignment5:inst1.VDT_A0[0]
+VDT_A2[1] => assignment5:inst1.VDT_A0[1]
+VDT_A2[2] => assignment5:inst1.VDT_A0[2]
+VDT_A2[3] => assignment5:inst1.VDT_A0[3]
+VDT_A2[4] => assignment5:inst1.VDT_A0[4]
+VDT_A2[5] => assignment5:inst1.VDT_A0[5]
+VDT_A2[6] => assignment5:inst1.VDT_A0[6]
+VDT_A2[7] => assignment5:inst1.VDT_A0[7]
+VDT_A3[0] => assignment5:inst1.VDT_A1[0]
+VDT_A3[1] => assignment5:inst1.VDT_A1[1]
+VDT_A3[2] => assignment5:inst1.VDT_A1[2]
+VDT_A3[3] => assignment5:inst1.VDT_A1[3]
+VDT_A3[4] => assignment5:inst1.VDT_A1[4]
+VDT_A3[5] => assignment5:inst1.VDT_A1[5]
+VDT_A3[6] => assignment5:inst1.VDT_A1[6]
+VDT_A3[7] => assignment5:inst1.VDT_A1[7]
+
+
+|mux818|assignment6:inst|assignment5:inst2
+VDT_Y[0] <= Y[0].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[1] <= Y[1].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[2] <= Y[2].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[3] <= Y[3].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[4] <= Y[4].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[5] <= Y[5].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[6] <= Y[6].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[7] <= Y[7].DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => assignment4:inst.VDT_S
+VDT_S => assignment4:inst1.VDT_S
+VDT_S => assignment4:inst2.VDT_S
+VDT_S => assignment4:inst3.VDT_S
+VDT_S => assignment4:inst4.VDT_S
+VDT_S => assignment4:inst6.VDT_S
+VDT_S => assignment4:inst7.VDT_S
+VDT_S => assignment4:inst5.VDT_S
+VDT_A1[0] => assignment4:inst5.VDT_A1
+VDT_A1[1] => assignment4:inst7.VDT_A1
+VDT_A1[2] => assignment4:inst6.VDT_A1
+VDT_A1[3] => assignment4:inst4.VDT_A1
+VDT_A1[4] => assignment4:inst3.VDT_A1
+VDT_A1[5] => assignment4:inst2.VDT_A1
+VDT_A1[6] => assignment4:inst1.VDT_A1
+VDT_A1[7] => assignment4:inst.VDT_A1
+VDT_A0[0] => assignment4:inst5.VDT_A0
+VDT_A0[1] => assignment4:inst7.VDT_A0
+VDT_A0[2] => assignment4:inst6.VDT_A0
+VDT_A0[3] => assignment4:inst4.VDT_A0
+VDT_A0[4] => assignment4:inst3.VDT_A0
+VDT_A0[5] => assignment4:inst2.VDT_A0
+VDT_A0[6] => assignment4:inst1.VDT_A0
+VDT_A0[7] => assignment4:inst.VDT_A0
+
+
+|mux818|assignment6:inst|assignment5:inst2|assignment4:inst
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst2|assignment4:inst1
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst2|assignment4:inst2
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst2|assignment4:inst3
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst2|assignment4:inst4
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst2|assignment4:inst6
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst2|assignment4:inst7
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst2|assignment4:inst5
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst
+VDT_Y[0] <= Y[0].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[1] <= Y[1].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[2] <= Y[2].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[3] <= Y[3].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[4] <= Y[4].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[5] <= Y[5].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[6] <= Y[6].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[7] <= Y[7].DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => assignment4:inst.VDT_S
+VDT_S => assignment4:inst1.VDT_S
+VDT_S => assignment4:inst2.VDT_S
+VDT_S => assignment4:inst3.VDT_S
+VDT_S => assignment4:inst4.VDT_S
+VDT_S => assignment4:inst6.VDT_S
+VDT_S => assignment4:inst7.VDT_S
+VDT_S => assignment4:inst5.VDT_S
+VDT_A1[0] => assignment4:inst5.VDT_A1
+VDT_A1[1] => assignment4:inst7.VDT_A1
+VDT_A1[2] => assignment4:inst6.VDT_A1
+VDT_A1[3] => assignment4:inst4.VDT_A1
+VDT_A1[4] => assignment4:inst3.VDT_A1
+VDT_A1[5] => assignment4:inst2.VDT_A1
+VDT_A1[6] => assignment4:inst1.VDT_A1
+VDT_A1[7] => assignment4:inst.VDT_A1
+VDT_A0[0] => assignment4:inst5.VDT_A0
+VDT_A0[1] => assignment4:inst7.VDT_A0
+VDT_A0[2] => assignment4:inst6.VDT_A0
+VDT_A0[3] => assignment4:inst4.VDT_A0
+VDT_A0[4] => assignment4:inst3.VDT_A0
+VDT_A0[5] => assignment4:inst2.VDT_A0
+VDT_A0[6] => assignment4:inst1.VDT_A0
+VDT_A0[7] => assignment4:inst.VDT_A0
+
+
+|mux818|assignment6:inst|assignment5:inst|assignment4:inst
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst|assignment4:inst1
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst|assignment4:inst2
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst|assignment4:inst3
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst|assignment4:inst4
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst|assignment4:inst6
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst|assignment4:inst7
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst|assignment4:inst5
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst1
+VDT_Y[0] <= Y[0].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[1] <= Y[1].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[2] <= Y[2].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[3] <= Y[3].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[4] <= Y[4].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[5] <= Y[5].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[6] <= Y[6].DB_MAX_OUTPUT_PORT_TYPE
+VDT_Y[7] <= Y[7].DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => assignment4:inst.VDT_S
+VDT_S => assignment4:inst1.VDT_S
+VDT_S => assignment4:inst2.VDT_S
+VDT_S => assignment4:inst3.VDT_S
+VDT_S => assignment4:inst4.VDT_S
+VDT_S => assignment4:inst6.VDT_S
+VDT_S => assignment4:inst7.VDT_S
+VDT_S => assignment4:inst5.VDT_S
+VDT_A1[0] => assignment4:inst5.VDT_A1
+VDT_A1[1] => assignment4:inst7.VDT_A1
+VDT_A1[2] => assignment4:inst6.VDT_A1
+VDT_A1[3] => assignment4:inst4.VDT_A1
+VDT_A1[4] => assignment4:inst3.VDT_A1
+VDT_A1[5] => assignment4:inst2.VDT_A1
+VDT_A1[6] => assignment4:inst1.VDT_A1
+VDT_A1[7] => assignment4:inst.VDT_A1
+VDT_A0[0] => assignment4:inst5.VDT_A0
+VDT_A0[1] => assignment4:inst7.VDT_A0
+VDT_A0[2] => assignment4:inst6.VDT_A0
+VDT_A0[3] => assignment4:inst4.VDT_A0
+VDT_A0[4] => assignment4:inst3.VDT_A0
+VDT_A0[5] => assignment4:inst2.VDT_A0
+VDT_A0[6] => assignment4:inst1.VDT_A0
+VDT_A0[7] => assignment4:inst.VDT_A0
+
+
+|mux818|assignment6:inst|assignment5:inst1|assignment4:inst
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst1|assignment4:inst1
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst1|assignment4:inst2
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst1|assignment4:inst3
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst1|assignment4:inst4
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst1|assignment4:inst6
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst1|assignment4:inst7
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+
+|mux818|assignment6:inst|assignment5:inst1|assignment4:inst5
+VDT_Y <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+VDT_S => inst2.IN0
+VDT_S => inst.IN0
+VDT_A1 => inst2.IN1
+VDT_A0 => inst1.IN1
+
+

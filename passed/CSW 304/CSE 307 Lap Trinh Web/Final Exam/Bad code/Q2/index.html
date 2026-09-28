@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- Fontawesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <!-- Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+            crossorigin="anonymous"
+        />
+        <!-- My CSS -->
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <div class="container-fluid px-4">
+                <h5 class="text-center top-text py-3 mb-0">BOOK MANAGEMENT SYSTEM</h5>
+                <div class="row">
+                    <div class="col-auto left-col py-2">
+                        <h3>Book Genre</h3>
+                        <ul id="book-ul">
+                            <li>All</li>
+                            <!-- <li>Action and Adventure</li>
+                            <li>Classics</li>
+                            <li>Comic book or Graphic Novel</li>
+                            <li>Detective and Mystery</li> -->
+                        </ul>
+                    </div>
+                    <div class="col ps-3 pt-2">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="m-0">ADD A NEW BOOK</h5>
+                            </div>
+                        </div>
+                        <div class="row mb-4 infor-item">
+                            <div class="col-6 mb-2">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Book Title<span>*</span></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" required id="title-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Authors</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" id="author-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Price</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" id="price-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Quantity<span>*</span></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" required id="quantity-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Image Link</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" id="image-link-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Genre</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <select id="select">
+                                            <option value="" selected>Choose...</option>
+                                            <!-- <option value="1">Action and Adventure</option>
+                                            <option value="2">Classics</option>
+                                            <option value="3">Comic book or Graphic Novel</option>
+                                            <option value="4">Detective and Mystery</option> -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col-8">
+                                        <button type="button" id="add-btn" class="btn btn-outline-primary px-3">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3 class="m-0">BOOK LIST</h3>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <p>Showing in: list style</p>
+                            <div class="d-flex ms-auto search-box" role="search">
+                                <input class="form-control" type="search" placeholder="Book Title" aria-label="Search" id="search-input" />
+                                <button class="btn btn-outline-secondary" type="submit" id="search">Search</button>
+                            </div>
+                        </div>
+                        <div class="row" id="showInforBookList">
+                            <!-- <div class="col-3 mb-3">
+                                <div class="card">
+                                    <img src="image/bookImg.PNG" class="card-img-top" alt="..." />
+                                    <div class="card-body">
+                                        <h6 class="card-title" id="name-book">The Call of the Wild</h6>
+                                        <p class="card-text" id="author-book">Jack London</p>
+                                        <p class="card-text" id="type-book">Action and Adventure</p>
+                                        <p class="card-text" id="quantity-book">In stock: 1</p>
+                                        <p class="card-text" id="price-book">Price: $7</p>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <!-- Java Script Bootstrap -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+            crossorigin="anonymous"
+        ></script>
+        <!-- My JavaScript -->
+        <script>
+            let typeBooks = ["Action and Adventure", "Classics", "Comic book or Graphic Novel", "Detective and Mystery"];
+            let inforBookList = [
+                {
+                    Src: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-7.jpg.webp",
+                    Name: "The Call of the Wild",
+                    Author: "Jack London",
+                    Type: "Action and Adventure",
+                    Quantity: "1",
+                    Price: "7",
+                },
+                {
+                    Src: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-8.jpg.webp",
+                    Name: "The Call of the Wild 1",
+                    Author: "Jack London",
+                    Type: "Classics",
+                    Quantity: "1",
+                    Price: "7",
+                },
+                {
+                    Src: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-9.jpg.webp",
+                    Name: "The Call of the Wild 2",
+                    Author: "Jack London",
+                    Type: "Comic book or Graphic Novel",
+                    Quantity: "1",
+                    Price: "7",
+                },
+                {
+                    Src: "https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/08/anh-con-meo-cute-10.jpg.webp",
+                    Name: "The Call of the Wild 3",
+                    Author: "Jack London",
+                    Type: "Detective and Mystery",
+                    Quantity: "1",
+                    Price: "7",
+                },
+            ];
+
+            for (let eachTypeBook of typeBooks) {
+                $("#book-ul").append(`<li>${eachTypeBook}</li>`);
+                $("#select").append(`<option value="${eachTypeBook}">${eachTypeBook}</option>`);
+            }
+
+            $("#add-btn").on("click", function () {
+                if (check() === true) {
+                    let eachBook = {
+                        Src: $("#image-link-input").val(),
+                        Name: $("#title-input").val(),
+                        Author: $("#author-input").val(),
+                        Type: $("#select").val(),
+                        Quantity: $("#quantity-input").val(),
+                        Price: $("#price-input").val(),
+                    };
+                    let eachInforBook = `
+                                <div class="col-3 mb-3">
+                                    <div class="card">
+                                        <img src="${eachBook.Src}" class="card-img-top" alt="..." />
+                                        <div class="card-body">
+                                            <h6 class="card-title" id="name-book">${eachBook.Name}</h6>
+                                            <p class="card-text" id="author-book">${eachBook.Author}</p>
+                                            <p class="card-text" id="type-book">${eachBook.Type}</p>
+                                            <p class="card-text" id="quantity-book">In stock: ${eachBook.Quantity}</p>
+                                            <p class="card-text" id="price-book">Price: $${eachBook.Price}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+                    $("#showInforBookList").append(eachInforBook);
+                }
+            });
+
+            function check() {
+                if ($("#title-input").val() === "" || $("#quantity-input").val() === "") {
+                    alert("Please complete correct all needed information!");
+                    return false;
+                } else {
+                    let q = +$("#quantity-input").val();
+                    if (!Number.isInteger(q) || q < 0) {
+                        alert("Please complete correct all needed information!");
+                        return false;
+                    }
+                    return true;
+                }
+            }
+
+            showBookList(inforBookList);
+            function showBookList(bookList) {
+                $("#showInforBookList").empty();
+                for (let eachBook of bookList) {
+                    let eachInforBook = `
+                                <div class="col-3 mb-3">
+                                    <div class="card">
+                                        <img src="${eachBook.Src}" class="card-img-top" alt="..." />
+                                        <div class="card-body">
+                                            <h6 class="card-title" id="name-book">${eachBook.Name}</h6>
+                                            <p class="card-text" id="author-book">${eachBook.Author}</p>
+                                            <p class="card-text" id="type-book">${eachBook.Type}</p>
+                                            <p class="card-text" id="quantity-book">In stock: ${eachBook.Quantity}</p>
+                                            <p class="card-text" id="price-book">Price: $${eachBook.Price}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+                    $("#showInforBookList").append(eachInforBook);
+                }
+            }
+
+            $("#search").on("click", function () {
+                let titleBook = $("#search-input").val();
+                if (titleBook === "") return;
+                let bookList = [];
+                for (let eachBook of inforBookList) {
+                    if (eachBook.Name === titleBook) {
+                        bookList.push(eachBook);
+                    }
+                }
+                showBookList(bookList);
+            });
+
+            $("#book-ul").on("click", "li", function () {
+                let typeBook = $(this).text();
+                let bookList = [];
+                for (let eachBook of inforBookList) {
+                    if (eachBook.Type === typeBook) {
+                        bookList.push(eachBook);
+                    }
+                }
+                if (typeBook == "All") showBookList(inforBookList);
+                else showBookList(bookList);
+            });
+        </script>
+    </body>
+</html>

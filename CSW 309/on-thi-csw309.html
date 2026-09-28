@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Ôn thi CSW 309 - Information Systems Analysis and Design</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --ink:#e9e4d8;
+    --paper:#15140f;
+    --line:#3c392e;
+    --accent:#e2924f;
+    --accent-soft:#2c2317;
+    --box:#201e17;
+    --muted:#a89d89;
+    --danger:#e2776a;
+    --danger-soft:#2b1a17;
+    --diagram-bg:#fbf9f3;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    line-height:1.6; font-size:15.5px;
+  }
+  .layout{display:flex; max-width:1200px; margin:0 auto;}
+  nav.toc{
+    width:230px; flex-shrink:0; position:sticky; top:0; align-self:flex-start;
+    height:100vh; overflow-y:auto; padding:24px 14px; border-right:1px solid var(--line);
+    font-size:13px;
+  }
+  nav.toc h3{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 10px 4px;}
+  nav.toc a{display:block; color:var(--ink); text-decoration:none; padding:5px 4px; border-radius:3px;}
+  nav.toc a:hover{background:var(--accent-soft);}
+  main{flex:1; min-width:0; padding:32px 40px 90px;}
+  header.title{border-bottom:3px solid var(--ink); padding-bottom:14px; margin-bottom:28px;}
+  header.title .tag{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:600;}
+  header.title h1{margin:4px 0 6px; font-size:29px;}
+  header.title p{margin:0; color:var(--muted); font-size:14px;}
+  section{margin-bottom:48px; scroll-margin-top:20px;}
+  h2{
+    font-size:20px; border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:16px;
+    display:flex; align-items:baseline; gap:10px;
+  }
+  h2 .num{color:var(--accent); font-size:14px; font-weight:700;}
+  h3{font-size:16px; margin:22px 0 8px;}
+  h4{font-size:14px; margin:14px 0 6px;}
+  p{margin:8px 0;}
+  ul, ol{margin:8px 0; padding-left:22px;}
+  li{margin:3px 0;}
+  .note{
+    background:var(--box); border-left:3px solid var(--accent); padding:10px 14px;
+    font-size:13.5px; margin:14px 0;
+  }
+  .lose-points{
+    background:var(--danger-soft); border-left:3px solid var(--danger); padding:10px 14px;
+    font-size:13.5px; margin:14px 0;
+  }
+  .lose-points h4{margin:0 0 6px; color:var(--danger); font-size:12.5px; text-transform:uppercase; letter-spacing:.03em;}
+  .lose-points ul{margin:4px 0 0;}
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:13.5px;}
+  th, td{border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top;}
+  th{background:var(--box); font-size:12px; text-transform:uppercase; letter-spacing:.03em;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .three-col{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;}
+  @media (max-width:800px){.two-col,.three-col{grid-template-columns:1fr;} nav.toc{display:none;} main{padding:20px;}}
+  .card{border:1px solid var(--line); padding:14px 16px; background:var(--box);}
+  .card h4{margin:0 0 6px; font-size:12.5px; text-transform:uppercase; color:var(--accent);}
+  code{background:var(--box); padding:1px 5px; border-radius:3px; font-family:"Courier New", monospace; font-size:13px;}
+  .diagram{border:1px solid var(--line); background:var(--diagram-bg); padding:10px; margin:14px 0; overflow-x:auto; border-radius:2px;}
+  .diagram svg{display:block; margin:0 auto;}
+  .diagram text{font-family:Arial, Helvetica, sans-serif;}
+  .caption{font-size:12px; color:var(--muted); text-align:center; margin-top:4px;}
+  .checklist li{list-style:none; margin:4px 0; position:relative; padding-left:20px;}
+  .checklist li:before{content:"☐"; position:absolute; left:0; color:var(--accent);}
+  .mistake{color:var(--danger); font-weight:600;}
+  .good{color:#3a6b3a; font-weight:600;}
+  .exam-highlight{border:2px solid var(--accent); padding:16px 18px; background:var(--box);}
+  .exam-highlight h4{margin-top:0; text-transform:uppercase; font-size:13px; color:var(--accent);}
+  .flow{font-size:13.5px;}
+  .flow span{display:inline-block; background:var(--box); border:1px solid var(--line); padding:4px 9px; margin:2px;}
+  .flow .arrow{border:none; background:none; padding:0 2px; color:var(--muted);}
+  .rank{
+    counter-reset:rankcount;
+  }
+  .rank li{counter-increment:rankcount; list-style:none; position:relative; padding-left:30px; margin:8px 0;}
+  .rank li:before{content:counter(rankcount); position:absolute; left:0; top:0; width:20px; height:20px; border-radius:50%;
+    background:var(--danger); color:#fff; font-size:11px; font-weight:700; text-align:center; line-height:20px;}
+  footer{border-top:1px solid var(--line); margin-top:40px; padding-top:14px; font-size:12px; color:var(--muted);}
+  @media print{
+    nav.toc{display:none;}
+    .layout{display:block;}
+    main{padding:0;}
+    a{color:inherit; text-decoration:none;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="toc">
+  <h3>Mục lục</h3>
+  <a href="#top10">★ Top 10 lỗi mất điểm</a>
+  <a href="#cautruc">1. Cấu trúc đề thi</a>
+  <a href="#roadmap">2. Roadmap 7 bước</a>
+  <a href="#req">3. Xác định yêu cầu</a>
+  <a href="#usecase">4. Use Case Diagram</a>
+  <a href="#activity">5. Activity Diagram</a>
+  <a href="#class">6. Class Diagram</a>
+  <a href="#sequence">7. Sequence Diagram</a>
+  <a href="#ui">8. UI Wireframe &amp; Controls</a>
+  <a href="#khung-mau">9. Bộ khung mẫu 5 diagram</a>
+  <a href="#q3">10. Case mẫu Kỳ 3 — walkthrough</a>
+  <a href="#checklist-final">11. Checklist trước khi nộp</a>
+  <a href="#mock-exam">★ Đề thi mẫu — Điều dưỡng</a>
+  <a href="#mock-solution">★ Lời giải mẫu</a>
+</nav>
+
+<main>
+  <header class="title">
+    <div class="tag">CSW 309 — Information Systems Analysis and Design</div>
+    <h1>Tài liệu ôn thi cuối kỳ</h1>
+    <p>Tổng hợp từ Topic 5 (Service-based / Event-based / Big Data / Course Review) và cấu trúc đề thi Kỳ 1, Kỳ 2, Kỳ 3 (2025–2026). Trọng tâm: quy trình phân tích scenario → yêu cầu → 4 loại diagram → UI wireframe, kèm ghi chú những chỗ hay bị trừ điểm.</p>
+  </header>
+
+  <section id="top10">
+    <h2><span class="num">★</span>Top 10 lỗi khiến mất điểm nhiều nhất</h2>
+    <p>Tổng hợp từ mục "Common Mistakes" của từng loại diagram trong slide — đây là những lỗi giảng viên liệt kê rõ ràng, khả năng cao được dùng làm tiêu chí chấm.</p>
+    <ol class="rank">
+      <li><b>Use Case:</b> đưa Database / module nội bộ / bảng dữ liệu vào làm actor hoặc use case — luôn bị trừ vì sai bản chất use case diagram.</li>
+      <li><b>Class Diagram:</b> chỉ vẽ hộp tên class, không có attribute + method bên trong — đây là lỗi phổ biến nhất và mất điểm nặng nhất vì class diagram chiếm 20/35 điểm ở Section 2.</li>
+      <li><b>Class Diagram:</b> thiếu multiplicity trên các association — giám khảo chấm riêng tiêu chí này.</li>
+      <li><b>Activity Diagram:</b> thiếu initial node / final node rõ ràng, hoặc decision node không ghi điều kiện (VD: thiếu nhãn "Yes/No" hay "[available]/[not available]").</li>
+      <li><b>Activity Diagram:</b> gán sai trách nhiệm swimlane (VD: hành động của System lại vẽ trong lane Student) hoặc vẽ Database thành 1 swimlane riêng.</li>
+      <li><b>Sequence Diagram:</b> Actor gọi thẳng vào Database/Repository, bỏ qua tầng Controller/Service — vi phạm nguyên tắc phân lớp.</li>
+      <li><b>Sequence Diagram:</b> thiếu activation bar hoặc thiếu return message (message trả về phải vẽ nét đứt).</li>
+      <li><b>Sequence Diagram:</b> không xử lý nhánh lỗi/không khả dụng (thiếu alt/opt fragment) dù đề luôn có tình huống "not available/invalid".</li>
+      <li><b>UI Wireframe:</b> chỉ liệt kê danh sách field bằng chữ, không vẽ layout — đề yêu cầu "wireframe" nghĩa là phải có bố cục hình khối, không phải danh sách.</li>
+      <li><b>Toàn bộ bài:</b> các diagram không nhất quán với nhau — tên class trong Class Diagram không khớp tên object trong Sequence Diagram, use case không khớp activity. Giám khảo dễ nhận ra và trừ điểm toàn bài.</li>
+    </ol>
+  </section>
+
+  <section id="cautruc">
+    <h2><span class="num">01</span>Cấu trúc đề thi — nhìn 3 kỳ để đoán kỳ tới</h2>
+    <table>
+      <tr><th>Kỳ</th><th>Hình thức</th><th>Case study</th><th>Cấu trúc điểm</th></tr>
+      <tr>
+        <td>Kỳ 1</td>
+        <td>Closed book</td>
+        <td>Library Borrowing System (LBS)</td>
+        <td>S1 (25đ): Req + Use Case · S2 (35đ): Class + Sequence · S3 (40đ): Activity + UI Wireframe</td>
+      </tr>
+      <tr>
+        <td>Kỳ 2</td>
+        <td>Practice on Computer, Open book</td>
+        <td>2 case: Online Banking + Library Management System</td>
+        <td>S1 (40đ): Problem/Req/Use Case cho case Banking · S2 (60đ): Req + <b>DFD</b> + <b>ERD</b> cho case Library</td>
+      </tr>
+      <tr>
+        <td><b>Kỳ 3</b></td>
+        <td><b>Closed Book / Practice on Computer</b></td>
+        <td><b>University Clinic Appointment System</b></td>
+        <td>S1 (25đ): Req + Use Case · S2 (35đ): Class + Sequence · S3 (40đ): Activity + UI Wireframe</td>
+      </tr>
+    </table>
+    <div class="exam-highlight">
+      <h4>Nhận xét — kỳ 3 quay lại đúng format kỳ 1</h4>
+      <p>Kỳ 3 <b>không</b> dùng DFD/ERD (khác kỳ 2) mà quay lại format 3-section giống hệt kỳ 1: <b>25 – 35 – 40</b>. Đây gần như chắc chắn là khung đề của kỳ thi sắp tới. Cần học kỹ 5 kỹ năng: Use Case, Class Diagram, Sequence Diagram, Activity Diagram, UI Wireframe — vẽ bằng <b>draw.io</b>, nộp PDF.</p>
+      <table>
+        <tr><th>Section</th><th>Câu hỏi</th><th>Điểm</th><th>Yêu cầu bắt buộc</th></tr>
+        <tr><td rowspan="2">1 (25đ)</td><td>Q1 Functional Requirements</td><td>10đ</td><td>5 functional requirements</td></tr>
+        <tr><td>Q2 Use Case Diagram</td><td>15đ</td><td>2 actor · ≥6 use case · 1 include · 1 extend</td></tr>
+        <tr><td rowspan="2">2 (35đ)</td><td>Q1 Class Diagram</td><td>20đ</td><td>≥6 class · attribute có kiểu dữ liệu · key operations · multiplicity · ≥1 inheritance · ≥1 aggregation/composition</td></tr>
+        <tr><td>Q2 Sequence Diagram</td><td>15đ</td><td>1 actor + 5 object · message/activation bar/return message</td></tr>
+        <tr><td rowspan="2">3 (40đ)</td><td>Q1 Activity Diagram</td><td>20đ</td><td>3 swimlane · decision node · start/end rõ · control flow</td></tr>
+        <tr><td>Q2 UI Wireframe + Controls</td><td>20đ</td><td>7 vùng bố cục bắt buộc · 5 control/validation</td></tr>
+      </table>
+      <p style="font-size:12.5px;color:var(--muted)">Bảng phân bổ điểm theo từng câu lấy trực tiếp từ đề — bám sát đúng cấu trúc này khi luyện tập để không bỏ sót tiêu chí chấm.</p>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <h2><span class="num">02</span>Roadmap 7 bước (trang 29–30 slide)</h2>
+    <p>Toàn bộ đề thi chỉ là một quy trình lặp lại: đọc scenario → suy ra yêu cầu → vẽ 4 loại diagram → thiết kế UI. Mọi diagram phải <b>mô tả cùng một hệ thống</b> — tính nhất quán (traceability) là điểm cộng lớn, và là điều giám khảo kiểm tra đầu tiên khi chấm cả bài.</p>
+    <div class="flow">
+      <span>Scenario</span><span class="arrow">→</span><span>Requirements</span><span class="arrow">→</span><span>Use Case</span><span class="arrow">→</span><span>Activity</span><span class="arrow">→</span><span>Class</span><span class="arrow">→</span><span>Sequence</span><span class="arrow">→</span><span>UI Wireframe</span>
+    </div>
+    <div class="note">
+      <b>Ví dụ traceability</b> — Requirement: "User submits booking request" phải xuất hiện xuyên suốt:
+      Use case <code>Submit Booking Request</code> → Activity: Enter details → Validate → Check availability → Save → Class: <code>BookingRequest, User, Facility</code> → Sequence: User → UI → Controller → Service → Database → UI: Booking Request Form.
+    </div>
+    <div class="lose-points">
+      <h4>Điểm dễ mất</h4>
+      <ul>
+        <li>Đặt tên class/object khác nhau giữa các diagram (VD: Class Diagram gọi <code>Appointment</code>, Sequence Diagram lại gọi <code>Booking</code>) — luôn dùng đúng một danh từ xuyên suốt bài.</li>
+        <li>Vẽ Use Case xong quên đối chiếu lại với Activity/Sequence — nên vẽ nháp thứ tự Requirement → Use case trước, ghi tên chuẩn ra giấy nháp rồi mới vẽ 4 diagram còn lại theo đúng tên đó.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="req">
+    <h2><span class="num">03</span>Bước 1 — Xác định yêu cầu</h2>
+    <p>Từ scenario, gạch chân từ khóa theo 6 nhóm: <b>actor</b> (ai dùng), <b>verb</b> (hành động), <b>noun</b> (dữ liệu/thực thể), <b>condition</b> (luật), <b>output</b> (báo cáo/thông báo), <b>exception</b> (lỗi/ngoại lệ).</p>
+    <div class="note">Công thức viết functional requirement: <b>The system shall + action + object + condition.</b><br>
+    VD: <i>The system shall check facility availability before saving a booking request.</i></div>
+    <h3>Phân loại yêu cầu — dễ nhầm nhất</h3>
+    <div class="two-col">
+      <div class="card"><h4>Functional requirement</h4><p>Mô tả hệ thống <b>làm gì</b>. VD: "The system shall allow students to submit an appointment request."</p></div>
+      <div class="card"><h4>Non-functional requirement</h4><p>Mô tả hệ thống <b>làm tốt đến mức nào</b> — performance, security, usability, availability. VD: "The system shall respond to search requests within 2 seconds." Đề thường không hỏi riêng phần này nhưng nếu case study có (VD kỳ 2 hỏi rõ), cần phân biệt được với functional.</p></div>
+    </div>
+    <table>
+      <tr><th>Loại</th><th>Ví dụ (case Clinic Appointment)</th></tr>
+      <tr><td>Functional</td><td>Hệ thống cho phép sinh viên tìm kiếm dịch vụ và bác sĩ khả dụng</td></tr>
+      <tr><td>Data</td><td>AppointmentRequest lưu student, doctor, service, date, time, status</td></tr>
+      <tr><td>Business rule</td><td>Sinh viên chỉ được reschedule một cuộc hẹn đã approve một lần</td></tr>
+      <tr><td>Report/Output</td><td>Clinic staff xem báo cáo cơ bản về usage của appointment</td></tr>
+      <tr><td>Exception</td><td>Nếu sinh viên bỏ hẹn không hủy trước, hệ thống tự sinh missed-appointment warning</td></tr>
+    </table>
+    <div class="lose-points">
+      <h4>Điểm dễ mất</h4>
+      <ul>
+        <li>Viết chung chung, không kiểm chứng được: "hệ thống dễ dùng", "hệ thống nhanh" — <span class="mistake">không phải</span> requirement hợp lệ.</li>
+        <li>Nhầm requirement với giải pháp kỹ thuật: "dùng MySQL để lưu dữ liệu" — đây là thiết kế, không phải yêu cầu.</li>
+        <li>Thiếu chủ ngữ actor rõ ràng khiến câu mơ hồ ai làm hành động gì.</li>
+        <li>Bỏ qua business rule ẩn trong đoạn văn (thường nằm ở câu có "may", "must", "once", "automatically").</li>
+        <li>Liệt kê đúng 5 nhưng trùng ý nhau (VD: 2 câu đều nói về "submit request" theo cách khác nhau) — giám khảo chỉ tính 1.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="usecase">
+    <h2><span class="num">04</span>Bước 2 — Use Case Diagram (15đ)</h2>
+    <div class="two-col">
+      <div class="card">
+        <h4>Actor</h4>
+        <p>Người/hệ thống bên ngoài tương tác. <span class="good">Đúng:</span> Student, Clinic Staff, Notification Service (nếu coi là hệ thống ngoài).<br><span class="mistake">Sai:</span> đưa Database, module nội bộ, bảng dữ liệu làm actor.</p>
+      </div>
+      <div class="card">
+        <h4>Use case</h4>
+        <p>Đặt tên = <b>verb + object</b>: Search Clinic Services, Submit Appointment Request, Approve Appointment Request, Reject Appointment Request, Reschedule Appointment, View Appointment Status.</p>
+      </div>
+    </div>
+    <h3>Include vs Extend — quy tắc chiều mũi tên</h3>
+    <ul>
+      <li><b>Include</b> — luôn luôn xảy ra, base use case <b>phụ thuộc</b> vào included use case. Mũi tên nét đứt đi <i>từ base → included</i>: <code>Submit Appointment Request</code> --include--&gt; <code>Validate Request Information</code></li>
+      <li><b>Extend</b> — tùy chọn/điều kiện, extending use case <b>bổ sung thêm</b> cho base. Mũi tên nét đứt đi <i>từ extending → base</i>: <code>Send Rejection Notification</code> --extend--&gt; <code>Reject Appointment Request</code></li>
+    </ul>
+    <div class="note">Mẹo phân biệt nhanh: hỏi "nếu bỏ bước này thì use case chính còn chạy được không?" — Còn chạy được ⇒ Extend. Không chạy được (bắt buộc) ⇒ Include.</div>
+    <div class="diagram">
+      <svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:720px">
+        <rect x="140" y="10" width="610" height="360" fill="none" stroke="#1c1c1c" stroke-width="1.5"/>
+        <text x="155" y="32" font-size="12" fill="#6b6459">Appointment System</text>
+        <g transform="translate(45,150)" stroke="#1c1c1c" stroke-width="1.6" fill="none">
+          <circle cx="0" cy="-28" r="9" fill="#fff"/>
+          <line x1="0" y1="-19" x2="0" y2="12"/>
+          <line x1="-14" y1="-4" x2="14" y2="-4"/>
+          <line x1="0" y1="12" x2="-12" y2="34"/>
+          <line x1="0" y1="12" x2="12" y2="34"/>
+        </g>
+        <text x="45" y="60" text-anchor="middle" font-size="12">Student</text>
+        <g transform="translate(45,290)" stroke="#1c1c1c" stroke-width="1.6" fill="none">
+          <circle cx="0" cy="-28" r="9" fill="#fff"/>
+          <line x1="0" y1="-19" x2="0" y2="12"/>
+          <line x1="-14" y1="-4" x2="14" y2="-4"/>
+          <line x1="0" y1="12" x2="-12" y2="34"/>
+          <line x1="0" y1="12" x2="12" y2="34"/>
+        </g>
+        <text x="45" y="345" text-anchor="middle" font-size="12">Clinic Staff</text>
+        <g font-size="11.5" fill="#1c1c1c">
+          <ellipse cx="270" cy="60" rx="95" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="64" text-anchor="middle">Search Services &amp; Doctors</text>
+          <ellipse cx="270" cy="140" rx="95" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="144" text-anchor="middle">Submit Appointment Request</text>
+          <ellipse cx="530" cy="110" rx="105" ry="24" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="530" y="114" text-anchor="middle">Validate Request Info</text>
+          <ellipse cx="270" cy="220" rx="95" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="224" text-anchor="middle">View Appointment Status</text>
+          <ellipse cx="270" cy="300" rx="95" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="304" text-anchor="middle">Reschedule Appointment</text>
+          <ellipse cx="530" cy="220" rx="105" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="530" y="216" text-anchor="middle">Approve / Reject</text>
+          <text x="530" y="230" text-anchor="middle">Request</text>
+          <ellipse cx="650" cy="300" rx="95" ry="24" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="650" y="296" text-anchor="middle">Send Status</text>
+          <text x="650" y="310" text-anchor="middle">Notification</text>
+        </g>
+        <g stroke="#1c1c1c" stroke-width="1.2">
+          <line x1="70" y1="130" x2="185" y2="70"/>
+          <line x1="70" y1="150" x2="175" y2="140"/>
+          <line x1="70" y1="170" x2="185" y2="215"/>
+          <line x1="70" y1="185" x2="185" y2="292"/>
+          <line x1="70" y1="290" x2="185" y2="225"/>
+        </g>
+        <g stroke="#1c1c1c" stroke-width="1.1" stroke-dasharray="4,3" marker-end="url(#arrow)">
+          <line x1="360" y1="130" x2="440" y2="115"/>
+        </g>
+        <text x="405" y="105" font-size="10" fill="#b5502f">&lt;&lt;include&gt;&gt;</text>
+        <g stroke="#1c1c1c" stroke-width="1.1" stroke-dasharray="4,3" marker-end="url(#arrow)">
+          <line x1="590" y1="270" x2="625" y2="280"/>
+        </g>
+        <text x="580" y="255" font-size="10" fill="#b5502f">&lt;&lt;extend&gt;&gt;</text>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/>
+          </marker>
+        </defs>
+      </svg>
+      <div class="caption">Use Case Diagram mẫu — mô phỏng đúng cấu trúc đề Kỳ 3 (2 actor, include + extend)</div>
+    </div>
+    <div class="lose-points">
+      <h4>Điểm dễ mất</h4>
+      <ul>
+        <li>Actor vẽ <b>bên trong</b> system boundary (phải luôn ở ngoài hình chữ nhật).</li>
+        <li>Association vẽ mũi tên có đầu nhọn (association với actor thường chỉ là đường thẳng, không có arrowhead trừ khi thể hiện navigability).</li>
+        <li>Include/extend bị đảo chiều — nhớ lại quy tắc chiều mũi tên ở trên.</li>
+        <li>Dùng quá 2 include/extend khi đề chỉ yêu cầu "một" — thừa không sai nhưng dễ vẽ nhầm quan hệ, ưu tiên đúng số lượng đề yêu cầu trước.</li>
+        <li>Use case đặt tên là danh từ ("Appointment Request" thay vì "Submit Appointment Request").</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="activity">
+    <h2><span class="num">05</span>Bước 3 — Activity Diagram (20đ)</h2>
+    <p>Yêu cầu chuẩn của đề: <b>swimlane theo actor</b> (VD: Student, System, Clinic Staff), <b>decision node</b>, <b>control flow rõ ràng</b>, có start/end.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:600px">
+        <g font-size="11">
+          <circle cx="30" cy="30" r="9" fill="#1c1c1c"/>
+          <text x="55" y="24" fill="#6b6459">Initial Node</text>
+          <text x="55" y="38" fill="#6b6459">— điểm bắt đầu</text>
+          <rect x="180" y="15" width="90" height="30" rx="14" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="225" y="34" text-anchor="middle">Validate Info</text>
+          <text x="290" y="30" fill="#6b6459">Action — bắt đầu bằng động từ</text>
+          <polygon points="450,10 480,30 450,50 420,30" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="450" y="34" text-anchor="middle" font-size="9">Valid?</text>
+          <text x="495" y="30" fill="#6b6459">Decision node</text>
+          <circle cx="30" cy="100" r="10" fill="none" stroke="#1c1c1c" stroke-width="1.4"/>
+          <circle cx="30" cy="100" r="5" fill="#1c1c1c"/>
+          <text x="55" y="104" fill="#6b6459">Final Node</text>
+          <rect x="180" y="85" width="80" height="140" fill="none" stroke="#1c1c1c"/>
+          <line x1="180" y1="108" x2="260" y2="108" stroke="#1c1c1c"/>
+          <line x1="180" y1="155" x2="260" y2="155" stroke="#1c1c1c"/>
+          <text x="220" y="100" text-anchor="middle" font-size="9">Student</text>
+          <text x="220" y="133" text-anchor="middle" font-size="9">System</text>
+          <text x="220" y="190" text-anchor="middle" font-size="9">Staff</text>
+          <text x="290" y="120" fill="#6b6459">Swimlane —</text>
+          <text x="290" y="134" fill="#6b6459">phân chia trách nhiệm</text>
+          <line x1="380" y1="105" x2="440" y2="105" stroke="#1c1c1c" marker-end="url(#a2)"/>
+          <text x="495" y="108" fill="#6b6459">Control flow</text>
+        </g>
+        <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/></marker></defs>
+      </svg>
+      <div class="caption">Ký hiệu Activity Diagram cần nhớ chính xác (đúng bảng notation trong slide 50)</div>
+    </div>
+    <h3>Fork/Join &amp; Merge — ít dùng nhưng nên biết</h3>
+    <p>Fork (thanh đen) tách 1 luồng thành nhiều nhánh chạy song song; Join gộp lại. Merge node (hình thoi giống decision nhưng gộp nhánh không kèm điều kiện) dùng khi 2 nhánh valid/invalid quay lại cùng 1 điểm tiếp theo. Case Clinic thường không cần fork/join, chỉ cần decision + merge là đủ.</p>
+    <p><b>Case mẫu (Clinic):</b> "Clinic Staff approves or rejects an appointment request" — swimlane Student / System / Clinic Staff, ≥2 decision node (VD: đủ thông tin? doctor còn slot?), có nhánh valid/invalid, kết thúc rõ ràng (Approved / Rejected).</p>
+    <div class="lose-points">
+      <h4>Điểm dễ mất</h4>
+      <ul>
+        <li>Thiếu start/end statement rõ ràng ở mỗi nhánh (mỗi luồng phải kết thúc ở 1 final node, không được để "lửng").</li>
+        <li>Decision node không ghi điều kiện trên nhánh ra (thiếu nhãn Yes/No hoặc [condition]).</li>
+        <li>Mũi tên chồng chéo nhau (overlapping arrows) làm khó đọc — nên xếp swimlane trái→phải theo đúng thứ tự luồng xử lý.</li>
+        <li>Activity không bắt đầu bằng động từ (VD: "Booking Information" thay vì "Enter Booking Information").</li>
+        <li>Gán sai trách nhiệm vào swimlane — hành động validate luôn thuộc System, không thuộc Student.</li>
+        <li>Vẽ Database thành 1 swimlane riêng — Database không phải actor/role, không có lane.</li>
+        <li>Thiếu nhánh lỗi/alternative (VD: quên vẽ trường hợp "reject" khi chỉ vẽ đường "approve").</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="class">
+    <h2><span class="num">06</span>Bước 4 — Class Diagram (20/35 điểm — nặng nhất)</h2>
+    <table>
+      <tr><th>Ký hiệu</th><th>Ý nghĩa</th></tr>
+      <tr><td>—————</td><td>Association — quan hệ giữa 2 class</td></tr>
+      <tr><td>◇——— (rỗng, đặt phía "whole")</td><td>Aggregation — quan hệ "sở hữu" yếu (whole-part), part vẫn tồn tại độc lập nếu whole bị xóa</td></tr>
+      <tr><td>◆——— (đặc, đặt phía "whole")</td><td>Composition — quan hệ "sở hữu" mạnh, part không tồn tại nếu whole bị xóa</td></tr>
+      <tr><td>—▷ (tam giác rỗng)</td><td>Generalization / Inheritance — trỏ về class cha</td></tr>
+      <tr><td>1, 0..1, 0..*, 1..*, *</td><td>Multiplicity — đủ 5 dạng cần nhớ, không chỉ có "1" và "*"</td></tr>
+      <tr><td>+ / − / #</td><td>Public / Private / Protected</td></tr>
+    </table>
+    <div class="diagram">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:660px">
+        <g font-size="11">
+          <rect x="20" y="15" width="150" height="90" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="20" y1="35" x2="170" y2="35" stroke="#1c1c1c"/>
+          <line x1="20" y1="70" x2="170" y2="70" stroke="#1c1c1c"/>
+          <text x="95" y="29" text-anchor="middle" font-weight="bold">User</text>
+          <text x="26" y="48">- id: int</text>
+          <text x="26" y="61">- role: String</text>
+          <text x="26" y="85">+ login()</text>
+          <rect x="20" y="150" width="150" height="60" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="20" y1="170" x2="170" y2="170" stroke="#1c1c1c"/>
+          <text x="95" y="164" text-anchor="middle" font-weight="bold">Student</text>
+          <text x="26" y="185">- studentId: String</text>
+          <text x="26" y="200">+ viewStatus()</text>
+          <line x1="95" y1="105" x2="95" y2="150" stroke="#1c1c1c"/>
+          <polygon points="95,150 88,138 102,138" fill="#fff" stroke="#1c1c1c"/>
+          <text x="105" y="130" font-size="9" fill="#6b6459">inheritance</text>
+          <rect x="280" y="55" width="180" height="110" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="280" y1="75" x2="460" y2="75" stroke="#1c1c1c"/>
+          <line x1="280" y1="120" x2="460" y2="120" stroke="#1c1c1c"/>
+          <text x="370" y="69" text-anchor="middle" font-weight="bold">AppointmentRequest</text>
+          <text x="286" y="88">- date: Date</text>
+          <text x="286" y="101">- time: String</text>
+          <text x="286" y="114">- status: String</text>
+          <text x="286" y="135">+ submit()</text>
+          <text x="286" y="148">+ reschedule()</text>
+          <line x1="170" y1="55" x2="280" y2="90" stroke="#1c1c1c"/>
+          <text x="180" y="48" font-size="9">1</text>
+          <text x="265" y="80" font-size="9">0..*</text>
+          <rect x="530" y="20" width="150" height="80" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="530" y1="40" x2="680" y2="40" stroke="#1c1c1c"/>
+          <line x1="530" y1="68" x2="680" y2="68" stroke="#1c1c1c"/>
+          <text x="605" y="34" text-anchor="middle" font-weight="bold">Doctor</text>
+          <text x="536" y="53">- name: String</text>
+          <text x="536" y="82">+ checkSlot()</text>
+          <line x1="460" y1="80" x2="530" y2="60" stroke="#1c1c1c"/>
+          <text x="470" y="75" font-size="9">0..*</text>
+          <text x="515" y="55" font-size="9">1</text>
+          <rect x="530" y="150" width="150" height="70" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="530" y1="170" x2="680" y2="170" stroke="#1c1c1c"/>
+          <text x="605" y="164" text-anchor="middle" font-weight="bold">ClinicService</text>
+          <text x="536" y="185">- name: String</text>
+          <text x="536" y="198">- fee: double</text>
+          <line x1="460" y1="130" x2="530" y2="175" stroke="#1c1c1c"/>
+          <polygon points="460,130 470,124 470,138" fill="#1c1c1c"/>
+          <text x="470" y="122" font-size="9" fill="#6b6459">composition</text>
+        </g>
+      </svg>
+      <div class="caption">Class Diagram mẫu — đủ inheritance + aggregation/composition + multiplicity như đề yêu cầu</div>
+    </div>
+    <h3>Multiplicity — bảng tra nhanh</h3>
+    <table>
+      <tr><th>Ký hiệu</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td>1</td><td>Đúng 1</td><td>1 AppointmentRequest thuộc đúng 1 Student</td></tr>
+      <tr><td>0..1</td><td>0 hoặc 1</td><td>1 AppointmentRequest có thể chưa có Doctor gán (0..1)</td></tr>
+      <tr><td>0..*</td><td>0 trở lên</td><td>1 Student có thể có 0 hoặc nhiều AppointmentRequest</td></tr>
+      <tr><td>1..*</td><td>Ít nhất 1</td><td>1 Doctor phải có ít nhất 1 DoctorSchedule</td></tr>
+      <tr><td>*</td><td>Không giới hạn (viết tắt của 0..*)</td><td>—</td></tr>
+    </table>
+    <div class="lose-points">
+      <h4>Điểm dễ mất</h4>
+      <ul>
+        <li>Chỉ vẽ hộp tên class, <b>không có attribute/method</b> — mất điểm nặng nhất trong cả bài vì Class Diagram chiếm tỷ trọng cao nhất.</li>
+        <li>Thiếu kiểu dữ liệu cho attribute (VD: viết "- date" thay vì "- date: Date").</li>
+        <li>Thiếu multiplicity ở một hoặc cả hai đầu association.</li>
+        <li>Nhầm aggregation/composition — đặt sai vị trí hình thoi (phải đặt phía class "chứa", không phải phía class "bị chứa").</li>
+        <li>Nhầm relationship với luồng dữ liệu (data flow) kiểu DFD — Class Diagram không có mũi tên chỉ hướng dữ liệu chạy.</li>
+        <li>Đưa actor (Student, Staff) vào làm class dư thừa không cần thiết khi đã có class nghiệp vụ tương ứng.</li>
+        <li>Thiếu ít nhất 1 inheritance hoặc 1 aggregation/composition dù đề bắt buộc — kiểm tra lại trước khi nộp.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="sequence">
+    <h2><span class="num">07</span>Bước 5 — Sequence Diagram (15đ)</h2>
+    <p>Thứ tự lifeline chuẩn theo case Clinic: <b>Student → AppointmentRequestScreen → ClinicServiceCatalog → AppointmentService → DoctorScheduleService → NotificationService</b>.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:680px">
+        <g font-size="10">
+          <g stroke="#c9c2b4" stroke-dasharray="3,3">
+            <line x1="50" y1="45" x2="50" y2="240"/>
+            <line x1="190" y1="45" x2="190" y2="240"/>
+            <line x1="330" y1="45" x2="330" y2="240"/>
+            <line x1="470" y1="45" x2="470" y2="240"/>
+            <line x1="610" y1="45" x2="610" y2="240"/>
+          </g>
+          <g font-weight="bold">
+            <rect x="15" y="15" width="70" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="50" y="32" text-anchor="middle">Student</text>
+            <rect x="130" y="15" width="120" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="190" y="32" text-anchor="middle" font-size="9">RequestScreen</text>
+            <rect x="270" y="15" width="120" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="330" y="32" text-anchor="middle" font-size="9">AppointmentService</text>
+            <rect x="415" y="15" width="110" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="470" y="32" text-anchor="middle" font-size="9">DoctorScheduleService</text>
+            <rect x="565" y="15" width="90" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="610" y="32" text-anchor="middle" font-size="9">NotificationService</text>
+          </g>
+          <rect x="185" y="60" width="10" height="150" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="325" y="80" width="10" height="90" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="465" y="100" width="10" height="40" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="605" y="175" width="10" height="25" fill="#efe2d8" stroke="#1c1c1c"/>
+          <line x1="50" y1="60" x2="185" y2="60" stroke="#1c1c1c" marker-end="url(#a3)"/>
+          <text x="55" y="55">1: submitRequest(doctor, service, time)</text>
+          <line x1="195" y1="80" x2="325" y2="80" stroke="#1c1c1c" marker-end="url(#a3)"/>
+          <text x="200" y="75">2: createRequest()</text>
+          <line x1="335" y1="100" x2="465" y2="100" stroke="#1c1c1c" marker-end="url(#a3)"/>
+          <text x="340" y="95">3: checkAvailability()</text>
+          <line x1="465" y1="120" x2="335" y2="120" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#a4)"/>
+          <text x="340" y="116" fill="#6b6459">4: available</text>
+          <line x1="335" y1="145" x2="195" y2="145" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#a4)"/>
+          <text x="200" y="141" fill="#6b6459">5: status = Pending</text>
+          <line x1="330" y1="175" x2="610" y2="175" stroke="#1c1c1c" marker-end="url(#a3)"/>
+          <text x="340" y="170">6: notify(Student, Staff)</text>
+          <line x1="195" y1="200" x2="50" y2="200" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#a4)"/>
+          <text x="60" y="196" fill="#6b6459">7: show confirmation</text>
+          <rect x="180" y="205" width="330" height="28" fill="none" stroke="#1c1c1c"/>
+          <text x="186" y="216" font-size="9">alt [doctor available]</text>
+          <line x1="180" y1="221" x2="510" y2="221" stroke="#1c1c1c"/>
+          <text x="186" y="230" font-size="9">[not available] → return error message</text>
+        </g>
+        <defs>
+          <marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/></marker>
+          <marker id="a4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6b6459"/></marker>
+        </defs>
+      </svg>
+      <div class="caption">Sequence Diagram mẫu — có activation bar, return message (nét đứt), và alt fragment</div>
+    </div>
+    <h3>Loại message cần phân biệt</h3>
+    <table>
+      <tr><th>Loại</th><th>Vẽ như thế nào</th><th>Khi dùng</th></tr>
+      <tr><td>Synchronous call</td><td>Mũi tên nét liền, đầu đặc</td><td>Gọi và chờ kết quả trả về (phổ biến nhất trong case)</td></tr>
+      <tr><td>Return message</td><td>Mũi tên nét đứt, đầu hở</td><td>Trả kết quả về lifeline gọi</td></tr>
+      <tr><td>Self-message</td><td>Mũi tên vòng lại chính lifeline đó</td><td>Object tự gọi hàm nội bộ, VD validate() tự kiểm tra dữ liệu</td></tr>
+      <tr><td>alt / opt fragment</td><td>Khung chữ nhật có nhãn alt/opt và điều kiện [ ]</td><td>Rẽ nhánh valid/invalid — luôn cần trong bài thi vì case luôn có điều kiện available/not available</td></tr>
+    </table>
+    <div class="lose-points">
+      <h4>Điểm dễ mất</h4>
+      <ul>
+        <li>Thiếu activation bar (thanh hình chữ nhật hẹp trên lifeline khi object đang xử lý).</li>
+        <li>Message không theo đúng thứ tự thời gian (đọc từ trên xuống phải đúng trình tự nghiệp vụ).</li>
+        <li>Actor gọi thẳng vào Database/Repository, bỏ qua Controller/Service — vi phạm tầng kiến trúc.</li>
+        <li>Không có return message (mọi lời gọi synchronous nên có ít nhất 1 message trả kết quả).</li>
+        <li>Không xử lý case invalid/unavailable — thiếu alt fragment dù case luôn có tình huống rẽ nhánh.</li>
+        <li>Vẽ quá nhiều lifeline không cần thiết khiến diagram rối, khó chấm điểm.</li>
+        <li>Tên object trong Sequence Diagram không khớp tên class trong Class Diagram.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ui">
+    <h2><span class="num">08</span>Bước 6 — UI Wireframe &amp; Controls (20đ)</h2>
+    <table>
+      <tr><th>Dữ liệu</th><th>Control phù hợp</th></tr>
+      <tr><td>Doctor / Service</td><td>Dropdown</td></tr>
+      <tr><td>Date</td><td>Date picker</td></tr>
+      <tr><td>Start/End time</td><td>Time picker</td></tr>
+      <tr><td>Purpose / lý do khám</td><td>Text area</td></tr>
+      <tr><td>Status</td><td>Dropdown / Label</td></tr>
+      <tr><td>Approve / Reject</td><td>Button (2 nút riêng)</td></tr>
+    </table>
+    <div class="diagram">
+      <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:420px">
+        <g font-size="10.5" stroke="#1c1c1c" fill="none">
+          <rect x="10" y="10" width="460" height="280"/>
+          <rect x="10" y="10" width="100" height="280"/>
+          <text x="60" y="30" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="9">Navigation</text>
+          <rect x="125" y="25" width="330" height="24"/>
+          <text x="290" y="41" fill="#6b6459" stroke="none" text-anchor="middle" font-size="9">🔍 Search box</text>
+          <rect x="125" y="60" width="155" height="90"/>
+          <text x="202" y="75" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="9">Clinic Service List</text>
+          <rect x="290" y="60" width="165" height="90"/>
+          <text x="372" y="75" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="9">Doctor Availability</text>
+          <rect x="125" y="160" width="330" height="70"/>
+          <text x="290" y="175" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="9">Service / Doctor Detail Panel</text>
+          <rect x="330" y="240" width="125" height="26" fill="#efe2d8"/>
+          <text x="392" y="257" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="9">Request Appointment</text>
+          <rect x="125" y="240" width="190" height="26" stroke-dasharray="3,2"/>
+          <text x="220" y="257" fill="#6b6459" stroke="none" text-anchor="middle" font-size="9">Status / Notification area</text>
+        </g>
+      </svg>
+      <div class="caption">Wireframe mẫu cho "Appointment Request Screen" — đủ 7 vùng đề yêu cầu (nav, search, service list, doctor list, detail panel, button, status)</div>
+    </div>
+    <h3>Validation &amp; Feedback — 3 loại phải có đủ</h3>
+    <div class="three-col">
+      <div class="card"><h4>Validation rule</h4><ul>
+        <li>Doctor / Service bắt buộc chọn</li>
+        <li>Date không được ở quá khứ</li>
+        <li>Start time &lt; End time</li>
+        <li>Không double-booking cùng doctor/slot</li>
+      </ul></div>
+      <div class="card"><h4>Error message</h4><ul>
+        <li>"Please select a doctor."</li>
+        <li>"This time slot is not available."</li>
+        <li>"End time must be later than start time."</li>
+      </ul></div>
+      <div class="card"><h4>Success/Warning message</h4><ul>
+        <li>"Your appointment request is pending approval."</li>
+        <li>"Booking request submitted successfully."</li>
+        <li>Warning nếu cần: "This slot is almost full."</li>
+      </ul></div>
+    </div>
+    <div class="lose-points">
+      <h4>Điểm dễ mất</h4>
+      <ul>
+        <li>Chỉ liệt kê field bằng chữ (danh sách), <b>không vẽ layout hình khối</b> — đề yêu cầu "wireframe", không phải "danh sách trường dữ liệu".</li>
+        <li>Chọn sai loại control (VD: dùng text input tự do cho Date thay vì Date picker).</li>
+        <li>Thiếu validation hoặc thiếu feedback message — đề luôn yêu cầu liệt kê 5 control/validation kèm mô tả rule.</li>
+        <li>Thiếu 1 trong các vùng bắt buộc: navigation area, search box, list, detail panel, action button, status/notification area.</li>
+        <li>Form quá rối, nhồi nhét quá nhiều thông tin không liên quan đến case.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="khung-mau">
+    <h2><span class="num">09</span>Bộ khung mẫu — dựng nhanh 5 diagram trong phòng thi</h2>
+    <p>Đây là "bộ xương" chung cho mỗi loại diagram. Khi vào phòng thi, chỉ cần thay tên actor/class/object theo đúng case study — không cần nghĩ lại bố cục từ đầu. Học thuộc cấu trúc này thay vì học thuộc từng case cụ thể.</p>
+
+    <h3>1. Use Case Diagram — khung 4 bước</h3>
+    <ol>
+      <li>Vẽ hình chữ nhật system boundary, ghi tên hệ thống ở góc trên.</li>
+      <li>Đặt 2 actor <b>ngoài</b> boundary, thường 1 actor "người dùng" bên trái, 1 actor "người quản lý/duyệt" bên trái phía dưới hoặc bên phải.</li>
+      <li>Bên trong: 1 use case "Search/View ___", 1 use case "Submit ___ Request", 1 use case "Validate ___" (sẽ include), 1 use case "Approve/Reject ___", 1 use case "View Status", 1 use case "Manage ___" (dành cho actor quản lý).</li>
+      <li>Nối: Submit ___ Request --include--&gt; Validate ___; Send Rejection Notification --extend--&gt; Reject ___ Request.</li>
+    </ol>
+    <div class="diagram">
+      <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:660px">
+        <rect x="130" y="10" width="560" height="320" fill="none" stroke="#1c1c1c" stroke-width="1.5"/>
+        <text x="145" y="30" font-size="11" fill="#6b6459">[Tên hệ thống]</text>
+        <g transform="translate(45,130)" stroke="#1c1c1c" stroke-width="1.6" fill="none">
+          <circle cx="0" cy="-26" r="8" fill="#fff"/>
+          <line x1="0" y1="-18" x2="0" y2="10"/>
+          <line x1="-12" y1="-4" x2="12" y2="-4"/>
+          <line x1="0" y1="10" x2="-11" y2="30"/>
+          <line x1="0" y1="10" x2="11" y2="30"/>
+        </g>
+        <text x="45" y="55" text-anchor="middle" font-size="10.5">[Actor 1]</text>
+        <g transform="translate(45,250)" stroke="#1c1c1c" stroke-width="1.6" fill="none">
+          <circle cx="0" cy="-26" r="8" fill="#fff"/>
+          <line x1="0" y1="-18" x2="0" y2="10"/>
+          <line x1="-12" y1="-4" x2="12" y2="-4"/>
+          <line x1="0" y1="10" x2="-11" y2="30"/>
+          <line x1="0" y1="10" x2="11" y2="30"/>
+        </g>
+        <text x="45" y="300" text-anchor="middle" font-size="10.5">[Actor 2]</text>
+        <g font-size="10" fill="#1c1c1c">
+          <ellipse cx="260" cy="55" rx="90" ry="22" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="260" y="59" text-anchor="middle">Search / View [đối tượng]</text>
+          <ellipse cx="260" cy="120" rx="90" ry="22" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="260" y="124" text-anchor="middle">Submit [tên] Request</text>
+          <ellipse cx="500" cy="90" rx="95" ry="22" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="500" y="94" text-anchor="middle">Validate [tên] Info</text>
+          <ellipse cx="260" cy="185" rx="90" ry="22" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="260" y="189" text-anchor="middle">View [tên] Status</text>
+          <ellipse cx="260" cy="250" rx="90" ry="22" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="260" y="254" text-anchor="middle">Approve / Reject Request</text>
+          <ellipse cx="260" cy="305" rx="90" ry="22" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="260" y="309" text-anchor="middle">Manage [dữ liệu quản lý]</text>
+          <ellipse cx="500" cy="270" rx="95" ry="22" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="500" y="266" text-anchor="middle">Send Rejection</text>
+          <text x="500" y="280" text-anchor="middle">Notification</text>
+        </g>
+        <g stroke="#1c1c1c" stroke-width="1.1">
+          <line x1="70" y1="110" x2="170" y2="60"/>
+          <line x1="70" y1="130" x2="165" y2="120"/>
+          <line x1="70" y1="150" x2="170" y2="180"/>
+          <line x1="70" y1="245" x2="170" y2="255"/>
+          <line x1="70" y1="260" x2="170" y2="305"/>
+        </g>
+        <g stroke="#1c1c1c" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#akm1)">
+          <line x1="350" y1="110" x2="410" y2="98"/>
+        </g>
+        <text x="365" y="88" font-size="9" fill="#b5502f">&lt;&lt;include&gt;&gt;</text>
+        <g stroke="#1c1c1c" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#akm1)">
+          <line x1="350" y1="258" x2="405" y2="268"/>
+        </g>
+        <text x="335" y="245" font-size="9" fill="#b5502f">&lt;&lt;extend&gt;&gt;</text>
+        <defs><marker id="akm1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/></marker></defs>
+      </svg>
+      <div class="caption">Khung Use Case — chỉ cần thay [Actor], [tên], [đối tượng] theo case thi</div>
+    </div>
+
+    <h3>2. Activity Diagram — khung 3 swimlane</h3>
+    <p>Công thức: <b>Actor nộp → System validate (decision 1) → System kiểm tra điều kiện nghiệp vụ (decision 2) → Actor duyệt (decision 3) → kết thúc riêng cho mỗi nhánh</b>.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:680px">
+        <g font-size="9">
+          <rect x="10" y="10" width="220" height="280" fill="none" stroke="#1c1c1c"/>
+          <rect x="230" y="10" width="240" height="280" fill="none" stroke="#1c1c1c"/>
+          <rect x="470" y="10" width="220" height="280" fill="none" stroke="#1c1c1c"/>
+          <text x="120" y="26" text-anchor="middle" font-weight="bold">[Actor 1 — người nộp]</text>
+          <text x="350" y="26" text-anchor="middle" font-weight="bold">System</text>
+          <text x="580" y="26" text-anchor="middle" font-weight="bold">[Actor 2 — người duyệt]</text>
+          <circle cx="120" cy="50" r="8" fill="#1c1c1c"/>
+          <rect x="70" y="70" width="100" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="120" y="87" text-anchor="middle">Submit [tên] Request</text>
+          <line x1="170" y1="83" x2="255" y2="60" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <rect x="255" y="45" width="120" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="315" y="62" text-anchor="middle">Validate Info</text>
+          <line x1="315" y1="71" x2="315" y2="90" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <polygon points="315,90 340,110 315,130 290,110" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="315" y="113" text-anchor="middle" font-size="7.5">Đủ info?</text>
+          <line x1="340" y1="110" x2="440" y2="110" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <text x="360" y="105" font-size="7.5">No</text>
+          <rect x="440" y="97" width="90" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="485" y="114" text-anchor="middle" font-size="8">Show Error</text>
+          <circle cx="485" cy="150" r="9" fill="none" stroke="#1c1c1c"/><circle cx="485" cy="150" r="4" fill="#1c1c1c"/>
+          <line x1="485" y1="123" x2="485" y2="141" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <line x1="315" y1="130" x2="315" y2="150" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <text x="325" y="143" font-size="7.5">Yes</text>
+          <rect x="255" y="150" width="120" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="315" y="167" text-anchor="middle" font-size="8">Kiểm tra điều kiện</text>
+          <line x1="315" y1="176" x2="315" y2="195" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <polygon points="315,195 340,215 315,235 290,215" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="315" y="218" text-anchor="middle" font-size="7">Hợp lệ?</text>
+          <line x1="340" y1="215" x2="440" y2="215" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <text x="355" y="210" font-size="7.5">No</text>
+          <rect x="440" y="202" width="90" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="485" y="219" text-anchor="middle" font-size="8">Auto-Reject</text>
+          <circle cx="485" cy="255" r="9" fill="none" stroke="#1c1c1c"/><circle cx="485" cy="255" r="4" fill="#1c1c1c"/>
+          <line x1="485" y1="228" x2="485" y2="246" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <line x1="315" y1="235" x2="315" y2="255" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <text x="325" y="248" font-size="7.5">Yes</text>
+          <rect x="255" y="255" width="120" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="315" y="272" text-anchor="middle">Save as Pending</text>
+          <line x1="375" y1="268" x2="580" y2="90" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <rect x="530" y="60" width="100" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="580" y="77" text-anchor="middle" font-size="8">Review Request</text>
+          <line x1="580" y1="86" x2="580" y2="105" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <polygon points="580,105 605,125 580,145 555,125" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="580" y="128" text-anchor="middle" font-size="7.5">Duyệt?</text>
+          <line x1="580" y1="145" x2="580" y2="165" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <text x="590" y="158" font-size="7.5">Yes</text>
+          <rect x="530" y="165" width="100" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="580" y="182" text-anchor="middle" font-size="8">Approve + Notify</text>
+          <circle cx="580" cy="220" r="9" fill="none" stroke="#1c1c1c"/><circle cx="580" cy="220" r="4" fill="#1c1c1c"/>
+          <line x1="580" y1="191" x2="580" y2="211" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <line x1="605" y1="125" x2="650" y2="150" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+          <text x="612" y="140" font-size="7.5">No</text>
+          <rect x="600" y="150" width="85" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="642" y="167" text-anchor="middle" font-size="7.5">Reject + Notify</text>
+          <circle cx="642" cy="205" r="9" fill="none" stroke="#1c1c1c"/><circle cx="642" cy="205" r="4" fill="#1c1c1c"/>
+          <line x1="642" y1="176" x2="642" y2="196" stroke="#1c1c1c" marker-end="url(#akm2)"/>
+        </g>
+        <defs><marker id="akm2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/></marker></defs>
+      </svg>
+      <div class="caption">Khung Activity — luôn có 2 decision ở lane System + 1 decision ở lane Actor duyệt, mỗi nhánh No kết thúc riêng</div>
+    </div>
+
+    <h3>3. Class Diagram — khung 6-8 class</h3>
+    <p>Công thức: <b>1 class cha User → 2 class con (Actor 1, Actor 2) kế thừa → 1 class trung tâm "___Request" liên kết với Actor 1 → 2-3 class dữ liệu liên quan (composition/aggregation với nhau) → 1 class liên kết với ___Request</b>.</p>
+    <table>
+      <tr><th>Vai trò</th><th>Đặt tên gợi ý</th><th>Quan hệ</th></tr>
+      <tr><td>Class cha</td><td>User</td><td>—</td></tr>
+      <tr><td>Class con 1</td><td>[Actor 1] (VD: Student)</td><td>Inheritance từ User</td></tr>
+      <tr><td>Class con 2</td><td>[Actor 2] (VD: Staff)</td><td>Inheritance từ User</td></tr>
+      <tr><td>Class trung tâm</td><td>[Tên]Request</td><td>1 [Actor1] — 0..* [Tên]Request</td></tr>
+      <tr><td>Class "nơi chứa"</td><td>VD: Hospital/Facility</td><td>1 Hospital — 0..* Department (composition)</td></tr>
+      <tr><td>Class "tài nguyên"</td><td>VD: Doctor/Room</td><td>1 Department — 0..* Doctor (aggregation)</td></tr>
+      <tr><td>Class liên kết request</td><td>VD: Schedule/Slot</td><td>[Tên]Request — 1 Schedule (association)</td></tr>
+    </table>
+
+    <h3>4. Sequence Diagram — khung 5 lifeline + alt</h3>
+    <p>Công thức lifeline cố định: <b>Actor → [Tên]RequestScreen → [Tên]Service → [ThựcThểKiểmTra]Service → NotificationService</b>, luôn có 7 message: gửi → tạo request → check điều kiện → trả kết quả → cập nhật status → notify → xác nhận, kèm 1 khối <code>alt</code> cho trường hợp không hợp lệ.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:680px">
+        <g font-size="9.5">
+          <g stroke="#c9c2b4" stroke-dasharray="3,3">
+            <line x1="45" y1="45" x2="45" y2="220"/>
+            <line x1="185" y1="45" x2="185" y2="220"/>
+            <line x1="330" y1="45" x2="330" y2="220"/>
+            <line x1="480" y1="45" x2="480" y2="220"/>
+            <line x1="620" y1="45" x2="620" y2="220"/>
+          </g>
+          <g font-weight="bold">
+            <rect x="10" y="15" width="70" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="45" y="32" text-anchor="middle" font-size="9">[Actor]</text>
+            <rect x="125" y="15" width="120" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="185" y="32" text-anchor="middle" font-size="8.5">[Tên]RequestScreen</text>
+            <rect x="270" y="15" width="120" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="330" y="32" text-anchor="middle" font-size="8.5">[Tên]Service</text>
+            <rect x="425" y="15" width="110" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="480" y="32" text-anchor="middle" font-size="8">[Kiểm tra]Service</text>
+            <rect x="575" y="15" width="90" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="620" y="32" text-anchor="middle" font-size="8.5">NotificationService</text>
+          </g>
+          <rect x="180" y="55" width="10" height="140" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="325" y="72" width="10" height="85" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="475" y="90" width="10" height="35" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="615" y="160" width="10" height="22" fill="#efe2d8" stroke="#1c1c1c"/>
+          <line x1="45" y1="55" x2="180" y2="55" stroke="#1c1c1c" marker-end="url(#akm3)"/>
+          <text x="50" y="51" font-size="8.5">1: submit[Tên]Request(...)</text>
+          <line x1="190" y1="72" x2="325" y2="72" stroke="#1c1c1c" marker-end="url(#akm3)"/>
+          <text x="195" y="68" font-size="8.5">2: createRequest()</text>
+          <line x1="335" y1="90" x2="475" y2="90" stroke="#1c1c1c" marker-end="url(#akm3)"/>
+          <text x="340" y="86" font-size="8.5">3: checkCondition()</text>
+          <line x1="475" y1="108" x2="335" y2="108" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#akm4)"/>
+          <text x="340" y="104" fill="#6b6459" font-size="8.5">4: result</text>
+          <line x1="325" y1="130" x2="190" y2="130" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#akm4)"/>
+          <text x="195" y="126" fill="#6b6459" font-size="8.5">5: status = Pending</text>
+          <line x1="330" y1="157" x2="615" y2="157" stroke="#1c1c1c" marker-end="url(#akm3)"/>
+          <text x="340" y="153" font-size="8.5">6: notify([Actor1], [Actor2])</text>
+          <line x1="190" y1="180" x2="45" y2="180" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#akm4)"/>
+          <text x="55" y="176" fill="#6b6459" font-size="8.5">7: show confirmation</text>
+          <rect x="175" y="188" width="320" height="26" fill="none" stroke="#1c1c1c"/>
+          <text x="181" y="199" font-size="8">alt [điều kiện thỏa mãn]</text>
+          <line x1="175" y1="203" x2="495" y2="203" stroke="#1c1c1c"/>
+          <text x="181" y="211" font-size="8">[không thỏa] → trả thông báo lỗi</text>
+        </g>
+        <defs>
+          <marker id="akm3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/></marker>
+          <marker id="akm4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6b6459"/></marker>
+        </defs>
+      </svg>
+      <div class="caption">Khung Sequence — 5 lifeline cố định, chỉ đổi tên theo case</div>
+    </div>
+
+    <h3>5. UI Wireframe — khung 7 vùng cố định</h3>
+    <p>Mọi màn hình "Request Screen" trong dạng đề này đều có đúng 7 vùng sau — vẽ đúng thứ tự là đủ điểm bố cục:</p>
+    <ol>
+      <li>Navigation area (trái hoặc trên cùng)</li>
+      <li>Search box</li>
+      <li>List thứ nhất (danh mục chính, VD: service/hospital list)</li>
+      <li>List thứ hai (danh mục phụ, VD: doctor/slot availability)</li>
+      <li>Detail panel (thông tin chi tiết mục đã chọn)</li>
+      <li>Nút hành động chính ("Request ___" / "Submit ___")</li>
+      <li>Status/Notification area</li>
+    </ol>
+    <div class="diagram">
+      <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:420px">
+        <g font-size="9.5" stroke="#1c1c1c" fill="none">
+          <rect x="10" y="10" width="460" height="280"/>
+          <rect x="10" y="10" width="100" height="280"/>
+          <text x="60" y="30" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">① Navigation</text>
+          <rect x="125" y="25" width="330" height="24"/>
+          <text x="290" y="41" fill="#6b6459" stroke="none" text-anchor="middle" font-size="8.5">② Search box</text>
+          <rect x="125" y="60" width="155" height="90"/>
+          <text x="202" y="75" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">③ List 1</text>
+          <rect x="290" y="60" width="165" height="90"/>
+          <text x="372" y="75" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">④ List 2</text>
+          <rect x="125" y="160" width="330" height="70"/>
+          <text x="290" y="175" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">⑤ Detail Panel</text>
+          <rect x="330" y="240" width="125" height="26" fill="#efe2d8"/>
+          <text x="392" y="257" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">⑥ Action Button</text>
+          <rect x="125" y="240" width="190" height="26" stroke-dasharray="3,2"/>
+          <text x="220" y="257" fill="#6b6459" stroke="none" text-anchor="middle" font-size="8.5">⑦ Status area</text>
+        </g>
+      </svg>
+      <div class="caption">Khung Wireframe — 7 vùng cố định, chỉ đổi nhãn theo case</div>
+    </div>
+    <div class="note">
+      <b>Mẹo dùng khung mẫu trong phòng thi:</b> đọc scenario xong, viết nhanh ra nháp 2 actor + tên class trung tâm (thường là "[Danh từ chính]Request"). Sau đó áp lần lượt vào 5 khung trên — chỉ mất công thay tên, không cần nghĩ lại bố cục.
+    </div>
+  </section>
+
+  <section id="q3">
+    <h2><span class="num">10</span>Case mẫu Kỳ 3 — walkthrough đầy đủ</h2>
+    <p><b>University Clinic Appointment System.</b> Sinh viên tìm dịch vụ/bác sĩ khả dụng, gửi yêu cầu hẹn. Clinic staff duyệt/từ chối theo lịch bác sĩ và số slot. Hẹn được approve tạo appointment record. Sinh viên xem trạng thái, được reschedule 1 lần. Hệ thống gửi thông báo mỗi khi trạng thái thay đổi và tự tạo missed-appointment warning nếu bỏ hẹn.</p>
+    <table>
+      <tr><th>Bước</th><th>Áp dụng cho case Clinic</th></tr>
+      <tr><td>Actor</td><td>Student, Clinic Staff</td></tr>
+      <tr><td>Use case chính</td><td>Search Services, Submit Request, Approve/Reject, Reschedule, View Status, Manage Doctors/Schedules, View Reports</td></tr>
+      <tr><td>Class chính</td><td>Student, ClinicStaff (kế thừa User), AppointmentRequest, Doctor, ClinicService, DoctorSchedule</td></tr>
+      <tr><td>Sequence chính</td><td>Student requests a clinic appointment — 5 object: AppointmentRequestScreen, ClinicServiceCatalog, AppointmentService, DoctorScheduleService, NotificationService</td></tr>
+      <tr><td>Activity chính</td><td>Clinic Staff approves/rejects — 3 swimlane: Student, System, Clinic Staff</td></tr>
+      <tr><td>UI chính</td><td>Appointment Request Screen — navigation, search box, service list, doctor availability, detail panel, request button, status area</td></tr>
+    </table>
+    <div class="note">
+      <b>Business rule dễ bị bỏ sót trong case này:</b> "Students may reschedule an approved appointment <u>once</u>" — nghĩa là AppointmentRequest cần 1 attribute kiểu <code>rescheduleCount: int</code> hoặc <code>hasBeenRescheduled: boolean</code> để kiểm soát giới hạn 1 lần. Nếu Class Diagram thiếu attribute này, khó thể hiện đúng business rule khi bị hỏi thêm.
+    </div>
+  </section>
+
+  <section id="checklist-final">
+    <h2><span class="num">11</span>Checklist trước khi nộp</h2>
+    <ul class="checklist">
+      <li>5 functional requirement viết đúng format "The system shall..." và không trùng ý</li>
+      <li>Use Case: đủ actor (ngoài system boundary), ≥6 use case, đúng 1 include + 1 extend đúng chiều mũi tên</li>
+      <li>Class Diagram: ≥6 class, mọi attribute có kiểu dữ liệu, ≥1 inheritance, ≥1 aggregation/composition, multiplicity đầy đủ 2 đầu mỗi association</li>
+      <li>Sequence Diagram: đủ activation bar, return message (nét đứt), có alt/opt fragment xử lý invalid</li>
+      <li>Activity Diagram: đủ swimlane đúng trách nhiệm, ≥2 decision node có ghi điều kiện, có start/end, nhánh lỗi</li>
+      <li>UI Wireframe: vẽ layout hình khối (không phải danh sách chữ), đủ 7 vùng + 5 control/validation liệt kê rõ rule và message</li>
+      <li>Tất cả diagram dùng chung một bộ tên class/object/use case (traceability)</li>
+      <li>Xuất PDF đúng format: <code>CSW309_StudentID_FullName</code></li>
+    </ul>
+  </section>
+
+  <section id="mock-exam">
+    <h2><span class="num">★</span>Đề thi mẫu tự luyện — chủ đề Điều dưỡng (spoil từ giảng viên)</h2>
+    <div class="exam-highlight">
+      <p style="margin-top:0"><b>Course code:</b> CSW 309 &nbsp;|&nbsp; <b>Course name:</b> Information Systems Analysis and Design &nbsp;|&nbsp; <b>Exam code:</b> 02 (đề tự luyện) &nbsp;|&nbsp; <b>Duration:</b> 90 phút &nbsp;|&nbsp; <b>Type:</b> Closed Book / Practice on Computer &nbsp;|&nbsp; <b>Maximum mark:</b> 100</p>
+      <p>Đề dựng theo đúng khung Kỳ 3 (25 – 35 – 40), dùng case study liên quan ngành <b>Điều dưỡng (Nursing)</b> của EIU — chủ đề được giáo viên gợi ý/spoil, cần luyện kỹ vì khả năng ra thi cao.</p>
+    </div>
+
+    <h3>CASE STUDY — Nursing Clinical Practicum Placement System</h3>
+    <p>The EIU School of Nursing wants to digitize the clinical practicum placement process for nursing students.</p>
+    <p>Nursing students must complete clinical hours at partner hospitals as part of their program. The system allows students to search available clinical placement slots by hospital, department, and shift schedule. Students submit placement requests. Clinical Instructors review each request and approve or reject it based on hospital department capacity and student eligibility (completed prerequisite courses).</p>
+    <p>When a placement request is approved, the system creates a placement record including the student, hospital, department, mentor nurse, shift date/time, and status. Students can view their placement status and may request to swap an approved shift once if there is a scheduling conflict.</p>
+    <p>The system sends notifications to students when their placement request is submitted, approved, rejected, or swapped. If a student misses a clinical shift without prior notice, the system automatically generates a missed-shift warning and reduces the student's practicum eligibility score.</p>
+    <p>Clinical Instructors can manage hospitals, departments, mentor nurses, and shift schedules. Clinical Instructors can also view basic reports about student clinical hours completed.</p>
+    <p><b>The system includes:</b></p>
+    <ol>
+      <li>Students search hospitals, departments, and available shift slots.</li>
+      <li>Students submit clinical placement requests.</li>
+      <li>Clinical Instructors approve or reject placement requests.</li>
+      <li>Approved requests generate placement records.</li>
+      <li>Students may request one shift swap for an approved placement.</li>
+      <li>Missed-shift warnings are automatically generated.</li>
+      <li>Clinical Instructors manage hospitals, departments, mentor nurses, and shift schedules.</li>
+      <li>Clinical Instructors view clinical hours reports.</li>
+    </ol>
+    <p><i>Use this case for all questions.</i></p>
+
+    <h3>Section 1 (25 marks) — Requirements &amp; Use Case Review</h3>
+    <p><b>Question 1. Identify Functional Requirements (10 pts)</b> — List five (05) functional requirements inferred from the case study.</p>
+    <p><b>Question 2. (15 pts) Draw a Use Case Diagram showing:</b></p>
+    <ul>
+      <li>Actors: Student, Clinical Instructor</li>
+      <li>At least 6 use cases</li>
+      <li>One &lt;&lt;include&gt;&gt; and one &lt;&lt;extend&gt;&gt; relation</li>
+    </ul>
+
+    <h3>Section 2 (35 marks) — UML Class Modeling</h3>
+    <p><b>Question 1. UML Design Class Diagram (20 pts)</b> — Create a UML Class Diagram that includes:</p>
+    <ul>
+      <li>At least 6 domain classes</li>
+      <li>Attributes with data types</li>
+      <li>Key operations (business methods)</li>
+      <li>Associations with multiplicities</li>
+      <li>≥1 inheritance relation</li>
+      <li>≥1 aggregation/composition</li>
+    </ul>
+    <p><b>Question 2. Sequence Diagram (15 pts)</b> — Draw a Sequence Diagram for the main success scenario of the use case: <b>"Student submits a clinical placement request."</b> Include:</p>
+    <ul>
+      <li>Actor: Student</li>
+      <li>Objects: PlacementRequestScreen, HospitalCatalog, PlacementService, ShiftScheduleService, NotificationService</li>
+      <li>Messages, activation bars, and return messages</li>
+    </ul>
+
+    <h3>Section 3 (40 marks) — Activity &amp; UI/UX Design</h3>
+    <p><b>Question 1. Activity Diagram (20 pts)</b> — Draw an Activity Diagram modeling the workflow: <b>"Clinical Instructor approves or rejects a placement request."</b> Include:</p>
+    <ul>
+      <li>Swimlanes: Student, System, Clinical Instructor</li>
+      <li>Decision nodes</li>
+      <li>Clear start/end</li>
+      <li>Control flows</li>
+    </ul>
+    <p><b>Question 2. UI Wireframe &amp; Controls (20 pts)</b> — Design a UI wireframe for the <b>Placement Request Screen</b> and list five (05) controls/validations. Your wireframe must include:</p>
+    <ul>
+      <li>Navigation area</li>
+      <li>Search box</li>
+      <li>Hospital / department list</li>
+      <li>Shift availability list</li>
+      <li>Mentor / shift detail panel</li>
+      <li>"Request Placement" button</li>
+      <li>Status / notification area</li>
+    </ul>
+    <p style="text-align:center;font-style:italic;color:var(--muted)">------ End ------</p>
+  </section>
+
+  <section id="mock-solution">
+    <h2><span class="num">★</span>Lời giải mẫu</h2>
+
+    <h3>Section 1 / Q1 — 5 Functional Requirements</h3>
+    <ol>
+      <li>The system shall allow nursing students to search available clinical placement slots by hospital, department, and shift schedule.</li>
+      <li>The system shall allow students to submit clinical placement requests online.</li>
+      <li>The system shall allow clinical instructors to approve or reject pending placement requests based on department capacity and student eligibility.</li>
+      <li>The system shall allow students to request one shift swap for an approved placement.</li>
+      <li>The system shall automatically generate a missed-shift warning and send status notifications when a placement request is submitted, approved, rejected, or swapped.</li>
+    </ol>
+
+    <h3>Section 1 / Q2 — Use Case Diagram</h3>
+    <div class="diagram">
+      <svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:740px">
+        <rect x="140" y="10" width="630" height="380" fill="none" stroke="#1c1c1c" stroke-width="1.5"/>
+        <text x="155" y="32" font-size="12" fill="#6b6459">Nursing Clinical Practicum System</text>
+        <g transform="translate(45,150)" stroke="#1c1c1c" stroke-width="1.6" fill="none">
+          <circle cx="0" cy="-28" r="9" fill="#fff"/>
+          <line x1="0" y1="-19" x2="0" y2="12"/>
+          <line x1="-14" y1="-4" x2="14" y2="-4"/>
+          <line x1="0" y1="12" x2="-12" y2="34"/>
+          <line x1="0" y1="12" x2="12" y2="34"/>
+        </g>
+        <text x="45" y="60" text-anchor="middle" font-size="12">Student</text>
+        <g transform="translate(45,310)" stroke="#1c1c1c" stroke-width="1.6" fill="none">
+          <circle cx="0" cy="-28" r="9" fill="#fff"/>
+          <line x1="0" y1="-19" x2="0" y2="12"/>
+          <line x1="-14" y1="-4" x2="14" y2="-4"/>
+          <line x1="0" y1="12" x2="-12" y2="34"/>
+          <line x1="0" y1="12" x2="12" y2="34"/>
+        </g>
+        <text x="45" y="365" text-anchor="middle" font-size="11">Clinical Instructor</text>
+        <g font-size="11" fill="#1c1c1c">
+          <ellipse cx="270" cy="50" rx="100" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="54" text-anchor="middle">Search Hospitals &amp; Shifts</text>
+
+          <ellipse cx="270" cy="120" rx="100" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="124" text-anchor="middle">Submit Placement Request</text>
+
+          <ellipse cx="540" cy="90" rx="105" ry="24" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="540" y="94" text-anchor="middle">Validate Request Info</text>
+
+          <ellipse cx="270" cy="190" rx="100" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="194" text-anchor="middle">View Placement Status</text>
+
+          <ellipse cx="270" cy="260" rx="100" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="264" text-anchor="middle">Request Shift Swap</text>
+
+          <ellipse cx="540" cy="260" rx="110" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="540" y="256" text-anchor="middle">Approve / Reject</text>
+          <text x="540" y="270" text-anchor="middle">Placement Request</text>
+
+          <ellipse cx="270" cy="330" rx="100" ry="24" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="270" y="326" text-anchor="middle">Manage Hospitals,</text>
+          <text x="270" y="340" text-anchor="middle">Depts &amp; Shifts</text>
+
+          <ellipse cx="670" cy="330" rx="90" ry="24" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="670" y="326" text-anchor="middle">Send Rejection</text>
+          <text x="670" y="340" text-anchor="middle">Notification</text>
+        </g>
+        <g stroke="#1c1c1c" stroke-width="1.2">
+          <line x1="70" y1="130" x2="185" y2="60"/>
+          <line x1="70" y1="150" x2="175" y2="120"/>
+          <line x1="70" y1="170" x2="185" y2="185"/>
+          <line x1="70" y1="185" x2="185" y2="255"/>
+          <line x1="70" y1="290" x2="185" y2="335"/>
+          <line x1="70" y1="285" x2="185" y2="265"/>
+        </g>
+        <g stroke="#1c1c1c" stroke-width="1.1" stroke-dasharray="4,3" marker-end="url(#armk)">
+          <line x1="365" y1="105" x2="450" y2="95"/>
+        </g>
+        <text x="400" y="85" font-size="10" fill="#b5502f">&lt;&lt;include&gt;&gt;</text>
+        <g stroke="#1c1c1c" stroke-width="1.1" stroke-dasharray="4,3" marker-end="url(#armk)">
+          <line x1="620" y1="300" x2="655" y2="315"/>
+        </g>
+        <text x="600" y="290" font-size="10" fill="#b5502f">&lt;&lt;extend&gt;&gt;</text>
+        <defs>
+          <marker id="armk" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/>
+          </marker>
+        </defs>
+      </svg>
+      <div class="caption">Include: Submit Placement Request → Validate Request Info · Extend: Send Rejection Notification → Approve/Reject Placement Request</div>
+    </div>
+
+    <h3>Section 2 / Q1 — Class Diagram</h3>
+    <table>
+      <tr><th>Class</th><th>Attributes (kiểu dữ liệu)</th><th>Methods</th></tr>
+      <tr><td>User <i>(abstract, class cha)</i></td><td>- userId: int · - name: String · - email: String</td><td>+ login()</td></tr>
+      <tr><td>Student <i>(kế thừa User)</i></td><td>- studentId: String · - eligibilityScore: double</td><td>+ viewStatus() · + requestSwap()</td></tr>
+      <tr><td>ClinicalInstructor <i>(kế thừa User)</i></td><td>- instructorId: String</td><td>+ approveRequest() · + rejectRequest()</td></tr>
+      <tr><td>Hospital</td><td>- hospitalId: int · - name: String · - address: String</td><td>+ listDepartments()</td></tr>
+      <tr><td>Department</td><td>- departmentId: int · - name: String · - capacity: int</td><td>+ checkCapacity()</td></tr>
+      <tr><td>MentorNurse</td><td>- mentorId: int · - name: String · - specialty: String</td><td>—</td></tr>
+      <tr><td>ShiftSchedule</td><td>- shiftId: int · - date: Date · - startTime: String · - endTime: String · - slotsAvailable: int</td><td>+ checkAvailability()</td></tr>
+      <tr><td>PlacementRequest</td><td>- requestId: int · - status: String · - submittedDate: Date · - swapCount: int</td><td>+ submit() · + approve() · + reject() · + requestSwap()</td></tr>
+    </table>
+    <div class="diagram">
+      <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:720px">
+        <g font-size="10">
+          <!-- User -->
+          <rect x="270" y="10" width="150" height="70" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="270" y1="28" x2="420" y2="28" stroke="#1c1c1c"/>
+          <line x1="270" y1="55" x2="420" y2="55" stroke="#1c1c1c"/>
+          <text x="345" y="22" text-anchor="middle" font-weight="bold">User</text>
+          <text x="275" y="40">- userId: int</text>
+          <text x="275" y="52">- email: String</text>
+          <text x="275" y="70">+ login()</text>
+
+          <!-- Student -->
+          <rect x="150" y="130" width="150" height="65" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="150" y1="148" x2="300" y2="148" stroke="#1c1c1c"/>
+          <line x1="150" y1="172" x2="300" y2="172" stroke="#1c1c1c"/>
+          <text x="225" y="142" text-anchor="middle" font-weight="bold">Student</text>
+          <text x="155" y="162">- eligibilityScore: double</text>
+          <text x="155" y="188">+ requestSwap()</text>
+          <line x1="320" y1="80" x2="240" y2="130" stroke="#1c1c1c"/>
+          <polygon points="240,130 250,120 258,132" fill="#fff" stroke="#1c1c1c"/>
+
+          <!-- ClinicalInstructor -->
+          <rect x="400" y="130" width="160" height="55" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="400" y1="148" x2="560" y2="148" stroke="#1c1c1c"/>
+          <text x="480" y="142" text-anchor="middle" font-weight="bold">ClinicalInstructor</text>
+          <text x="405" y="162">+ approveRequest()</text>
+          <line x1="360" y1="80" x2="450" y2="130" stroke="#1c1c1c"/>
+          <polygon points="450,130 435,124 442,136" fill="#fff" stroke="#1c1c1c"/>
+          <text x="440" y="105" font-size="8.5" fill="#6b6459">inheritance</text>
+
+          <!-- Hospital -->
+          <rect x="10" y="230" width="140" height="50" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="10" y1="248" x2="150" y2="248" stroke="#1c1c1c"/>
+          <text x="80" y="242" text-anchor="middle" font-weight="bold">Hospital</text>
+          <text x="15" y="262">- name: String</text>
+
+          <!-- Department -->
+          <rect x="170" y="230" width="140" height="50" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="170" y1="248" x2="310" y2="248" stroke="#1c1c1c"/>
+          <text x="240" y="242" text-anchor="middle" font-weight="bold">Department</text>
+          <text x="175" y="262">- capacity: int</text>
+          <line x1="150" y1="255" x2="170" y2="255" stroke="#1c1c1c"/>
+          <polygon points="150,255 160,249 160,261" fill="#1c1c1c"/>
+          <text x="152" y="270" font-size="8" fill="#6b6459">1</text>
+          <text x="315" y="270" font-size="8" fill="#6b6459">0..*</text>
+
+          <!-- ShiftSchedule -->
+          <rect x="330" y="230" width="150" height="60" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="330" y1="248" x2="480" y2="248" stroke="#1c1c1c"/>
+          <text x="405" y="242" text-anchor="middle" font-weight="bold">ShiftSchedule</text>
+          <text x="335" y="262">- date: Date</text>
+          <text x="335" y="274">- slotsAvailable: int</text>
+          <line x1="310" y1="255" x2="330" y2="255" stroke="#1c1c1c"/>
+          <text x="315" y="270" font-size="8" fill="#6b6459">1</text>
+          <text x="485" y="270" font-size="8" fill="#6b6459">0..*</text>
+
+          <!-- MentorNurse -->
+          <rect x="560" y="220" width="150" height="55" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="560" y1="238" x2="710" y2="238" stroke="#1c1c1c"/>
+          <text x="635" y="232" text-anchor="middle" font-weight="bold">MentorNurse</text>
+          <text x="565" y="252">- specialty: String</text>
+          <line x1="480" y1="250" x2="560" y2="245" stroke="#1c1c1c"/>
+          <text x="490" y="265" font-size="8" fill="#6b6459">0..1</text>
+
+          <!-- PlacementRequest -->
+          <rect x="540" y="30" width="180" height="90" fill="#fff" stroke="#1c1c1c"/>
+          <line x1="540" y1="48" x2="720" y2="48" stroke="#1c1c1c"/>
+          <line x1="540" y1="70" x2="720" y2="70" stroke="#1c1c1c"/>
+          <text x="630" y="42" text-anchor="middle" font-weight="bold">PlacementRequest</text>
+          <text x="545" y="61">- status: String</text>
+          <text x="545" y="82">+ submit()</text>
+          <text x="545" y="94">+ approve() / reject()</text>
+          <text x="545" y="106">+ requestSwap()</text>
+          <line x1="225" y1="130" x2="580" y2="120" stroke="#1c1c1c"/>
+          <text x="230" y="126" font-size="8" fill="#6b6459">1 (Student)</text>
+          <text x="555" y="118" font-size="8" fill="#6b6459">0..*</text>
+        </g>
+      </svg>
+      <div class="caption">Class Diagram — Student/ClinicalInstructor kế thừa User; Hospital-Department là composition; PlacementRequest liên kết Student, ShiftSchedule</div>
+    </div>
+
+    <h3>Section 2 / Q2 — Sequence Diagram: "Student submits a clinical placement request"</h3>
+    <div class="diagram">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:680px">
+        <g font-size="9.5">
+          <g stroke="#c9c2b4" stroke-dasharray="3,3">
+            <line x1="45" y1="45" x2="45" y2="240"/>
+            <line x1="185" y1="45" x2="185" y2="240"/>
+            <line x1="330" y1="45" x2="330" y2="240"/>
+            <line x1="480" y1="45" x2="480" y2="240"/>
+            <line x1="620" y1="45" x2="620" y2="240"/>
+          </g>
+          <g font-weight="bold">
+            <rect x="10" y="15" width="70" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="45" y="32" text-anchor="middle">Student</text>
+            <rect x="125" y="15" width="120" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="185" y="32" text-anchor="middle" font-size="8.5">RequestScreen</text>
+            <rect x="270" y="15" width="120" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="330" y="32" text-anchor="middle" font-size="8.5">PlacementService</text>
+            <rect x="425" y="15" width="110" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="480" y="32" text-anchor="middle" font-size="8.5">ShiftScheduleService</text>
+            <rect x="575" y="15" width="90" height="26" fill="#f3f0e9" stroke="#1c1c1c"/>
+            <text x="620" y="32" text-anchor="middle" font-size="8.5">NotificationService</text>
+          </g>
+          <rect x="180" y="60" width="10" height="150" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="325" y="80" width="10" height="90" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="475" y="100" width="10" height="40" fill="#efe2d8" stroke="#1c1c1c"/>
+          <rect x="615" y="175" width="10" height="25" fill="#efe2d8" stroke="#1c1c1c"/>
+
+          <line x1="45" y1="60" x2="180" y2="60" stroke="#1c1c1c" marker-end="url(#am1)"/>
+          <text x="50" y="55">1: submitRequest(hospital, dept, shift)</text>
+          <line x1="190" y1="80" x2="325" y2="80" stroke="#1c1c1c" marker-end="url(#am1)"/>
+          <text x="195" y="75">2: createRequest()</text>
+          <line x1="335" y1="100" x2="475" y2="100" stroke="#1c1c1c" marker-end="url(#am1)"/>
+          <text x="340" y="95">3: checkSlotAvailability()</text>
+          <line x1="475" y1="120" x2="335" y2="120" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#am2)"/>
+          <text x="340" y="116" fill="#6b6459">4: available</text>
+          <line x1="325" y1="145" x2="190" y2="145" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#am2)"/>
+          <text x="195" y="141" fill="#6b6459">5: status = Pending</text>
+          <line x1="330" y1="175" x2="615" y2="175" stroke="#1c1c1c" marker-end="url(#am1)"/>
+          <text x="340" y="170">6: notify(Student, Instructor)</text>
+          <line x1="190" y1="200" x2="45" y2="200" stroke="#6b6459" stroke-dasharray="4,3" marker-end="url(#am2)"/>
+          <text x="55" y="196" fill="#6b6459">7: show confirmation</text>
+          <rect x="175" y="205" width="320" height="28" fill="none" stroke="#1c1c1c"/>
+          <text x="181" y="216" font-size="8.5">alt [slot available]</text>
+          <line x1="175" y1="221" x2="495" y2="221" stroke="#1c1c1c"/>
+          <text x="181" y="230" font-size="8.5">[not available] → return "Slot not available" error</text>
+        </g>
+        <defs>
+          <marker id="am1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/></marker>
+          <marker id="am2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6b6459"/></marker>
+        </defs>
+      </svg>
+      <div class="caption">7 message chính + 1 alt fragment xử lý trường hợp hết slot</div>
+    </div>
+
+    <h3>Section 3 / Q1 — Activity Diagram: "Clinical Instructor approves or rejects a placement request"</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>Student lane</h4>
+        <p>① Submit placement request → (chờ) → nhận notification kết quả → End</p>
+      </div>
+      <div class="card">
+        <h4>System lane</h4>
+        <p>② Validate request information → Decision <i>"Info complete?"</i> — No → show error, End · Yes → ③ Check department capacity &amp; eligibility → Decision <i>"Eligible &amp; slot available?"</i> — No → auto-reject, notify Student, End · Yes → Save as Pending → route to Clinical Instructor</p>
+      </div>
+      <div class="card">
+        <h4>Clinical Instructor lane</h4>
+        <p>④ Review pending request → Decision <i>"Approve?"</i> — Yes → Approve request → System creates placement record + notify Student → End · No → Reject request → System notifies Student → End</p>
+      </div>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:680px">
+        <g font-size="9">
+          <!-- lanes -->
+          <rect x="10" y="10" width="220" height="280" fill="none" stroke="#1c1c1c"/>
+          <rect x="230" y="10" width="240" height="280" fill="none" stroke="#1c1c1c"/>
+          <rect x="470" y="10" width="220" height="280" fill="none" stroke="#1c1c1c"/>
+          <text x="120" y="26" text-anchor="middle" font-weight="bold">Student</text>
+          <text x="350" y="26" text-anchor="middle" font-weight="bold">System</text>
+          <text x="580" y="26" text-anchor="middle" font-weight="bold">Clinical Instructor</text>
+
+          <circle cx="120" cy="50" r="8" fill="#1c1c1c"/>
+          <rect x="75" y="70" width="90" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="120" y="87" text-anchor="middle">Submit Request</text>
+
+          <line x1="165" y1="83" x2="255" y2="60" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <rect x="255" y="45" width="120" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="315" y="62" text-anchor="middle">Validate Info</text>
+
+          <line x1="315" y1="71" x2="315" y2="90" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <polygon points="315,90 340,110 315,130 290,110" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="315" y="113" text-anchor="middle" font-size="7.5">Complete?</text>
+
+          <line x1="340" y1="110" x2="440" y2="110" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <text x="360" y="105" font-size="7.5">No</text>
+          <rect x="440" y="97" width="90" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="485" y="114" text-anchor="middle" font-size="8">Show Error</text>
+          <circle cx="485" cy="150" r="9" fill="none" stroke="#1c1c1c"/><circle cx="485" cy="150" r="4" fill="#1c1c1c"/>
+          <line x1="485" y1="123" x2="485" y2="141" stroke="#1c1c1c" marker-end="url(#af1)"/>
+
+          <line x1="315" y1="130" x2="315" y2="150" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <text x="325" y="143" font-size="7.5">Yes</text>
+          <rect x="255" y="150" width="120" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="315" y="167" text-anchor="middle" font-size="8">Check Eligibility</text>
+
+          <line x1="315" y1="176" x2="315" y2="195" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <polygon points="315,195 340,215 315,235 290,215" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="315" y="218" text-anchor="middle" font-size="7">Eligible?</text>
+
+          <line x1="340" y1="215" x2="440" y2="215" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <text x="355" y="210" font-size="7.5">No</text>
+          <rect x="440" y="202" width="90" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="485" y="219" text-anchor="middle" font-size="8">Auto-Reject</text>
+          <circle cx="485" cy="255" r="9" fill="none" stroke="#1c1c1c"/><circle cx="485" cy="255" r="4" fill="#1c1c1c"/>
+          <line x1="485" y1="228" x2="485" y2="246" stroke="#1c1c1c" marker-end="url(#af1)"/>
+
+          <line x1="315" y1="235" x2="315" y2="255" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <text x="325" y="248" font-size="7.5">Yes</text>
+          <rect x="255" y="255" width="120" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="315" y="272" text-anchor="middle" font-size="8">Save as Pending</text>
+
+          <line x1="375" y1="268" x2="580" y2="90" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <rect x="530" y="60" width="100" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="580" y="77" text-anchor="middle" font-size="8">Review Request</text>
+
+          <line x1="580" y1="86" x2="580" y2="105" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <polygon points="580,105 605,125 580,145 555,125" fill="#efe2d8" stroke="#1c1c1c"/>
+          <text x="580" y="128" text-anchor="middle" font-size="7.5">Approve?</text>
+
+          <line x1="580" y1="145" x2="580" y2="165" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <text x="590" y="158" font-size="7.5">Yes</text>
+          <rect x="530" y="165" width="100" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="580" y="182" text-anchor="middle" font-size="8">Approve + Notify</text>
+          <circle cx="580" cy="220" r="9" fill="none" stroke="#1c1c1c"/><circle cx="580" cy="220" r="4" fill="#1c1c1c"/>
+          <line x1="580" y1="191" x2="580" y2="211" stroke="#1c1c1c" marker-end="url(#af1)"/>
+
+          <line x1="605" y1="125" x2="650" y2="150" stroke="#1c1c1c" marker-end="url(#af1)"/>
+          <text x="612" y="140" font-size="7.5">No</text>
+          <rect x="600" y="150" width="85" height="26" rx="12" fill="#f3f0e9" stroke="#1c1c1c"/>
+          <text x="642" y="167" text-anchor="middle" font-size="7.5">Reject + Notify</text>
+          <circle cx="642" cy="205" r="9" fill="none" stroke="#1c1c1c"/><circle cx="642" cy="205" r="4" fill="#1c1c1c"/>
+          <line x1="642" y1="176" x2="642" y2="196" stroke="#1c1c1c" marker-end="url(#af1)"/>
+        </g>
+        <defs><marker id="af1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c1c1c"/></marker></defs>
+      </svg>
+      <div class="caption">Activity Diagram — 3 swimlane, 3 decision node, đủ nhánh valid/invalid và điểm kết thúc riêng cho từng nhánh</div>
+    </div>
+
+    <h3>Section 3 / Q2 — UI Wireframe &amp; Controls</h3>
+    <div class="diagram">
+      <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:420px">
+        <g font-size="9.5" stroke="#1c1c1c" fill="none">
+          <rect x="10" y="10" width="460" height="280"/>
+          <rect x="10" y="10" width="100" height="280"/>
+          <text x="60" y="30" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">Navigation</text>
+          <rect x="125" y="25" width="330" height="24"/>
+          <text x="290" y="41" fill="#6b6459" stroke="none" text-anchor="middle" font-size="8.5">🔍 Search hospital / department</text>
+          <rect x="125" y="60" width="155" height="90"/>
+          <text x="202" y="75" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">Hospital &amp; Dept List</text>
+          <rect x="290" y="60" width="165" height="90"/>
+          <text x="372" y="75" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">Shift Availability List</text>
+          <rect x="125" y="160" width="330" height="70"/>
+          <text x="290" y="175" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">Mentor / Shift Detail Panel</text>
+          <rect x="330" y="240" width="125" height="26" fill="#efe2d8"/>
+          <text x="392" y="257" fill="#1c1c1c" stroke="none" text-anchor="middle" font-size="8.5">Request Placement</text>
+          <rect x="125" y="240" width="190" height="26" stroke-dasharray="3,2"/>
+          <text x="220" y="257" fill="#6b6459" stroke="none" text-anchor="middle" font-size="8.5">Status / Notification area</text>
+        </g>
+      </svg>
+      <div class="caption">Placement Request Screen — đủ 7 vùng theo yêu cầu đề</div>
+    </div>
+    <table>
+      <tr><th>#</th><th>Control</th><th>Validation / business rule</th></tr>
+      <tr><td>1</td><td>Hospital dropdown</td><td>Bắt buộc chọn trước khi Department load dữ liệu</td></tr>
+      <tr><td>2</td><td>Department dropdown</td><td>Populate theo Hospital đã chọn; bắt buộc chọn</td></tr>
+      <tr><td>3</td><td>Shift date picker</td><td>Không được chọn ngày trong quá khứ</td></tr>
+      <tr><td>4</td><td>Slot availability check (ẩn, chạy khi submit)</td><td>Hệ thống kiểm tra <code>slotsAvailable &gt; 0</code> trước khi cho submit — business rule check</td></tr>
+      <tr><td>5</td><td>"Request Placement" button</td><td>Disabled cho tới khi đủ field hợp lệ; chỉ Student đã đăng nhập mới thấy nút này (access control)</td></tr>
+    </table>
+  </section>
+
+  <footer>Tự tổng hợp từ slide Topic 5 (ISAD) và đề thi Kỳ 1–3, 2025–2026 · CSW 309 — EIU</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,1157 @@
+  <div id="tab-theory" class="tab-content active">
+  <div class="content-area">
+
+    <!-- SELECT & WHERE -->
+    <div class="section" id="s-select">
+      <div class="section-eyebrow">Section 1 · SQL DML</div>
+      <h2>SELECT & WHERE — Truy vấn cơ bản</h2>
+
+      <p>Mọi câu query đều bắt đầu từ đây. Hãy hiểu rõ <strong>thứ tự thực thi</strong> của MySQL — nó <em>không</em> chạy theo thứ tự bạn viết.</p>
+
+      <h3>⚙️ Thứ tự thực thi thực sự của MySQL</h3>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root {
+    /* Palette hiện đại mang âm hưởng IDE Dark Theme */
+    --bg: #181a1f; 
+    --bg2: #21252b; 
+    --bg3: #282c34; 
+    --border: #3e4451;
+    --text: #abb2bf;
+    --heading: #ffffff;
+    --muted: #7f848e;
+    
+    /* Syntax & Accent Colors */
+    --primary: #61afef; /* Blue */
+    --primary-dim: rgba(97, 175, 239, 0.15);
+    --success: #98c379; /* Green */
+    --success-dim: rgba(152, 195, 121, 0.15);
+    --warning: #e5c07b; /* Yellow */
+    --warning-dim: rgba(229, 192, 123, 0.15);
+    --danger: #e06c75;  /* Red */
+    --danger-dim: rgba(224, 108, 117, 0.15);
+    --purple: #c678dd;
+    --purple-dim: rgba(198, 120, 221, 0.15);
+    --orange: #d19a66;
+    
+    --radius: 12px;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.15);
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.25);
+    --code-font: 'JetBrains Mono', Consolas, monospace;
+    --body-font: 'Inter', -apple-system, sans-serif;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body-font);
+    font-size: 15px;
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    z-index: 50;
+  }
+
+  .sidebar-header {
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(33, 37, 43, 0.95);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .sidebar-header .badge {
+    font-size: 11px;
+    font-family: var(--code-font);
+    background: var(--primary-dim);
+    color: var(--primary);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .sidebar-header h1 { 
+    font-size: 18px; 
+    color: var(--heading); 
+    font-weight: 800; 
+    line-height: 1.3; 
+    letter-spacing: -0.5px;
+  }
+  
+  .sidebar-header p { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 500; }
+
+  .nav-group { margin-top: 16px; padding-bottom: 8px; }
+  .nav-group-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: var(--transition);
+    cursor: pointer;
+    margin: 2px 8px;
+    border-radius: 8px;
+  }
+  
+  .nav-link:hover { 
+    color: var(--heading); 
+    background: var(--bg3); 
+    transform: translateX(4px);
+  }
+  
+  .nav-link.active { 
+    color: var(--primary); 
+    background: var(--primary-dim);
+    font-weight: 600;
+  }
+  
+  .nav-link .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border); flex-shrink: 0;
+    transition: var(--transition);
+  }
+  
+  .nav-link:hover .dot { background: var(--muted); }
+  .nav-link.active .dot { background: var(--primary); box-shadow: 0 0 8px var(--primary); }
+
+  /* ── MAIN CONTENT ── */
+  #main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    background: var(--bg);
+    scroll-behavior: smooth;
+  }
+
+  /* TAB BAR (Giống Editor Tabs) */
+  .tab-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 2px;
+    padding: 0 20px;
+    overflow-x: auto;
+  }
+  
+  .tab-btn {
+    padding: 16px 24px;
+    color: var(--muted);
+    font-size: 14px;
+    font-family: var(--body-font);
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-top: 3px solid transparent;
+    transition: var(--transition);
+    white-space: nowrap;
+    position: relative;
+  }
+  
+  .tab-btn:hover { 
+    color: var(--heading); 
+    background: var(--bg3);
+  }
+  
+  .tab-btn.active { 
+    color: var(--heading); 
+    background: var(--bg);
+    border-top-color: var(--primary);
+  }
+  
+  .tab-btn.active::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px; background: var(--bg);
+  }
+
+  .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+  .tab-content.active { display: block; }
+  
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .content-area {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 40px 100px;
+  }
+
+  /* ── TYPOGRAPHY & SECTIONS ── */
+  .section {
+    margin-bottom: 72px;
+    scroll-margin-top: 80px;
+    background: var(--bg);
+  }
+  
+  .section-eyebrow {
+    font-size: 12px;
+    font-family: var(--code-font);
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  
+  .section h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--heading);
+    margin-bottom: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  
+  .section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 36px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .section h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--heading);
+    margin: 24px 0 12px;
+  }
+  
+  p { margin-bottom: 16px; }
+  strong { color: var(--heading); font-weight: 600; }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 20px;
+    overflow-x: auto;
+    font-family: var(--code-font);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 24px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .code-label {
+    font-family: var(--code-font);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 8px 16px;
+    display: inline-block;
+    margin-top: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Syntax Highlighting Tweak */
+  .kw { color: var(--purple); font-weight: 700; }  
+  .fn { color: var(--primary); }                     
+  .str { color: var(--success); }                    
+  .num { color: var(--orange); }                     
+  .cmt { color: var(--muted); font-style: italic; }  
+  .tbl { color: var(--danger); }                     
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 20px 0;
+    border: 1px solid transparent;
+    border-left: 4px solid;
+    background: var(--bg2);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .callout.tip { background: var(--success-dim); border-color: var(--success); }
+  .callout.warn { background: var(--warning-dim); border-color: var(--warning); }
+  .callout.info { background: var(--primary-dim); border-color: var(--primary); }
+  .callout.danger { background: var(--danger-dim); border-color: var(--danger); }
+  
+  .callout-title {
+    font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  
+  .callout.tip .callout-title { color: var(--success); }
+  .callout.warn .callout-title { color: var(--warning); }
+  .callout.info .callout-title { color: var(--primary); }
+  .callout.danger .callout-title { color: var(--danger); }
+
+  /* ── TABLES ── */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 16px 0 24px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  
+  th {
+    background: var(--bg2);
+    color: var(--heading);
+    font-weight: 600;
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  td {
+    padding: 12px 16px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg3); transition: var(--transition); }
+  
+  td code, li code {
+    font-family: var(--code-font);
+    font-size: 13px;
+    background: var(--bg2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--orange);
+    border: 1px solid var(--border);
+  }
+
+  /* ── SCHEMA CARDS ── */
+  .schema-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+  }
+  
+  .schema-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .schema-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  
+  .schema-card h5 {
+    font-family: var(--code-font);
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .schema-card ul { list-style: none; }
+  .schema-card li {
+    font-family: var(--code-font);
+    font-size: 13px;
+    color: var(--text);
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .schema-card li .pk { background: var(--warning-dim); color: var(--warning); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: bold; margin-right: 8px;}
+  .schema-card li .fk { background: var(--purple-dim); color: var(--purple); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: bold; margin-right: 8px;}
+  .schema-card li .type { color: var(--success); font-size: 11px; opacity: 0.8; }
+
+  /* ── EXAM STYLES ── */
+  .exam-header {
+    background: linear-gradient(145deg, var(--bg2) 0%, var(--bg) 100%);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 24px 32px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .exam-header h2 { font-size: 20px; margin: 0 0 8px; border: none; padding: 0; }
+  
+  .question-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  
+  .question-block:hover { border-color: rgba(97, 175, 239, 0.5); }
+  
+  .question-header {
+    background: var(--bg2);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  
+  .q-num {
+    font-family: var(--code-font);
+    font-size: 13px;
+    font-weight: 800;
+    background: var(--primary-dim);
+    color: var(--primary);
+    border-radius: 8px;
+    padding: 6px 12px;
+  }
+  
+  .question-header h4 { font-size: 16px; margin: 0; flex: 1; }
+  
+  .marks { 
+    background: var(--warning-dim); 
+    color: var(--warning); 
+    padding: 4px 10px; 
+    border-radius: 20px; 
+    font-size: 12px; 
+    font-weight: 700; 
+  }
+  
+  .question-body { padding: 24px; }
+  
+  .explain-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--purple);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap { margin: 24px 20px; }
+  .progress-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 8px; display: flex; justify-content: space-between; }
+  .progress-bar { height: 6px; background: var(--bg3); border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--purple)); border-radius: 10px; transition: width 0.3s ease; }
+
+  /* ── SCROLLBAR (Custom) ── */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+      </style>
+
+      <h3>Cú pháp SELECT đầy đủ</h3>
+      <div class="code-label">sql — Template (chỉ dùng những gì cần)</div>
+      <pre><span class="kw">SELECT</span>   [<span class="kw">DISTINCT</span>] cột1, cột2, <span class="fn">COUNT</span>(*), <span class="fn">SUM</span>(cột)
+<span class="kw">FROM</span>     tên_bảng [<span class="kw">AS</span> alias]
+[<span class="kw">JOIN</span>    bảng2 <span class="kw">ON</span> điều_kiện]
+[<span class="kw">WHERE</span>   điều_kiện_lọc_hàng]
+[<span class="kw">GROUP BY</span> cột_nhóm]
+[<span class="kw">HAVING</span>  điều_kiện_lọc_nhóm]
+[<span class="kw">ORDER BY</span> cột <span class="kw">ASC</span>/<span class="kw">DESC</span>]
+[<span class="kw">LIMIT</span>   n];</pre>
+
+      <h3>Ví dụ thực tế — Query sản phẩm từ TechNova DB</h3>
+      <div class="code-label">sql — Laptop/Tablet giá dưới 20 triệu, sắp theo giá tăng</div>
+      <pre><span class="kw">SELECT</span> product_name, category, unit_price
+<span class="kw">FROM</span>   <span class="tbl">product</span>
+<span class="kw">WHERE</span>  category <span class="kw">IN</span> (<span class="str">'Laptop'</span>, <span class="str">'Tablet'</span>)
+  <span class="kw">AND</span>  unit_price &lt; <span class="num">20000000</span>
+<span class="kw">ORDER BY</span> unit_price <span class="kw">ASC</span>;</pre>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:0 0 18px;">
+        <div style="background:var(--bg2);padding:7px 14px;font-size:11px;color:var(--muted);font-family:var(--code-font);border-bottom:1px solid var(--border);">📊 KẾT QUẢ TRẢ VỀ</div>
+        <table style="margin:0;font-size:12px;">
+          <tr><th>product_name</th><th>category</th><th>unit_price</th></tr>
+          <tr><td>Xiaomi Redmi Pad SE</td><td>Tablet</td><td>5,490,000</td></tr>
+          <tr><td>iPad 10</td><td>Tablet</td><td>11,490,000</td></tr>
+          <tr><td>Samsung Galaxy Tab S9</td><td>Tablet</td><td>16,990,000</td></tr>
+          <tr><td>Asus Vivobook 15</td><td>Laptop</td><td>17,650,000</td></tr>
+          <tr><td>Dell Inspiron 15</td><td>Laptop</td><td>18,990,000</td></tr>
+        </table>
+      </div>
+
+      <h3>Tất cả toán tử WHERE cần nhớ</h3>
+      <table>
+        <tr><th>Toán tử</th><th>Ví dụ</th><th>Lưu ý quan trọng</th></tr>
+        <tr><td><code>=</code></td><td><code>status = 'completed'</code></td><td>Bằng chính xác. Chuỗi phân biệt hoa thường với utf8mb4_bin</td></tr>
+        <tr><td><code>!= hoặc &lt;&gt;</code></td><td><code>status != 'cancelled'</code></td><td>Khác. NULL != 'x' không phải TRUE — phải dùng IS NOT NULL</td></tr>
+        <tr><td><code>&lt;, &gt;, &lt;=, &gt;=</code></td><td><code>unit_price &lt; 25000000</code></td><td>Dùng được cho số và ngày tháng</td></tr>
+        <tr><td><code>IN (...)</code></td><td><code>category IN ('Laptop','Tablet')</code></td><td>Gọn hơn nhiều OR. Có thể IN (subquery)</td></tr>
+        <tr><td><code>NOT IN (...)</code></td><td><code>status NOT IN ('cancelled','pending')</code></td><td>⚠️ Cẩn thận: nếu tập có NULL thì kết quả sẽ rỗng!</td></tr>
+        <tr><td><code>BETWEEN a AND b</code></td><td><code>order_date BETWEEN '2024-01-01' AND '2024-12-31'</code></td><td>Bao gồm cả 2 đầu. Dùng tốt với index!</td></tr>
+        <tr><td><code>LIKE</code></td><td><code>full_name LIKE 'Nguyen%'</code></td><td><code>%</code>=bất kỳ chuỗi, <code>_</code>=đúng 1 ký tự. LIKE '%abc' không dùng được index</td></tr>
+        <tr><td><code>IS NULL</code></td><td><code>email IS NULL</code></td><td>KHÔNG viết <code>= NULL</code> — luôn sai! Phải dùng IS NULL</td></tr>
+        <tr><td><code>AND</code></td><td><code>cat='Laptop' AND price&lt;20M</code></td><td>Ưu tiên cao hơn OR → dùng ngoặc khi kết hợp</td></tr>
+        <tr><td><code>OR</code></td><td><code>cat='Laptop' OR cat='Tablet'</code></td><td>Ưu tiên thấp hơn AND → cẩn thận thứ tự</td></tr>
+      </table>
+
+      <div class="callout warn">
+        <div class="callout-title">⚠️ Bẫy: AND ưu tiên hơn OR</div>
+        <code>WHERE category='Laptop' OR category='Tablet' AND price&lt;20000000</code><br>
+        MySQL đọc: <code>category='Laptop' OR (category='Tablet' AND price&lt;20M)</code> — SAI ý đồ!<br>
+        Đúng: <code>WHERE (category='Laptop' OR category='Tablet') AND price&lt;20000000</code><br>
+        Hoặc gọn hơn: <code>WHERE category IN ('Laptop','Tablet') AND price&lt;20000000</code>
+      </div>
+    </div>
+
+    <!-- JOIN -->
+    <div class="section" id="s-join">
+      <div class="section-eyebrow">Section 1 · SQL DML</div>
+      <h2>JOIN — Kết hợp nhiều bảng</h2>
+
+      <p>JOIN ghép các bảng lại với nhau qua điều kiện <code>ON</code>, thường là khóa ngoại = khóa chính.</p>
+
+      <h3>INNER JOIN vs LEFT JOIN — Hiểu qua ví dụ</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 6px;">
+        <div>
+          <div class="code-label">customer (3 người)</div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+            <table style="margin:0;font-size:12px;"><tr><th>customer_id</th><th>full_name</th></tr>
+              <tr><td>1</td><td>Minh Khang</td></tr>
+              <tr><td>2</td><td>Bao Chau</td></tr>
+              <tr><td style="color:var(--red)">3</td><td style="color:var(--red)">Hoang Nam (chưa mua)</td></tr>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div class="code-label">order_header (3 đơn)</div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+            <table style="margin:0;font-size:12px;"><tr><th>order_id</th><th>customer_id</th><th>total</th></tr>
+              <tr><td>1</td><td>1</td><td>19.78M</td></tr>
+              <tr><td>2</td><td>2</td><td>12.28M</td></tr>
+              <tr><td>5</td><td>1</td><td>28.55M</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <h4>INNER JOIN — Chỉ lấy hàng KHỚP ở cả 2 bảng</h4>
+      <div class="code-label">sql</div>
+      <pre><span class="kw">SELECT</span> c.full_name, oh.order_id, oh.total_amount
+<span class="kw">FROM</span>   <span class="tbl">customer</span> c
+<span class="kw">JOIN</span>   <span class="tbl">order_header</span> oh <span class="kw">ON</span> c.customer_id = oh.customer_id;</pre>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:14px;">
+        <table style="margin:0;font-size:12px;"><tr><th>full_name</th><th>order_id</th><th>total_amount</th></tr>
+          <tr><td>Minh Khang</td><td>1</td><td>19,780,000</td></tr>
+          <tr><td>Minh Khang</td><td>5</td><td>28,550,000</td></tr>
+          <tr><td>Bao Chau</td><td>2</td><td>12,280,000</td></tr>
+        </table>
+      </div>
+      <div class="explain-box"><strong>Hoang Nam không xuất hiện</strong> vì không có đơn nào. <strong>Minh Khang xuất hiện 2 lần</strong> vì có 2 đơn — đây là hành vi bình thường, mỗi cặp khớp = 1 hàng kết quả.</div>
+
+      <h4>LEFT JOIN — Giữ hết bảng TRÁI, bên phải NULL nếu không khớp</h4>
+      <div class="code-label">sql — Tất cả khách kể cả chưa mua hàng</div>
+      <pre><span class="kw">SELECT</span> c.full_name, oh.order_id
+<span class="kw">FROM</span>   <span class="tbl">customer</span> c
+<span class="kw">LEFT JOIN</span> <span class="tbl">order_header</span> oh <span class="kw">ON</span> c.customer_id = oh.customer_id;</pre>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:14px;">
+        <table style="margin:0;font-size:12px;"><tr><th>full_name</th><th>order_id</th></tr>
+          <tr><td>Minh Khang</td><td>1</td></tr>
+          <tr><td>Minh Khang</td><td>5</td></tr>
+          <tr><td>Bao Chau</td><td>2</td></tr>
+          <tr><td>Hoang Nam</td><td style="color:var(--red)">NULL ← không có đơn</td></tr>
+        </table>
+      </div>
+
+      <h3>JOIN 3 bảng — Pattern chuẩn trong đề thi</h3>
+      <div class="code-label">sql — Tên khách + sản phẩm + số lượng từng đơn</div>
+      <pre><span class="kw">SELECT</span>
+    c.full_name,
+    p.product_name,
+    od.quantity,
+    od.quantity * od.unit_price <span class="kw">AS</span> thanh_tien
+<span class="kw">FROM</span>   <span class="tbl">order_header</span> oh
+<span class="kw">JOIN</span>   <span class="tbl">customer</span>     c  <span class="kw">ON</span> c.customer_id  = oh.customer_id   <span class="cmt">-- lấy tên khách</span>
+<span class="kw">JOIN</span>   <span class="tbl">order_detail</span> od <span class="kw">ON</span> od.order_id    = oh.order_id      <span class="cmt">-- lấy chi tiết</span>
+<span class="kw">JOIN</span>   <span class="tbl">product</span>      p  <span class="kw">ON</span> p.product_id   = od.product_id    <span class="cmt">-- lấy tên SP</span>
+<span class="kw">WHERE</span>  oh.status = <span class="str">'completed'</span>;</pre>
+
+      <div class="callout tip">
+        <div class="callout-title">✅ Mẹo đọc JOIN cho dễ nhớ</div>
+        Bắt đầu từ bảng <strong>trung tâm</strong> (order_header), rồi JOIN ra các bảng xung quanh theo quan hệ khóa ngoại. Luôn đặt alias ngắn (oh, c, od, p) để tránh nhầm lẫn.
+      </div>
+
+      <h3>🚨 Bẫy Tích Descartes — Lỗi phổ biến nhất</h3>
+      <div class="callout danger">
+        <div class="callout-title">❌ JOIN đồng thời 2 bảng "nhiều" → kết quả SAI</div>
+        <p style="font-size:13px;margin:8px 0;">Đơn #3 có <strong>4 sản phẩm</strong> trong order_detail + <strong>1 thanh toán</strong> trong payment:<br>
+        JOIN cả 2 vào → 4 × 1 = 4 hàng → <code>SUM(payment.amount)</code> bị nhân 4 lần = <strong style="color:var(--red)">SAI!</strong></p>
+      </div>
+      <div class="callout tip">
+        <div class="callout-title">✅ Giải pháp: Scalar Subquery riêng biệt</div>
+        <pre style="margin:6px 0;background:transparent;border:none;padding:0;font-size:13px;">(<span class="kw">SELECT</span> <span class="fn">SUM</span>(od.quantity * od.unit_price) <span class="kw">FROM</span> <span class="tbl">order_detail</span> od <span class="kw">WHERE</span> od.order_id = oh.order_id)
+(<span class="kw">SELECT</span> <span class="fn">COALESCE</span>(<span class="fn">SUM</span>(p.amount),<span class="num">0</span>) <span class="kw">FROM</span> <span class="tbl">payment</span> p <span class="kw">WHERE</span> p.order_id = oh.order_id)</pre>
+        Mỗi subquery tính độc lập → không gây tích Descartes → kết quả đúng.
+      </div>
+    </div>
+
+    <!-- GROUP BY & HAVING -->
+    <div class="section" id="s-agg">
+      <div class="section-eyebrow">Section 1 · SQL DML</div>
+      <h2>GROUP BY & HAVING — Tổng hợp theo nhóm</h2>
+
+      <p>GROUP BY gom các hàng có cùng giá trị thành một nhóm, rồi tính aggregate cho từng nhóm.</p>
+
+      <h3>Hình dung GROUP BY từng bước</h3>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:12px 0;">
+        <p style="color:var(--muted);font-size:12px;margin-bottom:8px;">📦 DỮ LIỆU THÔ (sau JOIN customer + order_header)</p>
+        <table style="font-size:12px;margin:0 0 14px;">
+          <tr><th>customer_id</th><th>full_name</th><th>order_id</th><th>total_amount</th></tr>
+          <tr><td>1</td><td>Nguyen Minh Khang</td><td>1</td><td>19,780,000</td></tr>
+          <tr><td>1</td><td>Nguyen Minh Khang</td><td>5</td><td>28,550,000</td></tr>
+          <tr><td>2</td><td>Tran Bao Chau</td><td>2</td><td>12,280,000</td></tr>
+          <tr><td>2</td><td>Tran Bao Chau</td><td>10</td><td>23,220,000</td></tr>
+          <tr><td>3</td><td>Le Hoang Nam</td><td>3</td><td>26,460,000</td></tr>
+          <tr><td>3</td><td>Le Hoang Nam</td><td>13</td><td>25,560,000</td></tr>
+        </table>
+        <div style="font-size:12px;color:var(--purple);font-weight:700;margin:6px 0;">↓ GROUP BY customer_id, full_name + COUNT(*) + SUM()</div>
+        <table style="font-size:12px;margin:0;">
+          <tr><th>full_name</th><th>total_orders</th><th>total_spent</th></tr>
+          <tr><td>Nguyen Minh Khang</td><td style="color:var(--green)">2</td><td style="color:var(--green)">48,330,000</td></tr>
+          <tr><td>Tran Bao Chau</td><td style="color:var(--green)">2</td><td style="color:var(--green)">35,500,000</td></tr>
+          <tr><td>Le Hoang Nam</td><td style="color:var(--green)">2</td><td style="color:var(--green)">52,020,000</td></tr>
+        </table>
+      </div>
+
+      <div class="code-label">sql — Query hoàn chỉnh với GROUP BY + HAVING</div>
+      <pre><span class="kw">SELECT</span>
+    c.full_name,
+    <span class="fn">COUNT</span>(oh.order_id)    <span class="kw">AS</span> total_orders,   <span class="cmt">-- đếm số đơn mỗi khách</span>
+    <span class="fn">SUM</span>(oh.total_amount)  <span class="kw">AS</span> total_spent      <span class="cmt">-- cộng tổng tiền</span>
+<span class="kw">FROM</span>   <span class="tbl">customer</span>     c
+<span class="kw">JOIN</span>   <span class="tbl">order_header</span> oh <span class="kw">ON</span> c.customer_id = oh.customer_id
+<span class="kw">GROUP BY</span> c.customer_id, c.full_name           <span class="cmt">-- gom nhóm theo từng khách</span>
+<span class="kw">HAVING</span>   <span class="fn">COUNT</span>(oh.order_id) >= <span class="num">2</span>             <span class="cmt">-- chỉ lấy khách có ít nhất 2 đơn</span>
+<span class="kw">ORDER BY</span> total_spent <span class="kw">DESC</span>;</pre>
+
+      <h3>Các hàm Aggregate cần nhớ</h3>
+      <table>
+        <tr><th>Hàm</th><th>Ý nghĩa</th><th>Ghi chú quan trọng</th></tr>
+        <tr><td><code>COUNT(*)</code></td><td>Đếm tất cả hàng, kể cả NULL</td><td>Dùng khi cần đếm số hàng đơn thuần</td></tr>
+        <tr><td><code>COUNT(cột)</code></td><td>Đếm hàng có giá trị không NULL</td><td><code>COUNT(email)</code> bỏ qua hàng email=NULL</td></tr>
+        <tr><td><code>COUNT(DISTINCT cột)</code></td><td>Đếm giá trị duy nhất</td><td><code>COUNT(DISTINCT product_id)</code> = số loại SP khác nhau</td></tr>
+        <tr><td><code>SUM(cột)</code></td><td>Tổng tất cả giá trị</td><td>Trả NULL nếu không có hàng nào — dùng COALESCE!</td></tr>
+        <tr><td><code>AVG(cột)</code></td><td>Trung bình cộng</td><td>Bỏ qua NULL khi tính</td></tr>
+        <tr><td><code>MAX(cột)</code></td><td>Giá trị lớn nhất</td><td>Dùng được với số, ngày, chuỗi</td></tr>
+        <tr><td><code>MIN(cột)</code></td><td>Giá trị nhỏ nhất</td><td>Dùng được với số, ngày, chuỗi</td></tr>
+        <tr><td><code>COALESCE(expr,0)</code></td><td>Thay NULL → 0</td><td>Bắt buộc khi có LEFT JOIN hoặc subquery có thể không có dữ liệu</td></tr>
+      </table>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;">
+        <div class="callout danger">
+          <div class="callout-title">❌ SAI: WHERE với aggregate</div>
+          <pre style="background:transparent;border:none;padding:4px 0;font-size:12px;margin:0;"><span class="kw">GROUP BY</span> customer_id
+<span class="kw">WHERE</span> <span class="fn">COUNT</span>(*) >= <span class="num">2</span>  <span class="cmt">-- LỖI SYNTAX!</span></pre>
+          WHERE chạy TRƯỚC GROUP BY → chưa có COUNT().
+        </div>
+        <div class="callout tip">
+          <div class="callout-title">✅ ĐÚNG: HAVING sau GROUP BY</div>
+          <pre style="background:transparent;border:none;padding:4px 0;font-size:12px;margin:0;"><span class="kw">GROUP BY</span> customer_id
+<span class="kw">HAVING</span> <span class="fn">COUNT</span>(*) >= <span class="num">2</span>  <span class="cmt">-- Đúng!</span></pre>
+          HAVING chạy SAU GROUP BY → đã có COUNT().
+        </div>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-title">💡 Quy tắc GROUP BY bắt buộc</div>
+        <strong>Mọi cột trong SELECT mà không nằm trong hàm aggregate đều phải có trong GROUP BY.</strong><br>
+        Ví dụ: <code>SELECT customer_id, full_name, COUNT(*)</code><br>
+        → <code>GROUP BY customer_id, full_name</code> ✅ (COUNT(*) là aggregate, không cần thêm)
+      </div>
+    </div>
+
+    <!-- SUBQUERY -->
+    <div class="section" id="s-sub">
+      <div class="section-eyebrow">Section 1 · SQL DML</div>
+      <h2>Subquery — Truy vấn lồng nhau</h2>
+
+      <p>Subquery là SELECT nằm bên trong SELECT khác. MySQL chạy subquery trước, lấy kết quả, rồi dùng vào query ngoài.</p>
+
+      <h3>Loại 1: Subquery trong WHERE với IN</h3>
+      <p>Dùng khi muốn lọc theo điều kiện cần JOIN nhiều bảng.</p>
+
+      <div class="code-label">sql — Tìm khách đã mua Laptop ít nhất 1 lần</div>
+      <pre><span class="kw">SELECT</span> customer_id, full_name
+<span class="kw">FROM</span>   <span class="tbl">customer</span>
+<span class="kw">WHERE</span>  customer_id <span class="kw">IN</span> (
+    <span class="cmt">-- Bước 1: Subquery tìm tập customer_id đã mua Laptop</span>
+    <span class="kw">SELECT DISTINCT</span> oh.customer_id
+    <span class="kw">FROM</span>   <span class="tbl">order_header</span> oh
+    <span class="kw">JOIN</span>   <span class="tbl">order_detail</span> od <span class="kw">ON</span> oh.order_id   = od.order_id
+    <span class="kw">JOIN</span>   <span class="tbl">product</span>      p  <span class="kw">ON</span> od.product_id = p.product_id
+    <span class="kw">WHERE</span>  p.category = <span class="str">'Laptop'</span>
+    <span class="cmt">-- Subquery trả về: [1, 2, 3, 4, 5, 7, 8, 9, 11, 12]</span>
+);
+<span class="cmt">-- Bước 2: Lọc customer WHERE customer_id IN [1,2,3,4,5,7,8,9,11,12]</span></pre>
+
+      <h3>Loại 2: Scalar Subquery trong SELECT</h3>
+      <p>Trả về <strong>đúng 1 giá trị</strong> cho mỗi hàng của query ngoài. Giải pháp cho bài toán tính tổng từ 2 bảng quan hệ N.</p>
+
+      <div class="code-label">sql — Đơn hàng + tổng đã thanh toán + còn nợ</div>
+      <pre><span class="kw">SELECT</span>
+    oh.order_id,
+    oh.total_amount,
+    <span class="cmt">-- Scalar subquery: chạy 1 lần cho TỪNG hàng order_header</span>
+    (<span class="kw">SELECT</span> <span class="fn">COALESCE</span>(<span class="fn">SUM</span>(amount), <span class="num">0</span>)
+     <span class="kw">FROM</span>   <span class="tbl">payment</span>
+     <span class="kw">WHERE</span>  order_id = oh.order_id)   <span class="kw">AS</span> da_thanh_toan,
+    oh.total_amount
+    - (<span class="kw">SELECT</span> <span class="fn">COALESCE</span>(<span class="fn">SUM</span>(amount), <span class="num">0</span>)
+       <span class="kw">FROM</span>   <span class="tbl">payment</span>
+       <span class="kw">WHERE</span>  order_id = oh.order_id) <span class="kw">AS</span> con_no
+<span class="kw">FROM</span>  <span class="tbl">order_header</span> oh;</pre>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:14px;">
+        <table style="margin:0;font-size:12px;">
+          <tr><th>order_id</th><th>total_amount</th><th>da_thanh_toan</th><th>con_no</th></tr>
+          <tr><td>1</td><td>19,780,000</td><td style="color:var(--green)">19,780,000</td><td style="color:var(--green)">0</td></tr>
+          <tr><td>5</td><td>28,550,000</td><td style="color:var(--yellow)">20,000,000</td><td style="color:var(--yellow)">8,550,000</td></tr>
+          <tr><td>7</td><td>11,490,000</td><td style="color:var(--red)">0 ← chưa trả</td><td style="color:var(--red)">11,490,000</td></tr>
+        </table>
+      </div>
+
+      <h3>Loại 3: OR với 2 Subquery — Dạng "High-Value Customer"</h3>
+      <p>Đây là dạng <strong>thường xuất hiện ở câu 3 Section 1</strong>. Điều kiện OR nhưng mỗi vế cần logic phức tạp riêng.</p>
+
+      <div class="code-label">sql — Mua Laptop ≥1 lần OR tổng chi tiêu > 100 triệu</div>
+      <pre><span class="kw">SELECT DISTINCT</span>   <span class="cmt">-- DISTINCT vì một khách có thể thỏa cả 2 điều kiện</span>
+    c.customer_id,
+    c.full_name,
+    c.email
+<span class="kw">FROM</span> <span class="tbl">customer</span> c
+<span class="kw">WHERE</span>
+    <span class="cmt">-- ĐK 1: Đã mua Laptop ít nhất 1 lần</span>
+    c.customer_id <span class="kw">IN</span> (
+        <span class="kw">SELECT</span> oh.customer_id
+        <span class="kw">FROM</span>   <span class="tbl">order_header</span> oh
+        <span class="kw">JOIN</span>   <span class="tbl">order_detail</span> od <span class="kw">ON</span> oh.order_id   = od.order_id
+        <span class="kw">JOIN</span>   <span class="tbl">product</span>      p  <span class="kw">ON</span> od.product_id = p.product_id
+        <span class="kw">WHERE</span>  p.category = <span class="str">'Laptop'</span>
+    )
+    <span class="kw">OR</span>
+    <span class="cmt">-- ĐK 2: Tổng chi tiêu vượt 100 triệu</span>
+    c.customer_id <span class="kw">IN</span> (
+        <span class="kw">SELECT</span>   customer_id
+        <span class="kw">FROM</span>     <span class="tbl">order_header</span>
+        <span class="kw">GROUP BY</span> customer_id
+        <span class="kw">HAVING</span>   <span class="fn">SUM</span>(total_amount) > <span class="num">100000000</span>
+    );</pre>
+
+      <div class="callout tip">
+        <div class="callout-title">✅ Tại sao DISTINCT?</div>
+        Một khách thỏa cả ĐK1 (mua Laptop) lẫn ĐK2 (chi > 100M) → sẽ khớp ở cả 2 subquery → xuất hiện 2 lần → <code>DISTINCT</code> loại bỏ trùng lặp.
+      </div>
+    </div>
+
+    <!-- VIEW -->
+    <div class="section" id="s-view">
+      <div class="section-eyebrow">Section 2 · SQL Advanced</div>
+      <h2>VIEW — Bảng ảo tái sử dụng được</h2>
+
+      <p>View là một <strong>câu SELECT được đặt tên và lưu trong database</strong>. Query view giống query bảng thật — MySQL tự chạy SELECT định nghĩa của view mỗi lần.</p>
+
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin:12px 0 18px;font-size:13px;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <div style="background:var(--blue-dim);border:1px solid var(--blue);color:var(--blue);border-radius:6px;padding:7px 14px;font-family:var(--code-font);font-size:12px;font-weight:700;">SELECT * FROM v_order_invoice</div>
+          <div style="color:var(--muted);">↓ MySQL nội bộ thay bằng</div>
+          <div style="background:var(--purple-dim);border:1px solid var(--purple);color:var(--purple);border-radius:6px;padding:7px 14px;font-family:var(--code-font);font-size:12px;">SELECT oh.order_id, c.full_name, ...</div>
+          <div style="color:var(--muted);">→</div>
+          <div style="background:var(--green-dim);border:1px solid var(--green);color:var(--green);border-radius:6px;padding:7px 14px;font-family:var(--code-font);font-size:12px;">Kết quả bảng</div>
+        </div>
+      </div>
+
+      <h3>Cú pháp CREATE VIEW</h3>
+      <div class="code-label">sql</div>
+      <pre><span class="kw">CREATE VIEW</span> <span class="tbl">tên_view</span> <span class="kw">AS</span>
+<span class="kw">SELECT</span> ...;           <span class="cmt">-- bất kỳ câu SELECT nào</span>
+
+<span class="kw">CREATE OR REPLACE VIEW</span> <span class="tbl">tên_view</span> <span class="kw">AS</span>
+<span class="kw">SELECT</span> ...;           <span class="cmt">-- tạo mới hoặc ghi đè nếu đã tồn tại</span>
+
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> <span class="tbl">tên_view</span>;   <span class="cmt">-- dùng như bảng thật</span>
+<span class="kw">DROP VIEW IF EXISTS</span> <span class="tbl">tên_view</span>;  <span class="cmt">-- xóa view</span></pre>
+
+      <h3>Ví dụ: v_order_invoice với Scalar Subquery</h3>
+
+      <div class="callout danger">
+        <div class="callout-title">❌ JOIN trực tiếp → Tích Descartes → Kết quả SAI</div>
+        Đơn #3: 4 sản phẩm × 1 payment = 4 dòng → SUM(payment.amount) × 4 = SAI!
+      </div>
+
+      <div class="code-label">sql — v_order_invoice ĐÚNG (scalar subquery)</div>
+      <pre><span class="kw">CREATE VIEW</span> <span class="tbl">v_order_invoice</span> <span class="kw">AS</span>
+<span class="kw">SELECT</span>
+    oh.order_id,
+    c.full_name                                    <span class="kw">AS</span> customer_name,
+    oh.order_date,
+    <span class="cmt">-- ① Tổng tiền hàng: subquery riêng tránh Descartes</span>
+    (<span class="kw">SELECT</span> <span class="fn">SUM</span>(od.quantity * od.unit_price)
+     <span class="kw">FROM</span>   <span class="tbl">order_detail</span> od
+     <span class="kw">WHERE</span>  od.order_id = oh.order_id)             <span class="kw">AS</span> total_product_amount,
+    <span class="cmt">-- ② Tổng đã thanh toán: COALESCE xử lý đơn chưa có payment</span>
+    (<span class="kw">SELECT</span> <span class="fn">COALESCE</span>(<span class="fn">SUM</span>(p.amount), <span class="num">0</span>)
+     <span class="kw">FROM</span>   <span class="tbl">payment</span> p
+     <span class="kw">WHERE</span>  p.order_id = oh.order_id)              <span class="kw">AS</span> total_payment,
+    <span class="cmt">-- ③ Còn nợ = tiền hàng - đã trả</span>
+    (<span class="kw">SELECT</span> <span class="fn">SUM</span>(od.quantity * od.unit_price)
+     <span class="kw">FROM</span>   <span class="tbl">order_detail</span> od
+     <span class="kw">WHERE</span>  od.order_id = oh.order_id)
+    -(<span class="kw">SELECT</span> <span class="fn">COALESCE</span>(<span class="fn">SUM</span>(p.amount), <span class="num">0</span>)
+      <span class="kw">FROM</span>   <span class="tbl">payment</span> p
+      <span class="kw">WHERE</span>  p.order_id = oh.order_id)             <span class="kw">AS</span> balance
+<span class="kw">FROM</span>   <span class="tbl">order_header</span> oh
+<span class="kw">JOIN</span>   <span class="tbl">customer</span>     c <span class="kw">ON</span> c.customer_id = oh.customer_id;</pre>
+
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:10px 0;">
+        <div style="background:var(--bg2);padding:7px 14px;font-size:11px;color:var(--muted);font-family:var(--code-font);border-bottom:1px solid var(--border);">📊 SELECT * FROM v_order_invoice</div>
+        <table style="margin:0;font-size:12px;">
+          <tr><th>order_id</th><th>customer_name</th><th>total_product_amount</th><th>total_payment</th><th>balance</th></tr>
+          <tr><td>1</td><td>Nguyen Minh Khang</td><td>19,780,000</td><td>19,780,000</td><td style="color:var(--green)">0 ✓</td></tr>
+          <tr><td>5</td><td>Nguyen Minh Khang</td><td>28,550,000</td><td>20,000,000</td><td style="color:var(--yellow)">8,550,000</td></tr>
+          <tr><td>7</td><td>Bui Gia Han</td><td>11,490,000</td><td>0</td><td style="color:var(--red)">11,490,000</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- STORED PROCEDURE -->
+    <div class="section" id="s-proc">
+      <div class="section-eyebrow">Section 2 · SQL Advanced</div>
+      <h2>Stored Procedure — Thủ tục lưu trữ</h2>
+
+      <p>Stored Procedure là <strong>khối lệnh SQL có tên, lưu trong DB</strong>. Nhận tham số đầu vào, thực hiện logic (IF, vòng lặp), gọi bằng <code>CALL</code>.</p>
+
+      <div class="callout info">
+        <div class="callout-title">💡 Tại sao phải đổi DELIMITER?</div>
+        MySQL dùng <code>;</code> để kết thúc lệnh. Bên trong Procedure cũng có nhiều <code>;</code> → MySQL bị nhầm và báo lỗi trước khi tạo xong procedure.<br>
+        Giải pháp: đổi delimiter sang <code>$$</code> tạm thời → viết toàn bộ procedure → đổi lại <code>;</code>.<br>
+        (<code>$$</code> chỉ là quy ước, có thể dùng <code>//</code> hay bất kỳ chuỗi nào.)
+      </div>
+
+      <h3>Cú pháp — Giải thích từng thành phần</h3>
+      <div class="code-label">sql — sp_create_order từ đề thi TechNova Q2</div>
+      <pre><span class="kw">DELIMITER</span> $$   <span class="cmt">-- ① Đổi delimiter, MySQL không kết thúc ở ";" nữa</span>
+
+<span class="kw">CREATE PROCEDURE</span> <span class="fn">sp_create_order</span>(
+    <span class="cmt">-- ② IN = tham số đầu vào (tiền tố p_ = parameter)</span>
+    <span class="kw">IN</span> p_customer_id  <span class="tbl">INT</span>,
+    <span class="kw">IN</span> p_product_id   <span class="tbl">INT</span>,
+    <span class="kw">IN</span> p_quantity     <span class="tbl">INT</span>
+)
+<span class="kw">BEGIN</span>     <span class="cmt">-- ③ Bắt đầu khối lệnh</span>
+
+    <span class="cmt">-- ④ DECLARE: khai báo biến cục bộ (tiền tố v_ = variable)</span>
+    <span class="cmt">--    Phải đặt NGAY ĐẦU BEGIN, trước bất kỳ lệnh nào!</span>
+    <span class="kw">DECLARE</span> v_stock    <span class="tbl">INT</span>;
+    <span class="kw">DECLARE</span> v_price    <span class="tbl">DECIMAL</span>(<span class="num">15</span>,<span class="num">2</span>);
+    <span class="kw">DECLARE</span> v_order_id <span class="tbl">INT</span>;
+
+    <span class="cmt">-- ⑤ SELECT INTO: gán kết quả query vào biến (phải trả đúng 1 hàng)</span>
+    <span class="kw">SELECT</span> stock_quantity, unit_price
+    <span class="kw">INTO</span>   v_stock, v_price
+    <span class="kw">FROM</span>   <span class="tbl">product</span>
+    <span class="kw">WHERE</span>  product_id = p_product_id;
+
+    <span class="cmt">-- ⑥ IF...THEN...END IF: kiểm tra điều kiện</span>
+    <span class="kw">IF</span> v_stock < p_quantity <span class="kw">THEN</span>
+        <span class="cmt">-- ⑦ SIGNAL: ném lỗi, dừng procedure, hủy mọi thay đổi</span>
+        <span class="kw">SIGNAL SQLSTATE</span> <span class="str">'45000'</span>
+            <span class="kw">SET MESSAGE_TEXT</span> = <span class="str">'Insufficient stock'</span>;
+    <span class="kw">END IF</span>;
+
+    <span class="cmt">-- ⑧ INSERT vào bảng cha</span>
+    <span class="kw">INSERT INTO</span> <span class="tbl">order_header</span> (customer_id, order_date, status, total_amount)
+    <span class="kw">VALUES</span> (p_customer_id, <span class="fn">CURDATE</span>(), <span class="str">'pending'</span>, <span class="num">0</span>);
+
+    <span class="cmt">-- ⑨ LAST_INSERT_ID(): lấy AUTO_INCREMENT ID vừa được tạo</span>
+    <span class="kw">SET</span> v_order_id = <span class="fn">LAST_INSERT_ID</span>();
+
+    <span class="cmt">-- ⑩ INSERT vào bảng con (dùng v_order_id vừa lấy)</span>
+    <span class="kw">INSERT INTO</span> <span class="tbl">order_detail</span> (order_id, product_id, quantity, unit_price)
+    <span class="kw">VALUES</span> (v_order_id, p_product_id, p_quantity, v_price);
+
+    <span class="cmt">-- ⑪ UPDATE tồn kho</span>
+    <span class="kw">UPDATE</span> <span class="tbl">product</span>
+    <span class="kw">SET</span>    stock_quantity = stock_quantity - p_quantity
+    <span class="kw">WHERE</span>  product_id = p_product_id;
+
+<span class="kw">END</span> $$    <span class="cmt">-- ⑫ Kết thúc procedure bằng $$</span>
+
+<span class="kw">DELIMITER</span> ;   <span class="cmt">-- ⑬ Trả delimiter về ";" như bình thường</span></pre>
+
+      <h3>Cách gọi procedure</h3>
+      <div class="code-label">sql</div>
+      <pre><span class="kw">CALL</span> <span class="fn">sp_create_order</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">1</span>);         <span class="cmt">-- khách #1 mua SP #2, số lượng 1</span>
+<span class="kw">CALL</span> <span class="fn">sp_create_order</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">99999</span>);     <span class="cmt">-- lỗi "Insufficient stock" nếu stock < 99999</span></pre>
+
+      <h3>Bảng tổng hợp các lệnh trong Procedure</h3>
+      <table>
+        <tr><th>Lệnh</th><th>Cú pháp</th><th>Lưu ý</th></tr>
+        <tr><td>Khai báo biến</td><td><code>DECLARE v_name TYPE;</code></td><td>Phải đặt ngay đầu BEGIN, trước mọi lệnh</td></tr>
+        <tr><td>Gán từ query</td><td><code>SELECT col INTO v_name FROM tbl WHERE ...;</code></td><td>Query phải trả đúng 1 hàng</td></tr>
+        <tr><td>Gán trực tiếp</td><td><code>SET v_name = giá_trị;</code></td><td>Gán số, chuỗi, biểu thức, hàm</td></tr>
+        <tr><td>Điều kiện</td><td><code>IF ... THEN ... [ELSEIF ... THEN ...] [ELSE ...] END IF;</code></td><td>Nhớ END IF với dấu chấm phẩy</td></tr>
+        <tr><td>Báo lỗi</td><td><code>SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '...';</code></td><td>Dừng procedure, hủy transaction</td></tr>
+        <tr><td>ID vừa insert</td><td><code>LAST_INSERT_ID()</code></td><td>Lấy giá trị AUTO_INCREMENT vừa được tạo</td></tr>
+        <tr><td>Ngày hôm nay</td><td><code>CURDATE()</code></td><td>Trả DATE (không có giờ)</td></tr>
+        <tr><td>Ngày giờ hiện tại</td><td><code>NOW()</code></td><td>Trả DATETIME đầy đủ giờ phút giây</td></tr>
+      </table>
+    </div>
+
+    <!-- TRIGGER -->
+    <div class="section" id="s-trig">
+      <div class="section-eyebrow">Section 2 · SQL Advanced</div>
+      <h2>Trigger — Tự động thực thi khi có sự kiện</h2>
+
+      <p>Trigger là code <strong>tự chạy</strong> khi có INSERT/UPDATE/DELETE — không cần gọi thủ công.</p>
+
+      <h3>Vòng đời một INSERT với Trigger</h3>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin:12px 0;overflow-x:auto;">
+        <div style="display:flex;align-items:center;gap:6px;min-width:500px;">
+          <div style="text-align:center;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;min-width:90px;">
+            <div style="color:var(--blue);font-weight:700;font-size:11px;">📝 INSERT</div>
+            <div style="color:var(--muted);font-size:10px;">từ app/user</div>
+          </div>
+          <div style="color:var(--muted);">→</div>
+          <div style="text-align:center;background:var(--orange-dim);border:1px solid var(--orange);border-radius:6px;padding:8px 12px;min-width:110px;">
+            <div style="color:var(--orange);font-weight:700;font-size:11px;">⚡ BEFORE</div>
+            <div style="color:var(--muted);font-size:10px;">chạy trước khi ghi</div>
+            <div style="color:var(--muted);font-size:10px;">SIGNAL để chặn</div>
+          </div>
+          <div style="color:var(--muted);">→</div>
+          <div style="text-align:center;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;min-width:110px;">
+            <div style="color:var(--text);font-weight:700;font-size:11px;">💾 Ghi vào DB</div>
+            <div style="color:var(--muted);font-size:10px;">dữ liệu đã commit</div>
+          </div>
+          <div style="color:var(--muted);">→</div>
+          <div style="text-align:center;background:var(--purple-dim);border:1px solid var(--purple);border-radius:6px;padding:8px 12px;min-width:110px;">
+            <div style="color:var(--purple);font-weight:700;font-size:11px;">⚡ AFTER</div>
+            <div style="color:var(--muted);font-size:10px;">chạy sau khi ghi</div>
+            <div style="color:var(--muted);font-size:10px;">cập nhật bảng khác</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>NEW và OLD — Truy cập dữ liệu trong Trigger</h3>
+      <table>
+        <tr><th>Biến</th><th>INSERT</th><th>UPDATE</th><th>DELETE</th></tr>
+        <tr><td><code>NEW.cột</code></td><td style="color:var(--green)">✅ Dữ liệu mới thêm</td><td style="color:var(--green)">✅ Giá trị sau sửa</td><td style="color:var(--red)">❌ Không tồn tại</td></tr>
+        <tr><td><code>OLD.cột</code></td><td style="color:var(--red)">❌ Không tồn tại</td><td style="color:var(--green)">✅ Giá trị trước sửa</td><td style="color:var(--green)">✅ Dữ liệu vừa xóa</td></tr>
+      </table>
+
+      <h3>Ví dụ 1: AFTER INSERT — Cập nhật total_amount tự động</h3>
+      <div class="code-label">sql — trg_update_order_total</div>
+      <pre><span class="kw">DELIMITER</span> $$
+<span class="kw">CREATE TRIGGER</span> <span class="fn">trg_update_order_total</span>
+<span class="kw">AFTER INSERT ON</span> <span class="tbl">order_detail</span>  <span class="cmt">-- sự kiện: sau khi INSERT order_detail</span>
+<span class="kw">FOR EACH ROW</span>                   <span class="cmt">-- chạy cho từng dòng được INSERT</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">DECLARE</span> v_status <span class="tbl">VARCHAR</span>(<span class="num">20</span>);
+
+    <span class="cmt">-- NEW.order_id = order_id của dòng order_detail vừa thêm</span>
+    <span class="kw">SELECT</span> status <span class="kw">INTO</span> v_status
+    <span class="kw">FROM</span>   <span class="tbl">order_header</span>
+    <span class="kw">WHERE</span>  order_id = NEW.order_id;
+
+    <span class="kw">IF</span> v_status != <span class="str">'cancelled'</span> <span class="kw">THEN</span>
+        <span class="kw">UPDATE</span> <span class="tbl">order_header</span>
+        <span class="kw">SET</span>    total_amount = (
+            <span class="cmt">-- Tính lại TOÀN BỘ đơn (không chỉ dòng mới)</span>
+            <span class="kw">SELECT</span> <span class="fn">SUM</span>(quantity * unit_price)
+            <span class="kw">FROM</span>   <span class="tbl">order_detail</span>
+            <span class="kw">WHERE</span>  order_id = NEW.order_id
+        )
+        <span class="kw">WHERE</span>  order_id = NEW.order_id;
+    <span class="kw">END IF</span>;
+<span class="kw">END</span> $$
+<span class="kw">DELIMITER</span> ;</pre>
+
+      <div class="explain-box">
+        <strong>Minh họa:</strong> INSERT thêm Anker Charger (890,000) vào đơn #5:<br>
+        → AFTER INSERT chạy → Tính lại SUM(order_detail WHERE order_id=5) = 28,550,000<br>
+        → UPDATE order_header SET total_amount = 28,550,000 WHERE order_id = 5
+      </div>
+
+      <h3>Ví dụ 2: BEFORE INSERT — Chặn dữ liệu không hợp lệ</h3>
+      <div class="code-label">sql — trg_check_payment_limit</div>
+      <pre><span class="kw">DELIMITER</span> $$
+<span class="kw">CREATE TRIGGER</span> <span class="fn">trg_check_payment_limit</span>
+<span class="kw">BEFORE INSERT ON</span> <span class="tbl">payment</span>  <span class="cmt">-- BEFORE để có thể chặn bằng SIGNAL</span>
+<span class="kw">FOR EACH ROW</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">DECLARE</span> v_order_total  <span class="tbl">DECIMAL</span>(<span class="num">15</span>,<span class="num">2</span>);
+    <span class="kw">DECLARE</span> v_already_paid <span class="tbl">DECIMAL</span>(<span class="num">15</span>,<span class="num">2</span>);
+
+    <span class="kw">SELECT</span> total_amount <span class="kw">INTO</span> v_order_total
+    <span class="kw">FROM</span>   <span class="tbl">order_header</span>
+    <span class="kw">WHERE</span>  order_id = NEW.order_id;
+
+    <span class="kw">SELECT</span> <span class="fn">COALESCE</span>(<span class="fn">SUM</span>(amount), <span class="num">0</span>) <span class="kw">INTO</span> v_already_paid
+    <span class="kw">FROM</span>   <span class="tbl">payment</span>
+    <span class="kw">WHERE</span>  order_id = NEW.order_id;
+
+    <span class="cmt">-- Nếu tổng sau khi thêm > total_amount → chặn</span>
+    <span class="kw">IF</span> v_already_paid + NEW.amount > v_order_total <span class="kw">THEN</span>
+        <span class="kw">SIGNAL SQLSTATE</span> <span class="str">'45000'</span>
+            <span class="kw">SET MESSAGE_TEXT</span> = <span class="str">'Payment exceeds order total amount'</span>;
+    <span class="kw">END IF</span>;
+<span class="kw">END</span> $$
+<span class="kw">DELIMITER</span> ;</pre>
+
+      <h3>So sánh BEFORE vs AFTER</h3>
+      <table>
+        <tr><th></th><th>BEFORE Trigger</th><th>AFTER Trigger</th></tr>
+        <tr><td><strong>Chạy khi nào</strong></td><td>Trước khi dữ liệu ghi vào DB</td><td>Sau khi dữ liệu đã ghi xong</td></tr>
+        <tr><td><strong>Dùng SIGNAL</strong></td><td>✅ HỦY được thao tác gốc</td><td>⚠️ Không hoàn tác được thao tác gốc</td></tr>
+        <tr><td><strong>Dùng để</strong></td><td>Validate, ngăn dữ liệu sai, double booking</td><td>Cập nhật bảng khác, ghi audit log</td></tr>
+        <tr><td><strong>Ví dụ trong đề</strong></td><td>Chặn thanh toán vượt mức, chặn double booking</td><td>Cập nhật total_amount, đổi status phòng</td></tr>
+      </table>
+    </div>
+
+    <!-- INDEX -->
+    <div class="section" id="s-idx">
+      <div class="section-eyebrow">Section 3 · Optimization</div>
+      <h2>Index & Tối ưu — Tăng tốc với 15 triệu bản ghi</h2>
+
+      <p>Index là cấu trúc dữ liệu bổ sung (B-tree) giúp MySQL tìm kiếm nhanh hơn, tương tự mục lục của cuốn sách.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 18px;">
+        <div style="background:var(--red-dim);border:1px solid var(--red);border-radius:var(--radius);padding:14px 16px;">
+          <div style="color:var(--red);font-weight:700;font-size:12px;margin-bottom:8px;">❌ Không có Index</div>
+          <div style="font-size:13px;">Query: WHERE order_date = '2025-06-01'</div>
+          <div style="font-size:13px;margin-top:8px;">MySQL quét toàn bộ 15 triệu hàng → kiểm tra từng hàng → <strong style="color:var(--red)">Full Table Scan</strong></div>
+          <div style="font-family:var(--code-font);font-size:11px;color:var(--muted);margin-top:8px;">⏱ Vài giây đến vài phút</div>
+        </div>
+        <div style="background:var(--green-dim);border:1px solid var(--green);border-radius:var(--radius);padding:14px 16px;">
+          <div style="color:var(--green);font-weight:700;font-size:12px;margin-bottom:8px;">✅ Có Index trên order_date</div>
+          <div style="font-size:13px;">Query: WHERE order_date = '2025-06-01'</div>
+          <div style="font-size:13px;margin-top:8px;">MySQL tra B-tree → nhảy thẳng đến vị trí → đọc vài hàng → <strong style="color:var(--green)">Index Scan</strong></div>
+          <div style="font-family:var(--code-font);font-size:11px;color:var(--muted);margin-top:8px;">⏱ Dưới 10ms</div>
+        </div>
+      </div>
+
+      <h3>Cú pháp tạo Index</h3>
+      <div class="code-label">sql</div>
+      <pre><span class="cmt">-- Index đơn trên 1 cột</span>
+<span class="kw">CREATE INDEX</span> idx_order_date <span class="kw">ON</span> <span class="tbl">order_header</span>(order_date);
+
+<span class="cmt">-- Unique Index: đồng thời ràng buộc không trùng</span>
+<span class="kw">CREATE UNIQUE INDEX</span> idx_email <span class="kw">ON</span> <span class="tbl">customer</span>(email);
+
+<span class="cmt">-- Composite Index: tối ưu query lọc cả status lẫn ngày</span>
+<span class="kw">CREATE INDEX</span> idx_status_date <span class="kw">ON</span> <span class="tbl">order_header</span>(status, order_date);</pre>
+
+      <h3>🔥 Hàm phá Index — Câu hỏi chắc chắn trong đề!</h3>
+
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin:12px 0 20px;">
+        <p style="font-size:13px;margin-bottom:12px;">Index B-tree lưu giá trị gốc đã sắp xếp:</p>
+        <div style="font-family:var(--code-font);font-size:12px;color:var(--muted);margin-bottom:16px;">
+          <span style="color:var(--green)">2024-01-10</span> → row1 &nbsp;|&nbsp;
+          <span style="color:var(--green)">2024-01-15</span> → row2 &nbsp;|&nbsp;
+          <span style="color:var(--green)">2024-02-02</span> → row3 &nbsp;|&nbsp; ... 15 triệu bản ghi ...
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:var(--green-dim);border:1px solid var(--green);border-radius:6px;padding:12px;">
+            <div style="color:var(--green);font-weight:700;font-size:12px;margin-bottom:8px;">✅ BETWEEN — Dùng được Index</div>
+            <pre style="background:transparent;border:none;padding:0;font-size:12px;margin:0 0 8px;"><span class="kw">WHERE</span> order_date
+  <span class="kw">BETWEEN</span> <span class="str">'2025-01-01'</span>
+  <span class="kw">AND</span> <span class="str">'2025-12-31'</span></pre>
+            <p style="font-size:12px;color:var(--muted);margin:0;">MySQL nhảy thẳng đến 2025-01-01 trong B-tree index, đọc đến 2025-12-31, dừng. Không cụm tất cả 15M hàng.</p>
+          </div>
+          <div style="background:var(--red-dim);border:1px solid var(--red);border-radius:6px;padding:12px;">
+            <div style="color:var(--red);font-weight:700;font-size:12px;margin-bottom:8px;">❌ YEAR() — Phá Index</div>
+            <pre style="background:transparent;border:none;padding:0;font-size:12px;margin:0 0 8px;"><span class="kw">WHERE</span> <span class="fn">YEAR</span>(order_date)
+  = <span class="num">2025</span>
+
+</pre>
+            <p style="font-size:12px;color:var(--muted);margin:0;">MySQL phải tính YEAR() cho từng hàng. Index lưu 2024-01-10 chứ không lưu 2024 → không tra được. → Full Scan 15M hàng.</p>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:13px;padding:10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;">
+          <strong style="color:var(--yellow)">Nguyên tắc:</strong> Cột index bị bọc trong <strong>bất kỳ hàm nào</strong> ở WHERE → index vô dụng → Full Table Scan.<br>
+          Áp dụng cho: <code>YEAR()</code>, <code>MONTH()</code>, <code>DATE()</code>, <code>LOWER()</code>, <code>col+1=5</code>, v.v.
+        </div>
+      </div>
+
+      <h3>Constraint — Ràng buộc toàn vẹn dữ liệu</h3>
+      <div class="code-label">sql — 5 loại constraint cần biết</div>
+      <pre><span class="kw">CREATE TABLE</span> <span class="tbl">ví_dụ</span> (
+    id        <span class="tbl">INT</span> <span class="kw">AUTO_INCREMENT PRIMARY KEY</span>,  <span class="cmt">-- PK: không null, không trùng</span>
+    full_name <span class="tbl">VARCHAR</span>(<span class="num">100</span>) <span class="kw">NOT NULL</span>,               <span class="cmt">-- bắt buộc có giá trị</span>
+    email     <span class="tbl">VARCHAR</span>(<span class="num">100</span>) <span class="kw">UNIQUE</span>,               <span class="cmt">-- không cho trùng</span>
+    status    <span class="tbl">VARCHAR</span>(<span class="num">20</span>)  <span class="kw">DEFAULT</span> <span class="str">'pending'</span>,   <span class="cmt">-- giá trị mặc định</span>
+    price     <span class="tbl">DECIMAL</span>(<span class="num">15</span>,<span class="num">2</span>) <span class="kw">NOT NULL</span>,
+    <span class="kw">CONSTRAINT</span> chk_price <span class="kw">CHECK</span> (price > <span class="num">0</span>),      <span class="cmt">-- điều kiện tùy chỉnh (MySQL 8+)</span>
+    customer_id <span class="tbl">INT</span> <span class="kw">NOT NULL</span>,
+    <span class="kw">CONSTRAINT</span> fk_cust
+        <span class="kw">FOREIGN KEY</span> (customer_id)
+        <span class="kw">REFERENCES</span> <span class="tbl">customer</span>(customer_id)          <span class="cmt">-- ràng buộc tham chiếu</span>
+        <span class="kw">ON DELETE RESTRICT</span>                        <span class="cmt">-- không cho xóa nếu còn tham chiếu</span>
+        <span class="kw">ON UPDATE CASCADE</span>                         <span class="cmt">-- tự cập nhật khi ID thay đổi</span>
+);
+
+<span class="cmt">-- Thêm constraint vào bảng đã có:</span>
+<span class="kw">ALTER TABLE</span> <span class="tbl">payment</span>
+<span class="kw">ADD CONSTRAINT</span> uq_payment <span class="kw">UNIQUE</span> (order_id);</pre>
+    </div>
+
+  </div>
+  </div><!-- end theory -->

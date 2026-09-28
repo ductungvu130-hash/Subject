@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.information > div > div {
+    margin-bottom: 20px;
+}
+ul {
+    list-style-type: none;
+}
+ul > li {
+    margin-bottom: 16px;
+}
+.information {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.content {
+    font-weight: 650;
+}
+.copyright {
+    background-color: #2d3e50;
+}
+.copyright > p {
+    padding: 10px 0;
+    text-align: center;
+    color: #ffff;
+}
+@media (max-width: 767.98px) {
+    .copyright > p {
+        text-align: left;
+        padding-left: 10px;
+    }
+    span {
+        display: block;
+    }
+}
+h5 {
+    position: relative;
+    margin-bottom: 50px;
+}
+h5::after {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 40px;
+    left: 0;
+    width: 50px;
+    border-bottom: 5px solid #5e337a;
+    border-radius: 2px;
+}
+a {
+    color: #000;
+}

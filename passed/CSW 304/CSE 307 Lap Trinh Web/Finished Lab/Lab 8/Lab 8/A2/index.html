@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Create a To Do List</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .all {
+            width: 300px;
+            padding: 50px;
+        }
+        .input-div {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .input-div input {
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .input-div button {
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .list {
+            list-style-type: none;
+        }
+        .list li {
+            background-color: #f9f9f9;
+            padding: 10px 0 10px 35px;
+            position: relative;
+        }
+        .list li:nth-child(even) {
+            background-color: #888888;
+            color: #ffff;
+        }
+        .checked {
+            text-decoration: line-through;
+        }
+        .checked::before {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            -webkit-font-smoothing: antialiased;
+            content: "\f00c";
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+        .list li span {
+            position: absolute;
+            width: 30px;
+            text-align: center;
+            right: 0px;
+            top: 10px;
+        }
+    </style>
+    <body>
+        <main>
+            <div class="all">
+                <div class="input-div">
+                    <input type="text" id="text" placeholder="Title..." />
+                    <button onclick="add()">ADD</button>
+                </div>
+                <ul class="list">
+                    <li>Hit the gym<span>x</span></li>
+                    <li class="checked">Marry<span>x</span></li>
+                </ul>
+            </div>
+        </main>
+        <script>
+            function add() {
+                let value = document.getElementById("text").value.trim();
+                if (value === "") return;
+                let ul = document.querySelector(".list");
+                let li = `<li>${value}<span>x</span></li>`;
+                ul.innerHTML += li;
+                document.getElementById("text").value = "";
+            }
+        </script>
+    </body>
+</html>

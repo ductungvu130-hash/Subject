@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Chỉnh sửa thông tin sân - SportHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#00217a",
+                    "surface-container-highest": "#e0e3e5",
+                    "secondary-fixed-dim": "#b8c4ff",
+                    "tertiary-fixed": "#ffdbca",
+                    "tertiary": "#9d4300",
+                    "background": "#f7f9fb",
+                    "primary": "#006e2f",
+                    "on-surface": "#191c1e",
+                    "primary-container": "#22c55e",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e6e8ea",
+                    "on-tertiary-fixed": "#341100",
+                    "surface-tint": "#006e2f",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "primary-fixed-dim": "#4ae176",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary-container": "#004b1e",
+                    "surface-bright": "#f7f9fb",
+                    "outline": "#6d7b6c",
+                    "surface": "#f7f9fb",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "secondary-container": "#708cfd",
+                    "on-tertiary-container": "#6d2d00",
+                    "on-primary-fixed": "#002109",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#173bab",
+                    "surface-variant": "#e0e3e5",
+                    "secondary": "#3755c3",
+                    "on-primary-fixed-variant": "#005321",
+                    "on-surface-variant": "#3d4a3d",
+                    "outline-variant": "#bccbb9",
+                    "primary-fixed": "#6bff8f",
+                    "secondary-fixed": "#dde1ff",
+                    "on-background": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#ff8e4d",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "inverse-primary": "#4ae176",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d8dadc",
+                    "on-secondary-fixed": "#001453",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eceef0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "lg": "24px",
+                    "sm": "12px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "xs": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "display-lg": ["44px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #006e2f;
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            transform: translateX(100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface mb-24">
+<!-- Top AppBar (Transactional: No Nav Drawer/Bottom Nav) -->
+<header class="bg-surface/90 backdrop-blur-md flex items-center justify-between px-margin-mobile h-16 w-full fixed top-0 z-50 border-b border-surface-variant/30">
+<div class="flex items-center gap-4">
+<button class="p-2 -ml-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="font-title-lg text-title-lg-mobile text-on-surface">Chỉnh sửa thông tin sân</h1>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-lg text-label-lg shadow-sm active:scale-95 transition-transform duration-150">
+            Lưu
+        </button>
+</header>
+<main class="mt-16 overflow-x-hidden">
+<!-- Hero Image Section -->
+<section class="relative w-full h-64 overflow-hidden group">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A professional aerial photograph of a high-end artificial turf football field during the golden hour. The turf is lush and vibrant green, surrounded by professional netting and clean white boundary lines. Soft evening sunlight creates long, dramatic shadows across the pitch, emphasizing a premium and energetic sports atmosphere. The overall aesthetic is clean, modern, and high-performance." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBevzoQa4ilEMbLix_sU6G01VZQiNyRKfyCwzu6nNGeX7YW_YlZfw_F9Zx_Zf9iTucbPITbV5UBOq14WdpZpywR0RB7zVhJ84aVFzSzWTaiPc8NObGpMwFdnBmLUOWOZY4tILB-Wd4wzuAGlFwg8bSNjo3jKGsQDnhw_uqxKyyTUv-C2gt7DHCZBVfmjxP3swZV-_bbXYi9h55z-0dSnK-AaNHMaRHAHYrhZcy9e0mYHZkNkykRT49S')"></div>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+<button class="glass-panel flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/40 text-white font-label-lg shadow-lg active:scale-90 transition-all">
+<span class="material-symbols-outlined">photo_camera</span>
+<span>Đổi ảnh bìa</span>
+</button>
+</div>
+</section>
+<!-- Main Form Container -->
+<div class="px-margin-mobile -mt-8 relative z-10 space-y-6">
+<!-- Basic Info Card -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0px_4px_12px_rgba(30,64,175,0.08)] space-y-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">info</span>
+<h2 class="font-title-lg text-body-lg font-bold">Thông tin cơ bản</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">Đang hoạt động</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer toggle-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-label"></div>
+</label>
+</div>
+</div>
+<!-- Field Name -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface-variant px-1">Tên sân</label>
+<input class="w-full bg-surface-container-low border-0 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary font-body-md transition-all outline-none" placeholder="Nhập tên sân..." type="text" value="SportHub Premium Field 1"/>
+</div>
+<!-- Field Category -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface-variant px-1">Loại sân</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-0 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary font-body-md transition-all appearance-none outline-none">
+<option>Sân bóng đá 5 người</option>
+<option>Sân bóng đá 7 người</option>
+<option>Sân Cầu lông</option>
+<option>Sân Tennis</option>
+<option>Sân Pickleball</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Address -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface-variant px-1">Địa chỉ cụ thể</label>
+<textarea class="w-full bg-surface-container-low border-0 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary font-body-md transition-all outline-none resize-none" rows="2">123 Đường thể thao, Phường 10, Quận 7, TP. Hồ Chí Minh</textarea>
+</div>
+<!-- Description -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface-variant px-1">Mô tả chi tiết</label>
+<textarea class="w-full bg-surface-container-low border-0 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary font-body-md transition-all outline-none resize-none" placeholder="Nhập mô tả về chất lượng sân, dịch vụ đi kèm..." rows="4">Sân bóng đá cỏ nhân tạo đạt chuẩn FIFA, hệ thống chiếu sáng hiện đại, thoáng mát. Phù hợp cho các giải đấu phong trào và giao lưu văn phòng.</textarea>
+</div>
+</div>
+<!-- Pricing Section -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0px_4px_12px_rgba(30,64,175,0.08)] space-y-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">payments</span>
+<h2 class="font-title-lg text-body-lg font-bold">Giá thuê</h2>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface-variant px-1">Giá mặc định (VNĐ/giờ)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-0 rounded-xl pl-4 pr-12 py-3.5 focus:ring-2 focus:ring-primary font-body-md transition-all outline-none" type="number" value="350000"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-label-lg">đ</span>
+</div>
+</div>
+<div class="p-4 rounded-xl border border-primary-container bg-primary-container/5 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<div>
+<p class="font-label-lg text-on-surface">Giờ cao điểm</p>
+<p class="text-[11px] text-on-surface-variant">Tự động tăng giá vào khung giờ HOT</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer toggle-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary toggle-label"></div>
+</label>
+</div>
+<div class="flex items-center gap-2 py-2 px-3 bg-white/60 rounded-lg">
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+<p class="text-label-sm text-primary font-semibold">Tăng 25% (437.500đ) từ 17:00 - 21:00</p>
+</div>
+</div>
+</div>
+<!-- Facilities Section -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0px_4px_12px_rgba(30,64,175,0.08)] space-y-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">communities</span>
+<h2 class="font-title-lg text-body-lg font-bold">Tiện ích sân</h2>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Wifi Toggle -->
+<label class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">wifi</span>
+<span class="font-label-lg">Wifi</span>
+</div>
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</label>
+<!-- Parking Toggle -->
+<label class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">local_parking</span>
+<span class="font-label-lg">Gửi xe</span>
+</div>
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</label>
+<!-- Shower Toggle -->
+<label class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">shower</span>
+<span class="font-label-lg">Phòng tắm</span>
+</div>
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</label>
+<!-- Water Toggle -->
+<label class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">water_drop</span>
+<span class="font-label-lg">Nước uống</span>
+</div>
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="pt-4 pb-8">
+<button class="w-full flex items-center justify-center gap-2 p-4 text-error font-label-lg bg-error-container/10 border border-error/20 rounded-xl active:scale-95 transition-all">
+<span class="material-symbols-outlined">delete</span>
+                    Xóa sân này
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Actions Bar (Mobile Sticky) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface/80 backdrop-blur-xl border-t border-surface-variant/30 px-margin-mobile py-4 z-50 flex gap-3 pb-safe-offset-4">
+<button class="flex-1 border border-outline-variant text-on-surface-variant py-3.5 rounded-full font-label-lg active:bg-surface-container-high transition-colors">
+            Hủy bỏ
+        </button>
+<button class="flex-[2] bg-primary text-on-primary py-3.5 rounded-full font-label-lg shadow-lg shadow-primary/20 active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">check</span>
+            Cập nhật ngay
+        </button>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple scale effect for interactive cards
+        document.querySelectorAll('.bg-surface-container-lowest').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.99)';
+                card.style.transition = 'transform 0.1s ease';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add padding-bottom to body for fixed bottom bar
+        const bottomBar = document.querySelector('.fixed.bottom-0');
+        if (bottomBar) {
+            document.body.style.paddingBottom = (bottomBar.offsetHeight + 16) + 'px';
+        }
+    </script>
+</body></html>

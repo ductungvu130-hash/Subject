@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Go To Top</title>
+        <!-- Fontawesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <style>
+            .all {
+                height: 2000px;
+            }
+            #go-to-top {
+                width: 50px;
+                height: 50px;
+                border: none;
+                border-radius: 50%;
+                background-color: #0c683b;
+                color: #fff;
+                text-align: center;
+                line-height: 50px;
+                position: fixed;
+                bottom: 50px;
+                right: 50px;
+                cursor: pointer;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="all">
+                <div id="go-to-top" onclick="goToTop()">
+                    <i class="fa-solid fa-angle-up"></i>
+                </div>
+            </div>
+        </main>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() > 100) {
+                        $("#go-to-top").fadeIn();
+                    } else {
+                        $("#go-to-top").fadeOut();
+                    }
+                });
+                $("#go-to-top").click(function () {
+                    $("html, body").animate({ scrollTop: 0 }, 100);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

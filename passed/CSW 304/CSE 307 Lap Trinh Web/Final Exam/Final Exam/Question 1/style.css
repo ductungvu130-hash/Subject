@@ -1,0 +1,42 @@
+.header-text {
+    color: #ffff;
+    background-color: #111111;
+}
+
+.left-div {
+    background-color: #ddd;
+}
+
+.add-room p {
+    font-weight: 700;
+}
+
+.add-room span {
+    color: red;
+}
+
+.add-room input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+img {
+    max-width: 300px;
+    max-height: 350px;
+    width: 100%;
+    height: 100%;
+}
+
+.room-infor h6 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.room-infor p {
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: #ddd;
+}

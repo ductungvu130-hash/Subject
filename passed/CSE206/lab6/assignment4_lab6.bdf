@@ -1,0 +1,503 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2019  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+*/
+(header "graphic" (version "1.4"))
+(pin
+	(input)
+	(rect 72 304 248 320)
+	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
+	(text "VDT_Data[23..0]" (rect 5 0 88 12)(font "Arial" ))
+	(pt 176 8)
+	(drawing
+		(line (pt 92 12)(pt 117 12))
+		(line (pt 92 4)(pt 117 4))
+		(line (pt 121 8)(pt 176 8))
+		(line (pt 92 12)(pt 92 4))
+		(line (pt 117 4)(pt 121 8))
+		(line (pt 117 12)(pt 121 8))
+	)
+	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect 72 336 240 352)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "VDT_Clock" (rect 5 0 59 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect 72 352 240 368)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "VDT_Reset" (rect 5 0 59 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect 72 368 240 384)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "VDT_Enable" (rect 5 0 65 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(output)
+	(rect 1368 672 1551 688)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "VDTOffset_Q[7..0]" (rect 90 0 177 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 1384 336 1560 352)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "VDT_OP[2..0]" (rect 90 0 158 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 1384 392 1560 408)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "VDT_RA[2..0]" (rect 90 0 153 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 1368 520 1544 536)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "VDT_RB[2..0]" (rect 90 0 153 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 1368 584 1544 600)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "VDT_RC[2..0]" (rect 90 0 153 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(symbol
+	(rect 784 296 1000 424)
+	(text "assignment8" (rect 5 0 39 6)(font "Intel Clear" (font_size 4)))
+	(text "inst" (rect 8 107 24 124)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "VDT_Data[7..0]" (rect 0 0 92 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Data[7..0]" (rect 21 27 113 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "VDT_Clock" (rect 0 0 64 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Clock" (rect 21 43 85 62)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "VDT_Reset" (rect 0 0 66 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Reset" (rect 21 59 87 78)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "VDT_Enable" (rect 0 0 73 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Enable" (rect 21 75 94 94)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 216 32)
+		(output)
+		(text "VDT_Q[7..0]" (rect 0 0 73 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Q[7..0]" (rect 122 27 195 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 216 32)(pt 200 32)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 200 112))
+	)
+)
+(symbol
+	(rect 784 480 1000 608)
+	(text "assignment8" (rect 5 0 39 6)(font "Intel Clear" (font_size 4)))
+	(text "inst1" (rect 8 107 30 124)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "VDT_Data[7..0]" (rect 0 0 92 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Data[7..0]" (rect 21 27 113 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "VDT_Clock" (rect 0 0 64 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Clock" (rect 21 43 85 62)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "VDT_Reset" (rect 0 0 66 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Reset" (rect 21 59 87 78)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "VDT_Enable" (rect 0 0 73 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Enable" (rect 21 75 94 94)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 216 32)
+		(output)
+		(text "VDT_Q[7..0]" (rect 0 0 73 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Q[7..0]" (rect 122 27 195 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 216 32)(pt 200 32)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 200 112))
+	)
+)
+(symbol
+	(rect 784 648 1000 776)
+	(text "assignment8" (rect 5 0 39 6)(font "Intel Clear" (font_size 4)))
+	(text "inst2" (rect 8 107 30 124)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "VDT_Data[7..0]" (rect 0 0 92 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Data[7..0]" (rect 21 27 113 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "VDT_Clock" (rect 0 0 64 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Clock" (rect 21 43 85 62)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "VDT_Reset" (rect 0 0 66 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Reset" (rect 21 59 87 78)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "VDT_Enable" (rect 0 0 73 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Enable" (rect 21 75 94 94)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 216 32)
+		(output)
+		(text "VDT_Q[7..0]" (rect 0 0 73 19)(font "Intel Clear" (font_size 8)))
+		(text "VDT_Q[7..0]" (rect 122 27 195 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 216 32)(pt 200 32)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 200 112))
+	)
+)
+(connector
+	(pt 784 528)
+	(pt 392 528)
+)
+(connector
+	(pt 392 528)
+	(pt 392 696)
+)
+(connector
+	(pt 240 344)
+	(pt 392 344)
+)
+(connector
+	(pt 392 344)
+	(pt 784 344)
+)
+(connector
+	(pt 392 344)
+	(pt 392 528)
+)
+(connector
+	(pt 240 360)
+	(pt 376 360)
+)
+(connector
+	(pt 376 360)
+	(pt 784 360)
+)
+(connector
+	(pt 784 544)
+	(pt 376 544)
+)
+(connector
+	(pt 784 712)
+	(pt 376 712)
+)
+(connector
+	(pt 784 728)
+	(pt 360 728)
+)
+(connector
+	(pt 784 560)
+	(pt 360 560)
+)
+(connector
+	(pt 240 376)
+	(pt 360 376)
+)
+(connector
+	(pt 360 376)
+	(pt 784 376)
+)
+(connector
+	(pt 248 312)
+	(pt 344 312)
+	(bus)
+)
+(connector
+	(pt 392 696)
+	(pt 784 696)
+)
+(connector
+	(pt 376 360)
+	(pt 376 544)
+)
+(connector
+	(pt 376 544)
+	(pt 376 712)
+)
+(connector
+	(pt 360 376)
+	(pt 360 560)
+)
+(connector
+	(pt 360 560)
+	(pt 360 728)
+)
+(connector
+	(pt 344 312)
+	(pt 344 328)
+	(bus)
+)
+(connector
+	(text "Data[23..16]" (rect 354 304 411 321)(font "Intel Clear" ))
+	(pt 784 328)
+	(pt 344 328)
+	(bus)
+)
+(connector
+	(text "Data[15..8]" (rect 354 496 405 513)(font "Intel Clear" ))
+	(pt 784 512)
+	(pt 344 512)
+	(bus)
+)
+(connector
+	(pt 344 704)
+	(pt 352 704)
+	(bus)
+)
+(connector
+	(pt 344 328)
+	(pt 344 512)
+	(bus)
+)
+(connector
+	(text "Data[23..0]" (rect 320 594 337 645)(font "Intel Clear" )(vertical))
+	(pt 344 512)
+	(pt 344 680)
+	(bus)
+)
+(connector
+	(pt 344 680)
+	(pt 344 704)
+	(bus)
+)
+(connector
+	(text "Data[7..0]" (rect 354 664 400 681)(font "Intel Clear" ))
+	(pt 784 680)
+	(pt 344 680)
+	(bus)
+)
+(connector
+	(text "Q[7..0]" (rect 1010 664 1041 681)(font "Intel Clear" ))
+	(pt 1368 680)
+	(pt 1000 680)
+	(bus)
+)
+(connector
+	(text "Q1[7..0]" (rect 1010 312 1047 329)(font "Intel Clear" ))
+	(pt 1000 328)
+	(pt 1112 328)
+	(bus)
+)
+(connector
+	(text "Q2[6..4]" (rect 1146 512 1183 529)(font "Intel Clear" ))
+	(pt 1048 528)
+	(pt 1368 528)
+	(bus)
+)
+(connector
+	(pt 1048 512)
+	(pt 1048 528)
+	(bus)
+)
+(connector
+	(text "Q2[2..0]" (rect 1146 576 1183 593)(font "Intel Clear" ))
+	(pt 1048 592)
+	(pt 1368 592)
+	(bus)
+)
+(connector
+	(text "Q2[7..0]" (rect 1032 550 1049 587)(font "Intel Clear" )(vertical))
+	(pt 1048 528)
+	(pt 1048 592)
+	(bus)
+)
+(connector
+	(pt 1048 592)
+	(pt 1048 624)
+	(bus)
+)
+(connector
+	(text "Q1[2..0]" (rect 1162 384 1199 401)(font "Intel Clear" ))
+	(pt 1112 400)
+	(pt 1384 400)
+	(bus)
+)
+(connector
+	(text "Q1[6..4]" (rect 1162 328 1199 345)(font "Intel Clear" ))
+	(pt 1112 344)
+	(pt 1384 344)
+	(bus)
+)
+(connector
+	(text "Q2[7..0]" (rect 1010 496 1047 513)(font "Intel Clear" ))
+	(pt 1000 512)
+	(pt 1048 512)
+	(bus)
+)
+(connector
+	(pt 1112 328)
+	(pt 1112 344)
+	(bus)
+)
+(connector
+	(text "Q1[7..0]" (rect 1096 358 1113 395)(font "Intel Clear" )(vertical))
+	(pt 1112 344)
+	(pt 1112 400)
+	(bus)
+)
+(connector
+	(pt 1112 400)
+	(pt 1112 448)
+	(bus)
+)
+(junction (pt 392 528))
+(junction (pt 392 344))
+(junction (pt 376 360))
+(junction (pt 360 376))
+(junction (pt 344 328))
+(junction (pt 376 544))
+(junction (pt 360 560))
+(junction (pt 344 512))
+(junction (pt 344 680))
+(junction (pt 1048 528))
+(junction (pt 1048 592))
+(junction (pt 1112 400))
+(junction (pt 1112 344))

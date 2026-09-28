@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registration form</title>
+        <style>
+            textarea {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            input[type="email"],
+            input[type="tel"] {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .error-message {
+                color: red;
+                font-size: 14px;
+                margin: 0px;
+                padding-top: 2px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <form action="">
+                <table border="1" style="width: 700px">
+                    <!-- Full name -->
+                    <tr>
+                        <th><label for="">Full Name*</label></th>
+                        <td><input type="text" name="fullName" id="fullName" /></td>
+                    </tr>
+                    <tr>
+                        <th>Email*</th>
+                        <td><input type="email" name="email" id="email" /></td>
+                    </tr>
+                    <tr>
+                        <th>Password*</th>
+                        <td><input type="password" name="password" id="password" placeholder="Enter your password" /></td>
+                    </tr>
+                    <tr>
+                        <th>Confirm Password*</th>
+                        <td><input type="password" name="confirmPassword" id="confirmPassword" placeholder="Enter your password again" /></td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number*</th>
+                        <td><input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter your phone number (only number)" /></td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td><textarea name="content" cols="60" rows="3"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>City</th>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="text" name="city" placeholder="Enter your City" />
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td><b>State</b></td>
+                                                <td><input type="text" name="state" placeholder="Enter your State" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Zip/Postal Code</th>
+                        <td><input type="text" name="zipPostalCode" placeholder="Enter your Zip/Postal Code" /></td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td>
+                            <select name="country">
+                                <option value="none" selected>[Select your Country]</option>
+                                <option value="Vietnam">Vietnam</option>
+                                <option value="Campuchia">Campuchia</option>
+                                <option value="Thailand">Thailand</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Birthday</th>
+                        <td><input type="date" name="birthday" placeholder="mm/dd/yyyy" /></td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>
+                            <select name="gender">
+                                <option value="male" selected>Male</option>
+                                <option value="female">Female</option>
+                                <option value="otherGender">Other</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Starting date</th>
+                        <td><input type="radio" name="spring" /> Spring <input type="radio" name="summer" checked /> Summer</td>
+                    </tr>
+                    <tr>
+                        <th>Comments</th>
+                        <td>
+                            <textarea name="comments" rows="3" placeholder="Please send us more information"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                            <button type="button" name="submit" onclick="clickHandle()">
+                                <img src="images/Submit Button.png" alt="submitButton" />
+                            </button>
+                        </th>
+                    </tr>
+                </table>
+            </form>
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        </main>
+        <script>
+            function showError(inputElement, message) {
+                let parent = inputElement.parent();
+                let oldError = parent.find(".error-message");
+                if (oldError.length) oldError.remove();
+                parent.append(`<p class="error-message">${message}</p>`);
+            }
+
+            function removeError(inputElement) {
+                let parent = inputElement.parent();
+                let oldError = parent.find(".error-message");
+                if (oldError.length) oldError.remove();
+            }
+
+            function clickHandle() {
+                let fullName = $("#fullName");
+                let email = $("#email");
+                let password = $("#password");
+                let confirmPassword = $("#confirmPassword");
+                let phone = $("#phoneNumber");
+
+                if (fullName.val().length < 3 || fullName.val().length > 30) {
+                    showError(fullName, "Please input your name");
+                } else {
+                    removeError(fullName);
+                }
+
+                if (!email.val().includes("@")) {
+                    showError(email, "Please input your email");
+                } else {
+                    removeError(email);
+                }
+
+                if (password.val().length < 6) {
+                    showError(password, "Please input your password (min-length = 6)");
+                } else {
+                    removeError(password);
+                }
+
+                if (password.val() !== confirmPassword.val()) {
+                    showError(confirmPassword, "It does not match your password");
+                } else {
+                    removeError(confirmPassword);
+                }
+
+                if (phone.val().length !== 10 || isNaN(phone.val())) {
+                    showError(phone, "Enter your phone number");
+                } else {
+                    removeError(phone);
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Xác nhận và Thanh toán - SportHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001453",
+                    "on-primary-container": "#004b1e",
+                    "on-primary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface-container-high": "#e6e8ea",
+                    "on-error-container": "#93000a",
+                    "secondary": "#3755c3",
+                    "on-secondary-container": "#00217a",
+                    "primary-container": "#22c55e",
+                    "tertiary-container": "#ff8e4d",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "on-error": "#ffffff",
+                    "tertiary": "#9d4300",
+                    "inverse-on-surface": "#eff1f3",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-fixed": "#ffdbca",
+                    "primary-fixed": "#6bff8f",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-container": "#6d2d00",
+                    "background": "#f7f9fb",
+                    "on-primary-fixed": "#002109",
+                    "surface-dim": "#d8dadc",
+                    "outline-variant": "#bccbb9",
+                    "inverse-primary": "#4ae176",
+                    "secondary-fixed-dim": "#b8c4ff",
+                    "surface-tint": "#006e2f",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#191c1e",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "secondary-fixed": "#dde1ff",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-surface-variant": "#3d4a3d",
+                    "on-secondary-fixed-variant": "#173bab",
+                    "primary": "#006e2f",
+                    "on-primary-fixed-variant": "#005321",
+                    "outline": "#6d7b6c",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary-container": "#708cfd",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed": "#341100",
+                    "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "base": "4px",
+                    "sm": "12px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "xs": "8px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["44px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .premium-shadow {
+            box-shadow: 0px 4px 12px rgba(30, 64, 175, 0.08);
+        }
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- Header / TopAppBar (Modified for transactional context: No Global Nav) -->
+<header class="flex items-center justify-between px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface shadow-sm">
+<button class="flex items-center justify-center w-10 h-10 rounded-full active:scale-95 transition-transform" onclick="window.history.back()">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="font-title-lg text-title-lg-mobile text-on-surface text-center flex-1">Xác nhận đặt sân</h1>
+<div class="w-10"></div> <!-- Spacer for centering title -->
+</header>
+<main class="pt-20 pb-40 px-margin-mobile max-w-2xl mx-auto">
+<!-- Summary Card -->
+<section class="mb-lg">
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden premium-shadow border border-outline-variant">
+<div class="h-40 w-full relative">
+<img class="w-full h-full object-cover" data-alt="A high-resolution wide-angle photograph of a premium indoor badminton court with vibrant green flooring and bright professional LED lighting. The facility is modern, clean, and features white architectural lines against a deep sporty blue background. The mood is energetic and ready for high-performance sports, captured in a clean light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8IENBUrDS74r_z5FQtIp74LfL_tAO5OtGri6dlQLNvuhKUCitdSXESl6XUZcNvFDPaxl0bmpUn2Xx8gN0VqJp_vfYl4Xbz0bALeOZkPWKtQXmGkOgKD1LERiDlnTp2n6s2S54dOYHdU9YxF-HJS92u5M28xENJySxXzqygVdVljKh5PU9QHR9kDRNegCX_TWbjQfrCF6AHlQ185YPgsNX4AesDQ6mNfGZe1JPBcXBzjEzUCTwy_-1"/>
+<div class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-lg text-label-lg shadow-md">
+                        Còn sân
+                    </div>
+</div>
+<div class="p-md">
+<div class="flex justify-between items-start mb-base">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Sân Cầu Lông SportHub A1</h2>
+<div class="flex items-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg ml-1">4.9</span>
+</div>
+</div>
+<div class="space-y-sm mt-md">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-sm text-primary">calendar_today</span>
+<span class="font-body-md text-body-md">Thứ Bảy, 24 Tháng 5, 2024</span>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-sm text-primary">schedule</span>
+<span class="font-body-md text-body-md">18:00 - 20:00 (2 giờ)</span>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-sm text-primary">layers</span>
+<span class="font-body-md text-body-md">Sân số 04 - Thảm Yonex Cao Cấp</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="mb-lg">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md">Dịch vụ đã chọn</h3>
+<div class="space-y-sm">
+<!-- Service Item -->
+<div class="flex items-center justify-between p-md bg-surface-container rounded-xl border border-outline-variant">
+<div class="flex items-center">
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-primary">sports_tennis</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Thuê vợt Yonex</p>
+<p class="font-body-md text-body-md text-on-surface-variant">2 cây x 30.000đ</p>
+</div>
+</div>
+<p class="font-title-lg text-label-lg text-on-surface">60.000đ</p>
+</div>
+<!-- Service Item -->
+<div class="flex items-center justify-between p-md bg-surface-container rounded-xl border border-outline-variant">
+<div class="flex items-center">
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Nước suối Aquafina</p>
+<p class="font-body-md text-body-md text-on-surface-variant">3 chai x 10.000đ</p>
+</div>
+</div>
+<p class="font-title-lg text-label-lg text-on-surface">30.000đ</p>
+</div>
+</div>
+</section>
+<!-- Payment Methods -->
+<section class="mb-lg">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md">Phương thức thanh toán</h3>
+<div class="grid grid-cols-1 gap-sm">
+<!-- MoMo -->
+<label class="relative flex items-center p-md bg-surface-container-low rounded-xl border-2 border-transparent has-[:checked]:border-primary transition-all cursor-pointer">
+<input checked="" class="hidden peer" name="payment" type="radio"/>
+<div class="w-10 h-10 bg-[#A50064] rounded-lg flex items-center justify-center mr-md shrink-0">
+<img class="w-6 h-6 object-contain" data-alt="A stylized minimalist pink and white logo for a mobile wallet service like MoMo, representing modern digital transactions. The background is a clean solid white, with soft professional lighting accentuating the modern tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuWJimvyMmAa6ViCPAy_JrwlxibywatWqjZP2XAavRdC9phE7bf1g7hapyBVYiE1_O3LmdYjyPNRHQOqBVsr8Wb5Hhf09qlPIrZlWcU3LTAZJdPerAyZ5GQY1QSmrd9fGQ4MjDjUE-f9ickeNYj9TEgN8jZN1zVTgrPkz1phf_9PRXv6FerQdvuLWyBs2MR31Y-I5F0T_9KbmMccT1OdTNCTaDvw11V4fqUasDUir9U_0Yo40FM2y5"/>
+</div>
+<div class="flex-1">
+<p class="font-label-lg text-label-lg text-on-surface">Ví MoMo</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Thanh toán nhanh qua ứng dụng</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 peer-checked:opacity-100 transition-opacity">check_circle</span>
+</label>
+<!-- Bank Card -->
+<label class="relative flex items-center p-md bg-surface-container-low rounded-xl border-2 border-transparent has-[:checked]:border-primary transition-all cursor-pointer">
+<input class="hidden peer" name="payment" type="radio"/>
+<div class="w-10 h-10 bg-secondary-container rounded-lg flex items-center justify-center mr-md shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container">credit_card</span>
+</div>
+<div class="flex-1">
+<p class="font-label-lg text-label-lg text-on-surface">Thẻ ngân hàng (ATM/Visa/Master)</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Hỗ trợ tất cả ngân hàng nội địa</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 peer-checked:opacity-100 transition-opacity">check_circle</span>
+</label>
+<!-- Cash -->
+<label class="relative flex items-center p-md bg-surface-container-low rounded-xl border-2 border-transparent has-[:checked]:border-primary transition-all cursor-pointer">
+<input class="hidden peer" name="payment" type="radio"/>
+<div class="w-10 h-10 bg-surface-container-high rounded-lg flex items-center justify-center mr-md shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">payments</span>
+</div>
+<div class="flex-1">
+<p class="font-label-lg text-label-lg text-on-surface">Tiền mặt tại quầy</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Thanh toán khi đến nhận sân</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 peer-checked:opacity-100 transition-opacity">check_circle</span>
+</label>
+</div>
+</section>
+<!-- Pricing Summary -->
+<section class="p-lg bg-surface-container-highest rounded-2xl border border-outline-variant mb-xl">
+<div class="flex justify-between mb-sm">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Giá thuê sân (2h)</span>
+<span class="font-body-lg text-body-lg text-on-surface">240.000đ</span>
+</div>
+<div class="flex justify-between mb-sm">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Dịch vụ đi kèm</span>
+<span class="font-body-lg text-body-lg text-on-surface">90.000đ</span>
+</div>
+<div class="flex justify-between mb-sm text-error">
+<span class="font-body-lg text-body-lg">Giảm giá thành viên</span>
+<span class="font-body-lg text-body-lg">-30.000đ</span>
+</div>
+<div class="h-[1px] bg-outline-variant my-md"></div>
+<div class="flex justify-between items-center">
+<span class="font-title-lg text-title-lg text-on-surface">Tổng cộng</span>
+<span class="font-display-lg text-title-lg-mobile text-primary">300.000đ</span>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Booking Bar -->
+<div class="fixed bottom-0 left-0 w-full bg-surface shadow-[0px_-4px_12px_rgba(30,64,175,0.08)] z-50 safe-bottom">
+<div class="p-margin-mobile flex flex-col gap-md max-w-2xl mx-auto">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tổng thanh toán</p>
+<p class="font-title-lg text-title-lg text-primary">300.000đ</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Bao gồm VAT</p>
+</div>
+</div>
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-title-lg text-label-lg flex items-center justify-center gap-sm active:scale-95 transition-all shadow-lg shadow-primary/20" onclick="handlePayment()">
+<span>Xác nhận đặt sân</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        function handlePayment() {
+            const btn = document.querySelector('button.bg-primary');
+            const originalContent = btn.innerHTML;
+            
+            // Loading State
+            btn.disabled = true;
+            btn.innerHTML = `
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Đang xử lý...</span>
+            `;
+            
+            // Simulate Payment Processing
+            setTimeout(() => {
+                btn.innerHTML = `
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Đặt sân thành công!</span>
+                `;
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-primary-container', 'text-on-primary-container');
+                
+                // Reset or Redirect after success
+                setTimeout(() => {
+                    alert('Cảm ơn bạn đã đặt sân tại SportHub! Chi tiết đơn hàng đã được gửi vào email.');
+                    window.location.reload();
+                }, 1500);
+            }, 2000);
+        }
+
+        // Handle Method Selection Visuals
+        document.querySelectorAll('input[name="payment"]').forEach(input => {
+            input.addEventListener('change', (e) => {
+                document.querySelectorAll('label').forEach(label => {
+                    label.classList.remove('border-primary', 'bg-surface-container');
+                    label.classList.add('border-transparent', 'bg-surface-container-low');
+                });
+                if(e.target.checked) {
+                    const label = e.target.closest('label');
+                    label.classList.remove('border-transparent', 'bg-surface-container-low');
+                    label.classList.add('border-primary', 'bg-surface-container');
+                }
+            });
+        });
+    </script>
+</body></html>

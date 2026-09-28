@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SportHub - Giới thiệu Dự án</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Style & Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001453",
+                    "on-primary-container": "#004b1e",
+                    "on-primary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface-container-high": "#e6e8ea",
+                    "on-error-container": "#93000a",
+                    "secondary": "#3755c3",
+                    "on-secondary-container": "#00217a",
+                    "primary-container": "#22c55e",
+                    "tertiary-container": "#ff8e4d",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "on-error": "#ffffff",
+                    "tertiary": "#9d4300",
+                    "inverse-on-surface": "#eff1f3",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-fixed": "#ffdbca",
+                    "primary-fixed": "#6bff8f",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-container": "#6d2d00",
+                    "background": "#f7f9fb",
+                    "on-primary-fixed": "#002109",
+                    "surface-dim": "#d8dadc",
+                    "outline-variant": "#bccbb9",
+                    "inverse-primary": "#4ae176",
+                    "secondary-fixed-dim": "#b8c4ff",
+                    "surface-tint": "#006e2f",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#191c1e",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "secondary-fixed": "#dde1ff",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-surface-variant": "#3d4a3d",
+                    "on-secondary-fixed-variant": "#173bab",
+                    "primary": "#006e2f",
+                    "on-primary-fixed-variant": "#005321",
+                    "outline": "#6d7b6c",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary-container": "#708cfd",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed": "#341100",
+                    "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "base": "4px",
+                    "sm": "12px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "xs": "8px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["44px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        .bento-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0px 4px 12px rgba(30, 64, 175, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface dark:bg-on-background shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary font-bold text-3xl">sports_soccer</span>
+<h1 class="font-display-lg text-display-lg-mobile text-primary dark:text-primary-fixed-dim">SportHub</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors">location_on</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-12">
+<div class="relative h-[400px] rounded-[32px] overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A professional high-energy cinematic shot of a modern multi-purpose sports complex at twilight. The scene features vibrant green turf, bright stadium lighting casting dramatic shadows, and a clean architectural design. The atmosphere is premium and energetic, utilizing a palette of deep blues and vibrant greens consistent with a high-performance sports brand." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9TZCGuWu9uPs_VRz-RtbIyH6q-pHWZxj5K6z7t-2NO0xsIrgy45r8qe6AiOJ0DscWUohP3KoaGncF0-aqGYhSZP9TZqwrbj8sCYi7LQbpONZvQd_2lsGDCUkJVM1BdfKUhUg12ubJIGeQYlp1zOG8SAjcA0lC-92BJg8SJPtMtzBtThKREIO-7B4Bz1ZxJP0yICs7D4uraPgX8NO9Dpt6HLtr9wh5pkfvSc_qGQZu2oQZRjhLEujz')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
+<span class="inline-block px-4 py-1 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg mb-4 w-fit">Đồ án Tốt nghiệp</span>
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-2">Hệ Thống Đặt Sân Thể Thao Trực Tuyến</h2>
+<p class="font-body-lg text-body-lg text-white/80 max-w-2xl">Nền tảng kết nối người chơi và các cơ sở thể thao hàng đầu, tối ưu hóa quy trình đặt sân và quản lý vận hành chuyên nghiệp.</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid Info Section -->
+<div class="bento-grid">
+<!-- Project About -->
+<div class="bento-card col-span-12 lg:col-span-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">info</span>
+<h3 class="font-title-lg text-title-lg text-primary">Về Dự Án</h3>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        SportHub ra đời với sứ mệnh chuyển đổi số ngành dịch vụ thể thao. Chúng tôi cung cấp giải pháp toàn diện giúp người dùng tìm kiếm, so sánh và đặt sân chỉ trong vài giây, đồng thời hỗ trợ chủ sân quản lý lịch trình, doanh thu và khách hàng một cách thông minh, tự động hóa.
+                    </p>
+</div>
+<div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-4 rounded-xl text-center border border-outline-variant">
+<span class="block font-display-lg text-primary text-3xl mb-1">50+</span>
+<span class="text-label-sm text-on-surface-variant">Sân liên kết</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl text-center border border-outline-variant">
+<span class="block font-display-lg text-primary text-3xl mb-1">1k+</span>
+<span class="text-label-sm text-on-surface-variant">Thành viên</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl text-center border border-outline-variant">
+<span class="block font-display-lg text-primary text-3xl mb-1">24/7</span>
+<span class="text-label-sm text-on-surface-variant">Đặt lịch</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl text-center border border-outline-variant">
+<span class="block font-display-lg text-primary text-3xl mb-1">100%</span>
+<span class="text-label-sm text-on-surface-variant">Uy tín</span>
+</div>
+</div>
+</div>
+<!-- Tech Stack -->
+<div class="bento-card col-span-12 lg:col-span-4 bg-primary text-on-primary">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined">terminal</span>
+<h3 class="font-title-lg text-title-lg">Công Nghệ</h3>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 bg-white/10 p-3 rounded-xl border border-white/20">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">smartphone</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg">React Native &amp; Expo</p>
+<p class="text-xs opacity-70">Frontend Mobile</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white/10 p-3 rounded-xl border border-white/20">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">api</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg">ASP.NET Core Web API</p>
+<p class="text-xs opacity-70">Backend Service</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white/10 p-3 rounded-xl border border-white/20">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">database</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg">SQL Server</p>
+<p class="text-xs opacity-70">Database Management</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white/10 p-3 rounded-xl border border-white/20">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">cloud_done</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg">Azure / Docker</p>
+<p class="text-xs opacity-70">Deployment</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Team Members -->
+<div class="bento-card col-span-12">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">groups</span>
+<h3 class="font-title-lg text-title-lg text-primary">Thành Viên Phát Triển</h3>
+</div>
+<p class="text-on-surface-variant font-body-md">Sáng tạo &amp; Nhiệt huyết</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Member 1 -->
+<div class="flex flex-col items-center p-6 bg-surface-container rounded-3xl text-center border border-outline-variant hover:bg-secondary-container/10 transition-colors">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot of a young male software developer with a friendly expression. He is wearing a minimalist dark polo shirt. The background is a soft, out-of-focus modern office environment with warm indoor lighting and hints of indoor plants. Corporate professional photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbKL52F4weOooqSQvvTUqNTiqsoCGgL3_GsPLXhfCp1YSKvIMqwHtCJfQuktjA7t_OBt9qmxOdBUgcZAFq903EtSXlFM6NZnZudV6TphpUcWzf1IWRsfGLk6VIiRUj2M5QRwN9QnIMU3f4bL4O44wRu_Wh-6N6bihmM5rUXVlZN1jt5fbnkqAcKE8IdMsm-JkV8J6D9taVD2kelcYtrVyaQWxaq8a3FlhkJlATQ7KCdhrD_QH48tlc"/>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-1">Nguyễn Văn A</h4>
+<p class="text-primary font-label-sm uppercase tracking-wider mb-3">Project Manager</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-sm">code</span></button>
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-sm">mail</span></button>
+</div>
+</div>
+<!-- Member 2 -->
+<div class="flex flex-col items-center p-6 bg-surface-container rounded-3xl text-center border border-outline-variant hover:bg-secondary-container/10 transition-colors">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot of a young female mobile app developer with creative glasses. She is wearing a modern green blazer. The background is a clean, bright minimalist studio with soft high-key lighting. Professional LinkedIn style portrait with a focus on a professional and approachable demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP_mt7X5_YBjPvrLML2c7KNCPAzeo4svfUz_ekci9ARO6InwSIG2HrKYqU0olWYOXehggkfEpIP_02UTgOAmcCt5fUm6Du5-qGEti2K_aMa1otZKnjLSQ5MBteERh9dw1pZxxmkX_i5x7EO36_0Wt6VenoAGXLQvWgRKX4ed_MX2jtPJxxZSWh4BCymNM35bvc5oNrrs8Oo0-RMq3PMe4TRBubQkFlNA3PaD5t-_m-yQluZkIv-RHj"/>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-1">Trần Thị B</h4>
+<p class="text-primary font-label-sm uppercase tracking-wider mb-3">Mobile Developer</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-sm">smartphone</span></button>
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-sm">mail</span></button>
+</div>
+</div>
+<!-- Member 3 -->
+<div class="flex flex-col items-center p-6 bg-surface-container rounded-3xl text-center border border-outline-variant hover:bg-secondary-container/10 transition-colors">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a focused young male backend engineer in a clean white t-shirt. The setting is a modern co-working space with large windows and natural daylight. The lighting is crisp and natural. The image style is clean, corporate, and trustworthy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSOTsmG8LV-canwD8Vk9ZC3l8yA27VsymUfx-t9oxcvjyLuQ4wCm29XXB8h26839F0K-PLffBa7SuOnZ6EwORqusZmfcrdbt6BwASQzrIbtbwHSxYROQ_hBA_nIsKuAs-8j2mG2zdncvqr6efEl18bDNivRVCfYmbZrKWaMCJTFBwly4iWT61wwpJKe6XNgii2o2m46H2PgLTgFhgQwqcOadi3jWLCojYMPzfqR1c2Ae8JuY1Uf7H"/>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-1">Lê Văn C</h4>
+<p class="text-primary font-label-sm uppercase tracking-wider mb-3">Backend Developer</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-sm">storage</span></button>
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-sm">mail</span></button>
+</div>
+</div>
+<!-- Member 4 -->
+<div class="flex flex-col items-center p-6 bg-surface-container rounded-3xl text-center border border-outline-variant hover:bg-secondary-container/10 transition-colors">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a young female UI UX designer with a warm smile. She is wearing a modern black turtleneck. Background is a neutral soft grey with professional three-point lighting. The overall mood is sophisticated, artistic, and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2MpcZ7b5hBgMWlIIMdMIrDcG96hYMHgmPlMGJoOdi-kOruz86gZqnfz_ZaOsRYI-41OpYWkIr0M7kQgEyaALvqUp0OleauMFdz6rRmYOfYSHrAgHshXy-mgDpHvrP7YTjcL-_A7XYjtE_yod-2Wt7Yy49br2QglLLF1aRkguBIk5SjzX0P5UpBNb8i41ldMkcWa0XySJknrGo0hj6XA30cn_AB1efZUKTD_Mj54tR9-dlWK3eXKoX"/>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-1">Phạm Thị D</h4>
+<p class="text-primary font-label-sm uppercase tracking-wider mb-3">UI/UX Designer</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-sm">palette</span></button>
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-sm">mail</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Section -->
+<div class="col-span-12 mt-8 flex flex-col md:flex-row gap-6 items-center justify-center">
+<button class="w-full md:w-auto px-8 py-4 bg-primary text-on-primary rounded-full font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-lg hover:bg-on-primary-fixed-variant active:scale-95 transition-all">
+                    Tải ứng dụng ngay <span class="material-symbols-outlined">download</span>
+</button>
+<button class="w-full md:w-auto px-8 py-4 bg-white text-primary border-2 border-primary rounded-full font-label-lg text-label-lg flex items-center justify-center gap-2 hover:bg-primary/5 active:scale-95 transition-all">
+                    Xem demo <span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container dark:bg-inverse-surface shadow-[0px_-4px_12px_rgba(30,64,175,0.08)] rounded-t-xl md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Trang chủ</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm">Tìm kiếm</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-label-sm text-label-sm">Lịch đặt</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-container text-on-primary-container dark:text-primary-fixed rounded-full px-5 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Cá nhân</span>
+</div>
+</nav>
+<!-- Floating Atmosphere Elements -->
+<div class="fixed bottom-24 right-6 pointer-events-none opacity-20">
+<span class="material-symbols-outlined text-8xl text-primary animate-bounce">sports_basketball</span>
+</div>
+<div class="fixed top-32 left-6 pointer-events-none opacity-10">
+<span class="material-symbols-outlined text-9xl text-primary rotate-45">fitness_center</span>
+</div>
+<script>
+        // Simple Micro-interaction: Subtle scroll reveal for bento cards
+        const cards = document.querySelectorAll('.bento-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+            observer.observe(card);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parsing Numbers</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>str</th>
+                    <th>parseInt(str)</th>
+                    <th>parseFloat(str)</th>
+                    <th>Number(str)</th>
+                    <th>+str</th>
+                    <th>str|0</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+    <script>
+        let strings = ["1234", "1234abc", "0.15", "3.14ivan", "Infinity", "99999999999999999999"];
+        let tbody = document.querySelector("tbody");
+        for (let each of strings) {
+            let tr = document.createElement("tr");
+            let parsedInt = parseInt(each);
+            let parsedFloat = parseFloat(each);
+            let number = Number(each);
+            let plusStr = +each;
+            let orStr = each | 0;
+            tr.innerHTML = `
+                <td>${each}</td>
+                <td>${parsedInt}</td>
+                <td>${parsedFloat}</td>
+                <td>${number}</td>
+                <td>${plusStr}</td>
+                <td>${orStr}</td>
+            `;
+            tbody.appendChild(tr);
+        }
+        let allTr = document.querySelectorAll("tr");
+        for (let each of allTr) {
+            each.children[0].style.textAlign = "left";
+        }
+    </script>
+</body>
+
+</html>

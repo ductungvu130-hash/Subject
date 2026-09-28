@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bootstrap Layout Mẫu – 3 Thiết Kế Tham Khảo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"/>
+  <style>
+    :root {
+      --eiu-dark: #1a1a2e; --eiu-panel: #16213e; --eiu-accent: #e94560;
+      --eiu-text: #e0e0e0; --eiu-muted: #9ca3af; --eiu-card: #0f3460;
+      --eiu-border: #2d3561; --eiu-success: #10b981; --eiu-warn: #f59e0b;
+      --code-bg: #0d1117;
+    }
+    * { box-sizing: border-box; }
+    body { background: var(--eiu-dark); color: var(--eiu-text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; }
+
+    #sidebar { position: fixed; top: 0; left: 0; width: 260px; height: 100vh; background: var(--eiu-panel); border-right: 1px solid var(--eiu-border); overflow-y: auto; z-index: 100; padding: 0 0 2rem; }
+    #sidebar .logo { padding: 1.25rem 1.5rem; background: var(--eiu-accent); font-weight: 700; font-size: 1.05rem; }
+    #sidebar .logo span { font-size: .76rem; opacity: .85; display: block; font-weight: 400; }
+    .nav-group-title { padding: .6rem 1.5rem .2rem; font-size: .68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--eiu-muted); }
+    #sidebar a { display: block; padding: .4rem 1.5rem .4rem 2rem; color: var(--eiu-text); text-decoration: none; font-size: .85rem; border-left: 3px solid transparent; }
+    #sidebar a:hover, #sidebar a.active { color: #fff; background: rgba(233,69,96,.12); border-left-color: var(--eiu-accent); }
+
+    #main { margin-left: 260px; padding: 2rem 2.5rem; }
+
+    .section-badge { display: inline-block; padding: .2rem .75rem; border-radius: 20px; font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: .5rem; }
+    .badge-site1 { background: rgba(16,185,129,.15); color: var(--eiu-success); }
+    .badge-site2 { background: rgba(56,189,248,.15); color: #38bdf8; }
+    .badge-site3 { background: rgba(192,57,2,.15); color: #c084fc; }
+    .badge-tip { background: rgba(0,102,204,.2); color: #60a5fa; }
+
+    h2.sec-title { font-size: 1.55rem; font-weight: 800; margin-bottom: 1.25rem; padding-bottom: .6rem; border-bottom: 2px solid var(--eiu-border); }
+    h3.sub-title { font-size: 1.05rem; font-weight: 700; margin: 1.25rem 0 .65rem; color: #fff; }
+
+    .study-card { background: var(--eiu-panel); border: 1px solid var(--eiu-border); border-radius: 10px; padding: 1.3rem; margin-bottom: 1.1rem; }
+    .study-card h4 { font-size: .92rem; font-weight: 700; margin-bottom: .65rem; color: #fff; }
+
+    pre { background: var(--code-bg) !important; border: 1px solid var(--eiu-border); border-radius: 8px; margin: .65rem 0; overflow-x: auto; }
+    pre code.hljs { padding: .9rem 1.1rem; font-size: .79rem; line-height: 1.55; }
+
+    .layout-preview { background: #111827; border: 1px dashed var(--eiu-border); border-radius: 8px; overflow: hidden; margin: .65rem 0; }
+    .layout-preview .lp-header { background: var(--eiu-card); padding: .45rem 1rem; font-size: .72rem; color: var(--eiu-muted); font-family: monospace; }
+    .layout-preview .lp-body { padding: .65rem .85rem; }
+    .lp-box { border-radius: 4px; padding: .4rem; font-size: .68rem; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 46px; }
+    .lp-nav { background: rgba(233,69,96,.12); border: 1px dashed rgba(233,69,96,.45); color: var(--eiu-accent); }
+    .lp-hero { background: rgba(16,185,129,.1); border: 1px dashed rgba(16,185,129,.45); color: var(--eiu-success); min-height: 70px; }
+    .lp-card { background: rgba(245,158,11,.1); border: 1px dashed rgba(245,158,11,.45); color: var(--eiu-warn); min-height: 60px; }
+    .lp-side { background: rgba(56,189,248,.1); border: 1px dashed rgba(56,189,248,.45); color: #38bdf8; }
+    .lp-foot { background: rgba(156,163,175,.1); border: 1px dashed rgba(156,163,175,.45); color: var(--eiu-muted); }
+    .lp-form { background: rgba(192,132,252,.1); border: 1px dashed rgba(192,132,252,.45); color: #c084fc; }
+
+    .jq-highlight { background: rgba(245,158,11,.1); border-left: 3px solid var(--eiu-warn); border-radius: 0 6px 6px 0; padding: .7rem 1rem; margin: .65rem 0; font-size: .86rem; }
+    .jq-highlight strong { color: var(--eiu-warn); }
+    .tip-box { background: rgba(0,102,204,.12); border-left: 3px solid #3b82f6; border-radius: 0 6px 6px 0; padding: .7rem 1rem; margin: .65rem 0; font-size: .86rem; color: #93c5fd; }
+
+    .ref-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    .ref-table th { background: var(--eiu-card); padding: .5rem .7rem; text-align: left; color: #fff; font-weight: 600; border-bottom: 1px solid var(--eiu-border); }
+    .ref-table td { padding: .42rem .7rem; border-bottom: 1px solid var(--eiu-border); vertical-align: top; }
+    .ref-table td code { background: #1f2937; padding: .1rem .35rem; border-radius: 3px; font-size: .79rem; color: #f9a8d4; }
+
+    .sec-divider { border-color: var(--eiu-border); margin: 2.2rem 0; }
+
+    #sidebar::-webkit-scrollbar { width: 5px; }
+    #sidebar::-webkit-scrollbar-track { background: transparent; }
+    #sidebar::-webkit-scrollbar-thumb { background: var(--eiu-border); border-radius: 3px; }
+
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 1rem; } }
+  </style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="logo">📐 Layout Mẫu
+    <span>3 thiết kế tham khảo CSW 304</span>
+  </div>
+
+  <div class="nav-group-title">Tổng quan</div>
+  <a href="#overview">So sánh cấu trúc 3 site</a>
+
+  <div class="nav-group-title">Mẫu 1 · LANI & DANI</div>
+  <a href="#s1-nav">Navbar + Hero Carousel</a>
+  <a href="#s1-about">About 2 cột (ảnh đôi)</a>
+  <a href="#s1-services">Service Cards 3 cột</a>
+  <a href="#s1-icons">Icon Grid 4 cột</a>
+  <a href="#s1-cta">CTA Form trên ảnh nền</a>
+  <a href="#s1-blog">Blog: Card lớn + Sidebar list</a>
+  <a href="#s1-footer">Footer 3 cột</a>
+
+  <div class="nav-group-title">Mẫu 2 · KidKinder</div>
+  <a href="#s2-hero">Hero 2 cột nền màu</a>
+  <a href="#s2-icons">Icon Grid không viền</a>
+  <a href="#s2-about">About + Checklist</a>
+  <a href="#s2-classes">Class Cards có bảng</a>
+  <a href="#s2-booking">2 cột: nội dung + Form tối</a>
+  <a href="#s2-footer">Footer 4 cột + Newsletter</a>
+
+  <div class="nav-group-title">Mẫu 3 · Violet on Wednesday</div>
+  <a href="#s3-header">Topbar + Header + Navbar</a>
+  <a href="#s3-hero">Hero: Slider + Banner đôi</a>
+  <a href="#s3-shop">Layout Shop 8+4 (Sidebar phải)</a>
+  <a href="#s3-products">Product Grid 4 cột</a>
+  <a href="#s3-footer">Footer Feature bar + 4 cột</a>
+
+  <div class="nav-group-title">Tổng hợp</div>
+  <a href="#patterns">Pattern dùng chung</a>
+</nav>
+
+<main id="main">
+
+  <div class="study-card" style="background: linear-gradient(135deg, var(--eiu-panel), #0f3460); border-color: var(--eiu-accent); margin-bottom: 2rem;">
+    <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <div style="font-size: 2.6rem;">📐</div>
+      <div>
+        <div style="font-size: 1.3rem; font-weight: 800; color:#fff;">Bootstrap Layout Mẫu – Phân tích 3 thiết kế thực tế</div>
+        <div style="color: var(--eiu-muted); font-size: .88rem;">LANI &amp; DANI (Golf) · KidKinder (Giáo dục) · Violet on Wednesday (Shop hoa)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ OVERVIEW ═══════════ -->
+  <section id="overview">
+    <h2 class="sec-title">0 · So sánh cấu trúc 3 thiết kế</h2>
+    <div class="study-card">
+      <table class="ref-table">
+        <tr><th>Thành phần</th><th>LANI &amp; DANI</th><th>KidKinder</th><th>Violet on Wednesday</th></tr>
+        <tr><td>Loại site</td><td>Landing trang chủ công ty</td><td>Landing trung tâm giáo dục</td><td>Shop bán hàng (e-commerce)</td></tr>
+        <tr><td>Header</td><td>Navbar đơn giản</td><td>Navbar đơn giản</td><td>Topbar + Header (search/cart) + Navbar</td></tr>
+        <tr><td>Hero</td><td>Carousel ảnh full-width</td><td>2 cột, nền màu + ảnh bo dáng</td><td>Carousel (8) + 2 banner xếp (4)</td></tr>
+        <tr><td>Grid chính</td><td>Card 3 cột, Icon 4 cột</td><td>Icon 3 cột không viền, Card 3 cột</td><td>Sản phẩm 4 cột, lặp nhiều block</td></tr>
+        <tr><td>Layout đặc biệt</td><td>2 cột ảnh đôi, CTA nền ảnh</td><td>2 cột ảnh + checklist, Form tối</td><td><strong>Sidebar phải (8+4)</strong> kiểu shop</td></tr>
+        <tr><td>Footer</td><td>3 cột + bottom bar</td><td>4 cột + Newsletter</td><td>Feature bar + 4 cột</td></tr>
+      </table>
+      <div class="tip-box">
+        💡 Cả 3 đều dùng nguyên lý chung: <code>container</code> bọc nội dung, <code>row</code> chia cột, mỗi <strong>block lớn</strong> là 1 <code>&lt;section&gt;</code> riêng với màu nền khác nhau để phân tách.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MẪU 1: LANI & DANI
+  ════════════════════════════════════════ -->
+  <hr class="sec-divider" id="s1-nav"/>
+  <div class="section-badge badge-site1">Mẫu 1 — LANI &amp; DANI (Golf)</div>
+  <h2 class="sec-title">1 · Navbar + Hero Carousel</h2>
+
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">navbar (logo trái + menu phải) → carousel full-width</div>
+      <div class="lp-body">
+        <div class="row g-1 mb-2">
+          <div class="col-12"><div class="lp-box lp-nav">Navbar: Logo | Trang chủ | Dịch vụ... | 🇻🇳</div></div>
+        </div>
+        <div class="row g-1">
+          <div class="col-12"><div class="lp-box lp-hero">Carousel ảnh full-width (Bootstrap Carousel)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h4>✅ Code mẫu</h4>
+    <pre><code class="language-html">&lt;nav class="navbar navbar-expand-lg bg-white shadow-sm"&gt;
+  &lt;div class="container-fluid px-4"&gt;
+    &lt;a class="navbar-brand fw-bold" href="#"&gt;
+      &lt;img src="logo.png" height="40"&gt; LANI &amp; DANI
+    &lt;/a&gt;
+    &lt;button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav1"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div class="collapse navbar-collapse" id="nav1"&gt;
+      &lt;ul class="navbar-nav ms-auto"&gt;
+        &lt;li class="nav-item"&gt;&lt;a class="nav-link active" href="#"&gt;TRANG CHỦ&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="nav-item dropdown"&gt;
+          &lt;a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"&gt;CÔNG TRÌNH&lt;/a&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Công trình 1&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;LIÊN HỆ&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;!-- Carousel full width --&gt;
+&lt;div id="heroCarousel" class="carousel slide" data-bs-ride="carousel"&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-item active"&gt;
+      &lt;img src="golf1.jpg" class="d-block w-100" style="height:500px;object-fit:cover;"&gt;
+    &lt;/div&gt;
+    &lt;div class="carousel-item"&gt;
+      &lt;img src="golf2.jpg" class="d-block w-100" style="height:500px;object-fit:cover;"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="carousel-control-prev" data-bs-target="#heroCarousel" data-bs-slide="prev"&gt;
+    &lt;span class="carousel-control-prev-icon"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class="carousel-control-next" data-bs-target="#heroCarousel" data-bs-slide="next"&gt;
+    &lt;span class="carousel-control-next-icon"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s1-about"/>
+  <h2 class="sec-title">2 · About Us – 2 cột (text trái + 2 ảnh xếp lệch phải)</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">row → col-md-6 (text) | col-md-6 (2 ảnh con: col-7 + col-5)</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-md-6"><div class="lp-box lp-card" style="min-height:90px;">Text: tiêu đề + 2 đoạn văn</div></div>
+          <div class="col-md-6">
+            <div class="row g-1">
+              <div class="col-7"><div class="lp-box lp-card" style="min-height:90px;">Ảnh lớn</div></div>
+              <div class="col-5"><div class="lp-box lp-card" style="min-height:90px;">Ảnh nhỏ</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;section class="py-5"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row align-items-center g-4"&gt;
+
+      &lt;div class="col-md-6"&gt;
+        &lt;p class="text-muted mb-1"&gt;Chúng tôi là ai?&lt;/p&gt;
+        &lt;h2 class="fw-bold text-success mb-3"&gt;Công ty LANI &amp; DANI&lt;/h2&gt;
+        &lt;p&gt;Tự hào là công ty đầu tiên tại Việt Nam...&lt;/p&gt;
+        &lt;p&gt;Chúng tôi còn hoạt động trong lĩnh vực...&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class="col-md-6"&gt;
+        &lt;div class="row g-2"&gt;
+          &lt;div class="col-7"&gt;
+            &lt;img src="golfer1.jpg" class="img-fluid rounded shadow"&gt;
+          &lt;/div&gt;
+          &lt;div class="col-5"&gt;
+            &lt;img src="golfer2.jpg" class="img-fluid rounded shadow"&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s1-services"/>
+  <h2 class="sec-title">3 · Service Cards – heading giữa + lưới 3 cột x 2 hàng</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">text-center heading → row row-cols-md-3 (card ảnh + title + desc)</div>
+      <div class="lp-body">
+        <div class="row g-1 mb-1">
+          <div class="col-12"><div class="lp-box lp-card" style="min-height:40px;">Tiêu đề "Dịch Vụ Sân Golf" (text-center)</div></div>
+        </div>
+        <div class="row g-1">
+          <div class="col-4"><div class="lp-box lp-card">Card 1</div></div>
+          <div class="col-4"><div class="lp-box lp-card">Card 2</div></div>
+          <div class="col-4"><div class="lp-box lp-card">Card 3</div></div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;section class="py-5 bg-light"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="text-center mb-5"&gt;
+      &lt;p class="text-success fw-semibold mb-1"&gt;Chuyên gia hàng đầu&lt;/p&gt;
+      &lt;h2 class="fw-bold"&gt;Dịch Vụ Sân Golf&lt;/h2&gt;
+      &lt;p class="text-muted mx-auto" style="max-width:600px;"&gt;
+        Với đội ngũ thiết kế và xây dựng chuyên nghiệp...
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="row row-cols-1 row-cols-md-3 g-4"&gt;
+      &lt;div class="col"&gt;
+        &lt;img src="design.jpg" class="img-fluid rounded mb-3"&gt;
+        &lt;h5 class="text-center"&gt;Thiết Kế&lt;/h5&gt;
+        &lt;p class="text-center text-muted"&gt;Đội ngũ thiết kế sân golf hơn 10 năm kinh nghiệm...&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="col"&gt;
+        &lt;img src="construction.jpg" class="img-fluid rounded mb-3"&gt;
+        &lt;h5 class="text-center"&gt;Xây Dựng&lt;/h5&gt;
+        &lt;p class="text-center text-muted"&gt;Là đơn vị đứng đầu về thi công thiết kế sân golf...&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="col"&gt;
+        &lt;img src="operation.jpg" class="img-fluid rounded mb-3"&gt;
+        &lt;h5 class="text-center"&gt;Vận Hành&lt;/h5&gt;
+        &lt;p class="text-center text-muted"&gt;Quản lý, điều hành, vận hành hoạt động kinh doanh...&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;!-- lặp lại thêm 3 col nữa cho hàng 2 --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s1-icons"/>
+  <h2 class="sec-title">4 · Icon Grid – 4 cột x 2 hàng (Các Dịch Vụ Khác)</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">row row-cols-md-4 → mỗi cột là box icon + title, viền nhạt</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-3"><div class="lp-box lp-card">🏠 Icon+Text</div></div>
+          <div class="col-3"><div class="lp-box lp-card">🏗 Icon+Text</div></div>
+          <div class="col-3"><div class="lp-box lp-card">💥 Icon+Text</div></div>
+          <div class="col-3"><div class="lp-box lp-card">⚡ Icon+Text</div></div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;section class="py-5"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="text-center mb-5"&gt;
+      &lt;h2 class="fw-bold"&gt;Các Dịch Vụ Khác&lt;/h2&gt;
+    &lt;/div&gt;
+
+    &lt;div class="row row-cols-2 row-cols-md-4 g-4 text-center"&gt;
+      &lt;div class="col"&gt;
+        &lt;div class="border rounded p-4 h-100"&gt;
+          &lt;img src="icon-house.png" width="60" class="mb-3"&gt;
+          &lt;p class="fw-semibold mb-0"&gt;Xây dựng nhà ở&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="col"&gt;
+        &lt;div class="border rounded p-4 h-100"&gt;
+          &lt;img src="icon-building.png" width="60" class="mb-3"&gt;
+          &lt;p class="fw-semibold mb-0"&gt;Xây dựng công trình&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- lặp lại 6 box nữa --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s1-cta"/>
+  <h2 class="sec-title">5 · CTA Section – Form trên nền ảnh (overlay)</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">section có background-image → row 2 cột: box trong suốt + form trắng</div>
+      <div class="lp-body">
+        <div class="row g-2">
+          <div class="col-5"><div class="lp-box lp-form" style="min-height:90px;">Icon + "Bạn cần tư vấn?" + text</div></div>
+          <div class="col-7"><div class="lp-box lp-form" style="min-height:90px;">Form: Tên, Email, SĐT, Nội dung, nút Gửi</div></div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;section class="position-relative py-5"
+         style="background:url('golf-bg.jpg') center/cover; min-height:400px;"&gt;
+  &lt;div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"&gt;&lt;/div&gt;
+
+  &lt;div class="container position-relative" style="z-index:2;"&gt;
+    &lt;div class="row align-items-center"&gt;
+
+      &lt;div class="col-md-5 text-white"&gt;
+        &lt;div class="border border-light rounded p-4"&gt;
+          &lt;img src="icon-chat.png" width="50"&gt;
+          &lt;h3 class="fw-bold mt-2"&gt;Bạn đang cần tư vấn?&lt;/h3&gt;
+          &lt;p&gt;Đừng ngần ngại, hãy liên hệ ngay với LaniDani...&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="col-md-7"&gt;
+        &lt;div class="bg-white rounded shadow p-4"&gt;
+          &lt;form&gt;
+            &lt;div class="row g-3"&gt;
+              &lt;div class="col-md-6"&gt;
+                &lt;label for="ctaName" class="visually-hidden"&gt;Tên&lt;/label&gt;
+                &lt;input id="ctaName" class="form-control" placeholder="Tên của bạn"&gt;
+              &lt;/div&gt;
+              &lt;div class="col-md-6"&gt;
+                &lt;label for="ctaEmail" class="visually-hidden"&gt;Email&lt;/label&gt;
+                &lt;input id="ctaEmail" class="form-control" placeholder="Email của bạn"&gt;
+              &lt;/div&gt;
+              &lt;div class="col-12"&gt;
+                &lt;textarea class="form-control" rows="3" placeholder="Nội dung"&gt;&lt;/textarea&gt;
+              &lt;/div&gt;
+              &lt;div class="col-12"&gt;
+                &lt;button class="btn btn-success w-100"&gt;GỬI&lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s1-blog"/>
+  <h2 class="sec-title">6 · Blog/Tin tức – 2 Card lớn + Sidebar list nhỏ</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">row → col-md-4 (card lớn) x2 + col-md-4 (list item nhỏ x3)</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-4"><div class="lp-box lp-card" style="min-height:80px;">Card: ảnh lớn + title + desc</div></div>
+          <div class="col-4"><div class="lp-box lp-card" style="min-height:80px;">Card: ảnh lớn + title + desc</div></div>
+          <div class="col-4">
+            <div class="row g-1">
+              <div class="col-12"><div class="lp-box lp-side" style="min-height:24px;">Item nhỏ: ảnh trái + title</div></div>
+              <div class="col-12"><div class="lp-box lp-side" style="min-height:24px;">Item nhỏ: ảnh trái + title</div></div>
+              <div class="col-12"><div class="lp-box lp-side" style="min-height:24px;">Item nhỏ: ảnh trái + title</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;div class="row g-4"&gt;
+
+  &lt;!-- 2 card lớn --&gt;
+  &lt;div class="col-md-4"&gt;
+    &lt;img src="news1.jpg" class="img-fluid rounded mb-2"&gt;
+    &lt;h6 class="fw-bold"&gt;Những lưu ý quan trọng trong cách chọn golf cho nam&lt;/h6&gt;
+    &lt;small class="text-muted"&gt;Tháng Mười 28, 2020&lt;/small&gt;
+    &lt;p class="text-muted small mt-2"&gt;Theo chân các golfer nam ra sân đó chính là điều...&lt;/p&gt;
+    &lt;a href="#" class="btn btn-outline-success btn-sm"&gt;CHI TIẾT&lt;/a&gt;
+  &lt;/div&gt;
+
+  &lt;div class="col-md-4"&gt;
+    &lt;!-- lặp lại cấu trúc giống card 1 --&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Sidebar list nhỏ --&gt;
+  &lt;div class="col-md-4"&gt;
+    &lt;div class="d-flex mb-3"&gt;
+      &lt;img src="thumb1.jpg" width="70" class="rounded me-2"&gt;
+      &lt;div&gt;
+        &lt;small class="text-success"&gt;HỎI ĐÁP&lt;/small&gt;
+        &lt;p class="mb-0 fw-semibold small"&gt;Golf Course là gì? Có bao nhiêu loại?&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- lặp lại d-flex cho mỗi item --&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s1-footer"/>
+  <h2 class="sec-title">7 · Footer – 3 cột + thanh copyright</h2>
+  <div class="study-card">
+    <pre><code class="language-html">&lt;footer class="bg-dark text-light pt-5"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row g-4"&gt;
+      &lt;div class="col-md-4"&gt;
+        &lt;img src="logo-white.png" height="40" class="mb-2"&gt;
+        &lt;p class="text-muted small"&gt;Lani &amp; Dani là công ty hoạt động đa ngành...&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-4"&gt;
+        &lt;h6 class="text-uppercase"&gt;Liên Hệ&lt;/h6&gt;
+        &lt;p class="small mb-1"&gt;&lt;strong&gt;Địa chỉ&lt;/strong&gt;&lt;br&gt;202 Nguyễn Văn Hưởng...&lt;/p&gt;
+        &lt;p class="small mb-0"&gt;&lt;strong&gt;Điện thoại&lt;/strong&gt;&lt;br&gt;0989 368 462&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-4"&gt;
+        &lt;h6 class="text-uppercase"&gt;Tin Tức&lt;/h6&gt;
+        &lt;ul class="list-unstyled small"&gt;
+          &lt;li&gt;&lt;a href="#" class="text-light"&gt;Kỹ thuật Golf&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#" class="text-light"&gt;Giải đấu Golf&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="border-top border-secondary mt-4 py-3"&gt;
+    &lt;div class="container d-flex justify-content-between"&gt;
+      &lt;small&gt;Copyright 2021 © LANI &amp; DANI Company&lt;/small&gt;
+      &lt;div&gt;
+        &lt;a href="#" class="text-light me-2"&gt;&lt;i class="bi bi-facebook"&gt;&lt;/i&gt;&lt;/a&gt;
+        &lt;a href="#" class="text-light"&gt;&lt;i class="bi bi-instagram"&gt;&lt;/i&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MẪU 2: KIDKINDER
+  ════════════════════════════════════════ -->
+  <hr class="sec-divider" id="s2-hero"/>
+  <div class="section-badge badge-site2">Mẫu 2 — KidKinder (Giáo dục)</div>
+  <h2 class="sec-title">8 · Hero 2 cột nền màu (full-bleed)</h2>
+
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">section bg-teal → container → row 2 cột: text trái, ảnh bo dáng phải</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-6"><div class="lp-box lp-hero" style="min-height:90px;">Tagline + Heading lớn + đoạn văn + nút "Learn More"</div></div>
+          <div class="col-6"><div class="lp-box lp-hero" style="min-height:90px;">Ảnh học sinh (clip-path bo tròn dạng mây)</div></div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;section class="py-5" style="background:#1aa3a8;"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row align-items-center"&gt;
+
+      &lt;div class="col-md-6 text-white"&gt;
+        &lt;p class="text-uppercase small mb-2"&gt;Kids Learning Center&lt;/p&gt;
+        &lt;h1 class="fw-bold display-5"&gt;New Approach to Kids Education&lt;/h1&gt;
+        &lt;p class="my-3"&gt;Sea ipsum kasd eirmod kasd magna...&lt;/p&gt;
+        &lt;button class="btn btn-dark rounded-pill px-4"&gt;Learn More&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div class="col-md-6 text-center"&gt;
+        &lt;img src="kid-reading.jpg" class="img-fluid"
+             style="clip-path: ellipse(48% 50% at 50% 50%);"&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    <div class="tip-box">💡 Hiệu ứng "đám mây" quanh ảnh dùng CSS <code>clip-path</code> hoặc ảnh PNG nền trong suốt có sẵn khung — không cần thư viện gì thêm.</div>
+  </div>
+
+  <hr class="sec-divider" id="s2-icons"/>
+  <h2 class="sec-title">9 · Icon Grid không viền – 3 cột x 2 hàng</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">row row-cols-md-3 → mỗi col: icon trái + (title + desc) phải, nền xám nhạt</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-4"><div class="lp-box lp-card">🎪 Play Ground</div></div>
+          <div class="col-4"><div class="lp-box lp-card">🎵 Music and Dance</div></div>
+          <div class="col-4"><div class="lp-box lp-card">🎨 Arts and Crafts</div></div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;section class="py-5"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row row-cols-1 row-cols-md-3 g-4"&gt;
+
+      &lt;div class="col"&gt;
+        &lt;div class="bg-light p-4 h-100 d-flex"&gt;
+          &lt;img src="icon-playground.png" width="40" class="me-3"&gt;
+          &lt;div&gt;
+            &lt;h6 class="fw-bold"&gt;Play Ground&lt;/h6&gt;
+            &lt;p class="text-muted small mb-0"&gt;Kasd labore kasd et dolor est...&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- lặp lại 5 ô nữa --&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s2-about"/>
+  <h2 class="sec-title">10 · About – Ảnh trái + Text phải kèm Checklist + Ảnh nhỏ</h2>
+  <div class="study-card">
+    <pre><code class="language-html">&lt;section class="py-5"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row align-items-center g-4"&gt;
+
+      &lt;div class="col-md-5"&gt;
+        &lt;img src="family.jpg" class="img-fluid rounded"&gt;
+      &lt;/div&gt;
+
+      &lt;div class="col-md-7"&gt;
+        &lt;p class="text-info text-uppercase small mb-1"&gt;Learn About Us&lt;/p&gt;
+        &lt;h2 class="fw-bold"&gt;Best School For Your Kids&lt;/h2&gt;
+        &lt;p class="text-muted"&gt;Invidunt lorem justo sanctis clita...&lt;/p&gt;
+
+        &lt;div class="row align-items-center"&gt;
+          &lt;div class="col-5"&gt;
+            &lt;img src="kid-write.jpg" class="img-fluid rounded"&gt;
+          &lt;/div&gt;
+          &lt;div class="col-7"&gt;
+            &lt;p class="mb-1"&gt;&lt;i class="bi bi-check-circle text-success"&gt;&lt;/i&gt; Labore eos amet dolor amet diam&lt;/p&gt;
+            &lt;p class="mb-1"&gt;&lt;i class="bi bi-check-circle text-success"&gt;&lt;/i&gt; Etsea et sit dolor amet ipsum&lt;/p&gt;
+            &lt;p class="mb-0"&gt;&lt;i class="bi bi-check-circle text-success"&gt;&lt;/i&gt; Diam dolor diam elitripsum vero&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;button class="btn btn-info text-white rounded-pill mt-3 px-4"&gt;Learn More&lt;/button&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s2-classes"/>
+  <h2 class="sec-title">11 · Class Cards – 3 cột, có bảng thông tin trong card</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">row row-cols-md-3 → card: ảnh + title + desc + mini-table (key:value) + button</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-4"><div class="lp-box lp-card" style="min-height:80px;">Drawing Class<br/>(ảnh, info, nút Join)</div></div>
+          <div class="col-4"><div class="lp-box lp-card" style="min-height:80px;">Language Learning</div></div>
+          <div class="col-4"><div class="lp-box lp-card" style="min-height:80px;">Basic Science</div></div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;div class="row row-cols-1 row-cols-md-3 g-4"&gt;
+  &lt;div class="col"&gt;
+    &lt;div class="card h-100 border-0 shadow-sm"&gt;
+      &lt;img src="class1.jpg" class="card-img-top"&gt;
+      &lt;div class="card-body text-center"&gt;
+        &lt;h5&gt;Drawing Class&lt;/h5&gt;
+        &lt;p class="text-muted small"&gt;Justo ea diam stet diam non sit...&lt;/p&gt;
+
+        &lt;table class="table table-sm text-start mb-3"&gt;
+          &lt;tr&gt;&lt;td&gt;Age of Kids&lt;/td&gt;&lt;td class="text-end"&gt;3 - 6 Years&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;Total Seats&lt;/td&gt;&lt;td class="text-end"&gt;40 Seats&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;Class Time&lt;/td&gt;&lt;td class="text-end"&gt;08:00 - 10:00&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;Tution Fee&lt;/td&gt;&lt;td class="text-end"&gt;$290 / Month&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;button class="btn btn-info text-white rounded-pill px-4"&gt;Join Now&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- lặp lại cho 2 class còn lại --&gt;
+&lt;/div&gt;</code></pre>
+    <div class="tip-box">💡 Đây là trường hợp DUY NHẤT nên dùng <code>&lt;table&gt;</code> — vì nó hiển thị dữ liệu dạng key-value (Age, Seats, Time, Fee), không phải dùng để dàn layout trang.</div>
+  </div>
+
+  <hr class="sec-divider" id="s2-booking"/>
+  <h2 class="sec-title">12 · 2 cột: Nội dung trắng + Form nền tối (Book a Seat)</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">row → col-md-6 (text+checklist) | col-md-6 (box nền tối chứa form)</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-6"><div class="lp-box lp-card" style="min-height:80px;">Heading + đoạn văn + checklist + nút</div></div>
+          <div class="col-6"><div class="lp-box lp-form" style="min-height:80px;">Form nền tối: input Name/Email/Select + nút</div></div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;section class="py-5"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row align-items-center g-4"&gt;
+
+      &lt;div class="col-md-6"&gt;
+        &lt;p class="text-info small text-uppercase"&gt;Book A Seat&lt;/p&gt;
+        &lt;h2 class="fw-bold"&gt;Book A Seat For Your Kid&lt;/h2&gt;
+        &lt;p class="text-muted"&gt;Invidunt lorem justo sanctis clita...&lt;/p&gt;
+        &lt;p&gt;&lt;i class="bi bi-check2 text-success"&gt;&lt;/i&gt; Labore eos amet dolor amet diam&lt;/p&gt;
+        &lt;button class="btn btn-info text-white rounded-pill px-4"&gt;Book Now&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div class="col-md-6"&gt;
+        &lt;div class="p-4" style="background:#0d3b4f;"&gt;
+          &lt;h4 class="text-white text-center mb-4"&gt;Book A Seat&lt;/h4&gt;
+          &lt;form&gt;
+            &lt;div class="mb-3"&gt;
+              &lt;label for="bName" class="visually-hidden"&gt;Tên&lt;/label&gt;
+              &lt;input id="bName" class="form-control" placeholder="Your Name"&gt;
+            &lt;/div&gt;
+            &lt;div class="mb-3"&gt;
+              &lt;label for="bEmail" class="visually-hidden"&gt;Email&lt;/label&gt;
+              &lt;input id="bEmail" class="form-control" placeholder="Your Email"&gt;
+            &lt;/div&gt;
+            &lt;div class="mb-3"&gt;
+              &lt;label for="bClass" class="visually-hidden"&gt;Lớp&lt;/label&gt;
+              &lt;select id="bClass" class="form-select"&gt;
+                &lt;option&gt;Select A Class&lt;/option&gt;
+              &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;button class="btn btn-info text-white w-100"&gt;Book Now&lt;/button&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s2-footer"/>
+  <h2 class="sec-title">13 · Footer 4 cột + Form Newsletter</h2>
+  <div class="study-card">
+    <pre><code class="language-html">&lt;footer class="text-light pt-5" style="background:#0a2540;"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row g-4"&gt;
+      &lt;div class="col-md-3"&gt;
+        &lt;h4&gt;KidKinder&lt;/h4&gt;
+        &lt;p class="text-muted small"&gt;Labore dolor amet eos dolor...&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-3"&gt;
+        &lt;h6 class="text-info"&gt;Get In Touch&lt;/h6&gt;
+        &lt;p class="small"&gt;&lt;i class="bi bi-geo-alt"&gt;&lt;/i&gt; 123 Street, New York, USA&lt;/p&gt;
+        &lt;p class="small"&gt;&lt;i class="bi bi-envelope"&gt;&lt;/i&gt; info@example.com&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-3"&gt;
+        &lt;h6 class="text-info"&gt;Quick Links&lt;/h6&gt;
+        &lt;ul class="list-unstyled small"&gt;
+          &lt;li&gt;&lt;a href="#" class="text-light"&gt;Home&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#" class="text-light"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-3"&gt;
+        &lt;h6 class="text-info"&gt;Newsletter&lt;/h6&gt;
+        &lt;form&gt;
+          &lt;label for="nlName" class="visually-hidden"&gt;Tên&lt;/label&gt;
+          &lt;input id="nlName" class="form-control mb-2" placeholder="Your Name"&gt;
+          &lt;label for="nlEmail" class="visually-hidden"&gt;Email&lt;/label&gt;
+          &lt;input id="nlEmail" class="form-control mb-2" placeholder="Your Email"&gt;
+          &lt;button class="btn btn-info text-white w-100"&gt;Submit Now&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MẪU 3: VIOLET ON WEDNESDAY
+  ════════════════════════════════════════ -->
+  <hr class="sec-divider" id="s3-header"/>
+  <div class="section-badge badge-site3">Mẫu 3 — Violet on Wednesday (Shop hoa)</div>
+  <h2 class="sec-title">14 · Topbar + Header (logo/search/cart) + Navbar</h2>
+
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">3 thanh xếp dọc: topbar nhỏ → header chính → navbar màu</div>
+      <div class="lp-body">
+        <div class="row g-1 mb-1"><div class="col-12"><div class="lp-box lp-nav" style="min-height:24px;">Topbar: Hotline | Địa chỉ ── Đăng nhập | Tạo TK</div></div></div>
+        <div class="row g-1 mb-1">
+          <div class="col-3"><div class="lp-box lp-card" style="min-height:36px;">Logo</div></div>
+          <div class="col-6"><div class="lp-box lp-card" style="min-height:36px;">Search box</div></div>
+          <div class="col-3"><div class="lp-box lp-card" style="min-height:36px;">🛒 Cart info</div></div>
+        </div>
+        <div class="row g-1"><div class="col-12"><div class="lp-box lp-nav" style="min-height:24px;">Navbar: Trang chủ | Hoa sinh nhật | ... (nền tím)</div></div></div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;!-- Topbar --&gt;
+&lt;div class="bg-light border-bottom small py-1"&gt;
+  &lt;div class="container d-flex justify-content-between"&gt;
+    &lt;div&gt;
+      &lt;i class="bi bi-telephone"&gt;&lt;/i&gt; Hotline: 0968 159 239
+      &lt;i class="bi bi-geo-alt ms-3"&gt;&lt;/i&gt; 01 Nguyễn Cửu Vân, Bình Thạnh
+    &lt;/div&gt;
+    &lt;div&gt;&lt;a href="#"&gt;Đăng nhập&lt;/a&gt; hoặc &lt;a href="#"&gt;Tạo tài khoản mới&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Header chính: logo + search + cart --&gt;
+&lt;div class="container py-3"&gt;
+  &lt;div class="row align-items-center"&gt;
+    &lt;div class="col-md-3"&gt;
+      &lt;img src="logo.png" height="55"&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-6"&gt;
+      &lt;div class="input-group"&gt;
+        &lt;label for="searchBox" class="visually-hidden"&gt;Tìm kiếm&lt;/label&gt;
+        &lt;input id="searchBox" class="form-control" placeholder="Tìm kiếm..."&gt;
+        &lt;button class="btn btn-outline-secondary"&gt;&lt;i class="bi bi-search"&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-3 text-end"&gt;
+      &lt;i class="bi bi-cart-fill text-danger fs-3"&gt;&lt;/i&gt;
+      3 sản phẩm — 1,289,000 đ
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Navbar màu tím --&gt;
+&lt;nav class="navbar navbar-expand-lg" style="background:#5b2c8d;"&gt;
+  &lt;div class="container"&gt;
+    &lt;ul class="navbar-nav flex-row gap-3"&gt;
+      &lt;li class="nav-item"&gt;&lt;a class="nav-link text-white" href="#"&gt;TRANG CHỦ&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="nav-item"&gt;&lt;a class="nav-link text-white" href="#"&gt;HOA SINH NHẬT&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s3-hero"/>
+  <h2 class="sec-title">15 · Hero: Carousel (8 cột) + 2 Banner xếp dọc (4 cột)</h2>
+  <div class="study-card">
+    <div class="layout-preview">
+      <div class="lp-header">row → col-md-8 (carousel) | col-md-4 (2 banner xếp dọc)</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-8"><div class="lp-box lp-hero" style="min-height:80px;">Carousel khuyến mãi</div></div>
+          <div class="col-4">
+            <div class="row g-1">
+              <div class="col-12"><div class="lp-box lp-side" style="min-height:36px;">Banner 1: Miễn phí vận chuyển</div></div>
+              <div class="col-12"><div class="lp-box lp-side" style="min-height:36px;">Banner 2: Giảm 50%</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;div class="container py-3"&gt;
+  &lt;div class="row g-3"&gt;
+
+    &lt;div class="col-md-8"&gt;
+      &lt;div id="promoCarousel" class="carousel slide" data-bs-ride="carousel"&gt;
+        &lt;div class="carousel-inner rounded"&gt;
+          &lt;div class="carousel-item active"&gt;
+            &lt;img src="promo1.jpg" class="d-block w-100" style="height:300px;object-fit:cover;"&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="col-md-4"&gt;
+      &lt;div class="bg-info text-white rounded p-3 mb-3" style="height:138px;"&gt;
+        &lt;h6&gt;MIỄN PHÍ VẬN CHUYỂN&lt;/h6&gt;
+        &lt;p class="small mb-0"&gt;Trong nội thành&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="rounded p-3 text-white"
+           style="height:138px;background:url('flower-bg.jpg') center/cover;"&gt;
+        &lt;h6&gt;GIẢM 50% BỘ SƯU TẬP&lt;/h6&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s3-shop"/>
+  <h2 class="sec-title">16 · Layout Shop chính – 8+4 (Nội dung trái, Sidebar phải)</h2>
+  <div class="study-card">
+    <div class="jq-highlight">
+      <strong>⭐ Đây là pattern quan trọng nhất của site bán hàng:</strong> Toàn bộ phần thân trang chia 2 cột <code>col-md-8</code> (sản phẩm) + <code>col-md-4</code> (sidebar tiện ích), lặp lại nhiều section bên trong cột trái.
+    </div>
+    <div class="layout-preview">
+      <div class="lp-header">row → col-md-8 (nhiều block sản phẩm) | col-md-4 (nhiều widget)</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-8">
+            <div class="row g-1">
+              <div class="col-12"><div class="lp-box lp-card" style="min-height:24px;">Heading "SẢN PHẨM ƯA CHUỘNG"</div></div>
+              <div class="col-12"><div class="lp-box lp-card" style="min-height:60px;">Grid sản phẩm 4 cột</div></div>
+              <div class="col-12"><div class="lp-box lp-card" style="min-height:24px;">Banner quảng cáo</div></div>
+              <div class="col-12"><div class="lp-box lp-card" style="min-height:60px;">Grid sản phẩm khác...</div></div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row g-1">
+              <div class="col-12"><div class="lp-box lp-side" style="min-height:36px;">Widget: Tư vấn hỗ trợ</div></div>
+              <div class="col-12"><div class="lp-box lp-side" style="min-height:36px;">Widget: Sản phẩm khuyến mãi</div></div>
+              <div class="col-12"><div class="lp-box lp-side" style="min-height:36px;">Widget: Tin tức</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre><code class="language-html">&lt;div class="container py-4"&gt;
+  &lt;div class="row g-4"&gt;
+
+    &lt;!-- ═══ CỘT TRÁI 8/12: nội dung sản phẩm ═══ --&gt;
+    &lt;div class="col-md-8"&gt;
+
+      &lt;h6 class="fw-bold border-bottom pb-2 mb-3"&gt;SẢN PHẨM ƯA CHUỘNG&lt;/h6&gt;
+      &lt;div class="row row-cols-2 row-cols-md-4 g-3 mb-4"&gt;
+        &lt;!-- product card x8, xem mục 17 --&gt;
+      &lt;/div&gt;
+
+      &lt;img src="banner-rose.jpg" class="img-fluid rounded mb-4"&gt;
+
+      &lt;h6 class="fw-bold border-bottom pb-2 mb-3"&gt;SẢN PHẨM KHUYẾN MÃI&lt;/h6&gt;
+      &lt;div class="row row-cols-2 row-cols-md-4 g-3"&gt;
+        &lt;!-- product card x8 --&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+    &lt;!-- ═══ CỘT PHẢI 4/12: sidebar widget ═══ --&gt;
+    &lt;div class="col-md-4"&gt;
+
+      &lt;div class="border rounded p-3 mb-4"&gt;
+        &lt;h6 class="fw-bold"&gt;TƯ VẤN HỖ TRỢ&lt;/h6&gt;
+        &lt;div class="d-flex align-items-center mb-2"&gt;
+          &lt;img src="avatar1.jpg" class="rounded-circle me-2" width="40"&gt;
+          &lt;div&gt;Ms. Nguyễn Kiều Diễm &lt;span class="badge bg-success"&gt;Online&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="border rounded p-3 mb-4"&gt;
+        &lt;h6 class="fw-bold"&gt;SẢN PHẨM KHUYẾN MÃI&lt;/h6&gt;
+        &lt;!-- list item nhỏ, xem mục dưới --&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <hr class="sec-divider" id="s3-products"/>
+  <h2 class="sec-title">17 · Product Card Grid 4 cột + Sidebar list item nhỏ</h2>
+  <div class="row g-3">
+    <div class="col-md-7">
+      <div class="study-card h-100">
+        <h4>🛍️ Product Card (cột trái – 4 cột)</h4>
+        <pre style="margin:0;"><code class="language-html">&lt;div class="row row-cols-2 row-cols-md-4 g-3"&gt;
+  &lt;div class="col"&gt;
+    &lt;div class="card h-100 position-relative"&gt;
+      &lt;span class="badge bg-danger position-absolute top-0 end-0 m-2"&gt;-10%&lt;/span&gt;
+      &lt;img src="hoa1.jpg" class="card-img-top"&gt;
+      &lt;div class="card-body p-2"&gt;
+        &lt;p class="small mb-0"&gt;Khai trương hồng phát 2&lt;/p&gt;
+        &lt;small class="text-muted"&gt;VS035&lt;/small&gt;&lt;br&gt;
+        &lt;small class="text-muted text-decoration-line-through"&gt;890,000 đ&lt;/small&gt;
+        &lt;p class="text-danger fw-bold mb-0"&gt;807,500 đ&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- lặp lại 7 card nữa --&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="study-card h-100">
+        <h4>📋 Sidebar list item nhỏ (cột phải)</h4>
+        <pre style="margin:0;"><code class="language-html">&lt;div class="d-flex align-items-center mb-3"&gt;
+  &lt;div class="position-relative me-2"&gt;
+    &lt;img src="hoa-thumb.jpg" width="60" class="rounded"&gt;
+    &lt;span class="badge bg-danger position-absolute top-0 start-0"&gt;-30%&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;p class="mb-0 small"&gt;Tình bền lâu&lt;/p&gt;
+    &lt;p class="text-danger fw-bold mb-0 small"&gt;350,000 đ&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- lặp lại d-flex cho mỗi item --&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-card" style="margin-top:1.1rem;">
+    <div class="layout-preview">
+      <div class="lp-header">row row-cols-md-4 → mỗi col 1 card sản phẩm (ảnh + tên + mã + giá cũ/mới)</div>
+      <div class="lp-body">
+        <div class="row g-1">
+          <div class="col-3"><div class="lp-box lp-card" style="min-height:60px;">🌼 Card</div></div>
+          <div class="col-3"><div class="lp-box lp-card" style="min-height:60px;">🌸 Card</div></div>
+          <div class="col-3"><div class="lp-box lp-card" style="min-height:60px;">🌹 Card</div></div>
+          <div class="col-3"><div class="lp-box lp-card" style="min-height:60px;">🌺 Card</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sec-divider" id="s3-footer"/>
+  <h2 class="sec-title">18 · Feature Bar (3 icon) + Footer 4 cột</h2>
+  <div class="study-card">
+    <pre><code class="language-html">&lt;!-- Feature bar trước footer --&gt;
+&lt;div class="bg-light py-4"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row text-center"&gt;
+      &lt;div class="col-md-4 d-flex align-items-center justify-content-center"&gt;
+        &lt;i class="bi bi-truck fs-2 text-success me-2"&gt;&lt;/i&gt;
+        &lt;div class="text-start"&gt;
+          &lt;strong&gt;GIAO HÀNG MIỄN PHÍ&lt;/strong&gt;&lt;br&gt;
+          &lt;small class="text-muted"&gt;Trong nội thành&lt;/small&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- 2 cột tương tự cho "Tư vấn tận tâm" và "Giá thành tốt nhất" --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Footer 4 cột --&gt;
+&lt;footer class="bg-white border-top pt-4"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row g-4"&gt;
+      &lt;div class="col-md-3"&gt;
+        &lt;h6 class="fw-bold"&gt;HỆ THỐNG&lt;/h6&gt;
+        &lt;ul class="list-unstyled small"&gt;
+          &lt;li&gt;&lt;a href="#" class="text-dark"&gt;Hoa sinh nhật&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#" class="text-dark"&gt;Hoa cưới&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-3"&gt;
+        &lt;h6 class="fw-bold"&gt;CÔNG TY&lt;/h6&gt;
+        &lt;ul class="list-unstyled small"&gt;
+          &lt;li&gt;&lt;a href="#" class="text-dark"&gt;Giới thiệu&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-3"&gt;
+        &lt;h6 class="fw-bold"&gt;CÔNG TY&lt;/h6&gt;
+        &lt;ul class="list-unstyled small"&gt;
+          &lt;li&gt;&lt;a href="#" class="text-dark"&gt;Hướng dẫn đặt hàng&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-3"&gt;
+        &lt;h6 class="fw-bold"&gt;VIOLET ON WEDNESDAY&lt;/h6&gt;
+        &lt;p class="small mb-1"&gt;Địa chỉ: 01 Nguyễn Cửu Vân, Bình Thạnh&lt;/p&gt;
+        &lt;p class="small"&gt;Hotline: 0968 159 239&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="text-center small text-muted border-top mt-4 py-3"&gt;
+      © 2015 Violet on Wednesday Store. All Rights Reserved.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TỔNG HỢP PATTERN
+  ════════════════════════════════════════ -->
+  <hr class="sec-divider" id="patterns"/>
+  <div class="section-badge badge-tip">Tổng hợp</div>
+  <h2 class="sec-title">19 · 7 Pattern Bootstrap dùng chung cho cả 3 site</h2>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="study-card h-100">
+        <h4>① Heading giữa trang (text-center block)</h4>
+        <pre style="margin:0;"><code class="language-html">&lt;div class="text-center mb-5"&gt;
+  &lt;p class="text-uppercase small text-muted"&gt;Tagline&lt;/p&gt;
+  &lt;h2 class="fw-bold"&gt;Tiêu đề chính&lt;/h2&gt;
+  &lt;p class="text-muted mx-auto" style="max-width:600px"&gt;
+    Đoạn mô tả ngắn...
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="study-card h-100">
+        <h4>② Card Grid responsive (row-cols)</h4>
+        <pre style="margin:0;"><code class="language-html">&lt;div class="row row-cols-1 row-cols-md-3 g-4"&gt;
+  &lt;div class="col"&gt;&lt;div class="card h-100"&gt;...&lt;/div&gt;&lt;/div&gt;
+  &lt;!-- lặp lại --&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="study-card h-100">
+        <h4>③ 2 cột Text + Ảnh (đổi chiều linh hoạt)</h4>
+        <pre style="margin:0;"><code class="language-html">&lt;div class="row align-items-center g-4"&gt;
+  &lt;div class="col-md-6"&gt;&lt;!-- text --&gt;&lt;/div&gt;
+  &lt;div class="col-md-6"&gt;&lt;!-- ảnh --&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="study-card h-100">
+        <h4>④ Sidebar Split bất đối xứng (8+4)</h4>
+        <pre style="margin:0;"><code class="language-html">&lt;div class="row g-4"&gt;
+  &lt;div class="col-md-8"&gt;&lt;!-- nội dung chính --&gt;&lt;/div&gt;
+  &lt;div class="col-md-4"&gt;&lt;!-- widget phụ --&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="study-card h-100">
+        <h4>⑤ Section nền màu/ảnh khác nhau để phân tách</h4>
+        <pre style="margin:0;"><code class="language-html">&lt;section class="py-5 bg-light"&gt;...&lt;/section&gt;
+&lt;section class="py-5"&gt;...&lt;/section&gt;
+&lt;section class="py-5" style="background:url(...)"&gt;...&lt;/section&gt;</code></pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="study-card h-100">
+        <h4>⑥ Footer nhiều cột (3 hoặc 4)</h4>
+        <pre style="margin:0;"><code class="language-html">&lt;footer&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="row g-4"&gt;
+      &lt;div class="col-md-3"&gt;...&lt;/div&gt;
+      &lt;!-- lặp lại 3 col nữa --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-card" style="margin-top:1.1rem;">
+    <h4>⑦ List item nhỏ kiểu d-flex (dùng cho sidebar, blog list, comment...)</h4>
+    <pre><code class="language-html">&lt;div class="d-flex align-items-start mb-3"&gt;
+  &lt;img src="thumb.jpg" width="60" class="rounded me-2 flex-shrink-0"&gt;
+  &lt;div&gt;
+    &lt;p class="mb-0 fw-semibold small"&gt;Tiêu đề ngắn&lt;/p&gt;
+    &lt;small class="text-muted"&gt;Thông tin phụ&lt;/small&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <div class="tip-box">
+      💡 <strong>Mẹo lớn nhất:</strong> Khi nhìn 1 thiết kế bất kỳ, hãy quét theo chiều ngang xem có bao nhiêu "khối" cạnh nhau → đó là số <code>col-md-x</code> cần dùng (tổng = 12). Sau đó nhìn theo chiều dọc xem có bao nhiêu "section" màu nền khác nhau → mỗi section là 1 block riêng trong <code>&lt;body&gt;</code>.
+    </div>
+  </div>
+
+  <div class="study-card" style="background: linear-gradient(135deg, #0f3460, #16213e); border-color: var(--eiu-accent); text-align:center; padding: 2rem; margin-top:1.5rem;">
+    <div style="font-size: 2rem; margin-bottom: .5rem;">🏗️</div>
+    <div style="font-size: 1.15rem; font-weight: 700; color: #fff;">Ghép layout = ghép các pattern này lại theo đúng thứ tự trong ảnh thiết kế!</div>
+  </div>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+  $(function() {
+    $(window).on('scroll', function() {
+      var scrollPos = $(document).scrollTop() + 120;
+      $('[id]').each(function() {
+        var id = $(this).attr('id');
+        if (!id) return;
+        var top = $(this).offset().top;
+        if (top <= scrollPos) {
+          $('#sidebar a').removeClass('active');
+          $('#sidebar a[href="#' + id + '"]').addClass('active');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

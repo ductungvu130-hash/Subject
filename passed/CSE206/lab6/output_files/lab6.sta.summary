@@ -1,0 +1,21 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'VDT_Clock'
+Slack : -0.538
+TNS   : -15.729
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'VDT_Clock'
+Slack : -0.538
+TNS   : -15.888
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'VDT_Clock'
+Slack : -0.086
+TNS   : -1.708
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'VDT_Clock'
+Slack : -0.091
+TNS   : -1.808
+
+------------------------------------------------------------

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My To Do List</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+            crossorigin="anonymous"
+        />
+        <style>
+            .output ul li {
+                background-color: #f9f9f9;
+                padding: 10px 0px 10px 50px;
+                position: relative;
+            }
+            .output ul li:nth-child(even) {
+                background-color: #eeeeee;
+            }
+
+            ul .checked::before {
+                font-family: "Font Awesome 6 Free";
+                font-weight: 900;
+                -webkit-font-smoothing: antialiased;
+                content: "\f00c";
+                position: absolute;
+                top: 10px;
+                left: 15px;
+            }
+            .output ul li.checked {
+                background-color: #888888;
+                text-decoration: line-through;
+            }
+            .output ul span {
+                position: absolute;
+                top: 8px;
+                right: 15px;
+                font-weight: 500;
+            }
+            .input-div {
+                background-color: #659ff7;
+            }
+            .input-div input {
+                flex: 1;
+                padding: 8px;
+            }
+            .input-div h2 {
+                text-align: center;
+                color: #ffff;
+            }
+            .input-div button {
+                padding: 8px 30px;
+                background-color: #ddd;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="container" style="width: 450px">
+                <div class="row mt-5 p-2">
+                    <div class="input-div py-2">
+                        <h2 class="">My To Do List</h2>
+                        <div class="d-flex">
+                            <input type="text" id="text" />
+                            <button onclick="add()">ADD</button>
+                        </div>
+                    </div>
+                    <div class="output p-0">
+                        <ul class="list-unstyled">
+                            <li>Hit the gym <span>x</span></li>
+                            <li class="checked">Marry <span>x</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
+            integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            function add() {
+                let input = $("#text").val().trim();
+                if (!input) return;
+                $("ul").append(`<li>${input}<span>x</span></li>`);
+                $("#text").val("");
+            }
+            $(".output").on("click", function (event) {
+                if (event.target.nodeName === "SPAN") {
+                    event.target.parentElement.remove();
+                } else if (event.target.nodeName === "LI") {
+                    event.target.classList.toggle("checked");
+                }
+            });
+        </script>
+    </body>
+</html>

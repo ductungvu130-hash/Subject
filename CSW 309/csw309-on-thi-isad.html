@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSW 309 · Ôn thi ISAD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c1e30;
+    --bg-deep:#081422;
+    --panel:#0f2947;
+    --panel-2:#123056;
+    --grid:#1c3f63;
+    --line:#3f7099;
+    --ink:#dcecf7;
+    --ink-dim:#87aec8;
+    --ink-faint:#5c85a3;
+    --amber:#ffb92b;
+    --amber-dim:#8a6a26;
+    --mint:#6fe7c0;
+    --mint-dim:#2c5748;
+    --coral:#ff7a6e;
+    --coral-dim:#5c322d;
+    --paper-tape:#f2e6c9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, var(--grid) 28px),
+      repeating-linear-gradient(90deg, transparent, transparent 27px, var(--grid) 28px),
+      var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    font-size:15.5px;
+  }
+  ::selection{ background:var(--amber); color:#20150a; }
+  h1,h2,h3,h4{ font-family:'Be Vietnam Pro', sans-serif; margin:0 0 .4em; letter-spacing:-.01em; }
+  a{ color:var(--amber); }
+  code, .mono{ font-family:'JetBrains Mono', monospace; }
+
+  /* ---------- layout shell ---------- */
+  .shell{ display:grid; grid-template-columns:250px 1fr; max-width:1280px; margin:0 auto; }
+  @media (max-width:920px){ .shell{ grid-template-columns:1fr; } }
+
+  /* ---------- sidebar ---------- */
+  nav.side{
+    position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+    padding:22px 14px 40px 20px; border-right:1px solid var(--grid);
+    background:linear-gradient(180deg, var(--bg-deep), var(--bg));
+  }
+  @media (max-width:920px){ nav.side{ position:relative; height:auto; border-right:none; border-bottom:1px solid var(--grid); padding:16px; } }
+  .brand{ display:flex; align-items:center; gap:10px; margin-bottom:22px; }
+  .brand .chip{
+    width:34px; height:34px; border:1.5px solid var(--line); border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono'; font-weight:700; font-size:11px; color:var(--amber);
+    background:var(--panel);
+  }
+  .brand .t1{ font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.12em; }
+  .brand .t2{ font-family:'Be Vietnam Pro'; font-weight:700; font-size:15px; }
+  .side ol{ list-style:none; margin:0; padding:0; counter-reset:navnum; }
+  .side li{ counter-increment:navnum; margin-bottom:2px; }
+  .side a{
+    display:flex; gap:8px; text-decoration:none; color:var(--ink-dim);
+    padding:7px 8px; border-radius:4px; font-size:13.5px; border-left:2px solid transparent;
+  }
+  .side a::before{
+    content:counter(navnum,decimal-leading-zero); font-family:'JetBrains Mono'; font-size:10.5px;
+    color:var(--ink-faint); padding-top:1px;
+  }
+  .side a:hover{ color:var(--ink); background:var(--panel); border-left-color:var(--line); }
+  .side .sub{ margin:14px 0 8px; font-size:10.5px; text-transform:uppercase; letter-spacing:.14em; color:var(--ink-faint); padding-left:8px; }
+
+  /* ---------- main ---------- */
+  main{ padding:0; min-width:0; }
+  .hero{
+    padding:56px 44px 40px; border-bottom:1px solid var(--grid); position:relative; overflow:hidden;
+  }
+  .hero .stamp{
+    position:absolute; top:28px; right:44px; border:1.5px dashed var(--amber-dim); color:var(--amber);
+    padding:6px 12px; font-family:'JetBrains Mono'; font-size:11px; letter-spacing:.08em;
+    transform:rotate(4deg); border-radius:4px; opacity:.9;
+  }
+  .hero .eyebrow{ font-family:'JetBrains Mono'; color:var(--amber); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:14px; }
+  .hero h1{ font-size:clamp(28px,4vw,42px); font-weight:800; max-width:760px; }
+  .hero p.lead{ color:var(--ink-dim); max-width:640px; font-size:15.5px; margin-top:14px; }
+  @media (max-width:920px){ .hero{ padding:32px 20px 28px; } .hero .stamp{ display:none; } }
+
+  section{ padding:40px 44px; border-bottom:1px solid var(--grid); }
+  @media (max-width:920px){ section{ padding:28px 20px; } }
+  section .kicker{ font-family:'JetBrains Mono'; font-size:11.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.12em; margin-bottom:6px; }
+  section h2{ font-size:24px; font-weight:700; margin-bottom:6px; }
+  section > .desc{ color:var(--ink-dim); max-width:680px; margin-bottom:24px; font-size:14.5px; }
+
+  .card{
+    background:var(--panel); border:1px solid var(--grid); border-radius:6px; padding:20px 22px; margin-bottom:16px;
+    border-left:3px solid var(--line);
+  }
+  .card.amber{ border-left-color:var(--amber); }
+  .card.mint{ border-left-color:var(--mint); }
+  .card.coral{ border-left-color:var(--coral); }
+  .card h4{ font-size:15px; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:8px;}
+  .card h4 .tag{ font-family:'JetBrains Mono'; font-size:10px; padding:2px 6px; border-radius:3px; letter-spacing:.06em; text-transform:uppercase;}
+  .tag.mint{ background:var(--mint-dim); color:var(--mint); }
+  .tag.amber{ background:var(--amber-dim); color:var(--amber); }
+  .tag.coral{ background:var(--coral-dim); color:var(--coral); }
+  .card p, .card li{ font-size:14px; color:var(--ink); }
+  .card ul{ padding-left:18px; margin:8px 0; }
+  .card p{ margin:6px 0; }
+
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:760px){ .grid2, .grid3{ grid-template-columns:1fr; } }
+
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0; }
+  th,td{ border:1px solid var(--grid); padding:8px 10px; text-align:left; vertical-align:top; }
+  th{ background:var(--panel-2); color:var(--amber); font-family:'JetBrains Mono'; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; }
+  tr:nth-child(even) td{ background:rgba(255,255,255,0.015); }
+
+  .formula{
+    font-family:'JetBrains Mono'; background:var(--bg-deep); border:1px dashed var(--line); border-radius:5px;
+    padding:12px 16px; color:var(--mint); font-size:13px; margin:10px 0; white-space:pre-wrap; line-height:1.7;
+  }
+  .formula .slot{ color:var(--amber); }
+
+  .pill-row{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
+  .pill{ font-family:'JetBrains Mono'; font-size:11.5px; padding:4px 10px; border:1px solid var(--line); border-radius:20px; color:var(--ink-dim); }
+
+  svg text{ font-family:'JetBrains Mono', monospace; }
+  .diagram-wrap{ background:var(--bg-deep); border:1px solid var(--grid); border-radius:6px; padding:14px; overflow-x:auto; margin:14px 0; }
+
+  /* tabs for de-mau */
+  .tabs{ display:flex; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
+  .tabbtn{
+    font-family:'JetBrains Mono'; font-size:12px; background:var(--panel); color:var(--ink-dim);
+    border:1px solid var(--grid); padding:9px 14px; border-radius:5px; cursor:pointer; letter-spacing:.02em;
+  }
+  .tabbtn.active{ background:var(--panel-2); color:var(--amber); border-color:var(--amber-dim); }
+  .tabpanel{ display:none; }
+  .tabpanel.active{ display:block; }
+
+  .checklist label{ display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--grid); font-size:14px; cursor:pointer; }
+  .checklist label:last-child{ border-bottom:none; }
+  .checklist input{ margin-top:3px; accent-color:var(--amber); width:15px; height:15px; flex-shrink:0; }
+
+  .timebudget td.min{ font-family:'JetBrains Mono'; color:var(--amber); white-space:nowrap; }
+
+  footer{ padding:26px 44px 50px; color:var(--ink-faint); font-size:12.5px; }
+  @media (max-width:920px){ footer{ padding:20px; } }
+
+  .backtotop{ position:fixed; bottom:20px; right:20px; background:var(--panel-2); border:1px solid var(--line);
+    color:var(--amber); width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    text-decoration:none; font-size:16px; opacity:.85; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <nav class="side">
+    <div class="brand">
+      <div class="chip">309</div>
+      <div>
+        <div class="t1">CSW 309 · EIU</div>
+        <div class="t2">Ôn thi ISAD</div>
+      </div>
+    </div>
+    <ol>
+      <li><a href="#cau-truc">Cấu trúc đề thi</a></li>
+      <li><a href="#q1">Q1 — Problem & System Request</a></li>
+      <li><a href="#q2">Q2 — Functional Requirements</a></li>
+      <li><a href="#usecase">Q3 — Use Case Diagram</a></li>
+      <li><a href="#dfd">Section 2.1 — DFD Level-0</a></li>
+      <li><a href="#erd">Section 2.2 — ERD</a></li>
+      <li><a href="#class">Class Diagram</a></li>
+      <li><a href="#drawio">Thao tác drawio nhanh</a></li>
+      <li><a href="#demau">3 đề mẫu — lời giải đầy đủ</a></li>
+      <li><a href="#checklist">Checklist trước khi nộp</a></li>
+    </ol>
+    <div class="sub">Ghi chú</div>
+    <p style="font-size:12px;color:var(--ink-faint);padding-left:8px;line-height:1.6;">
+      Dựng từ 3 đề thi giữa kỳ thật (Q1/2025-26, Q2/2025-26, Q3/2025-26) — không có file lý thuyết riêng nào được đính kèm, nên phần công thức dựa trên chuẩn phân tích hệ thống (SDLC / SSADM) áp vào đúng format đề của cô.
+    </p>
+  </nav>
+
+  <main>
+
+    <div class="hero">
+      <div class="stamp">CLOSED BOOK · 90'</div>
+      <div class="eyebrow">Information Systems Analysis and Design</div>
+      <h1>Ôn thi thực hành CSW 309 — từ đề bài ra tới bản vẽ hoàn chỉnh</h1>
+      <p class="lead">3 đề thi giữa kỳ đều theo đúng một khuôn: Section 1 (Problem, Functional Requirements, Use Case) rồi Section 2 (DFD Level-0, ERD). Học công thức 1 lần — áp được cho mọi scenario khác nhau. Trang này đi từng bước: cách đọc đề để "bốc" ra process/entity/data store, quy tắc vẽ đúng chuẩn, và lời giải đầy đủ của cả 3 đề thật.</p>
+    </div>
+
+    <!-- ================= CẤU TRÚC ĐỀ ================= -->
+    <section id="cau-truc">
+      <div class="kicker">Tổng quan</div>
+      <h2>Cấu trúc đề thi — 100 điểm, 5 câu</h2>
+      <p class="desc">Cả 3 đề (Q1, Q2, Q3) đều bổ đôi giống hệt nhau. Nhớ đúng bảng này là biết mình cần viết bao nhiêu, vẽ bao nhiêu.</p>
+      <table>
+        <tr><th>Section</th><th>Câu</th><th>Nội dung</th><th>Điểm</th></tr>
+        <tr><td rowspan="3">1 — Requirements &amp; Use Case (40đ)</td><td>Q1</td><td>Problem Description &amp; System Request</td><td>10</td></tr>
+        <tr><td>Q2</td><td>Functional Requirements (liệt kê 5–6 chức năng)</td><td>10</td></tr>
+        <tr><td>Q3</td><td>Use Case Diagram</td><td>20</td></tr>
+        <tr><td rowspan="2">2 — Process &amp; Data Modeling (60đ)</td><td>Q1</td><td>Data Flow Diagram — Level 0</td><td>30</td></tr>
+        <tr><td>Q2</td><td>Entity–Relationship Diagram</td><td>30</td></tr>
+      </table>
+      <div class="card amber">
+        <h4><span class="tag amber">Mấu chốt</span> Đề luôn cho sẵn nguyên liệu</h4>
+        <p>Scenario nào cũng có sẵn 2 khối: <b>"System users"</b> và <b>"Main processes"</b> ngay trong đề. Đừng tự nghĩ ra — đó chính là <b>External Entities</b> và <b>Processes</b> của DFD, cũng là <b>Actors</b> và <b>Use Cases</b> của UC Diagram. Việc của mình là chuyển đổi đúng định dạng, không phải sáng tác thêm.</p>
+      </div>
+    </section>
+
+    <!-- ================= Q1 ================= -->
+    <section id="q1">
+      <div class="kicker">Section 1 · Question 1 — 10 điểm</div>
+      <h2>Problem Description &amp; System Request</h2>
+      <p class="desc">Yêu cầu luôn 3 phần: Problem (vì sao cần hệ thống) → Goal → 2–3 Benefits. Đọc đoạn scenario, gạch chân các câu than phiền — đó là nguyên liệu cho Problem.</p>
+
+      <div class="formula">Problem: Currently, <span class="slot">[cách làm thủ công hiện tại]</span> leads to <span class="slot">[hậu quả: errors / delays / double booking / confusion]</span>.
+
+Goal: The company wants to develop a computerized system that allows <span class="slot">[user]</span> to <span class="slot">[làm gì]</span>, and allows <span class="slot">[user khác]</span> to <span class="slot">[làm gì]</span>.
+
+Benefits:
+ - Reduce <span class="slot">[lỗi/thời gian]</span>
+ - Faster / more accurate <span class="slot">[process]</span>
+ - Centralized data for <span class="slot">[tra cứu / báo cáo / quản lý]</span></div>
+
+      <div class="card">
+        <h4>Kỹ thuật đọc nhanh (30 giây)</h4>
+        <p>Trong đoạn mở đầu scenario luôn có 2–3 câu chứa từ khóa "vấn đề". Chỉ cần bắt đúng các cụm: <span class="mono" style="color:var(--coral)">errors and delays</span>, <span class="mono" style="color:var(--coral)">double bookings</span>, <span class="mono" style="color:var(--coral)">long waiting time</span>, <span class="mono" style="color:var(--coral)">confusion</span>, <span class="mono" style="color:var(--coral)">no centralized record</span> — ghép lại thành câu Problem là xong, không cần văn hoa.</p>
+      </div>
+    </section>
+
+    <!-- ================= Q2 ================= -->
+    <section id="q2">
+      <div class="kicker">Section 1 · Question 2 — 10 điểm</div>
+      <h2>Functional Requirements</h2>
+      <p class="desc">Đây là câu "free điểm" nhất đề — vì list <b>Main processes</b> trong scenario gần như đã là đáp án, chỉ cần viết lại đúng văn phong requirement.</p>
+
+      <div class="formula">The system shall allow <span class="slot">[actor]</span> to <span class="slot">[verb + main process]</span>.</div>
+
+      <div class="card mint">
+        <h4><span class="tag mint">Quy tắc</span> Biến "Main processes" → "Functional Requirements"</h4>
+        <p>Mỗi process trong đề = 1 requirement. Nếu đề yêu cầu 5–6 chức năng mà scenario chỉ liệt kê 4 main processes, tách nhỏ 1 process thành 2 câu (ví dụ "Manage Course Information" → tách "add/update course" và "delete course") hoặc thêm requirement hợp lý về xem báo cáo / thông báo mà đoạn văn scenario có nhắc tới nhưng không nằm trong list chính thức.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill">shall allow ... to view</span>
+        <span class="pill">shall allow ... to manage (add/edit/delete)</span>
+        <span class="pill">shall allow ... to search / filter</span>
+        <span class="pill">shall allow ... to submit / request</span>
+        <span class="pill">shall allow ... to approve / reject</span>
+        <span class="pill">shall notify ... when</span>
+      </div>
+    </section>
+
+    <!-- ================= USE CASE ================= -->
+    <section id="usecase">
+      <div class="kicker">Section 1 · Question 3 — 20 điểm</div>
+      <h2>Use Case Diagram</h2>
+      <p class="desc">Actor = System users. Use case = Main processes (đã ghi sẵn trong Q2). Vẽ không khó, chỉ cần đúng ký hiệu và đúng ai-kết-nối-với-cái-gì.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 720 300" width="100%" style="max-width:640px;display:block;margin:0 auto;">
+          <rect x="230" y="20" width="330" height="260" rx="6" fill="none" stroke="#4C7EA8" stroke-width="1.5"/>
+          <text x="245" y="42" fill="#87aec8" font-size="12">«system boundary»</text>
+          <text x="245" y="58" fill="#dcecf7" font-size="13" font-weight="700">Training Center System</text>
+
+          <!-- actor 1 -->
+          <g transform="translate(60,120)">
+            <circle cx="0" cy="-28" r="10" fill="none" stroke="#dcecf7" stroke-width="1.6"/>
+            <line x1="0" y1="-18" x2="0" y2="20" stroke="#dcecf7" stroke-width="1.6"/>
+            <line x1="-16" y1="-4" x2="16" y2="-4" stroke="#dcecf7" stroke-width="1.6"/>
+            <line x1="0" y1="20" x2="-14" y2="44" stroke="#dcecf7" stroke-width="1.6"/>
+            <line x1="0" y1="20" x2="14" y2="44" stroke="#dcecf7" stroke-width="1.6"/>
+            <text x="0" y="66" fill="#ffb92b" font-size="12" text-anchor="middle">Staff</text>
+          </g>
+
+          <!-- actor 2 -->
+          <g transform="translate(60,240)">
+            <circle cx="0" cy="-28" r="10" fill="none" stroke="#dcecf7" stroke-width="1.6"/>
+            <line x1="0" y1="-18" x2="0" y2="20" stroke="#dcecf7" stroke-width="1.6"/>
+            <line x1="-16" y1="-4" x2="16" y2="-4" stroke="#dcecf7" stroke-width="1.6"/>
+            <line x1="0" y1="20" x2="-14" y2="44" stroke="#dcecf7" stroke-width="1.6"/>
+            <line x1="0" y1="20" x2="14" y2="44" stroke="#dcecf7" stroke-width="1.6"/>
+            <text x="0" y="66" fill="#6fe7c0" font-size="12" text-anchor="middle">Student</text>
+          </g>
+
+          <!-- use case ovals -->
+          <ellipse cx="400" cy="65" rx="110" ry="20" fill="#123056" stroke="#4C7EA8"/>
+          <text x="400" y="69" fill="#dcecf7" font-size="11.5" text-anchor="middle">Manage Course Info</text>
+
+          <ellipse cx="400" cy="120" rx="110" ry="20" fill="#123056" stroke="#4C7EA8"/>
+          <text x="400" y="124" fill="#dcecf7" font-size="11.5" text-anchor="middle">Manage Student Info</text>
+
+          <ellipse cx="400" cy="175" rx="110" ry="20" fill="#123056" stroke="#4C7EA8"/>
+          <text x="400" y="179" fill="#dcecf7" font-size="11.5" text-anchor="middle">Register for Course</text>
+
+          <ellipse cx="400" cy="230" rx="110" ry="20" fill="#123056" stroke="#4C7EA8"/>
+          <text x="400" y="234" fill="#dcecf7" font-size="11.5" text-anchor="middle">View Registration List</text>
+
+          <!-- connections staff -->
+          <line x1="90" y1="120" x2="292" y2="65" stroke="#ffb92b" stroke-width="1.2"/>
+          <line x1="90" y1="120" x2="292" y2="120" stroke="#ffb92b" stroke-width="1.2"/>
+          <line x1="90" y1="130" x2="292" y2="175" stroke="#ffb92b" stroke-width="1.2"/>
+          <line x1="90" y1="130" x2="292" y2="230" stroke="#ffb92b" stroke-width="1.2"/>
+
+          <!-- connections student -->
+          <line x1="90" y1="230" x2="292" y2="175" stroke="#6fe7c0" stroke-width="1.2"/>
+        </svg>
+        <p style="text-align:center;color:var(--ink-faint);font-size:11.5px;margin-top:6px;">Ví dụ: Use Case Diagram đề Q1 (Training Center) — Staff nối cả 4 use case, Student chỉ nối "Register for Course"</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h4>4 ký hiệu bắt buộc</h4>
+          <ul>
+            <li><b>Actor</b> — hình người que, đặt ngoài khung hệ thống</li>
+            <li><b>System boundary</b> — hình chữ nhật bao toàn bộ use case, ghi tên hệ thống trên đầu</li>
+            <li><b>Use case</b> — hình oval, đặt trong khung, 1 oval = 1 chức năng chính</li>
+            <li><b>Association</b> — đường thẳng nối actor với use case (không mũi tên)</li>
+          </ul>
+        </div>
+        <div class="card coral">
+          <h4><span class="tag coral">Lỗi hay gặp</span> Bị trừ điểm oan</h4>
+          <ul>
+            <li>Quên vẽ system boundary → mất điểm setup</li>
+            <li>Actor tự nối actor, hoặc use case tự nối use case</li>
+            <li>Thiếu use case so với list Functional Requirements đã liệt kê ở Q2</li>
+            <li>1 actor không nối use case nào (actor "mồ côi")</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card amber">
+        <h4><span class="tag amber">Nếu dư thời gian</span> &lt;&lt;include&gt;&gt; / &lt;&lt;extend&gt;&gt;</h4>
+        <p>Ví dụ đề canteen: "Place Order" &lt;&lt;include&gt;&gt; "Make Payment" (luôn xảy ra cùng nhau). Đề library: "Submit Booking Request" &lt;&lt;extend&gt;&gt; bởi bước phụ nếu cần — không bắt buộc nhưng có thể lấy điểm cộng nếu thời gian còn.</p>
+      </div>
+    </section>
+
+    <!-- ================= DFD ================= -->
+    <section id="dfd">
+      <div class="kicker">Section 2 · Question 1 — 30 điểm</div>
+      <h2>Data Flow Diagram — Level 0</h2>
+      <p class="desc">Câu nặng điểm nhất đề. Cần đúng 4 loại ký hiệu, đúng số lượng tối thiểu đề yêu cầu (thường: ≥3 process, ≥2 data store, ≥2 external entity), và tuân thủ luật kết nối.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 200 200" width="220" style="display:block;margin:0 auto 6px;">
+          <rect x="10" y="10" width="70" height="40" fill="none" stroke="#dcecf7" stroke-width="1.5"/>
+          <text x="45" y="34" fill="#dcecf7" font-size="10" text-anchor="middle">Student</text>
+          <text x="45" y="60" fill="#87aec8" font-size="9" text-anchor="middle">External Entity</text>
+
+          <rect x="115" y="8" width="80" height="44" rx="20" fill="#123056" stroke="#ffb92b" stroke-width="1.5"/>
+          <text x="155" y="26" fill="#ffb92b" font-size="9" text-anchor="middle">1.0</text>
+          <text x="155" y="40" fill="#dcecf7" font-size="9.5" text-anchor="middle">Process</text>
+          <text x="155" y="62" fill="#87aec8" font-size="9" text-anchor="middle">Process</text>
+
+          <path d="M10,120 h70 M10,120 v40 M10,160 h70" fill="none" stroke="#6fe7c0" stroke-width="1.5"/>
+          <text x="45" y="145" fill="#dcecf7" font-size="9" text-anchor="middle">D1: Data</text>
+          <text x="45" y="180" fill="#87aec8" font-size="9" text-anchor="middle">Data Store</text>
+
+          <line x1="120" y1="140" x2="190" y2="140" stroke="#dcecf7" stroke-width="1.4" marker-end="url(#arrow)"/>
+          <text x="155" y="132" fill="#87aec8" font-size="8.5" text-anchor="middle">record info</text>
+          <text x="155" y="180" fill="#87aec8" font-size="9" text-anchor="middle">Data Flow</text>
+          <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dcecf7"/></marker></defs>
+        </svg>
+      </div>
+
+      <div class="grid2">
+        <div class="card mint">
+          <h4><span class="tag mint">Cách xác định</span> Từ đề bài ra thẳng 3 thành phần</h4>
+          <table style="margin-top:8px;">
+            <tr><th>Thành phần</th><th>Lấy từ đâu trong đề</th></tr>
+            <tr><td>External Entity</td><td>Nguyên list <b>"System users"</b> — copy y nguyên (Student, Staff, Manager...)</td></tr>
+            <tr><td>Process</td><td>Nguyên list <b>"Main processes"</b> — đánh số 1.0, 2.0, 3.0...</td></tr>
+            <tr><td>Data Store</td><td>Đề hay cho sẵn ví dụ trong ngoặc <span class="mono">(e.g., D1: Student Data, D2: Course Data)</span> — nếu không có, tự đặt tên = "dữ liệu mà process cần lưu lại"</td></tr>
+          </table>
+        </div>
+        <div class="card coral">
+          <h4><span class="tag coral">4 luật bất di bất dịch</span></h4>
+          <ul>
+            <li>Data Store <b>không</b> nối thẳng với External Entity — phải qua 1 Process</li>
+            <li>External Entity <b>không</b> nối thẳng với External Entity khác</li>
+            <li>Data Store <b>không</b> nối thẳng với Data Store khác</li>
+            <li>Mỗi Process phải có ít nhất 1 flow vào và 1 flow ra (không có "black hole" hoặc "miracle")</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>Thứ tự vẽ trong 5 phút</h4>
+        <ol style="padding-left:18px;">
+          <li>Viết External Entities ở 2 mép trái/phải tờ giấy</li>
+          <li>Đặt các Process ở giữa, theo đúng thứ tự luồng nghiệp vụ (process nào xảy ra trước vẽ trước)</li>
+          <li>Đặt Data Store ngay cạnh Process nào đọc/ghi vào nó</li>
+          <li>Đọc lại từng câu trong đoạn mô tả scenario, mỗi câu = 1 mũi tên data flow có label (không để mũi tên trống tên)</li>
+          <li>Đếm lại: đủ số process/store/entity tối thiểu đề yêu cầu chưa?</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= ERD ================= -->
+    <section id="erd">
+      <div class="kicker">Section 2 · Question 2 — 30 điểm</div>
+      <h2>Entity–Relationship Diagram</h2>
+      <p class="desc">Đề luôn gợi ý sẵn entity tối thiểu trong ngoặc, ví dụ "(Student, Course, Registration)". Việc còn lại: thêm attribute, gạch chân PK, và vẽ đúng cardinality.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 620 190" width="100%" style="max-width:560px;display:block;margin:0 auto;">
+          <rect x="10" y="55" width="140" height="80" fill="#123056" stroke="#4C7EA8" stroke-width="1.5"/>
+          <text x="80" y="74" fill="#ffb92b" font-size="11" text-anchor="middle" font-weight="700">Student</text>
+          <line x1="18" y1="82" x2="142" y2="82" stroke="#4C7EA8"/>
+          <text x="80" y="97" fill="#dcecf7" font-size="9.5" text-anchor="middle" text-decoration="underline">StudentID (PK)</text>
+          <text x="80" y="112" fill="#87aec8" font-size="9.5" text-anchor="middle">Name, Email</text>
+
+          <rect x="240" y="55" width="140" height="80" fill="#123056" stroke="#6fe7c0" stroke-width="1.5"/>
+          <text x="310" y="74" fill="#6fe7c0" font-size="11" text-anchor="middle" font-weight="700">Registration</text>
+          <line x1="248" y1="82" x2="372" y2="82" stroke="#4C7EA8"/>
+          <text x="310" y="97" fill="#dcecf7" font-size="9.5" text-anchor="middle" text-decoration="underline">RegID (PK)</text>
+          <text x="310" y="112" fill="#87aec8" font-size="9.5" text-anchor="middle">StudentID, CourseID (FK)</text>
+
+          <rect x="470" y="55" width="140" height="80" fill="#123056" stroke="#4C7EA8" stroke-width="1.5"/>
+          <text x="540" y="74" fill="#ffb92b" font-size="11" text-anchor="middle" font-weight="700">Course</text>
+          <line x1="478" y1="82" x2="602" y2="82" stroke="#4C7EA8"/>
+          <text x="540" y="97" fill="#dcecf7" font-size="9.5" text-anchor="middle" text-decoration="underline">CourseID (PK)</text>
+          <text x="540" y="112" fill="#87aec8" font-size="9.5" text-anchor="middle">CourseName, Schedule</text>
+
+          <line x1="150" y1="95" x2="240" y2="95" stroke="#dcecf7" stroke-width="1.3"/>
+          <text x="160" y="88" fill="#dcecf7" font-size="12">1</text>
+          <text x="228" y="88" fill="#dcecf7" font-size="12">*</text>
+
+          <line x1="380" y1="95" x2="470" y2="95" stroke="#dcecf7" stroke-width="1.3"/>
+          <text x="390" y="88" fill="#dcecf7" font-size="12">*</text>
+          <text x="458" y="88" fill="#dcecf7" font-size="12">1</text>
+        </svg>
+        <p style="text-align:center;color:var(--ink-faint);font-size:11.5px;margin-top:6px;">Quan hệ nhiều–nhiều Student↔Course được giải quyết qua bảng trung gian Registration</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card mint">
+          <h4><span class="tag mint">Cách xác định entity</span></h4>
+          <ul>
+            <li>Danh từ chính có dữ liệu riêng, cần lưu trữ độc lập (Student, Room, Order...)</li>
+            <li>Nếu 2 entity có quan hệ <b>nhiều–nhiều</b> (n–n), luôn cần 1 entity trung gian (Registration, OrderDetail, Booking) để tách thành 2 quan hệ 1–n</li>
+            <li>Mỗi entity ít nhất 1 PK + 2–3 attribute mô tả hợp lý theo ngữ cảnh</li>
+          </ul>
+        </div>
+        <div class="card amber">
+          <h4><span class="tag amber">Cardinality — hỏi 2 câu</span></h4>
+          <p>Với mỗi cặp entity, tự hỏi:</p>
+          <ul>
+            <li>"1 Student có thể có bao nhiêu Booking?" → nhiều → phía Booking ghi <b>*</b></li>
+            <li>"1 Booking thuộc về bao nhiêu Student?" → 1 → phía Student ghi <b>1</b></li>
+          </ul>
+          <p>PK bên "1" luôn xuất hiện làm FK ở bên "nhiều".</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CLASS DIAGRAM ================= -->
+    <section id="class">
+      <div class="kicker">UML</div>
+      <h2>Class Diagram</h2>
+      <p class="desc">Class Diagram cùng "nguyên liệu" với ERD (entity → class) nhưng thêm <b>method</b> (hành vi) và <b>visibility</b>, đồng thời thể hiện quan hệ theo kiểu hướng đối tượng (association / aggregation / composition / generalization) thay vì chỉ cardinality dữ liệu.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 620 220" width="100%" style="max-width:560px;display:block;margin:0 auto;">
+          <rect x="20" y="30" width="170" height="120" fill="#123056" stroke="#4C7EA8" stroke-width="1.5"/>
+          <text x="105" y="50" fill="#ffb92b" font-size="12" text-anchor="middle" font-weight="700">Student</text>
+          <line x1="20" y1="60" x2="190" y2="60" stroke="#4C7EA8"/>
+          <text x="30" y="76" fill="#dcecf7" font-size="9.5">− studentID: String</text>
+          <text x="30" y="90" fill="#dcecf7" font-size="9.5">− name: String</text>
+          <text x="30" y="104" fill="#dcecf7" font-size="9.5">− email: String</text>
+          <line x1="20" y1="112" x2="190" y2="112" stroke="#4C7EA8"/>
+          <text x="30" y="128" fill="#6fe7c0" font-size="9.5">+ register(course)</text>
+          <text x="30" y="142" fill="#6fe7c0" font-size="9.5">+ viewStatus()</text>
+
+          <rect x="410" y="30" width="190" height="120" fill="#123056" stroke="#4C7EA8" stroke-width="1.5"/>
+          <text x="505" y="50" fill="#ffb92b" font-size="12" text-anchor="middle" font-weight="700">Course</text>
+          <line x1="410" y1="60" x2="600" y2="60" stroke="#4C7EA8"/>
+          <text x="420" y="76" fill="#dcecf7" font-size="9.5">− courseID: String</text>
+          <text x="420" y="90" fill="#dcecf7" font-size="9.5">− courseName: String</text>
+          <text x="420" y="104" fill="#dcecf7" font-size="9.5">− capacity: int</text>
+          <line x1="410" y1="112" x2="600" y2="112" stroke="#4C7EA8"/>
+          <text x="420" y="128" fill="#6fe7c0" font-size="9.5">+ addStudent(s)</text>
+          <text x="420" y="142" fill="#6fe7c0" font-size="9.5">+ checkAvailable()</text>
+
+          <line x1="190" y1="90" x2="410" y2="90" stroke="#dcecf7" stroke-width="1.3"/>
+          <text x="200" y="83" fill="#dcecf7" font-size="12">1</text>
+          <text x="395" y="83" fill="#dcecf7" font-size="12">*</text>
+          <text x="300" y="83" fill="#87aec8" font-size="9.5" text-anchor="middle">registers</text>
+        </svg>
+        <p style="text-align:center;color:var(--ink-faint);font-size:11.5px;margin-top:6px;">Class box 3 tầng: tên class / thuộc tính (− private) / phương thức (+ public) — quan hệ association ghi rõ tên + cardinality 2 đầu</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card mint">
+          <h4><span class="tag mint">Chuyển từ ERD sang Class nhanh</span></h4>
+          <ul>
+            <li>Entity → Class, giữ nguyên attribute (bỏ chữ PK/FK, chỉ cần liệt kê tên + kiểu dữ liệu)</li>
+            <li>Thêm 2–3 method hợp lý theo đúng Functional Requirements đã viết ở Q2 (VD: entity Booking → method <span class="mono">approve()</span>, <span class="mono">cancel()</span>)</li>
+            <li>Quan hệ nhiều–nhiều: có thể giữ trực tiếp <span class="mono">*..*</span> giữa 2 class (không bắt buộc tách bảng trung gian như ERD), hoặc tách thành class riêng nếu nó có thuộc tính/method riêng (VD: Registration có <span class="mono">registrationDate</span>, <span class="mono">status</span> → nên tách thành class)</li>
+          </ul>
+        </div>
+        <div class="card amber">
+          <h4><span class="tag amber">Ký hiệu quan hệ cần nhớ</span></h4>
+          <table style="margin-top:8px;">
+            <tr><th>Quan hệ</th><th>Ký hiệu đường nối</th><th>Ý nghĩa</th></tr>
+            <tr><td>Association</td><td>đường thẳng</td><td>2 class liên quan nhau, có thể ghi cardinality</td></tr>
+            <tr><td>Aggregation</td><td>đường + hình thoi rỗng</td><td>"has-a", phần có thể tồn tại độc lập (Room chứa nhiều Booking)</td></tr>
+            <tr><td>Composition</td><td>đường + hình thoi đặc</td><td>"phần thuộc hẳn về tổng", mất tổng thì mất phần (Order — OrderDetail)</td></tr>
+            <tr><td>Generalization</td><td>đường + tam giác rỗng</td><td>kế thừa (Staff, Manager cùng kế thừa từ class User)</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>Áp nhanh vào 3 đề</h4>
+        <table>
+          <tr><th>Đề</th><th>Class chính</th><th>Method tiêu biểu</th></tr>
+          <tr><td>Training Center</td><td>Student, Course, Registration</td><td>Student.register(course), Staff.manageCourse()</td></tr>
+          <tr><td>Canteen App</td><td>Student, MenuItem, Order, Payment</td><td>Order.placeOrder(), Payment.pay(), Order.updateStatus()</td></tr>
+          <tr><td>Library Booking</td><td>Student, Room, Booking</td><td>Student.submitBooking(), Staff.approveBooking(), Manager.generateReport()</td></tr>
+        </table>
+        <p style="color:var(--ink-faint);font-size:12.5px;margin-top:8px;">Lưu ý: 3 đề gốc chỉ chấm điểm ERD, không yêu cầu Class Diagram riêng — phần này để ôn thêm phòng khi đề đổi format hoặc để hiểu sâu hơn quan hệ hướng đối tượng giữa các entity.</p>
+      </div>
+    </section>
+
+    <!-- ================= DRAWIO ================= -->
+    <section id="drawio">
+      <div class="kicker">Kỹ năng phòng thi</div>
+      <h2>Thao tác drawio nhanh — tiết kiệm 10–15 phút</h2>
+      <p class="desc">90 phút cho 5 câu, phần vẽ chiếm 50/100 điểm — thao tác chuột chậm là mất điểm oan vì hết giờ.</p>
+      <div class="grid3">
+        <div class="card">
+          <h4>Tìm shape nhanh</h4>
+          <p>Double-click vùng trống trên canvas → gõ tên shape (<span class="mono">actor</span>, <span class="mono">process</span>, <span class="mono">data store</span>, <span class="mono">entity</span>) → Enter. Nhanh hơn nhiều so với kéo từ panel bên trái.</p>
+        </div>
+        <div class="card">
+          <h4>Panel có sẵn stencil</h4>
+          <p>Bên trái tìm mục <b>"UML"</b> (có sẵn Actor, Use Case, boundary) và <b>"Entity Relation"</b> (có sẵn khung ERD 3 dòng: tên bảng / PK / attribute) — bật lên từ "More Shapes" nếu chưa thấy.</p>
+        </div>
+        <div class="card">
+          <h4>Phím tắt sống còn</h4>
+          <ul>
+            <li><span class="mono">Ctrl+D</span> — nhân bản shape (dùng cho nhiều oval use case / nhiều entity box giống layout)</li>
+            <li><span class="mono">Ctrl+Shift+H</span> — fit toàn bộ diagram vào màn hình</li>
+            <li>Kéo cạnh shape ra sẽ tự hiện mũi tên nối — không cần chọn riêng công cụ Line</li>
+            <li>Double-click giữa đường nối để thêm label ngay trên arrow</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Phân bổ thời gian gợi ý (90 phút)</h4>
+        <table class="timebudget">
+          <tr><th>Câu</th><th>Việc cần làm</th><th>Thời gian</th></tr>
+          <tr><td>Q1 + Q2 (S1)</td><td>Viết Problem/Goal/Benefits + Functional Requirements</td><td class="min">12 phút</td></tr>
+          <tr><td>Q3 (S1)</td><td>Use Case Diagram</td><td class="min">18 phút</td></tr>
+          <tr><td>Q1 (S2)</td><td>DFD Level-0</td><td class="min">30 phút</td></tr>
+          <tr><td>Q2 (S2)</td><td>ERD</td><td class="min">25 phút</td></tr>
+          <tr><td>—</td><td>Rà soát lại luật kết nối, đếm số lượng tối thiểu</td><td class="min">5 phút</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= 3 ĐỀ MẪU ================= -->
+    <section id="demau">
+      <div class="kicker">Luyện đề</div>
+      <h2>3 đề thi thật — lời giải đầy đủ từng câu</h2>
+      <p class="desc">Chọn đề để xem breakdown Actor/Process/Data Store/Entity theo đúng format điểm số của đề đó.</p>
+
+      <div class="tabs">
+        <button class="tabbtn active" data-tab="e1">Q1 · Training Center</button>
+        <button class="tabbtn" data-tab="e2">Q2 · Canteen App</button>
+        <button class="tabbtn" data-tab="e3">Q3 · Library Booking</button>
+      </div>
+
+      <!-- EXAM 1 -->
+      <div class="tabpanel active" id="e1">
+        <div class="card">
+          <h4>Scenario tóm tắt</h4>
+          <p>Đăng ký khóa học thủ công bằng giấy, staff nhập tay vào Excel → lỗi, chậm trễ. Users: <b>Staff, Student</b>. Yêu cầu tối thiểu: DFD ≥3 process / 2 store / 2 entity; ERD ≥3 entity (Student, Course, Registration).</p>
+        </div>
+        <div class="grid2">
+          <div class="card mint">
+            <h4>Q1 — Problem & Goal</h4>
+            <p><b>Problem:</b> Students currently register by filling paper forms; staff manually enter data into Excel, causing errors and delays.</p>
+            <p><b>Goal:</b> Build a simple computerized system for staff to manage course/student info and register students; students can view registration lists.</p>
+            <p><b>Benefits:</b> Fewer data-entry errors, faster registration, easier tracking/reporting.</p>
+          </div>
+          <div class="card mint">
+            <h4>Q2 — Functional Requirements (5)</h4>
+            <ul>
+              <li>Allow Staff to manage course information</li>
+              <li>Allow Staff to manage student information</li>
+              <li>Allow Student to request registration for a course</li>
+              <li>Allow Staff to register students into available courses</li>
+              <li>Allow Staff to view course registration lists</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Q3 — Use Case</h4>
+          <p>Actors: <b>Staff, Student</b>. Use cases: Manage Course Info, Manage Student Info, Register for Course (Student khởi tạo request, Staff xử lý), View Registration List (Staff).</p>
+        </div>
+        <div class="grid2">
+          <div class="card amber">
+            <h4>Section 2.1 — DFD Level-0</h4>
+            <p><b>External Entities:</b> Staff, Student</p>
+            <p><b>Processes:</b> 1.0 Manage Course Info · 2.0 Manage Student Info · 3.0 Register Student for Course · 4.0 View Registration List</p>
+            <p><b>Data Stores:</b> D1 Student Data · D2 Course Data</p>
+          </div>
+          <div class="card amber">
+            <h4>Section 2.2 — ERD</h4>
+            <p><b>Student</b>(StudentID <u>PK</u>, Name, Email, Phone)</p>
+            <p><b>Course</b>(CourseID <u>PK</u>, CourseName, Schedule, Capacity)</p>
+            <p><b>Registration</b>(RegID <u>PK</u>, StudentID FK, CourseID FK, RegDate) — Student 1—* Registration *—1 Course</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAM 2 -->
+      <div class="tabpanel" id="e2">
+        <div class="card">
+          <h4>Scenario tóm tắt</h4>
+          <p>Sinh viên xếp hàng mua đồ ăn ở canteen, dễ nhầm order, khó theo dõi đơn đã trả tiền. Users: <b>Canteen Staff, Student</b>. Yêu cầu tối thiểu: DFD ≥3 process / 2 store / 2 entity; ERD gợi ý Student, Order, Menu-Item, Payment.</p>
+        </div>
+        <div class="grid2">
+          <div class="card mint">
+            <h4>Q1 — Problem & Goal</h4>
+            <p><b>Problem:</b> Students queue and order verbally at the counter, causing mistakes, long wait times, and confusion over which orders are paid.</p>
+            <p><b>Goal:</b> A mobile app where students select food, place orders, pay in-app, and get a "ready to collect" notice; staff manage menu and update order status.</p>
+            <p><b>Benefits:</b> Shorter wait time, fewer order mistakes, clear payment/order tracking.</p>
+          </div>
+          <div class="card mint">
+            <h4>Q2 — Functional Requirements (5)</h4>
+            <ul>
+              <li>Allow Student to browse menu and prices</li>
+              <li>Allow Student to place a food order</li>
+              <li>Allow Student to pay inside the app</li>
+              <li>Allow Student to receive "order ready" notification</li>
+              <li>Allow Canteen Staff to view paid orders and update order status</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Q3 — Use Case</h4>
+          <p>Actors: <b>Canteen Staff, Student</b>. Use cases: Browse Menu, Place Order &lt;&lt;include&gt;&gt; Make Payment, Receive Notification, Manage Menu (Staff), Update Order Status (Staff).</p>
+        </div>
+        <div class="grid2">
+          <div class="card amber">
+            <h4>Section 2.1 — DFD Level-0</h4>
+            <p><b>External Entities:</b> Student, Canteen Staff</p>
+            <p><b>Processes:</b> 1.0 Manage Menu Info · 2.0 Place Food Order & Make Payment · 3.0 Update Order Status / Notify Student</p>
+            <p><b>Data Stores:</b> D1 Menu Data · D2 Orders & Payments Data</p>
+          </div>
+          <div class="card amber">
+            <h4>Section 2.2 — ERD</h4>
+            <p><b>Student</b>(StudentID <u>PK</u>, Name)</p>
+            <p><b>MenuItem</b>(ItemID <u>PK</u>, Name, Price)</p>
+            <p><b>Order</b>(OrderID <u>PK</u>, StudentID FK, OrderDate, Status)</p>
+            <p><b>Payment</b>(PaymentID <u>PK</u>, OrderID FK, Amount, Method) — Student 1—* Order 1—1 Payment; Order *—* MenuItem</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAM 3 -->
+      <div class="tabpanel" id="e3">
+        <div class="card">
+          <h4>Scenario tóm tắt</h4>
+          <p>Đặt phòng thư viện thủ công qua sổ/Excel → double booking, sinh viên không rõ trạng thái đặt phòng. Users: <b>Student, Library Staff, Library Manager</b>. Yêu cầu tối thiểu: DFD ≥5 process / 3 store / 3 entity; ERD gợi ý Student, Room, Booking.</p>
+        </div>
+        <div class="grid2">
+          <div class="card mint">
+            <h4>Q1 — Problem & Goal</h4>
+            <p><b>Problem:</b> Bookings are recorded manually in notebooks/Excel, causing double bookings; students can't confirm status without repeated inquiries; no centralized usage data.</p>
+            <p><b>Goal:</b> A computerized system for students to check availability and book online; staff manage schedules and confirm/reject bookings; track room usage.</p>
+            <p><b>Benefits:</b> No more double bookings, faster confirmation, centralized usage reports for planning.</p>
+          </div>
+          <div class="card mint">
+            <h4>Q2 — Functional Requirements (6)</h4>
+            <ul>
+              <li>Allow Student to search room availability</li>
+              <li>Allow Student to submit a booking request online</li>
+              <li>Allow Library Staff to manage room information</li>
+              <li>Allow Library Staff to approve or reject bookings</li>
+              <li>Allow Student to view booking status</li>
+              <li>Allow Library Manager to generate room usage reports</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Q3 — Use Case</h4>
+          <p>Actors: <b>Student, Library Staff, Library Manager</b>. Use cases: Search Room Availability, Submit Booking Request, View Booking Status (Student) · Manage Room Info, Approve/Reject Booking (Staff) · Generate Usage Report (Manager).</p>
+        </div>
+        <div class="grid2">
+          <div class="card amber">
+            <h4>Section 2.1 — DFD Level-0</h4>
+            <p><b>External Entities:</b> Student, Library Staff, Library Manager</p>
+            <p><b>Processes:</b> 1.0 Manage Room Info · 2.0 Search Room Availability · 3.0 Submit Booking Request · 4.0 Approve/Reject Booking · 5.0 View Booking Status · 6.0 Generate Usage Report</p>
+            <p><b>Data Stores:</b> D1 User Data · D2 Room Data · D3 Booking Data</p>
+          </div>
+          <div class="card amber">
+            <h4>Section 2.2 — ERD</h4>
+            <p><b>Student</b>(StudentID <u>PK</u>, Name, Email, Phone)</p>
+            <p><b>Room</b>(RoomID <u>PK</u>, RoomName, Capacity, Location)</p>
+            <p><b>Booking</b>(BookingID <u>PK</u>, StudentID FK, RoomID FK, BookingDate, TimeSlot, Status) — Student 1—* Booking *—1 Room</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CHECKLIST ================= -->
+    <section id="checklist">
+      <div class="kicker">Trước khi nộp bài</div>
+      <h2>Checklist rà soát nhanh</h2>
+      <div class="card checklist">
+        <label><input type="checkbox"> Đủ số process / data store / external entity tối thiểu đề yêu cầu?</label>
+        <label><input type="checkbox"> Không có Data Store nối thẳng External Entity?</label>
+        <label><input type="checkbox"> Mọi Process đều có ít nhất 1 flow vào + 1 flow ra?</label>
+        <label><input type="checkbox"> Mọi Data Flow đều có label, không để mũi tên trống tên?</label>
+        <label><input type="checkbox"> Use Case Diagram có vẽ system boundary, không actor nào "mồ côi"?</label>
+        <label><input type="checkbox"> Số use case ≥ số Functional Requirements đã liệt kê ở Q2?</label>
+        <label><input type="checkbox"> Mỗi entity ERD có PK gạch chân, quan hệ nhiều–nhiều đã tách qua bảng trung gian?</label>
+        <label><input type="checkbox"> Cardinality (1 / *) ghi rõ ở cả 2 đầu mỗi quan hệ?</label>
+        <label><input type="checkbox"> Đặt tên file/label bằng tiếng Anh đúng theo đề (không lẫn tiếng Việt)?</label>
+      </div>
+    </section>
+
+    <footer>
+      Tài liệu ôn tập tự tổng hợp từ 3 đề thi giữa kỳ CSW 309 (Q1, Q2, Q3 · năm học 2025–2026). Dùng cho mục đích ôn luyện cá nhân.
+    </footer>
+
+  </main>
+</div>
+
+<a href="#cau-truc" class="backtotop">↑</a>
+
+<script>
+  document.querySelectorAll('.tabbtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

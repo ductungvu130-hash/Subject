@@ -1,0 +1,69 @@
+.music-category {
+    width: 450px;
+    background-color: #EEEEEE;
+    border-radius: 6px;
+}
+
+.container {
+    padding: 10px;
+}
+
+.container h1 {
+    font-weight: 100;
+    margin-top: 0;
+}
+
+.item {
+    display: flex;
+    border: 1px solid #000;
+    margin-top: 40px;
+    padding: 15px;
+}
+
+.left {
+    margin: 0;
+    padding: 0;
+}
+
+.right {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.item .left img {
+    margin: auto;
+}
+
+.item .right p {
+    padding-left: 15px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.item .right p span {
+    font-weight: 600;
+}
+
+.item .right .listen {
+    background-image: url(./images/listen.png);
+    color: #ffff;
+    border: none;
+    padding: 3px 15px;
+}
+
+.item .right .add {
+    background-image: url(./images/add.png);
+    color: #ffff;
+    border: none;
+    padding: 3px 15px;
+}
+
+.item .right .button-submit {
+    text-align: right;
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <div class="container-fluid">
+            <h5 class="text-center header-text py-3 mb-0">HOTEL MANAGEMENT SYSTEM</h5>
+            <div class="row mx-0">
+                <div class="col-3 left-div py-3">
+                    <h4>Room Types</h4>
+                    <ul class="px-3">
+                        <li>Single Room</li>
+                        <li>Double Room</li>
+                        <li>Twin Room</li>
+                        <li>Triple Room</li>
+                        <li>Quad Room</li>
+                    </ul>
+                </div>
+                <div class="col-9 right-div p-3">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6 class="mb-0">ADD A NEW ROOM</h6>
+                        </div>
+                    </div>
+                    <div class="row add-room">
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Room Number<span>*</span></p>
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control" type="text" id="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Price<span>*</span></p>
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control" type="text" id="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Genre</p>
+                                </div>
+                                <div class="col-12">
+                                    <select class="form-select">
+                                        <option selected>Choose...</option>
+                                        <option>Single Room</option>
+                                        <option>Double Room</option>
+                                        <option>Twin Room</option>
+                                        <option>Triple Room</option>
+                                        <option>Quad Room</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Description<span>*</span></p>
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Image Link</p>
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control" type="text" id="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2"></div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-outline-primary px-3">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-5 mb-3">
+                        <div class="card-body">
+                            <h3 class="mb-0">ROOM LIST</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4">
+                            <div class="d-flex">
+                                <select class="form-select">
+                                    <option value="">Price less than $15</option>
+                                    <option value="">Price $15 to $20</option>
+                                    <option value="">Price greater than $20</option>
+                                </select>
+                                <button class="btn btn-outline-secondary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 room-infor">
+                        <div class="col-3 mb-3">
+                            <div class="card">
+                                <img src="images/booking.PNG" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">302</h6>
+                                    <p class="card-text">Price</p>
+                                    <p class="card-text">Twin Room</p>
+                                    <p class="card-text">Some Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="card">
+                                <img src="images/booking.PNG" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">302</h6>
+                                    <p class="card-text">Price</p>
+                                    <p class="card-text">Twin Room</p>
+                                    <p class="card-text">Some Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="card">
+                                <img src="images/booking.PNG" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">302</h6>
+                                    <p class="card-text">Price</p>
+                                    <p class="card-text">Twin Room</p>
+                                    <p class="card-text">Some Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="card">
+                                <img src="images/booking.PNG" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">302</h6>
+                                    <p class="card-text">Price</p>
+                                    <p class="card-text">Twin Room</p>
+                                    <p class="card-text">Some Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="card">
+                                <img src="images/booking.PNG" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">302</h6>
+                                    <p class="card-text">Price</p>
+                                    <p class="card-text">Twin Room</p>
+                                    <p class="card-text">Some Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="card">
+                                <img src="images/booking.PNG" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">302</h6>
+                                    <p class="card-text">Price</p>
+                                    <p class="card-text">Twin Room</p>
+                                    <p class="card-text">Some Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="card">
+                                <img src="images/booking.PNG" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">302</h6>
+                                    <p class="card-text">Price</p>
+                                    <p class="card-text">Twin Room</p>
+                                    <p class="card-text">Some Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="card">
+                                <img src="images/booking.PNG" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">302</h6>
+                                    <p class="card-text">Price</p>
+                                    <p class="card-text">Twin Room</p>
+                                    <p class="card-text">Some Description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

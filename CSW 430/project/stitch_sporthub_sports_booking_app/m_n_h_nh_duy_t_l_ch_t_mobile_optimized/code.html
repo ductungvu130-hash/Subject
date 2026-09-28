@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Duyệt lịch đặt - SportHub Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e6e8ea;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-container": "#22c55e",
+                      "on-primary-fixed": "#002109",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e6e8ea",
+                      "surface-bright": "#f7f9fb",
+                      "outline-variant": "#bccbb9",
+                      "primary-fixed-dim": "#4ae176",
+                      "secondary-fixed": "#dde1ff",
+                      "surface-container-highest": "#e0e3e5",
+                      "outline": "#6d7b6c",
+                      "on-secondary-fixed": "#001453",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed-variant": "#173bab",
+                      "primary": "#006e2f",
+                      "surface-variant": "#e0e3e5",
+                      "surface-tint": "#006e2f",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#ff8e4d",
+                      "on-tertiary-fixed": "#341100",
+                      "on-background": "#191c1e",
+                      "on-primary-fixed-variant": "#005321",
+                      "tertiary-fixed-dim": "#ffb690",
+                      "on-tertiary-container": "#6d2d00",
+                      "on-surface-variant": "#3d4a3d",
+                      "surface-container-low": "#f2f4f6",
+                      "on-secondary-container": "#00217a",
+                      "secondary": "#3755c3",
+                      "primary-fixed": "#6bff8f",
+                      "on-surface": "#191c1e",
+                      "surface-dim": "#d8dadc",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#b8c4ff",
+                      "secondary-container": "#708cfd",
+                      "inverse-primary": "#4ae176",
+                      "on-tertiary-fixed-variant": "#783200",
+                      "surface": "#f7f9fb",
+                      "tertiary": "#9d4300",
+                      "surface-container": "#eceef0",
+                      "on-primary-container": "#004b1e",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "error-container": "#ffdad6",
+                      "on-error-container": "#93000a",
+                      "background": "#f7f9fb",
+                      "tertiary-fixed": "#ffdbca",
+                      "inverse-on-surface": "#eff1f3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "8px",
+                      "sm": "12px",
+                      "gutter": "16px",
+                      "md": "16px",
+                      "margin-mobile": "20px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "display-lg": ["44px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Top App Bar (Mobile) -->
+<header class="md:hidden flex items-center justify-between px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-bold text-xl text-primary">SportHub</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface">notifications</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-16 pb-24 min-h-screen">
+<!-- Page Title & Summary -->
+<div class="px-margin-mobile pt-6 mb-4">
+<h1 class="text-2xl font-bold text-on-surface">Duyệt lịch đặt sân</h1>
+<p class="text-on-surface-variant text-sm mt-1">Quản lý và phê duyệt các yêu cầu đặt sân.</p>
+</div>
+<!-- Sticky Tabs -->
+<div class="sticky top-16 z-40 bg-surface border-b border-outline-variant">
+<div class="flex w-full">
+<button class="flex-1 py-4 text-sm font-bold text-primary border-b-2 border-primary">
+                    Chờ duyệt (12)
+                </button>
+<button class="flex-1 py-4 text-sm font-medium text-on-surface-variant">
+                    Đã duyệt
+                </button>
+<button class="flex-1 py-4 text-sm font-medium text-on-surface-variant">
+                    Đã hủy
+                </button>
+</div>
+</div>
+<!-- Scrollable Cards List -->
+<div class="px-margin-mobile mt-6 space-y-4">
+<!-- Booking Card 1 -->
+<div class="glass-card rounded-2xl p-5 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h3 class="font-bold text-base">Nguyễn Văn An</h3>
+<p class="text-xs text-on-surface-variant">ID: #SH10293</p>
+</div>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[11px] font-bold">Mới nhất</span>
+</div>
+<div class="space-y-3 pb-5 border-b border-surface-container-highest">
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Sân đặt</span>
+<div class="flex items-center gap-1.5 font-semibold text-sm">
+<span class="material-symbols-outlined text-primary text-lg">sports_soccer</span>
+                            Sân bóng đá A1
+                        </div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Thời gian</span>
+<div class="flex items-center gap-1.5 text-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">schedule</span>
+                            18:00 - 19:30, 24/10
+                        </div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Tổng tiền</span>
+<span class="font-bold text-primary text-lg">450.000đ</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Thanh toán</span>
+<span class="text-sm font-medium text-secondary">Tiền mặt</span>
+</div>
+</div>
+<div class="flex gap-3 pt-4">
+<button class="flex-1 bg-primary text-on-primary py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-sm">
+<span class="material-symbols-outlined text-xl">check_circle</span> Xác nhận
+                    </button>
+<button class="flex-1 bg-error-container text-on-error-container py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">cancel</span> Từ chối
+                    </button>
+</div>
+</div>
+<!-- Booking Card 2 -->
+<div class="glass-card rounded-2xl p-5 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h3 class="font-bold text-base">Trần Thị Minh</h3>
+<p class="text-xs text-on-surface-variant">ID: #SH10294</p>
+</div>
+</div>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[11px] font-bold">5 phút trước</span>
+</div>
+<div class="space-y-3 pb-5 border-b border-surface-container-highest">
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Sân đặt</span>
+<div class="flex items-center gap-1.5 font-semibold text-sm">
+<span class="material-symbols-outlined text-primary text-lg">sports_tennis</span>
+                            Sân Cầu lông B2
+                        </div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Thời gian</span>
+<div class="flex items-center gap-1.5 text-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">schedule</span>
+                            19:00 - 21:00, 24/10
+                        </div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Tổng tiền</span>
+<span class="font-bold text-primary text-lg">200.000đ</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Thanh toán</span>
+<span class="text-sm font-medium text-on-primary-container">Chuyển khoản (Đã nhận)</span>
+</div>
+</div>
+<div class="flex gap-3 pt-4">
+<button class="flex-1 bg-primary text-on-primary py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">check_circle</span> Xác nhận
+                    </button>
+<button class="flex-1 bg-error-container text-on-error-container py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">cancel</span> Từ chối
+                    </button>
+</div>
+</div>
+<!-- Booking Card 3 -->
+<div class="glass-card rounded-2xl p-5 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h3 class="font-bold text-base">Lê Hoàng Nam</h3>
+<p class="text-xs text-on-surface-variant">ID: #SH10295</p>
+</div>
+</div>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[11px] font-bold">15 phút trước</span>
+</div>
+<div class="space-y-3 pb-5 border-b border-surface-container-highest">
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Sân đặt</span>
+<div class="flex items-center gap-1.5 font-semibold text-sm">
+<span class="material-symbols-outlined text-primary text-lg">sports_basketball</span>
+                            Sân Bóng rổ C1
+                        </div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Thời gian</span>
+<div class="flex items-center gap-1.5 text-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">schedule</span>
+                            08:00 - 10:00, 25/10
+                        </div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Tổng tiền</span>
+<span class="font-bold text-primary text-lg">600.000đ</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Thanh toán</span>
+<span class="text-sm font-medium text-secondary">Tiền mặt</span>
+</div>
+</div>
+<div class="flex gap-3 pt-4">
+<button class="flex-1 bg-primary text-on-primary py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">check_circle</span> Xác nhận
+                    </button>
+<button class="flex-1 bg-error-container text-on-error-container py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">cancel</span> Từ chối
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Admin Bottom Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface border-t border-outline-variant">
+<button class="flex flex-col items-center justify-center py-2 px-3 text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium mt-0.5">Tổng quan</span>
+</button>
+<button class="flex flex-col items-center justify-center py-2 px-3 text-on-surface-variant">
+<span class="material-symbols-outlined">stadium</span>
+<span class="text-[10px] font-medium mt-0.5">Sân bãi</span>
+</button>
+<button class="flex flex-col items-center justify-center py-2 px-4 bg-primary-container text-on-primary-container rounded-2xl">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event_note</span>
+<span class="text-[10px] font-bold mt-0.5">Lịch đặt</span>
+</button>
+<button class="flex flex-col items-center justify-center py-2 px-3 text-on-surface-variant">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium mt-0.5">Khách hàng</span>
+</button>
+<button class="flex flex-col items-center justify-center py-2 px-3 text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium mt-0.5">Cài đặt</span>
+</button>
+</nav>
+<script>
+        // Button interaction logic
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.innerText.toLowerCase();
+                if (text.includes('xác nhận') || text.includes('từ chối')) {
+                    const card = this.closest('.glass-card');
+                    card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    card.style.opacity = '0';
+                    card.style.transform = text.includes('xác nhận') ? 'translateX(100%)' : 'scale(0.95)';
+                    setTimeout(() => {
+                        card.style.height = '0';
+                        card.style.margin = '0';
+                        card.style.padding = '0';
+                        card.style.border = 'none';
+                        setTimeout(() => card.remove(), 400);
+                    }, 300);
+                }
+            });
+        });
+    </script>
+</body></html>

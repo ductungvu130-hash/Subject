@@ -1,0 +1,15 @@
+{
+    "java.project.sourcePaths": [
+        "userdefine",
+        "src",
+        "mustknow",
+        "lab2",
+        "Lab1",
+        "finalExam"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
+}

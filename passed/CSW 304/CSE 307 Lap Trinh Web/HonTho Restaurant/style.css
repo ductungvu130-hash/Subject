@@ -1,0 +1,598 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Menu */
+.main-menu > nav {
+    padding: 5px 70px;
+}
+.main-menu .orange {
+    color: #fbaf32;
+    font-weight: 600;
+}
+.main-menu .green {
+    color: #719a0a;
+    font-weight: 600;
+}
+.main-menu ul li a:hover {
+    color: #fbaf32;
+}
+
+/* Slider */
+
+.slider {
+    padding: 0 70px;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    color: white;
+    padding: 0px 250px;
+    height: 100%;
+    text-align: center;
+    align-content: center;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.overlay p {
+    text-align: center;
+}
+
+.overlay h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+.overlay span {
+    color: #fbaf32;
+}
+.menu-btn {
+    padding: 10px;
+    background-color: #fbaf32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.book-btn {
+    padding: 10px;
+    background-color: #719a0a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.menu-btn:hover {
+    background-color: #fff;
+    color: #fbaf32;
+}
+
+.book-btn:hover {
+    background-color: #fff;
+    color: #719a0a;
+}
+/* Booking */
+.booking {
+    background-color: #f5f5f5;
+    padding: 0 180px;
+    margin-bottom: 100px;
+}
+
+.booking-content {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.booking .intro {
+    color: #719a0a;
+    font-weight: 500;
+}
+.booking-form {
+    background-color: #fbaf32;
+    padding: 50px 30px;
+    height: 100%;
+    align-content: center;
+}
+
+.booking-form > form > div {
+    display: flex;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #ffff;
+    border-radius: 5px;
+}
+
+.booking-form input {
+    padding: 8px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.booking-form input::placeholder {
+    color: white;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+    border: none;
+    outline: none;
+}
+
+.booking-icon {
+    width: 40px;
+    padding-right: 4px;
+    align-content: center;
+    text-align: center;
+    color: white;
+}
+
+.form-btn {
+    width: 100%;
+    background-color: #ffff;
+    color: #fbaf32;
+    padding: 10px;
+    border: none;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.form-btn:hover {
+    background-color: #eee;
+}
+.form-quantity {
+    padding-right: 15px;
+}
+.form-quantity select {
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.form-quantity option {
+    color: black;
+    width: 20%;
+}
+
+/* Introduction */
+.introduction {
+    padding: 0 170px;
+    margin-bottom: 100px;
+}
+
+.introduction-video {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    position: relative;
+}
+
+.video-group {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+}
+
+.video-btn {
+    width: 100px;
+    height: 100px;
+    align-content: center;
+    color: white;
+    background-color: #fbaf32;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.video-btn i {
+    margin-left: 35px;
+}
+
+.introduction-video img {
+    border-radius: 20px;
+}
+
+.introduction-content {
+    padding: 20px 0;
+    text-align: justify;
+    align-content: center;
+}
+
+.introduction-btn {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #fbaf32;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.introduction .intro {
+    color: #719a0a;
+}
+
+.video-btn:hover {
+    background-color: rgb(204, 138, 0);
+}
+
+.introduction-btn:hover {
+    background-color: #719a0a;
+}
+/* Special Point */
+.outstanding {
+    padding: 0 170px;
+    margin-bottom: 100px;
+}
+
+.outstanding .intro {
+    color: #719a0a;
+}
+.outstanding h1 {
+    margin-bottom: 20px;
+}
+.outstanding-pictures img {
+    width: 100%;
+    height: 200px;
+}
+.outstanding-pictures > div {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.outstanding-pictures {
+    margin-bottom: 20px;
+}
+.outstanding-picture-1 {
+    border-top-left-radius: 10px;
+}
+
+.outstanding-picture-2 {
+    border-top-right-radius: 10px;
+}
+
+.outstanding-picture-3 {
+    border-bottom-left-radius: 10px;
+}
+
+.outstanding-picture-4 {
+    border-bottom-right-radius: 10px;
+}
+
+.outstanding-btn {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #fbaf32;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.outstanding-btn:hover {
+    background-color: #719a0a;
+}
+
+.outstanding > div > div > div {
+    margin-bottom: 20px;
+}
+
+.quality-picture {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+/* Service */
+.service {
+    margin-bottom: 100px;
+    padding: 0 170px;
+    text-align: center;
+}
+.service .intro {
+    color: #719a0a;
+    margin-bottom: 10px;
+}
+.service h1 {
+    margin-bottom: 50px;
+}
+.service .service-btn {
+    border: none;
+    background-color: #fbaf32;
+    color: #ffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+.service .nav-link.active {
+    background-color: #719a0a;
+}
+.service .tab-content .left {
+    width: 100px;
+    height: 80px;
+    border-radius: 50%;
+}
+.service .tab-content .right {
+    border-radius: 15px;
+}
+.service .tab-content h5 {
+    margin-bottom: 2px;
+    display: inline;
+    float: left;
+}
+.service .tab-content p {
+    clear: both;
+    float: left;
+    text-align: left;
+    margin-bottom: 0px;
+}
+.service .tab-content span {
+    margin-bottom: 2px;
+    color: #fbaf32;
+    float: right;
+    font-weight: 600;
+    font-size: 20px;
+}
+/* Contact */
+.contact {
+    padding: 0 170px;
+    margin-bottom: 100px;
+}
+.media {
+    display: flex;
+}
+.contact-intro p {
+    text-align: center;
+    color: #719a0a;
+}
+
+.contact-intro h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact i {
+    color: white;
+}
+
+.media-group {
+    background-color: #f5f5f5;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-content: center;
+    margin-bottom: 30px;
+}
+.media-content {
+    padding-bottom: 30px;
+}
+.media-content p {
+    margin-bottom: 0;
+}
+
+.contact h6 {
+    font-weight: 600;
+    color: #719a0a;
+}
+
+.media-social-network i {
+    color: #fbaf32;
+    margin-right: 5px;
+}
+
+.media-symbol {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    align-content: center;
+    text-align: center;
+    background-color: #fbaf32;
+    border-radius: 50px;
+}
+
+.contact-form {
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+.contact .form-btn {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #fbaf32;
+    border-radius: 5px;
+    max-width: 150px;
+    width: 100%;
+}
+
+.contact .form-btn:hover {
+    background-color: #719a0a;
+}
+.contact iframe {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Footer */
+.head-footer {
+    padding: 100px 170px 20px 170px;
+    background-color: #f5f5f5;
+    margin-bottom: 30px;
+}
+.head-footer .footer-content {
+    display: flex;
+}
+.head-footer .footer-intro {
+    color: #fbaf32;
+    position: relative;
+    margin-bottom: 30px;
+}
+.head-footer .footer-intro::before {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 30px;
+    left: 0;
+    width: 50px;
+    border-bottom: 2px solid #719a0a;
+    border-radius: 2px;
+}
+.head-footer .footer-content i {
+    color: #fbaf32;
+    padding-top: 5px;
+    margin-right: 10px;
+}
+
+.footer-media-group {
+    display: flex;
+}
+
+.footer-media-symbol {
+    width: 40px;
+    height: 40px;
+    background-color: #fbaf32;
+    text-align: center;
+    align-content: center;
+    margin-right: 5px;
+    border-radius: 50px;
+    color: white;
+}
+.head-footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+.footer-support li {
+    margin-bottom: 8px;
+}
+.footer-support li::before {
+    font-family: "fontawesome";
+    content: "\f105";
+    color: #fbaf32;
+    margin-right: 10px;
+    font-weight: 700;
+}
+.email-box {
+    display: flex;
+    border: 1px solid #fbaf32;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.email-box input {
+    border: none;
+    background-color: transparent;
+    flex: 1;
+    min-width: 150px;
+}
+
+.email-box input:focus {
+    outline: none;
+}
+
+.email-box > div {
+    justify-content: flex-end;
+}
+
+.email-box button {
+    border: none;
+    color: #fff;
+    background-color: #fbaf32;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.copyright-text {
+    text-align: center;
+    padding: 0 20px;
+}
+.copyright-text span {
+    color: #fbaf32;
+}
+.left-footer > div > div {
+    margin-bottom: 30px;
+}
+
+.go-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background-color: #fbaf32;
+    color: #ffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: none;
+}
+
+/*   mobile   */
+@media (max-width: 767.98px) {
+    /* Menu */
+    .main-menu > nav {
+        padding: 10px 5px;
+    }
+    /* Slider */
+    .slider {
+        padding: 0;
+    }
+    .slider .overlay {
+        padding: 0;
+    }
+    .slider h1 {
+        font-size: x-large;
+    }
+    .slider .carousel-item img {
+        height: 700px;
+        object-fit: cover;
+    }
+    /* Booking */
+    .booking {
+        padding: 0 5px;
+    }
+    /* Introduction */
+    .introduction {
+        padding: 0px 5px;
+    }
+    /* Special Point */
+    .outstanding {
+        padding: 0 5px;
+    }
+    .service {
+        padding: 0 5px;
+    }
+    .contact {
+        padding: 0 5px;
+    }
+    .contact iframe {
+        height: 400px;
+        padding-bottom: 20px;
+    }
+    .head-footer {
+        padding: 100px 5px 50px 5px;
+    }
+    .service .tab-content h5 {
+        display: block;
+    }
+    .service .tab-content span {
+        clear: both;
+        float: left;
+    }
+    .service .tab-content .hidden-picture {
+        display: none;
+    }
+}

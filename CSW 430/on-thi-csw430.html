@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ôn thi CSW430 - Mobile Application Development</title>
+<style>
+  :root{
+    --bg:#fafafa; --panel:#fff; --ink:#1a1a1a; --sub:#555;
+    --line:#e0e0e0; --accent:#2f6f4f; --accent-bg:#eaf3ee;
+    --code-bg:#1e1e1e; --code-ink:#e8e8e8; --warn:#b5451b; --warn-bg:#fdf1ea;
+    --info:#1d5c8a; --info-bg:#e9f2f9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+  }
+  header{
+    padding:22px 20px 16px; border-bottom:2px solid var(--ink); background:var(--panel);
+  }
+  header h1{margin:0 0 4px; font-size:1.35rem;}
+  header p{margin:0; color:var(--sub); font-size:0.92rem;}
+  nav{
+    display:flex; flex-wrap:wrap; gap:6px; padding:12px 20px; background:var(--panel);
+    border-bottom:1px solid var(--line); position:sticky; top:0; z-index:5;
+  }
+  nav button{
+    border:1px solid var(--line); background:#fff; padding:7px 12px; border-radius:6px;
+    font-size:0.85rem; cursor:pointer; color:var(--ink);
+  }
+  nav button.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  main{max-width:920px; margin:0 auto; padding:20px;}
+  section{display:none;}
+  section.active{display:block;}
+  h2{font-size:1.15rem; border-left:4px solid var(--accent); padding-left:10px; margin-top:28px;}
+  h3{font-size:1.0rem; margin-top:20px; color:var(--ink);}
+  h4{font-size:0.92rem; margin-top:16px; color:var(--accent);}
+  p{font-size:0.93rem;}
+  .box{
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:14px 16px; margin:12px 0;
+  }
+  .note{background:var(--accent-bg); border:1px solid #cfe4d8; border-radius:8px; padding:10px 14px; font-size:0.88rem; margin:10px 0;}
+  .warn{background:var(--warn-bg); border:1px solid #f0c9ae; border-radius:8px; padding:10px 14px; font-size:0.88rem; margin:10px 0; color:#7a2d0e;}
+  .info{background:var(--info-bg); border:1px solid #bcdbef; border-radius:8px; padding:10px 14px; font-size:0.88rem; margin:10px 0; color:#123c58;}
+  pre{
+    background:var(--code-bg); color:var(--code-ink); padding:12px 14px; border-radius:6px;
+    overflow-x:auto; font-size:0.78rem; line-height:1.5;
+  }
+  code{font-family: "SFMono-Regular", Consolas, Menlo, monospace;}
+  table{width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem;}
+  th,td{border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top;}
+  th{background:#f0f0f0;}
+  ul{font-size:0.9rem; padding-left:20px;}
+  ol{font-size:0.9rem; padding-left:20px;}
+  .checklist label{display:flex; gap:8px; align-items:flex-start; margin:6px 0; font-size:0.9rem;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
+  @media (max-width:700px){.grid2, .grid3{grid-template-columns:1fr;}}
+  .examtext{background:#fff; border:1px dashed #999; border-radius:8px; padding:14px 16px; font-size:0.88rem; margin:10px 0;}
+  .examtext b{color:var(--ink);}
+  .filetag{display:inline-block; background:#2f2f2f; color:#fff; font-size:0.72rem; padding:2px 8px; border-radius:4px 4px 0 0; font-family:monospace;}
+  .filetag + pre{border-radius:0 6px 6px 6px; margin-top:0;}
+  details{margin:10px 0; border:1px solid var(--line); border-radius:8px; padding:8px 12px; background:#fff;}
+  summary{cursor:pointer; font-weight:600; font-size:0.92rem;}
+  .mockup{border:1px solid #333; border-radius:14px; padding:8px; background:#fff; max-width:220px; margin:8px auto; font-size:0.7rem;}
+  .mockup .bar{background:#2f6f4f; color:#fff; text-align:center; padding:5px; border-radius:8px 8px 0 0; font-weight:600;}
+  .mockup .card{border:1px solid #ddd; border-radius:6px; margin:6px 0; padding:5px;}
+  .mockup .img{background:#ddd; height:40px; border-radius:4px; margin-bottom:3px;}
+  .mockup .pill{display:inline-block; background:#eaf3ee; color:#2f6f4f; border-radius:10px; padding:1px 6px; font-size:0.62rem; margin-right:3px;}
+  .mockup .btnrow{display:flex; gap:4px; margin-top:3px;}
+  .mockup .btn{border:1px solid #2f6f4f; color:#2f6f4f; border-radius:4px; padding:2px 5px; font-size:0.6rem;}
+  .allowed-list a{display:block; font-size:0.85rem; color:var(--info); text-decoration:none; margin:3px 0;}
+  .allowed-list a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Ôn thi thực hành CSW430 – Mobile Application Development</h1>
+  <p>Tổng hợp từ 2 đề thi (Quarter 1: Event Management, Quarter 2: User Management) + slide chương Router / Work with Data / Validation. Làm trên snack.expo.dev.</p>
+</header>
+
+<nav id="nav"></nav>
+<main id="main">
+
+<section id="tong-quan" class="active">
+<h2>1. Tổng quan cấu trúc đề thi</h2>
+<div class="box">
+<p>Cả 2 đề đều cùng 1 khuôn, chỉ đổi API + màn hình. Nắm chắc khuôn này là làm được cả 2 dạng đề tương tự khi thi thật.</p>
+<table>
+<tr><th>Câu</th><th>Điểm</th><th>Nội dung</th></tr>
+<tr><td>Câu 1</td><td>40đ</td><td>Thiết kế UI tĩnh cho các màn hình theo mô tả (List, Detail, Add, Edit)</td></tr>
+<tr><td>Câu 2</td><td>40đ</td><td>Code logic thật: fetch API, hiển thị dữ liệu động, submit form</td></tr>
+<tr><td>Câu 3</td><td>10đ</td><td>Validate input + bắt lỗi (try/catch, thông báo lỗi rõ ràng)</td></tr>
+<tr><td>Câu 4</td><td>10đ</td><td>React Navigation nối các màn hình lại với nhau</td></tr>
+</table>
+</div>
+<div class="note">
+<b>Điểm giống nhau giữa 2 đề:</b> API là <code>dummyjson.com</code> (REST chuẩn GET/POST/PUT/DELETE); ảnh random dùng <code>picsum.photos</code> hoặc <code>randomuser.me</code>; đều yêu cầu loading indicator, thông báo lỗi, và Stack/Native Stack Navigation.
+</div>
+</section>
+
+<section id="quy-dinh">
+<h2>2. Quy định & lịch thi cuối kỳ</h2>
+<div class="box">
+<table>
+<tr><th>Thời gian bắt đầu</th><td>10h15, ngày 25/08</td></tr>
+<tr><th>Yêu cầu có mặt</th><td>Sớm 15 phút (10h00) để ổn định chỗ, test máy trước khi thi</td></tr>
+<tr><th>Hình thức</th><td>Thi thực hành, <b>đề đóng</b>, làm trên nền tảng snack.expo.dev</td></tr>
+<tr><th>Tài liệu</th><td><b>Tuyệt đối KHÔNG</b> mang/dùng tài liệu dưới mọi hình thức (giấy hoặc file lưu sẵn trên máy)</td></tr>
+<tr><th>Xem preview app</th><td>Qua tab "Web, Android" ngay trên Snack — không cần cài app điện thoại</td></tr>
+</table>
+</div>
+<div class="warn">
+<b>Vì đề đóng nên KHÔNG dùng được trang ôn thi này trong giờ thi.</b> Trang này chỉ để học trước — vào phòng thi phải thuộc sẵn các pattern (fetch, validate, navigation) vì lúc đó chỉ được tra 6 trang docs chính thức dưới đây.
+</div>
+<h3>Các trang được phép truy cập trong lúc thi</h3>
+<div class="box allowed-list">
+<a href="https://snack.expo.dev/" target="_blank">snack.expo.dev</a> — nền tảng làm bài
+<a href="https://docs.expo.dev/" target="_blank">docs.expo.dev</a> — tài liệu Expo (cấu hình, API)
+<a href="https://reactnative.dev/" target="_blank">reactnative.dev</a> — tài liệu core components (View, Text, FlatList, TextInput, StyleSheet...)
+<a href="https://reactnavigation.org/" target="_blank">reactnavigation.org</a> — tài liệu React Navigation (Stack, params, options)
+<a href="https://oss.callstack.com/react-native-paper" target="_blank">oss.callstack.com/react-native-paper</a> — UI component có sẵn (Card, Avatar, Chip, Button...)
+<a href="https://redux-toolkit.js.org/" target="_blank">redux-toolkit.js.org</a> — nếu đề yêu cầu quản lý state bằng Redux Toolkit
+</div>
+<div class="note">
+<b>react-native-paper được cho phép tra cứu</b> → gợi ý nên cân nhắc dùng thư viện này để dựng UI nhanh, đẹp, đỡ tự viết StyleSheet từ đầu (xem mục 5). <b>redux-toolkit</b> cũng nằm trong danh sách — nếu đề yêu cầu chia sẻ state giữa nhiều màn hình (không qua route.params) thì đây là công cụ được phép dùng, xem lại bài tập chương 5 (đổi Redux Toolkit ↔ AsyncStorage) để ôn nhanh cú pháp <code>createSlice</code>, <code>configureStore</code>, <code>useSelector</code>, <code>useDispatch</code>.
+</div>
+</section>
+
+<section id="docs-tips">
+<h2>3. Cách tận dụng 6 trang tài liệu được phép khi thi</h2>
+<p>Đề đóng, không mang tài liệu riêng — nhưng 6 trang docs chính thức vẫn được mở. Biết chính xác cần tra trang nào, mục nào, và cách ghép code copy được vào bài làm sẽ tiết kiệm rất nhiều thời gian trong 90 phút.</p>
+
+<h3>3.1. Nguyên tắc chung khi lấy code từ docs</h3>
+<div class="box">
+<ol>
+<li><b>Không copy-paste nguyên khối rồi chạy thẳng.</b> Code mẫu trên docs luôn dùng data giả của riêng họ (ví dụ <code>data={[{key: 'a'}]}</code>) — phải đọc lướt để hiểu cấu trúc, rồi đổi tên biến/field cho khớp với data thật của đề (<code>posts</code>, <code>users</code>...).</li>
+<li><b>Dùng Ctrl+F (Cmd+F) ngay khi vào trang</b> để nhảy thẳng đến tên component/API cần, không đọc từ đầu trang — các trang docs này rất dài.</li>
+<li><b>Ưu tiên phần "Example" / "Usage"</b> — hầu hết trang đều có khối code mẫu chạy được ngay, thường ở đầu trang (React Navigation, Paper) hoặc cuối phần mô tả (React Native).</li>
+<li><b>Ghép theo khung "giữ cấu trúc — đổi nội dung":</b> giữ nguyên phần khai báo component/props/import từ doc, chỉ đổi: (a) tên biến state, (b) nguồn dữ liệu (URL fetch thật thay vì data giả), (c) style/màu theo ý muốn.</li>
+<li><b>Nếu code mẫu báo lỗi thiếu prop lạ</b> (do phiên bản thư viện trên Snack khác doc) — bỏ prop đó đi trước, ưu tiên chạy được cơ bản rồi mới thêm chi tiết.</li>
+</ol>
+</div>
+
+<h3>3.2. Tra cứu gì ở đâu — bảng tra nhanh theo nhu cầu</h3>
+<table>
+<tr><th>Cần làm gì</th><th>Tra ở trang nào</th><th>Từ khoá tìm (Ctrl+F)</th></tr>
+<tr><td>Render list cuộn được</td><td>reactnative.dev</td><td>"FlatList"</td></tr>
+<tr><td>Ô nhập liệu cho form</td><td>reactnative.dev</td><td>"TextInput"</td></tr>
+<tr><td>Hộp thoại Confirm (Cancel/Delete)</td><td>reactnative.dev</td><td>"Alert"</td></tr>
+<tr><td>Spinner loading</td><td>reactnative.dev</td><td>"ActivityIndicator"</td></tr>
+<tr><td>Cách viết style/flexbox</td><td>reactnative.dev</td><td>"StyleSheet" hoặc "Layout with Flexbox"</td></tr>
+<tr><td>Tạo Stack Navigator</td><td>reactnavigation.org</td><td>"Hello React Navigation" (trang Getting Started)</td></tr>
+<tr><td>Truyền tham số giữa 2 màn</td><td>reactnavigation.org</td><td>"Passing parameters to routes"</td></tr>
+<tr><td>Đổi tiêu đề header động</td><td>reactnavigation.org</td><td>"Setting the header title" / "setOptions"</td></tr>
+<tr><td>Quay lại màn trước</td><td>reactnavigation.org</td><td>"goBack"</td></tr>
+<tr><td>Card/Avatar/Chip đẹp sẵn</td><td>oss.callstack.com/react-native-paper</td><td>tên component: "Card", "Avatar", "Chip"</td></tr>
+<tr><td>Search bar có sẵn UI</td><td>oss.callstack.com/react-native-paper</td><td>"Searchbar"</td></tr>
+<tr><td>Config Expo/Snack đặc thù</td><td>docs.expo.dev</td><td>tên tính năng đang vướng (vd "Image", "Permissions")</td></tr>
+<tr><td>Chia sẻ state giữa nhiều màn không qua params</td><td>redux-toolkit.js.org</td><td>"Quick Start"</td></tr>
+</table>
+
+<h3>3.3. Ví dụ ghép code thật — từ doc React Native FlatList</h3>
+<p>Doc <code>reactnative.dev/docs/flatlist</code> có sẵn ví dụ dạng này (data giả, key tự đặt):</p>
+<pre><code>// Code mau tren doc (rut gon)
+&lt;FlatList
+  data={[{key: 'a'}, {key: 'b'}]}
+  renderItem={({item}) => &lt;Text&gt;{item.key}&lt;/Text&gt;}
+/&gt;</code></pre>
+<p><b>Ghép vào bài thi</b> — giữ nguyên cấu trúc <code>data</code>/<code>renderItem</code>, chỉ đổi 3 chỗ: nguồn data (state fetch thật), field hiển thị (theo model của đề), và <code>keyExtractor</code> (doc dùng sẵn <code>key</code> trong object, còn API thật thường có <code>id</code> nên phải tự thêm <code>keyExtractor</code>):</p>
+<pre><code>&lt;FlatList
+  data={events}                                    {/* doi: data gia -> state that */}
+  keyExtractor={(item) => item.id.toString()}       {/* them: doc khong can vi da co key san */}
+  renderItem={({item}) => &lt;Text&gt;{item.title}&lt;/Text&gt;} {/* doi: item.key -> item.title */}
+/&gt;</code></pre>
+
+<h3>3.4. Ví dụ ghép code thật — từ doc React Navigation "Passing params"</h3>
+<p>Doc mẫu thường viết bằng tên route/field tổng quát (<code>Details</code>, <code>itemId</code>):</p>
+<pre><code>// Code mau tren doc
+navigation.navigate('Details', { itemId: 86, otherParam: 'anything' });
+// man dich doc:
+const { itemId, otherParam } = route.params;</code></pre>
+<p><b>Ghép vào bài thi Event Management</b> — đổi tên route và tên field đúng theo đề, bỏ field không cần:</p>
+<pre><code>navigation.navigate('Detail', { id: item.id });
+// man Detail:
+const { id } = route.params;</code></pre>
+
+<h3>3.5. Ví dụ ghép code thật — từ doc react-native-paper Card</h3>
+<p>Trang Card của Paper có khối "Usage" copy được ngay (thường có nút Copy ở góc), dùng data cố định:</p>
+<pre><code>// Code mau tren doc (rut gon)
+&lt;Card&gt;
+  &lt;Card.Title title="Card Title" subtitle="Card Subtitle" /&gt;
+  &lt;Card.Content&gt;
+    &lt;Text variant="titleLarge"&gt;Title&lt;/Text&gt;
+    &lt;Text variant="bodyMedium"&gt;Card content&lt;/Text&gt;
+  &lt;/Card.Content&gt;
+&lt;/Card&gt;</code></pre>
+<p><b>Ghép vào bài thi</b> — thay chuỗi cố định bằng field thật, thêm <code>Card.Cover</code> cho ảnh và <code>Card.Actions</code> cho nút bấm (xem thêm phần bên dưới trang Card doc, thường có ví dụ riêng cho Actions):</p>
+<pre><code>&lt;Card style={{ marginBottom: 10 }}&gt;
+  &lt;Card.Cover source={{ uri: imgUrl }} /&gt;
+  &lt;Card.Title title={item.title} subtitle={item.tags?.join(' · ')} /&gt;
+  &lt;Card.Actions&gt;
+    &lt;Button onPress={() => navigation.navigate('Detail', { id: item.id })}&gt;Details&lt;/Button&gt;
+  &lt;/Card.Actions&gt;
+&lt;/Card&gt;</code></pre>
+
+<h3>3.6. Lưu ý khi thời gian gấp</h3>
+<div class="warn">
+Nếu không nhớ chính xác cú pháp 1 hook/API nào đó (VD <code>useFocusEffect</code>, <code>Alert.alert</code> nhận mấy tham số) — đừng đoán mò rồi để lỗi im lặng. Tra đúng 1 lần trên site cho phép, copy đúng chữ ký hàm (function signature), rồi quay lại code của mình. Tra nhanh 30 giây còn hơn debug sai cú pháp mất 5 phút.
+</div>
+<div class="note">
+Vì đây là bài tự thiết kế app, docs sẽ KHÔNG có sẵn app giống hệt đề — mục tiêu tra cứu là lấy đúng <b>cú pháp/props của từng component</b> (FlatList cần data/renderItem/keyExtractor gì, TextInput cần value/onChangeText gì...), còn logic ghép API, validate, và luồng navigation vẫn phải tự viết theo yêu cầu đề — xem lại mục 6–9 để nắm sẵn các pattern này, đỡ phải tra lại lúc thi.
+</div>
+</section>
+
+
+<section id="setup">
+<h2>4. Setup nhanh trên snack.expo.dev</h2>
+<div class="box">
+<h3>Bước làm khi mở đề (làm trong 5 phút đầu)</h3>
+<ul>
+<li>Vào <b>snack.expo.dev</b>, tạo project mới (hoặc dùng link đề cho sẵn nếu có).</li>
+<li>Vào tab <b>Dependencies</b> (icon package bên trái) → gõ tên thư viện cần cài. Snack tự cài, không cần <code>npm install</code>.</li>
+<li>Thư viện cần cho hầu hết đề Navigation:
+<pre>@react-navigation/native
+@react-navigation/native-stack
+react-native-screens
+react-native-safe-area-context</pre>
+</li>
+<li>Nếu đề note thêm (ví dụ đề Event Mgmt gợi ý): <code>react-native-paper, react-native-vector-icons, @react-navigation/stack, react-native-gesture-handler</code> — chỉ cài cái nào bạn thật sự dùng, cài dư không sao nhưng tốn thời gian chờ bundle.</li>
+<li>Tạo cấu trúc file trong Snack: <code>App.js</code> làm nơi khai báo Navigator, mỗi màn hình 1 file riêng trong <code>/screens/</code> (ví dụ <code>HomeScreen.js</code>, <code>DetailScreen.js</code>...) — giám khảo chấm rõ ràng hơn, code cũng dễ debug hơn. Xem chi tiết cấu trúc thư mục ở mục 7.</li>
+</ul>
+</div>
+<div class="warn">Lưu ý: Snack chạy trên web/preview có thể lag khi fetch nhiều — cứ code đúng logic, đừng cố tối ưu tốc độ, giám khảo chấm theo yêu cầu chức năng.</div>
+</section>
+
+<section id="ui-design">
+<h2>5. Cách thiết kế UI cho từng loại màn hình (Câu 1 — 40 điểm)</h2>
+<p>Câu 1 chiếm điểm nhiều nhất nhưng lại không cần logic gì — chỉ cần dựng đúng bố cục, đủ thành phần đề yêu cầu, layout gọn gàng. Cả 2 đề đều chỉ lặp lại 3 loại màn hình sau, thuộc 3 khuôn này là vẽ được UI cho mọi đề tương tự.</p>
+
+<h3>5.1. Nguyên tắc layout chung trong React Native</h3>
+<div class="box">
+<ul>
+<li><code>View</code> giống <code>&lt;div&gt;</code> trong HTML — mặc định layout theo <b>Flexbox</b>, hướng mặc định là <code>flexDirection: 'column'</code> (xếp dọc).</li>
+<li>Muốn xếp ngang (avatar + text cạnh nhau, nút bấm cạnh nhau) → thêm <code>flexDirection: 'row'</code>.</li>
+<li><code>gap</code> để tạo khoảng cách giữa các phần tử (thay vì margin từng cái) — hỗ trợ tốt trên Snack/Expo bản mới.</li>
+<li>Toàn bộ chữ phải nằm trong <code>&lt;Text&gt;</code> — không được để text "trần" trong <code>&lt;View&gt;</code>, sẽ lỗi.</li>
+<li>Dùng <code>StyleSheet.create()</code> ở cuối file thay vì style inline nhiều — vừa gọn code vừa dễ tái sử dụng giữa các screen.</li>
+</ul>
+<pre><code>// Khung flexbox dung lai duoc cho hau het cac card/row
+const styles = StyleSheet.create({
+  row:    { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  column: { flexDirection: 'column', gap: 6 },
+  card:   { borderWidth: 1, borderColor: '#ddd', borderRadius: 10, padding: 12, marginBottom: 10 },
+  pill:   { backgroundColor: '#eaf3ee', color: '#2f6f4f', borderRadius: 12, paddingHorizontal: 8, paddingVertical: 2, fontSize: 12 },
+});</code></pre>
+</div>
+
+<h3>5.2. Khuôn 1 — List Screen (Home / Users Screen)</h3>
+<div class="grid2">
+<div>
+<p><b>Bố cục từ trên xuống:</b></p>
+<ol>
+<li>(tuỳ chọn) Search bar ở đầu</li>
+<li>Danh sách cuộn được (<code>FlatList</code>/<code>ScrollView</code>), mỗi item là 1 "card":
+  <ul>
+    <li>Ảnh/avatar</li>
+    <li>Tiêu đề (bold, cỡ chữ lớn hơn)</li>
+    <li>1–2 dòng info phụ (tags, ngày, city...)</li>
+    <li>Hàng nút hành động (Details/Edit/Delete) nếu đề yêu cầu</li>
+  </ul>
+</li>
+<li>Nút "Add" cố định cuối danh sách hoặc dạng nút nổi (FAB)</li>
+</ol>
+</div>
+<div>
+<div class="mockup">
+  <div class="bar">Events</div>
+  <input placeholder="Search..." style="width:100%;font-size:0.65rem;margin:4px 0;padding:2px;box-sizing:border-box;" disabled>
+  <div class="card">
+    <div class="img"></div>
+    <b>Tech Conference 2025</b>
+    <div><span class="pill">tech</span><span class="pill">2025</span></div>
+    <div class="btnrow">
+      <span class="btn">Details</span><span class="btn">Edit</span><span class="btn">Delete</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="img"></div>
+    <b>Design Workshop</b>
+    <div><span class="pill">design</span></div>
+    <div class="btnrow">
+      <span class="btn">Details</span><span class="btn">Edit</span><span class="btn">Delete</span>
+    </div>
+  </div>
+  <div style="text-align:center;background:#2f6f4f;color:#fff;border-radius:6px;padding:4px;font-size:0.65rem;">+ Add Event</div>
+</div>
+</div>
+</div>
+<pre><code>&lt;View style={styles.card}&gt;
+  &lt;Image source={{ uri: imgUrl }} style={{ width: '100%', height: 140, borderRadius: 6 }} /&gt;
+  &lt;Text style={{ fontWeight: 'bold', fontSize: 16 }}&gt;{item.title}&lt;/Text&gt;
+  &lt;Text style={{ color: '#666' }}&gt;{item.tags?.join(' · ')}&lt;/Text&gt;
+  &lt;Text numberOfLines={2}&gt;{item.body}&lt;/Text&gt;
+  &lt;View style={styles.row}&gt;
+    &lt;TouchableOpacity&gt;&lt;Text&gt;Details&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+    &lt;TouchableOpacity&gt;&lt;Text&gt;Edit&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+    &lt;TouchableOpacity&gt;&lt;Text&gt;Delete&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+  &lt;/View&gt;
+&lt;/View&gt;</code></pre>
+
+<h3>5.3. Khuôn 2 — Detail Screen</h3>
+<div class="grid2">
+<div>
+<p><b>Bố cục từ trên xuống:</b></p>
+<ol>
+<li>Ảnh/avatar lớn ở đầu (banner hoặc avatar tròn ở giữa tuỳ loại object)</li>
+<li>Tên/tiêu đề — cỡ chữ lớn nhất trong screen</li>
+<li>Các dòng info phụ xếp dọc, mỗi dòng 1 field (tags, likes/dislikes, phone, city...)</li>
+<li>Đoạn mô tả dài (body) hoặc khối "Carts"/section phụ nếu có</li>
+<li>(nếu có) nút điều hướng tiếp sang màn con, ví dụ "Tap to view products"</li>
+</ol>
+</div>
+<div>
+<div class="mockup">
+  <div class="bar">← Event Detail</div>
+  <div class="img" style="height:70px;"></div>
+  <b>Tech Conference 2025</b>
+  <div><span class="pill">tech</span><span class="pill">2025</span></div>
+  <div style="font-size:0.62rem;color:#2f6f4f;margin:3px 0;">Likes: 192 · Dislikes: 25</div>
+  <div style="font-size:0.62rem;color:#555;">Annual event focusing on innovations in AI and IoT. Join us for...</div>
+</div>
+</div>
+</div>
+<pre><code>&lt;View style={{ padding: 14 }}&gt;
+  &lt;Image source={{ uri: imgUrl }} style={{ width: '100%', height: 200, borderRadius: 8 }} /&gt;
+  &lt;Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 10 }}&gt;{item.title}&lt;/Text&gt;
+  &lt;Text style={{ color: '#666' }}&gt;{item.tags?.join(' · ')}&lt;/Text&gt;
+  &lt;Text style={{ color: '#2f6f4f', marginTop: 4 }}&gt;{reactionsText}&lt;/Text&gt;
+  &lt;Text style={{ marginTop: 10, lineHeight: 20 }}&gt;{item.body}&lt;/Text&gt;
+&lt;/View&gt;</code></pre>
+
+<h3>5.4. Khuôn 3 — Form Screen (Add / Edit)</h3>
+<div class="grid2">
+<div>
+<p><b>Bố cục từ trên xuống — lặp lại cho mỗi field:</b></p>
+<ol>
+<li>Label field (VD "Title *") — chữ đậm nhẹ, cỡ nhỏ</li>
+<li><code>TextInput</code> có viền, bo góc</li>
+<li>(nếu invalid) dòng text đỏ ngay dưới ô nhập</li>
+<li>Lặp lại cho từng field theo đúng thứ tự đề cho</li>
+<li>Cuối form: 1 nút submit full-width, đổi label khi đang lưu ("Saving...")</li>
+</ol>
+</div>
+<div>
+<div class="mockup">
+  <div class="bar">← Add Event</div>
+  <div style="font-size:0.62rem;font-weight:600;margin-top:4px;">Title *</div>
+  <input style="width:100%;font-size:0.62rem;padding:3px;box-sizing:border-box;" disabled>
+  <div style="font-size:0.62rem;font-weight:600;margin-top:4px;">Description *</div>
+  <input style="width:100%;font-size:0.62rem;padding:3px;height:26px;box-sizing:border-box;" disabled>
+  <div style="font-size:0.62rem;font-weight:600;margin-top:4px;">Tags</div>
+  <input style="width:100%;font-size:0.62rem;padding:3px;box-sizing:border-box;" disabled>
+  <div style="text-align:center;background:#2f6f4f;color:#fff;border-radius:6px;padding:4px;font-size:0.65rem;margin-top:6px;">Add Event</div>
+</div>
+</div>
+</div>
+<pre><code>&lt;View style={{ padding: 16 }}&gt;
+  &lt;Text style={{ fontWeight: '600', marginTop: 12 }}&gt;Title *&lt;/Text&gt;
+  &lt;TextInput
+    value={title}
+    onChangeText={setTitle}
+    style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 6, padding: 10, marginTop: 4 }}
+  /&gt;
+  {errors.title && &lt;Text style={{ color: 'red', marginTop: 4 }}&gt;{errors.title}&lt;/Text&gt;}
+  {/* lap lai cho Description, Tags... */}
+  &lt;TouchableOpacity style={{ backgroundColor: '#2f6f4f', padding: 14, borderRadius: 8, alignItems: 'center', marginTop: 20 }}&gt;
+    &lt;Text style={{ color: '#fff' }}&gt;Add Event&lt;/Text&gt;
+  &lt;/TouchableOpacity&gt;
+&lt;/View&gt;</code></pre>
+
+<h3>5.5. Dựng UI nhanh hơn với react-native-paper (được phép tra docs khi thi)</h3>
+<p>Vì <code>oss.callstack.com/react-native-paper</code> nằm trong danh sách được phép truy cập, nên cân nhắc dùng thư viện này thay vì tự viết <code>StyleSheet</code> từ đầu — vừa nhanh vừa UI đẹp sẵn theo Material Design. Cài: <code>react-native-paper</code>.</p>
+<pre><code>import { Card, Avatar, Chip, Button, Searchbar, ActivityIndicator, TextInput } from 'react-native-paper';
+
+// List screen - thay card tu viet bang Card co san
+&lt;Card style={{ marginBottom: 10 }}&gt;
+  &lt;Card.Cover source={{ uri: imgUrl }} /&gt;
+  &lt;Card.Title title={item.title} subtitle={item.tags?.join(' · ')} /&gt;
+  &lt;Card.Actions&gt;
+    &lt;Button onPress={() => {}}&gt;Details&lt;/Button&gt;
+    &lt;Button onPress={() => {}}&gt;Edit&lt;/Button&gt;
+    &lt;Button onPress={() => {}} textColor="red"&gt;Delete&lt;/Button&gt;
+  &lt;/Card.Actions&gt;
+&lt;/Card&gt;
+
+// User row voi Avatar tron
+&lt;Avatar.Image size={50} source={{ uri: avatarUrl }} /&gt;
+
+// Form input
+&lt;TextInput label="Title" value={title} onChangeText={setTitle} mode="outlined" /&gt;
+
+// Search bar co san (thay TextInput tu style)
+&lt;Searchbar placeholder="Search users..." value={search} onChangeText={handleSearch} /&gt;</code></pre>
+<div class="warn">Nếu không chắc react-native-paper cấu hình đúng trong Snack (đôi khi cần <code>&lt;PaperProvider&gt;</code> bọc ngoài <code>App.js</code>), thì cứ ưu tiên viết tay bằng <code>View</code>/<code>StyleSheet</code> như khuôn 4.1–4.4 — chấm điểm theo bố cục đúng/đủ, không bắt buộc phải dùng thư viện nào.</div>
+
+<h3>5.6. Checklist khi vẽ UI (Câu 1)</h3>
+<div class="box checklist">
+<label><input type="checkbox"> Đủ tất cả field đề liệt kê, đúng thứ tự đề mô tả</label>
+<label><input type="checkbox"> Mỗi màn hình có tiêu đề/header rõ ràng (dùng title của Stack.Screen hoặc Text riêng)</label>
+<label><input type="checkbox"> List dùng FlatList/ScrollView cuộn được, không bị tràn màn hình</label>
+<label><input type="checkbox"> Card/item có viền hoặc bo góc để phân tách rõ với item khác</label>
+<label><input type="checkbox"> Nút bấm rõ ràng, dễ bấm (đủ padding, không quá nhỏ)</label>
+<label><input type="checkbox"> Layout responsive — không hardcode width theo pixel cố định, ưu tiên <code>flex</code>/<code>%</code></label>
+</div>
+</section>
+
+<section id="fetch">
+<h2>6. Gọi API — GET / POST / PUT / DELETE</h2>
+<p>Cả 2 đề đều cho sẵn API REST chuẩn dạng <code>https://dummyjson.com/&lt;resource&gt;</code>. Học thuộc pattern này, đổi tên resource là dùng lại được hết.</p>
+
+<h3>GET danh sách (dùng cho màn Home/List)</h3>
+<pre><code>useEffect(() => {
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch('https://dummyjson.com/posts');
+      const json = await res.json();
+      setItems(json.posts); // chu y: dummyjson tra ve { posts: [...] } chu khong phai mang truc tiep
+    } catch (error) {
+      setErrorMsg("Couldn't load data. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchData();
+}, []);</code></pre>
+
+<h3>GET chi tiết 1 item (dùng cho màn Detail)</h3>
+<pre><code>useEffect(() => {
+  const fetchDetail = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`https://dummyjson.com/posts/${id}`);
+      const json = await res.json();
+      setItem(json);
+    } catch (error) {
+      setErrorMsg('User information not available.');
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchDetail();
+}, [id]);</code></pre>
+
+<h3>POST (thêm mới — dùng cho màn Add)</h3>
+<pre><code>const handleAdd = async () => {
+  try {
+    const res = await fetch('https://dummyjson.com/posts/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title,
+        body: description,
+        tags: tags.split(',').map(t => t.trim()),
+        userId: 5, // API dummyjson yeu cau userId
+      }),
+    });
+    if (!res.ok) throw new Error('Add failed');
+    navigation.navigate('Home'); // quay lai Home + refresh
+  } catch (error) {
+    setErrorMsg("Couldn't save. Please check your connection and try again.");
+  }
+};</code></pre>
+
+<h3>PUT (cập nhật — dùng cho màn Edit)</h3>
+<pre><code>const handleUpdate = async () => {
+  try {
+    const res = await fetch(`https://dummyjson.com/posts/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, body: description, tags: tagArray }),
+    });
+    if (!res.ok) throw new Error('Update failed');
+    navigation.goBack();
+  } catch (error) {
+    setErrorMsg("Couldn't save. Please check your connection and try again.");
+  }
+};</code></pre>
+
+<h3>DELETE</h3>
+<pre><code>const handleDelete = async (itemId) => {
+  try {
+    await fetch(`https://dummyjson.com/posts/${itemId}`, { method: 'DELETE' });
+    setItems(prev => prev.filter(i => i.id !== itemId)); // refresh list local, khong can fetch lai
+  } catch (error) {
+    setErrorMsg("Couldn't delete. Please try again.");
+  }
+};</code></pre>
+
+<div class="note">
+<b>Note quan trọng:</b> dummyjson là API giả lập — POST/PUT/DELETE trả về thành công nhưng KHÔNG lưu thật vào server. Vì vậy sau khi POST/PUT, không nên gọi lại GET để thấy item mới (sẽ không có), mà nên: (1) cập nhật state local ngay sau khi request thành công, hoặc (2) làm đúng như đề yêu cầu là "refresh the list" (gọi lại GET) — đề bài chấp nhận cách này dù dữ liệu không thật sự đổi, miễn logic gọi đúng.
+</div>
+</section>
+
+<section id="list-detail">
+<h2>7. Màn hình List & Detail (mẫu chuẩn theo đề)</h2>
+
+<h3>Home/List Screen — FlatList + navigate sang Detail</h3>
+<pre><code>import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+
+export default function HomeScreen({ navigation }) {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // ...useEffect fetch nhu muc 5...
+
+  const randomImg = (id) => `https://picsum.photos/seed/${id}/600/360`;
+
+  if (loading) return <ActivityIndicator size="large" style={{ marginTop: 40 }} />;
+  if (items.length === 0) return <Text>No items found.</Text>;
+
+  return (
+    <FlatList
+      data={items}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => (
+        <View style={{ margin: 10, borderWidth: 1, borderRadius: 8, padding: 10 }}>
+          <Image source={{ uri: randomImg(item.id) }} style={{ width: '100%', height: 140, borderRadius: 6 }} />
+          <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
+          <Text numberOfLines={1}>{item.body}</Text>
+          <Text style={{ color: '#666' }}>{item.tags?.join(' · ')}</Text>
+          <View style={{ flexDirection: 'row', gap: 8, marginTop: 8 }}>
+            <TouchableOpacity onPress={() => navigation.navigate('Detail', { id: item.id })}>
+              <Text>Details</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Edit', { id: item.id })}>
+              <Text>Edit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleDelete(item.id)}>
+              <Text>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+      ListFooterComponent={
+        <TouchableOpacity onPress={() => navigation.navigate('Add')} style={{ padding: 14, alignItems: 'center' }}>
+          <Text>+ Add Event</Text>
+        </TouchableOpacity>
+      }
+    />
+  );
+}</code></pre>
+
+<h3>Detail Screen — nhận param qua route</h3>
+<pre><code>export default function DetailScreen({ route }) {
+  const { id } = route.params;
+  const [item, setItem] = useState(null);
+  // ...useEffect fetch chi tiet theo id (muc 5)...
+
+  if (!item) return <ActivityIndicator />;
+
+  // xu ly field reactions: co the la object {likes, dislikes} hoac number - de 1 co bay nay
+  const reactionsText = typeof item.reactions === 'object'
+    ? `Likes: ${item.reactions.likes} · Dislikes: ${item.reactions.dislikes}`
+    : `Reactions: ${item.reactions}`;
+
+  return (
+    <View>
+      <Image source={{ uri: `https://picsum.photos/seed/${item.id}/600/360` }} style={{ width: '100%', height: 200 }} />
+      <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{item.title}</Text>
+      <Text>{item.tags?.join(' · ')}</Text>
+      <Text>{reactionsText}</Text>
+      <Text>{item.body}</Text>
+    </View>
+  );
+}</code></pre>
+<div class="warn">Đọc kỹ đề: câu "If reactions is an object, show Likes/Dislikes; if it's a number, show Reactions: {number}" là 1 điểm nhỏ dễ bị bỏ sót — luôn check kiểu dữ liệu trước khi render field lạ.</div>
+</section>
+
+<section id="form">
+<h2>8. Form Add/Edit + Validate (Câu 3)</h2>
+<pre><code>export default function AddScreen({ navigation }) {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, setTags] = useState('');
+  const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
+
+  const validate = () => {
+    const e = {};
+    if (title.trim().length < 3) e.title = 'Title must be at least 3 characters';
+    if (description.trim().length < 10) e.description = 'Description must be at least 10 characters';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (!validate()) return; // dung lai, hien loi field
+    try {
+      setSaving(true);
+      setSaveError('');
+      const res = await fetch('https://dummyjson.com/posts/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, body: description, tags: tags.split(',').map(t=>t.trim()), userId: 5 }),
+      });
+      if (!res.ok) throw new Error();
+      navigation.navigate('Home');
+    } catch {
+      setSaveError("Couldn't save. Please check your connection and try again.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <View style={{ padding: 16 }}>
+      <Text>Title *</Text>
+      <TextInput value={title} onChangeText={setTitle} style={styles.input} />
+      {errors.title && <Text style={{ color: 'red' }}>{errors.title}</Text>}
+
+      <Text>Description *</Text>
+      <TextInput value={description} onChangeText={setDescription} multiline style={styles.input} />
+      {errors.description && <Text style={{ color: 'red' }}>{errors.description}</Text>}
+
+      <Text>Tags (comma-separated)</Text>
+      <TextInput value={tags} onChangeText={setTags} style={styles.input} />
+
+      {saveError ? <Text style={{ color: 'red' }}>{saveError}</Text> : null}
+      <TouchableOpacity onPress={handleSubmit} disabled={saving}>
+        <Text>{saving ? 'Saving...' : 'Add Event'}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}</code></pre>
+
+<div class="note">
+<b>Pattern validate hay lặp lại qua các đề (nhớ mấy hàm string này):</b>
+<code>.trim()</code> bỏ khoảng trắng thừa trước khi check length · <code>.length</code> check số ký tự tối thiểu · <code>isNaN(Number(x))</code> check là số (Price, Rating, Stock...) · <code>x.startsWith('http')</code> check field ảnh/link hợp lệ.
+</div>
+
+<h3>Edit Screen — khác Add ở chỗ: pre-fill dữ liệu cũ</h3>
+<pre><code>useEffect(() => {
+  fetch(`https://dummyjson.com/posts/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      setTitle(data.title);
+      setDescription(data.body);
+      setTags(data.tags.join(', '));
+    });
+}, [id]);
+// con lai validate + submit y het Add, chi doi method PUT + navigation.goBack()</code></pre>
+</section>
+
+<section id="nav">
+<h2>9. React Navigation & cách dựng các màn hình (Câu 4)</h2>
+<p>Cả 2 đề đều dùng Native Stack — pattern cố định, thuộc lòng đoạn này là ăn trọn 10 điểm câu 4. Phần dưới hướng dẫn từ A-Z cách dựng project nhiều màn hình trong Snack.</p>
+
+<h3>9.1. Cấu trúc thư mục nên dùng trong Snack</h3>
+<div class="box">
+<pre><code>App.js                     <-- khai bao NavigationContainer + Stack.Navigator o day
+screens/
+  HomeScreen.js             <-- man list
+  DetailScreen.js           <-- man chi tiet
+  AddScreen.js               <-- man them moi
+  EditScreen.js               <-- man chinh sua
+</code></pre>
+<p>Trong Snack: bấm dấu <b>+</b> ở panel bên trái để tạo file mới, gõ đường dẫn <code>screens/HomeScreen.js</code> — Snack tự tạo folder. Mỗi screen là 1 component <code>export default function</code>, nhận props <code>{ navigation, route }</code> do Navigator tự truyền vào — không cần import gì thêm để có 2 props này.</p>
+</div>
+
+<h3>9.2. Khai báo Navigator trong App.js (dùng chung khuôn cho mọi đề)</h3>
+<pre><code>import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import HomeScreen from './screens/HomeScreen';
+import DetailScreen from './screens/DetailScreen';
+import AddScreen from './screens/AddScreen';
+import EditScreen from './screens/EditScreen';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Events' }} />
+        <Stack.Screen name="Detail" component={DetailScreen} options={{ title: 'Event Detail' }} />
+        <Stack.Screen name="Add" component={AddScreen} options={{ title: 'Add Event' }} />
+        <Stack.Screen name="Edit" component={EditScreen} options={{ title: 'Edit Event' }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}</code></pre>
+
+<h3>9.3. Cách các màn hình "nói chuyện" với nhau — 3 thao tác cốt lõi</h3>
+<table>
+<tr><th>Thao tác</th><th>Cách dùng</th><th>Ghi chú</th></tr>
+<tr><td>Đi tới màn khác, kèm dữ liệu</td><td><code>navigation.navigate('Detail', { id: item.id })</code></td><td>Tên route ('Detail') phải trùng với <code>name</code> khai báo trong Stack.Screen</td></tr>
+<tr><td>Nhận dữ liệu ở màn đích</td><td><code>const { id } = route.params;</code></td><td><code>route</code> là props tự có, không cần khai báo state riêng để "nhận" — đọc thẳng từ route.params</td></tr>
+<tr><td>Quay lại màn trước</td><td><code>navigation.goBack()</code></td><td>Dùng cho nút Cancel, hoặc sau khi Update thành công</td></tr>
+<tr><td>Quay hẳn về màn gốc + làm mới list</td><td><code>navigation.navigate('Home')</code></td><td>Dùng sau khi Add/Delete thành công, thay vì goBack (goBack chỉ lùi 1 bước, navigate('Home') đảm bảo về đúng list)</td></tr>
+<tr><td>Đổi tiêu đề header động</td><td><code>navigation.setOptions({ title: 'Edit: ' + post.title })</code></td><td>Gọi trong <code>useEffect</code> nếu muốn tiêu đề đổi theo dữ liệu fetch về</td></tr>
+</table>
+
+<h3>9.4. Sơ đồ luồng điều hướng của từng đề</h3>
+<div class="grid2">
+<div class="box">
+<b>Đề 1 — Event Management</b>
+<pre><code>Home (list)
+ |-- navigate('Detail', {id})  --> Detail
+ |-- navigate('Add')           --> Add
+ |     (submit xong) --> navigate('Home')
+ |-- navigate('Edit', {post})  --> Edit
+       (submit xong) --> navigate('Home')</code></pre>
+</div>
+<div class="box">
+<b>Đề 2 — User Management</b>
+<pre><code>Users (list)
+ |-- navigate('UserDetail', {id})
+       |
+       UserDetail
+        |-- navigate('CartDetail', {userId})
+              |
+              CartDetail</code></pre>
+<p style="font-size:0.85rem">Đây là chuỗi 3 màn nối tiếp — không có nhánh rẽ, chỉ toàn <code>navigate</code> tới rồi <code>goBack()</code> lùi lại, đơn giản hơn đề 1.</p>
+</div>
+</div>
+
+<h3>9.5. Cách truyền dữ liệu giữa các màn: truyền id hay truyền cả object?</h3>
+<ul>
+<li><b>Truyền <code>id</code></b> (ví dụ <code>navigate('Detail', {id: item.id})</code>): màn đích phải tự <code>fetch</code> lại theo id trong <code>useEffect</code>. An toàn, đúng "chuẩn REST" nhất, dùng khi đề yêu cầu rõ "Use a GET request to fetch the details of the selected item".</li>
+<li><b>Truyền cả object</b> (ví dụ <code>navigate('Edit', {post: item})</code>): màn đích lấy luôn dữ liệu từ <code>route.params.post</code>, không cần fetch lại — tiết kiệm 1 lần gọi API, hợp lý cho màn Edit vì dữ liệu đã có sẵn ở Home. Cả 2 cách đều được chấp nhận, miễn code chạy đúng.</li>
+</ul>
+<div class="warn">Sai phổ biến: quên đặt tên route trong <code>Stack.Screen name="..."</code> khớp với tên gọi trong <code>navigation.navigate('...')</code> — chỉ cần lệch 1 ký tự (hoa/thường) là app crash "screen not found".</div>
+</section>
+
+<section id="exception">
+<h2>10. Xử lý ngoại lệ & Loading (điểm hay bị mất nhất)</h2>
+<div class="box">
+<p>Cả 2 đề đều có mục Câu 3 yêu cầu y hệt nhau về hình thức — chỉ đổi nội dung message theo màn hình. Thuộc bảng này để không quên case nào:</p>
+<table>
+<tr><th>Tình huống</th><th>Cách xử lý</th></tr>
+<tr><td>Đang tải dữ liệu</td><td><code>{loading && &lt;ActivityIndicator /&gt;}</code>, ẩn đi khi fetch xong (dù thành công hay lỗi — nhớ ẩn trong <code>finally</code>)</td></tr>
+<tr><td>Không có dữ liệu trả về (mảng rỗng)</td><td>Hiện text: "No users found." / "This cart has no products."</td></tr>
+<tr><td>Không load được chi tiết 1 item</td><td>"User information not available."</td></tr>
+<tr><td>GET/POST/PUT lỗi mạng</td><td>bọc <code>try/catch</code>, hiện: "Couldn't load data. Please check your connection and try again."</td></tr>
+<tr><td>Input không hợp lệ</td><td>Hiện message cụ thể ngay dưới field, ví dụ "Title must be at least 3 characters"</td></tr>
+</table>
+</div>
+<pre><code>// Khung try/catch/finally chuan - dung lai cho MOI fetch trong bai thi
+const [loading, setLoading] = useState(true);
+const [errorMsg, setErrorMsg] = useState('');
+
+useEffect(() => {
+  (async () => {
+    try {
+      setLoading(true);
+      setErrorMsg('');
+      const res = await fetch(URL);
+      if (!res.ok) throw new Error('Request failed');
+      const data = await res.json();
+      setData(data);
+    } catch (e) {
+      setErrorMsg("Couldn't load data. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  })();
+}, []);</code></pre>
+</section>
+
+<section id="de1">
+<h2>11. Đề 1 — Event Management App (đề đầy đủ + lời giải)</h2>
+
+<h3>11.1. Đề bài đầy đủ</h3>
+<div class="examtext">
+<p><b>CSW 430 — Quarter 1 — Computer-Based Practical Exam — Duration 90' — Max 100 marks</b></p>
+<p>Students use the website: <b>https://snack.expo.dev</b> to design and develop mobile applications.</p>
+
+<p><b>Câu 1 (40 điểm):</b> Students design and implement several screens for an Event Management app.</p>
+<p><b>API Reference</b> (thay "posts" = "events" khi làm bài):</p>
+<ul>
+<li>GET <code>https://dummyjson.com/posts</code></li>
+<li>GET <code>https://dummyjson.com/posts/{id}</code></li>
+<li>POST <code>https://dummyjson.com/posts</code></li>
+<li>PUT <code>https://dummyjson.com/posts/{id}</code></li>
+<li>DELETE <code>https://dummyjson.com/posts/{id}</code></li>
+</ul>
+<p>Random image: <code>https://picsum.photos/seed/${id}/600/360</code></p>
+
+<p><b>4 màn hình cần thiết kế:</b></p>
+<ul>
+<li><b>Screen 1 — Home:</b> danh sách event, mỗi event có nút View Details / Edit / Delete, cuối list có nút Add.</li>
+<li><b>Screen 2 — Event Detail:</b> hiện đầy đủ thông tin 1 event khi bấm Details ở Screen 1.</li>
+<li><b>Screen 3 — Add Event:</b> mở khi bấm Add ở Screen 1. Form: Title, Description, Tags — bấm Add Event để tạo.</li>
+<li><b>Screen 4 — Edit Event:</b> mở khi bấm Edit ở Screen 1, form pre-fill sẵn dữ liệu event, bấm Update Event để lưu.</li>
+</ul>
+
+<p><b>Câu 2 (40 điểm): Implement screen functionality</b> — Build the working logic for the 4 screens từ Câu 1. Yêu cầu chi tiết:</p>
+<ol>
+<li><b>Home Screen — Fetch and display events:</b>
+  <ul>
+    <li>Khi load screen, gửi GET tới <code>https://dummyjson.com/posts</code> để lấy toàn bộ events.</li>
+    <li>Hiện list cuộn được. Mỗi event hiện: Title, Tags, đoạn preview ngắn của description (lấy từ <code>body</code>), 1 ảnh cover chọn random mỗi lần list load.</li>
+    <li>Cài đặt nút "View Details", "Edit", "Delete" cho từng event.
+      <ul>
+        <li>View Details: điều hướng sang Detail Screen.</li>
+        <li>Edit: điều hướng sang Edit Event Screen với form đã điền sẵn.</li>
+        <li>Delete: gửi DELETE để xóa event, sau đó refresh lại list (có hộp thoại Confirm: "Delete this event?" với 2 nút Cancel / Delete).</li>
+      </ul>
+    </li>
+    <li>Có nút Add Event ở cuối list để mở màn Add.</li>
+  </ul>
+</li>
+<li><b>Displaying event details (Detail Screen):</b>
+  <ul>
+    <li>Khi bấm "View Details" ở Home, điều hướng sang Detail Screen.</li>
+    <li>Dùng GET <code>https://dummyjson.com/posts/{id}</code> để lấy chi tiết event đã chọn.</li>
+    <li>Hiện title, tags, mô tả đầy đủ (từ body), và 1 ảnh cover chọn random khi screen load.</li>
+    <li>Nếu <code>reactions</code> là object, hiện Likes và Dislikes; nếu là số, hiện "Reactions: {number}".</li>
+    <li>Layout gọn gàng, dễ đọc trên màn hình mobile.</li>
+  </ul>
+</li>
+<li><b>Adding a new event (Add Event Screen):</b>
+  <ul>
+    <li>Form gồm: Title, Description, Tags (phân cách bằng dấu phẩy, không bắt buộc).</li>
+    <li>Khi submit, gửi POST tới <code>https://dummyjson.com/posts</code> kèm dữ liệu form (bao gồm <code>userId</code> theo yêu cầu của API).</li>
+    <li>Sau khi request thành công, điều hướng về Home Screen và refresh list để hiện event mới.</li>
+    <li>Hiện loading và error message khi cần; ảnh list/card vẫn chọn random mỗi lần list load.</li>
+  </ul>
+</li>
+<li><b>Editing an existing event (Edit Event Screen):</b>
+  <ul>
+    <li>Khi bấm "Edit" ở Home, điều hướng sang Edit Event Screen với form pre-fill sẵn dữ liệu hiện tại của event.</li>
+    <li>Cho phép người dùng thay đổi các field (Title, Description, Tags).</li>
+    <li>Khi submit, gửi PUT tới <code>https://dummyjson.com/posts/{id}</code> với dữ liệu đã cập nhật.</li>
+    <li>Nếu request thành công, quay về Home Screen và refresh list để hiện event đã cập nhật.</li>
+  </ul>
+</li>
+</ol>
+
+<p><b>Câu 3 (10 điểm): Programming to check exceptions programmatically với screen 3 và screen 4.</b></p>
+<ul>
+<li>Input validation: Title ≥ 3 ký tự; Description ≥ 10 ký tự.</li>
+<li>Nếu field nào thiếu hoặc không hợp lệ, hiện message rõ ràng (VD: "Title must be at least 3 characters").</li>
+<li>Khi submit, nếu POST/PUT tới <code>https://dummyjson.com/posts</code> hoặc <code>/posts/{id}</code> thất bại (lỗi network/server), bắt lỗi và hiện: "Couldn't save. Please check your connection and try again."</li>
+</ul>
+
+<p><b>Câu 4 (10 điểm): Use navigation to connect screens together.</b></p>
+<ul>
+<li>Dùng React Navigation (stack/native stack) cho mọi chuyển màn giữa Home, Event Detail, Add Event, và Edit Event.</li>
+<li>Từ Home: View Details điều hướng tới Detail (kèm id); Add Event mở Add; Edit mở Edit (kèm post). Mỗi screen hỗ trợ Back bằng <code>goBack()</code>.</li>
+</ul>
+</div>
+
+<h3>11.2. Lời giải — làm từng bước như đi thi thật</h3>
+<p>Thứ tự dưới đây đi đúng thứ tự 4 câu trong đề: dựng UI trước (chưa cần API) → nối API cho từng màn → thêm validate → cuối cùng mới nối Navigation. Đây cũng là thứ tự nên làm khi thi thật, vì UI làm được ngay dù chưa có logic, còn Navigation nên làm sau cùng khi đã chắc các screen chạy đúng.</p>
+
+<h4>Bước 0 — Setup project (trước khi làm Câu 1)</h4>
+<div class="info">📄 Tra cứu: <b>reactnavigation.org</b> → trang "Getting started" → mục "Installation" để lấy đúng danh sách package cần cài (bản mới nhất có thể khác đôi chút so với mục 4 ở trên, ưu tiên theo docs khi thi thật).</div>
+<div class="box">
+<p>Tạo cấu trúc file trong Snack, cài dependencies cho Navigation (xem mục 4 và 9.1):</p>
+<pre><code>App.js
+screens/HomeScreen.js
+screens/DetailScreen.js
+screens/AddEventScreen.js
+screens/EditEventScreen.js</code></pre>
+<p>Ở bước này <code>App.js</code> có thể tạm thời chỉ render 1 screen để test (chưa cần Navigator vội):</p>
+<span class="filetag">App.js (tạm, chưa có Navigation)</span>
+<pre><code>import HomeScreen from './screens/HomeScreen';
+export default function App() {
+  return &lt;HomeScreen /&gt;;
+}</code></pre>
+</div>
+
+<h4>Bước 1 — Câu 1: Dựng UI tĩnh cho 4 màn hình (chưa gọi API)</h4>
+<div class="info">📄 Tra cứu: <b>reactnative.dev</b> → "FlatList" (khung <code>data</code>/<code>renderItem</code>/<code>keyExtractor</code>), "TextInput" (cho form ở Add/Edit), "Image" (props <code>source</code>, <code>style</code>). Copy đúng khung props rồi đổi tên biến theo model event — xem cách ghép mẫu ở mục 3.3.</div>
+<p>Làm câu này trước để chắc chắn ăn được 40 điểm dễ nhất. Dùng dữ liệu giả (hardcode) để nhìn thấy layout ngay, không cần chờ fetch. Ví dụ Home Screen:</p>
+<span class="filetag">screens/HomeScreen.js — chỉ có UI, data giả</span>
+<pre><code>import React from 'react';
+import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
+
+// data gia de nhin thay UI ngay, se thay bang fetch that o Buoc 2
+const fakeEvents = [
+  { id: 1, title: 'Tech Conference 2025', body: 'Annual event focusing on innovations in AI and IoT...', tags: ['tech', '2025'] },
+  { id: 2, title: 'Design Workshop', body: 'Hands-on workshop about UI/UX fundamentals...', tags: ['design'] },
+];
+
+export default function HomeScreen() {
+  return (
+    &lt;FlatList
+      data={fakeEvents}
+      keyExtractor={(item) => item.id.toString()}
+      contentContainerStyle={{ padding: 10 }}
+      renderItem={({ item }) => (
+        &lt;View style={styles.card}&gt;
+          &lt;Image source={{ uri: `https://picsum.photos/seed/${item.id}/600/360` }} style={styles.image} /&gt;
+          &lt;Text style={styles.title}&gt;{item.title}&lt;/Text&gt;
+          &lt;Text style={styles.tags}&gt;{item.tags.join(' · ')}&lt;/Text&gt;
+          &lt;Text numberOfLines={2} style={styles.preview}&gt;{item.body}&lt;/Text&gt;
+          &lt;View style={styles.row}&gt;
+            &lt;TouchableOpacity&gt;&lt;Text style={styles.btn}&gt;Details&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+            &lt;TouchableOpacity&gt;&lt;Text style={styles.btn}&gt;Edit&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+            &lt;TouchableOpacity&gt;&lt;Text style={[styles.btn, { color: 'red' }]}&gt;Delete&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+          &lt;/View&gt;
+        &lt;/View&gt;
+      )}
+      ListFooterComponent={
+        &lt;TouchableOpacity style={styles.addBtn}&gt;
+          &lt;Text style={{ color: '#fff' }}&gt;+ Add Event&lt;/Text&gt;
+        &lt;/TouchableOpacity&gt;
+      }
+    /&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  card: { borderWidth: 1, borderColor: '#ddd', borderRadius: 8, marginBottom: 12, padding: 10 },
+  image: { width: '100%', height: 150, borderRadius: 6, marginBottom: 6 },
+  title: { fontWeight: 'bold', fontSize: 16 },
+  tags: { color: '#666', marginTop: 2 },
+  preview: { marginTop: 4 },
+  row: { flexDirection: 'row', gap: 16, marginTop: 10 },
+  btn: { color: '#2f6f4f', fontWeight: '600' },
+  addBtn: { backgroundColor: '#2f6f4f', padding: 14, borderRadius: 8, alignItems: 'center', marginTop: 10 },
+});</code></pre>
+<div class="note">Làm tương tự cho <code>DetailScreen.js</code> (render 1 object giả), <code>AddEventScreen.js</code> và <code>EditEventScreen.js</code> (form với <code>TextInput</code> rỗng/pre-fill giả) — dựng đúng khuôn ở mục 4.2–5.4. Bấm nút lúc này chưa cần chạy gì cả, cứ để trống <code>onPress</code>.</div>
+
+<h4>Bước 2 — Câu 2 (phần 1): Nối API thật cho Home Screen</h4>
+<div class="info">📄 Tra cứu: <b>reactnative.dev</b> → trang "Network" (mục "Using Fetch") — có sẵn khung <code>fetch().then()</code>/<code>async-await</code> chuẩn. Copy khung <code>try/catch</code> rồi đổi URL thành <code>https://dummyjson.com/posts</code> và đổi biến nhận kết quả từ <code>json</code> chung chung thành <code>json.posts</code> (đúng field API trả về).</div>
+<p>Bỏ <code>fakeEvents</code>, thay bằng <code>useState</code> + <code>useEffect</code> gọi GET thật. Đây là lúc thêm loading/error state (chuẩn bị sẵn cho Câu 3 luôn cho đỡ phải quay lại sửa):</p>
+<span class="filetag">screens/HomeScreen.js — thêm phần đầu file (giữ nguyên phần JSX render bên dưới)</span>
+<pre><code>import React, { useState, useCallback } from 'react';
+import { View, Text, FlatList, Image, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
+
+const randomImg = (id) => `https://picsum.photos/seed/${id}-${Date.now()}/600/360`;
+
+export default function HomeScreen() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const loadEvents = async () => {
+    try {
+      setLoading(true);
+      setErrorMsg('');
+      const res = await fetch('https://dummyjson.com/posts');
+      if (!res.ok) throw new Error();
+      const json = await res.json();
+      setEvents(json.posts);
+    } catch (e) {
+      setErrorMsg("Couldn't load data. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => { loadEvents(); }, []);
+
+  if (loading) return &lt;ActivityIndicator size="large" style={{ marginTop: 40 }} /&gt;;
+  if (errorMsg) return &lt;Text style={styles.error}&gt;{errorMsg}&lt;/Text&gt;;
+  if (events.length === 0) return &lt;Text style={styles.empty}&gt;No events found.&lt;/Text&gt;;
+
+  // ...phan return FlatList giu nguyen nhu Buoc 1, chi doi "fakeEvents" thanh "events"
+  // va doi randomImg(item.id) thay vi URL cung ung</code></pre>
+<div class="note">Chỗ này chưa cần nối nút Delete/Edit/View Details — cứ để hiện đúng UI + dữ liệu thật là đủ điểm phần "Home Screen — Fetch and display events" rồi. Xử lý nút bấm để ở Bước 5 (Navigation).</div>
+
+<h4>Bước 3 — Câu 2 (phần 2): Nối API cho Detail Screen</h4>
+<div class="info">📄 Tra cứu: dùng lại đúng khung <code>fetch</code> đã lấy ở Bước 2 (không cần tra lại) — chỉ đổi URL thêm <code>/${id}</code>. Nếu quên cú pháp template string, tra nhanh <b>reactnative.dev</b> phần code mẫu bất kỳ có dùng dấu backtick.</div>
+<p>Detail Screen tạm thời hardcode <code>id = 1</code> để test độc lập (chưa nối Navigation nên chưa nhận được id từ Home):</p>
+<span class="filetag">screens/DetailScreen.js</span>
+<pre><code>import React, { useEffect, useState } from 'react';
+import { View, Text, Image, ActivityIndicator, StyleSheet } from 'react-native';
+
+export default function DetailScreen() {
+  const id = 1; // tam hardcode de test rieng man nay, Buoc 5 se doi thanh route.params.id
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`https://dummyjson.com/posts/${id}`);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setItem(data);
+      } catch (e) {
+        setErrorMsg("Couldn't load data. Please check your connection and try again.");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [id]);
+
+  if (loading) return &lt;ActivityIndicator size="large" style={{ marginTop: 40 }} /&gt;;
+  if (errorMsg) return &lt;Text style={styles.error}&gt;{errorMsg}&lt;/Text&gt;;
+
+  const reactionsText = typeof item.reactions === 'object' && item.reactions !== null
+    ? `Likes: ${item.reactions.likes} · Dislikes: ${item.reactions.dislikes}`
+    : `Reactions: ${item.reactions}`;
+
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Image source={{ uri: `https://picsum.photos/seed/${item.id}/600/360` }} style={styles.image} /&gt;
+      &lt;Text style={styles.title}&gt;{item.title}&lt;/Text&gt;
+      &lt;Text style={styles.tags}&gt;{item.tags?.join(' · ')}&lt;/Text&gt;
+      &lt;Text style={styles.reactions}&gt;{reactionsText}&lt;/Text&gt;
+      &lt;Text style={styles.body}&gt;{item.body}&lt;/Text&gt;
+    &lt;/View&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { padding: 14 },
+  image: { width: '100%', height: 200, borderRadius: 8, marginBottom: 10 },
+  title: { fontSize: 20, fontWeight: 'bold' },
+  tags: { color: '#666', marginTop: 4 },
+  reactions: { marginTop: 6, color: '#2f6f4f' },
+  body: { marginTop: 10, lineHeight: 20 },
+  error: { color: 'red', textAlign: 'center', marginTop: 40 },
+});</code></pre>
+
+<h4>Bước 4 — Câu 2 (phần 3): Nối API cho Add & Edit Screen</h4>
+<div class="info">📄 Tra cứu: vẫn trang "Network" của <b>reactnative.dev</b> — mục ví dụ POST có sẵn khung <code>fetch(url, {'{'} method, headers, body {'}'})</code>. Copy khung này, đổi <code>method: 'POST'</code> → <code>'PUT'</code> cho Edit, đổi <code>body: JSON.stringify(...)</code> theo đúng field đề yêu cầu (title, body, tags, userId).</div>
+<p>Viết hàm submit thật (POST/PUT), nhưng nút submit tạm thời chưa <code>navigate</code> đi đâu — chỉ cần chạy không lỗi là được, để Bước 5 mới gắn Navigation vào:</p>
+<span class="filetag">screens/AddEventScreen.js — phần logic thêm vào (giữ nguyên form đã dựng ở Bước 1)</span>
+<pre><code>const [title, setTitle] = useState('');
+const [description, setDescription] = useState('');
+const [tags, setTags] = useState('');
+const [saving, setSaving] = useState(false);
+const [saveError, setSaveError] = useState('');
+
+const handleSubmit = async () => {
+  try {
+    setSaving(true);
+    setSaveError('');
+    const res = await fetch('https://dummyjson.com/posts/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: title.trim(),
+        body: description.trim(),
+        tags: tags.split(',').map(t => t.trim()).filter(Boolean),
+        userId: 5,
+      }),
+    });
+    if (!res.ok) throw new Error();
+    // Buoc 5 se them: navigation.navigate('Home')
+  } catch (e) {
+    setSaveError("Couldn't save. Please check your connection and try again.");
+  } finally {
+    setSaving(false);
+  }
+};</code></pre>
+<span class="filetag">screens/EditEventScreen.js — tương tự, đổi method PUT + thêm useEffect fetch data cũ để pre-fill</span>
+<pre><code>const id = 1; // tam hardcode, Buoc 5 doi thanh route.params.id
+const [title, setTitle] = useState('');
+const [description, setDescription] = useState('');
+const [tags, setTags] = useState('');
+
+useEffect(() => {
+  fetch(`https://dummyjson.com/posts/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      setTitle(data.title);
+      setDescription(data.body);
+      setTags(data.tags.join(', '));
+    });
+}, [id]);
+
+const handleSubmit = async () => {
+  // giong Add nhung method PUT toi /posts/{id}, khong can userId
+};</code></pre>
+
+<h4>Bước 5 — Câu 3: Thêm validate + xử lý lỗi cho Add/Edit</h4>
+<div class="warn">Bước này KHÔNG có trang docs nào cho sẵn — validate độ dài field và thông báo lỗi là logic nghiệp vụ riêng của đề, phải tự viết theo đúng điều kiện đề cho (VD "Title ≥ 3 ký tự"). Đừng mất thời gian tra docs ở bước này.</div>
+<p>Bước này chỉ thêm phần validate vào <b>trước</b> đoạn <code>fetch</code> đã viết ở Bước 4 — không viết lại từ đầu:</p>
+<span class="filetag">screens/AddEventScreen.js (và EditEventScreen.js) — thêm vào trước handleSubmit</span>
+<pre><code>const [errors, setErrors] = useState({});
+
+const validate = () => {
+  const e = {};
+  if (title.trim().length < 3) e.title = 'Title must be at least 3 characters';
+  if (description.trim().length < 10) e.description = 'Description must be at least 10 characters';
+  setErrors(e);
+  return Object.keys(e).length === 0;
+};
+
+const handleSubmit = async () => {
+  if (!validate()) return; // <-- dong nay them vao dau ham, dung lai neu invalid
+  try {
+    // ...phan fetch giu nguyen nhu Buoc 4...
+  } catch (e) {
+    setSaveError("Couldn't save. Please check your connection and try again.");
+  }
+};</code></pre>
+<p>Và thêm hiện lỗi ngay dưới từng ô input trong JSX (đặt sau mỗi <code>TextInput</code>):</p>
+<pre><code>&lt;TextInput value={title} onChangeText={setTitle} style={styles.input} /&gt;
+{errors.title && &lt;Text style={{ color: 'red', marginTop: 4 }}&gt;{errors.title}&lt;/Text&gt;}</code></pre>
+
+<h4>Bước 6 — Câu 4: Ghép Navigation, nối tất cả màn hình lại</h4>
+<div class="info">📄 Tra cứu: <b>reactnavigation.org</b> — trang "Getting started" (mục "Hello React Navigation") cho khung <code>NavigationContainer</code>/<code>Stack.Navigator</code>/<code>Stack.Screen</code>; trang "Passing parameters to routes" cho cú pháp <code>navigation.navigate(name, params)</code> và <code>route.params</code> (xem ví dụ ghép ở mục 3.4); trang "Moving between screens" cho <code>goBack()</code>. Copy đúng 3 khung này rồi đổi tên route/param theo bảng bên dưới.</div>
+<p>Đây là bước cuối — lúc này 4 screen đã chạy đúng riêng lẻ, giờ chỉ cần khai báo Stack Navigator và sửa lại các chỗ đã "tạm hardcode/để trống" ở các bước trước:</p>
+<span class="filetag">App.js — thay hoàn toàn bản tạm ở Bước 0</span>
+<pre><code>import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen';
+import DetailScreen from './screens/DetailScreen';
+import AddEventScreen from './screens/AddEventScreen';
+import EditEventScreen from './screens/EditEventScreen';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    &lt;NavigationContainer&gt;
+      &lt;Stack.Navigator initialRouteName="Home"&gt;
+        &lt;Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Events' }} /&gt;
+        &lt;Stack.Screen name="Detail" component={DetailScreen} options={{ title: 'Event Detail' }} /&gt;
+        &lt;Stack.Screen name="Add" component={AddEventScreen} options={{ title: 'Add Event' }} /&gt;
+        &lt;Stack.Screen name="Edit" component={EditEventScreen} options={{ title: 'Edit Event' }} /&gt;
+      &lt;/Stack.Navigator&gt;
+    &lt;/NavigationContainer&gt;
+  );
+}</code></pre>
+<p>Các chỗ cần sửa lại trong từng screen (chỉ sửa đúng những dòng đã đánh dấu "tạm" ở các bước trước):</p>
+<table>
+<tr><th>File</th><th>Sửa gì</th></tr>
+<tr><td>HomeScreen.js</td><td>Nhận thêm props <code>{ navigation }</code>; gắn <code>onPress={() => navigation.navigate('Detail', {id: item.id})}</code> vào nút Details, tương tự Edit → <code>navigate('Edit', {post: item})</code>, thêm <code>confirmDelete</code> + <code>handleDelete</code> cho nút Delete, nút Add → <code>navigate('Add')</code>. Đổi <code>useEffect</code> đơn giản thành <code>useFocusEffect</code> để list tự refresh khi quay lại Home.</td></tr>
+<tr><td>DetailScreen.js</td><td>Nhận thêm props <code>{ route }</code>; đổi dòng <code>const id = 1;</code> thành <code>const { id } = route.params;</code></td></tr>
+<tr><td>AddEventScreen.js</td><td>Nhận thêm props <code>{ navigation }</code>; trong <code>handleSubmit</code>, sau khi <code>if (!res.ok) throw new Error();</code> thêm dòng <code>navigation.navigate('Home');</code></td></tr>
+<tr><td>EditEventScreen.js</td><td>Nhận thêm props <code>{ route, navigation }</code>; đổi <code>const id = 1;</code> thành lấy từ <code>route.params.post</code> (dùng post.id, post.title... để khỏi phải fetch lại — xem mục 9.5); thêm <code>navigation.navigate('Home')</code> sau khi PUT thành công.</td></tr>
+</table>
+
+<div class="warn">Làm theo đúng 6 bước này khi thi thật: luôn test được từng màn hình độc lập trước khi ghép Navigation, tránh tình trạng sửa Navigation xong không biết lỗi nằm ở UI, ở fetch, hay ở navigate.</div>
+
+<div class="note">Ảnh chọn "random mỗi lần list load" — cách trên dùng <code>${id}-${Date.now()}</code> làm seed để picsum trả ảnh khác nhau mỗi lần <code>loadEvents()</code> chạy. Ở Detail Screen thì chỉ cần seed theo <code>id</code> là đủ (đề chỉ yêu cầu random khi screen load, không yêu cầu đổi liên tục).</div>
+</section>
+
+<section id="de2">
+<h2>12. Đề 2 — User Management App (đề đầy đủ + lời giải)</h2>
+
+<h3>12.1. Đề bài đầy đủ</h3>
+<div class="examtext">
+<p><b>CSW 430 — Quarter 2 — Close Book / Practice on Computer — Duration 90' — Max 100 marks</b></p>
+<p>Students use the website: <b>https://snack.expo.dev</b> to design and develop mobile applications.</p>
+
+<p><b>Câu 1 (40 điểm):</b> Students design and implement several screens for a User Management app.</p>
+<p><b>API Reference:</b></p>
+<ul>
+<li>GET <code>https://dummyjson.com/users</code></li>
+<li>GET <code>https://dummyjson.com/users/{id}</code></li>
+<li>GET <code>https://dummyjson.com/users/{id}/carts</code></li>
+</ul>
+
+<p><b>3 màn hình cần thiết kế:</b></p>
+<ul>
+<li><b>Screen 1 — Users List:</b> hiện list user. Mỗi user hiện avatar, tên, tuổi, giới tính, email, city. Có search users, tap vào 1 user để xem chi tiết.</li>
+<li><b>Screen 2 — User Detail:</b> hiện thông tin chi tiết user đã chọn — xuất hiện khi chọn user từ Users List. Có phần Carts, tap "Tap to view products" để xem giỏ hàng.</li>
+<li><b>Screen 3 — Cart Detail:</b> hiện list sản phẩm trong giỏ hàng đã chọn — xuất hiện khi tap vào 1 cart ở User Detail.</li>
+</ul>
+
+<p><b>Câu 2 (40 điểm): Implement screen functionality</b> — Build the working logic for the 3 screens từ Câu 1. Yêu cầu chi tiết:</p>
+<ol>
+<li><b>Users Screen — Fetch and display users:</b>
+  <ul>
+    <li>Khi screen load, gửi GET để lấy list users.</li>
+    <li>Hiện list cuộn được. Mỗi user hiện: Avatar, Name, Age, Gender, Email, City.</li>
+    <li>Ảnh avatar theo gender: nếu <code>male</code> dùng <code>https://randomuser.me/api/portraits/men/{id}.jpg</code>; nếu <code>female</code> dùng <code>.../women/{id}.jpg</code>. Dùng id của user để điền vào <code>{id}</code> (nên map về khoảng hợp lệ như 1–99 để tránh ảnh lỗi).</li>
+    <li>Có ô search ở đầu để tìm user theo tên.</li>
+    <li>Khi tap vào 1 user, điều hướng sang User Detail Screen để xem thêm thông tin.</li>
+  </ul>
+</li>
+<li><b>Display user details (User Detail Screen):</b>
+  <ul>
+    <li>Khi tap 1 user ở Users Screen, điều hướng sang User Detail Screen.</li>
+    <li>Dùng GET để lấy chi tiết user đã chọn (theo user id).</li>
+    <li>Hiện rõ thông tin user, gồm: Avatar (theo gender, dùng ảnh Random User), Name, Age, gender, username, email, phone, city, Company và job title.</li>
+    <li>Hiện phần Carts bên dưới thông tin user.</li>
+    <li>Khi tap "Tap to view products", điều hướng sang Cart Detail Screen.</li>
+  </ul>
+</li>
+<li><b>Display cart details (Cart Detail Screen):</b>
+  <ul>
+    <li>Khi tap "Tap to view products" ở User Detail Screen, điều hướng sang Cart Detail Screen.</li>
+    <li>Dùng GET để lấy chi tiết cart đã chọn.</li>
+    <li>Hiện list sản phẩm trong cart, cuộn được.</li>
+    <li>Mỗi sản phẩm hiện: ảnh sản phẩm, tên sản phẩm, Price, Quantity, Total price, Discounted price.</li>
+    <li>Layout gọn gàng, dễ đọc trên mobile.</li>
+  </ul>
+</li>
+</ol>
+
+<p><b>Câu 3 (10 điểm): Programmatically handle exceptions for all screens</b></p>
+<ul>
+<li>Input validation (Users Screen): nếu search text quá ngắn hoặc không hợp lệ, hiện: "Please enter at least 2 characters to search."</li>
+<li>Missing/empty data (mọi screen): nếu không có user nào, hiện "No users found."; nếu user detail không load được, hiện "User information not available."; nếu cart không có sản phẩm, hiện "This cart has no products."</li>
+<li>Network/server errors (mọi screen): nếu bất kỳ GET nào (users, details, carts) lỗi, bắt lỗi và hiện: "Couldn't load data. Please check your connection and try again."</li>
+<li>Loading state (mọi screen): hiện loading indicator khi đang fetch, ẩn khi dữ liệu đã load xong hoặc khi có lỗi.</li>
+</ul>
+
+<p><b>Câu 4 (10 điểm): Use navigation to connect screens together.</b></p>
+<ul>
+<li>Dùng React Navigation (Stack/Native Stack) để điều hướng giữa 3 screens: Users Screen → User Detail Screen → Cart Detail Screen.</li>
+</ul>
+</div>
+
+<h3>12.2. Lời giải — làm từng bước như đi thi thật</h3>
+<p>Cũng đi đúng thứ tự Câu 1 → Câu 2 → Câu 3 → Câu 4, dựng UI trước rồi mới nối API, validate, cuối cùng mới ghép Navigation.</p>
+
+<h4>Bước 0 — Setup project</h4>
+<div class="info">📄 Tra cứu: <b>reactnavigation.org</b> → "Getting started" → "Installation" để lấy đúng danh sách package cần cài.</div>
+<div class="box">
+<pre><code>App.js
+screens/UsersScreen.js
+screens/UserDetailScreen.js
+screens/CartDetailScreen.js</code></pre>
+<span class="filetag">App.js (tạm, chưa có Navigation)</span>
+<pre><code>import UsersScreen from './screens/UsersScreen';
+export default function App() {
+  return &lt;UsersScreen /&gt;;
+}</code></pre>
+</div>
+
+<h4>Bước 1 — Câu 1: Dựng UI tĩnh cho 3 màn hình (data giả)</h4>
+<div class="info">📄 Tra cứu: <b>reactnative.dev</b> → "FlatList", "TextInput" (cho ô search), "Image" (cho avatar). Nếu muốn ô search đẹp sẵn không phải tự style, tra thêm <b>oss.callstack.com/react-native-paper</b> → component "Searchbar" — copy khung <code>&lt;Searchbar placeholder=... value=... onChangeText=... /&gt;</code> rồi ghép thẳng vào (xem ví dụ ghép Card ở mục 3.5, làm tương tự cho Searchbar).</div>
+<span class="filetag">screens/UsersScreen.js — chỉ có UI, data giả</span>
+<pre><code>import React from 'react';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
+
+const fakeUsers = [
+  { id: 1, firstName: 'Emily', lastName: 'Johnson', age: 29, gender: 'female', email: 'emily.johnson@x.dummyjson.com', address: { city: 'Phoenix' } },
+  { id: 2, firstName: 'Michael', lastName: 'Williams', age: 36, gender: 'male', email: 'michael.williams@x.dummyjson.com', address: { city: 'Houston' } },
+];
+
+export default function UsersScreen() {
+  return (
+    &lt;View style={{ flex: 1 }}&gt;
+      &lt;TextInput placeholder="Search users..." style={styles.search} /&gt;
+      &lt;FlatList
+        data={fakeUsers}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{ padding: 10 }}
+        renderItem={({ item }) => (
+          &lt;TouchableOpacity style={styles.row}&gt;
+            &lt;Image source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }} style={styles.avatar} /&gt;
+            &lt;View style={{ flex: 1 }}&gt;
+              &lt;Text style={styles.name}&gt;{item.firstName} {item.lastName}&lt;/Text&gt;
+              &lt;Text style={styles.sub}&gt;{item.age} · {item.gender} · {item.email}&lt;/Text&gt;
+              &lt;Text style={styles.sub}&gt;City: {item.address.city}&lt;/Text&gt;
+            &lt;/View&gt;
+          &lt;/TouchableOpacity&gt;
+        )}
+      /&gt;
+    &lt;/View&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  search: { margin: 10, borderWidth: 1, borderColor: '#ccc', borderRadius: 8, padding: 10 },
+  row: { flexDirection: 'row', gap: 12, padding: 10, borderBottomWidth: 1, borderColor: '#eee', alignItems: 'center' },
+  avatar: { width: 50, height: 50, borderRadius: 25 },
+  name: { fontWeight: 'bold' },
+  sub: { color: '#666', fontSize: 12 },
+});</code></pre>
+<div class="note">Làm tương tự cho <code>UserDetailScreen.js</code> (render 1 object user giả + khối Carts với nút "Tap to view products") và <code>CartDetailScreen.js</code> (render vài sản phẩm giả dạng list) — dựng theo khuôn mục 5.2.</div>
+
+<h4>Bước 2 — Câu 2 (phần 1): Nối API + search thật cho Users Screen</h4>
+<div class="info">📄 Tra cứu: <b>reactnative.dev</b> → trang "Network" cho khung <code>fetch</code>/<code>async-await</code>. Đổi URL thành <code>https://dummyjson.com/users</code>, đổi biến nhận kết quả thành <code>json.users</code> (API này bọc trong field <code>users</code>, khác với ví dụ chung chung trên docs).</div>
+<p>Thay <code>fakeUsers</code> bằng fetch thật, thêm state loading/error luôn cho gọn:</p>
+<span class="filetag">screens/UsersScreen.js — thêm phần đầu (giữ JSX render bên dưới, chỉ đổi fakeUsers → filtered)</span>
+<pre><code>import React, { useEffect, useState } from 'react';
+import { ActivityIndicator } from 'react-native';
+
+const avatarUrl = (id, gender) => {
+  const n = (id % 99) + 1;
+  return gender === 'male'
+    ? `https://randomuser.me/api/portraits/men/${n}.jpg`
+    : `https://randomuser.me/api/portraits/women/${n}.jpg`;
+};
+
+export default function UsersScreen() {
+  const [users, setUsers] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const res = await fetch('https://dummyjson.com/users');
+        if (!res.ok) throw new Error();
+        const json = await res.json();
+        setUsers(json.users);
+        setFiltered(json.users);
+      } catch (e) {
+        setErrorMsg("Couldn't load data. Please check your connection and try again.");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
+  const handleSearch = (text) => {
+    setSearch(text);
+    setFiltered(users.filter(u =>
+      `${u.firstName} ${u.lastName}`.toLowerCase().includes(text.toLowerCase())
+    ));
+  };
+
+  if (loading) return &lt;ActivityIndicator size="large" style={{ marginTop: 40 }} /&gt;;
+  if (errorMsg) return &lt;Text&gt;{errorMsg}&lt;/Text&gt;;
+
+  // ...phan return giu nguyen JSX cua Buoc 1, doi:
+  // - onChangeText={setSearch} -> onChangeText={handleSearch}
+  // - data={fakeUsers} -> data={filtered}
+  // - source uri co dinh -> source={{ uri: avatarUrl(item.id, item.gender) }}</code></pre>
+
+<h4>Bước 3 — Câu 2 (phần 2): Nối API cho User Detail Screen</h4>
+<div class="info">📄 Tra cứu: dùng lại khung <code>fetch</code> đã lấy ở Bước 2, chỉ đổi URL thêm <code>/${id}</code> — không cần tra lại docs.</div>
+<span class="filetag">screens/UserDetailScreen.js</span>
+<pre><code>import React, { useEffect, useState } from 'react';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
+
+const avatarUrl = (id, gender) => {
+  const n = (id % 99) + 1;
+  return gender === 'male'
+    ? `https://randomuser.me/api/portraits/men/${n}.jpg`
+    : `https://randomuser.me/api/portraits/women/${n}.jpg`;
+};
+
+export default function UserDetailScreen() {
+  const id = 1; // tam hardcode de test rieng, Buoc 6 doi thanh route.params.id
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`https://dummyjson.com/users/${id}`);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setUser(data);
+      } catch (e) {
+        setErrorMsg('User information not available.');
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [id]);
+
+  if (loading) return &lt;ActivityIndicator size="large" style={{ marginTop: 40 }} /&gt;;
+  if (errorMsg || !user) return &lt;Text style={styles.err}&gt;{errorMsg || 'User information not available.'}&lt;/Text&gt;;
+
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Image source={{ uri: avatarUrl(user.id, user.gender) }} style={styles.avatar} /&gt;
+      &lt;Text style={styles.name}&gt;{user.firstName} {user.lastName}&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;{user.age} · {user.gender} · @{user.username}&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;{user.email}&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;{user.phone}&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;City: {user.address?.city}&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;{user.company?.name} - {user.company?.title}&lt;/Text&gt;
+      &lt;TouchableOpacity style={styles.cartBtn}&gt;
+        &lt;Text style={{ color: '#2f6f4f' }}&gt;Tap to view products →&lt;/Text&gt;
+      &lt;/TouchableOpacity&gt;
+    &lt;/View&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { padding: 16, alignItems: 'center' },
+  avatar: { width: 90, height: 90, borderRadius: 45, marginBottom: 10 },
+  name: { fontSize: 18, fontWeight: 'bold' },
+  line: { color: '#444', marginTop: 4 },
+  cartBtn: { marginTop: 20, padding: 12, borderWidth: 1, borderColor: '#2f6f4f', borderRadius: 8 },
+  err: { color: 'red', textAlign: 'center', marginTop: 40 },
+});</code></pre>
+
+<h4>Bước 4 — Câu 2 (phần 3): Nối API cho Cart Detail Screen</h4>
+<div class="info">📄 Tra cứu: vẫn khung <code>fetch</code> quen thuộc — chỉ đổi URL thành <code>/users/${userId}/carts</code>. Nếu quên cách truy cập phần tử đầu mảng an toàn (<code>?.[0]</code>), tra nhanh <b>reactnative.dev</b> phần bất kỳ có dùng optional chaining trong code mẫu.</div>
+<span class="filetag">screens/CartDetailScreen.js</span>
+<pre><code>import React, { useEffect, useState } from 'react';
+import { View, Text, Image, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+
+export default function CartDetailScreen() {
+  const userId = 1; // tam hardcode, Buoc 6 doi thanh route.params.userId
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`https://dummyjson.com/users/${userId}/carts`);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        const cart = data.carts?.[0];
+        setProducts(cart?.products || []);
+      } catch (e) {
+        setErrorMsg("Couldn't load data. Please check your connection and try again.");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [userId]);
+
+  if (loading) return &lt;ActivityIndicator size="large" style={{ marginTop: 40 }} /&gt;;
+  if (errorMsg) return &lt;Text style={styles.err}&gt;{errorMsg}&lt;/Text&gt;;
+  if (products.length === 0) return &lt;Text style={styles.empty}&gt;This cart has no products.&lt;/Text&gt;;
+
+  return (
+    &lt;FlatList
+      data={products}
+      keyExtractor={(item) => item.id.toString()}
+      contentContainerStyle={{ padding: 10 }}
+      renderItem={({ item }) => (
+        &lt;View style={styles.row}&gt;
+          &lt;Image source={{ uri: item.thumbnail }} style={styles.thumb} /&gt;
+          &lt;View style={{ flex: 1 }}&gt;
+            &lt;Text style={styles.name}&gt;{item.title}&lt;/Text&gt;
+            &lt;Text style={styles.sub}&gt;${item.price} x {item.quantity}&lt;/Text&gt;
+            &lt;Text style={styles.sub}&gt;Total: ${item.total} · Discounted: ${item.discountedTotal}&lt;/Text&gt;
+          &lt;/View&gt;
+        &lt;/View&gt;
+      )}
+    /&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  row: { flexDirection: 'row', gap: 12, padding: 10, borderBottomWidth: 1, borderColor: '#eee' },
+  thumb: { width: 60, height: 60, borderRadius: 6 },
+  name: { fontWeight: 'bold' },
+  sub: { color: '#666', fontSize: 12, marginTop: 2 },
+  err: { color: 'red', textAlign: 'center', marginTop: 40 },
+  empty: { textAlign: 'center', marginTop: 40, color: '#666' },
+});</code></pre>
+
+<h4>Bước 5 — Câu 3: Thêm validate cho ô search + hoàn thiện thông báo lỗi</h4>
+<div class="warn">Không có trang docs nào cho sẵn logic này — điều kiện "tối thiểu 2 ký tự" và câu chữ thông báo lỗi là yêu cầu riêng của đề, phải tự viết đúng theo đề, không tra được ở đâu.</div>
+<p>Bước này chỉ sửa lại hàm <code>handleSearch</code> đã viết ở Bước 2, thêm điều kiện check độ dài, và thêm state hiện lỗi:</p>
+<span class="filetag">screens/UsersScreen.js — sửa lại handleSearch</span>
+<pre><code>const [searchError, setSearchError] = useState('');
+
+const handleSearch = (text) => {
+  setSearch(text);
+  if (text.trim().length === 0) {
+    setSearchError('');
+    setFiltered(users);
+    return;
+  }
+  if (text.trim().length < 2) {
+    setSearchError('Please enter at least 2 characters to search.');
+    setFiltered([]);
+    return;
+  }
+  setSearchError('');
+  setFiltered(users.filter(u =>
+    `${u.firstName} ${u.lastName}`.toLowerCase().includes(text.trim().toLowerCase())
+  ));
+};
+
+// them ngay duoi TextInput trong JSX:
+// {searchError ? &lt;Text style={{color:'red'}}&gt;{searchError}&lt;/Text&gt; : null}</code></pre>
+<p>Các message còn lại ("No users found.", "This cart has no products.", "User information not available.") đã có sẵn từ Bước 2–4 rồi — không cần thêm gì nữa, chỉ cần soát lại đúng câu chữ theo đề.</p>
+
+<h4>Bước 6 — Câu 4: Ghép Navigation, nối 3 màn hình lại</h4>
+<div class="info">📄 Tra cứu: <b>reactnavigation.org</b> — "Getting started" cho khung <code>Stack.Navigator</code>/<code>Stack.Screen</code>; "Passing parameters to routes" cho cú pháp <code>navigate(name, params)</code> + <code>route.params</code> (áp dụng liên tiếp 2 lần: Users→UserDetail rồi UserDetail→CartDetail, xem sơ đồ ở mục 9.4). Copy đúng khung rồi đổi tên route/param theo bảng bên dưới.</div>
+<span class="filetag">App.js — thay hoàn toàn bản tạm ở Bước 0</span>
+<pre><code>import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import UsersScreen from './screens/UsersScreen';
+import UserDetailScreen from './screens/UserDetailScreen';
+import CartDetailScreen from './screens/CartDetailScreen';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    &lt;NavigationContainer&gt;
+      &lt;Stack.Navigator initialRouteName="Users"&gt;
+        &lt;Stack.Screen name="Users" component={UsersScreen} /&gt;
+        &lt;Stack.Screen name="UserDetail" component={UserDetailScreen} options={{ title: 'User Detail' }} /&gt;
+        &lt;Stack.Screen name="CartDetail" component={CartDetailScreen} options={{ title: 'Cart Detail' }} /&gt;
+      &lt;/Stack.Navigator&gt;
+    &lt;/NavigationContainer&gt;
+  );
+}</code></pre>
+<p>Sửa lại 3 chỗ đã đánh dấu "tạm" ở các bước trước:</p>
+<table>
+<tr><th>File</th><th>Sửa gì</th></tr>
+<tr><td>UsersScreen.js</td><td>Nhận thêm props <code>{ navigation }</code>; bọc mỗi row bằng <code>onPress={() => navigation.navigate('UserDetail', {id: item.id})}</code> (đã có <code>TouchableOpacity</code> sẵn từ Bước 1, chỉ cần gắn onPress).</td></tr>
+<tr><td>UserDetailScreen.js</td><td>Nhận thêm props <code>{ route, navigation }</code>; đổi <code>const id = 1;</code> thành <code>const { id } = route.params;</code>; gắn <code>onPress={() => navigation.navigate('CartDetail', {userId: user.id})}</code> vào nút "Tap to view products".</td></tr>
+<tr><td>CartDetailScreen.js</td><td>Nhận thêm props <code>{ route }</code>; đổi <code>const userId = 1;</code> thành <code>const { userId } = route.params;</code></td></tr>
+</table>
+
+<div class="warn">Test lại toàn bộ luồng: Users → tap 1 user → UserDetail load đúng người → tap "Tap to view products" → CartDetail load đúng giỏ hàng → bấm nút Back (header tự có, hoặc gọi thêm <code>navigation.goBack()</code> nếu cần nút riêng).</div>
+
+<div class="note"><code>GET /users/{id}/carts</code> của dummyjson trả về <code>{ carts: [...], total, skip, limit }</code> — luôn lấy <code>data.carts[0]</code> vì đề chỉ có 1 cart mỗi user trong dữ liệu mẫu. Field <code>city</code> nằm trong <code>address.city</code>, không phải field gốc — dễ bị quên khi đọc nhanh JSON mẫu trong đề.</div>
+</section>
+
+<section id="checklist">
+<h2>13. Checklist trước khi nộp bài</h2>
+<div class="box checklist">
+<label><input type="checkbox"> Cài đủ dependencies, chạy thử preview không bị crash trắng màn hình</label>
+<label><input type="checkbox"> Mỗi màn hình đều có loading indicator lúc fetch</label>
+<label><input type="checkbox"> Có xử lý case mảng rỗng / không tìm thấy dữ liệu</label>
+<label><input type="checkbox"> Có try/catch cho MỌI lệnh fetch (GET, POST, PUT, DELETE)</label>
+<label><input type="checkbox"> Validate đủ field theo đúng điều kiện đề cho (độ dài, kiểu số, bắt buộc...)</label>
+<label><input type="checkbox"> Message lỗi đúng y chang câu chữ đề yêu cầu (giám khảo so khớp)</label>
+<label><input type="checkbox"> Navigation đủ 2 chiều: đi tới bằng navigate(), quay lại bằng goBack()</label>
+<label><input type="checkbox"> Tên route trong Stack.Screen khớp chính xác với tên gọi trong navigate()</label>
+<label><input type="checkbox"> Param truyền đúng giữa các màn (id, userId, cartId, post...)</label>
+<label><input type="checkbox"> Add/Edit xong thì quay lại Home và list được cập nhật (kể cả chỉ update local state)</label>
+<label><input type="checkbox"> Đọc lại đúng field lồng nhau (reactions object/number, address.city, carts trong user...)</label>
+<label><input type="checkbox"> Có mặt phòng thi lúc 10h00 (25/08), chỉ mở đúng 6 trang docs được phép</label>
+</div>
+</section>
+
+</main>
+
+<script>
+const sections = [
+  {id:'tong-quan', label:'1. Tổng quan đề thi'},
+  {id:'quy-dinh', label:'2. Quy định & lịch thi'},
+  {id:'docs-tips', label:'3. Tận dụng docs được phép'},
+  {id:'setup', label:'4. Setup Snack'},
+  {id:'ui-design', label:'5. Thiết kế UI từng màn hình'},
+  {id:'fetch', label:'6. Gọi API (GET/POST/PUT/DELETE)'},
+  {id:'list-detail', label:'7. Màn List & Detail'},
+  {id:'form', label:'8. Form Add/Edit + Validate'},
+  {id:'nav', label:'9. React Navigation & cách dựng screen'},
+  {id:'exception', label:'10. Xử lý ngoại lệ / Loading'},
+  {id:'de1', label:'11. Đề 1 - Event Mgmt (đề+giải)'},
+  {id:'de2', label:'12. Đề 2 - User Mgmt (đề+giải)'},
+  {id:'checklist', label:'13. Checklist khi thi'},
+];
+
+const nav = document.getElementById('nav');
+sections.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.textContent=s.label;
+  b.dataset.target=s.id;
+  if(i===0) b.classList.add('active');
+  b.onclick=()=>{
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.querySelectorAll('main section').forEach(x=>x.classList.remove('active'));
+    document.getElementById(s.id).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  nav.appendChild(b);
+});
+</script>
+</body>
+</html>
