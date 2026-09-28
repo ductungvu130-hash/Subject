@@ -1,0 +1,276 @@
+/* tech-cyber.css - High-Tech Modern Developer Styles for CSW 306 */
+/* v3.1 - Chỉnh lại để đọc dễ hơn: giảm hiệu ứng glow, tăng tương phản chữ,
+   phóng to vùng nội dung học (lý thuyết / code / quiz) vốn đang bị chữ quá nhỏ. */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-void: #0b0c0f; /* tối nhưng không quá gắt như đen tuyền */
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.09);
+    --text-main: #f4f4f5; /* Zinc 100 */
+    --text-muted: #b4b4bd; /* sáng hơn Zinc 400 gốc để dễ đọc trên nền tối */
+    --accent-glow: rgba(6, 182, 212, 0.35);
+    --accent-cyan: #22d3ee;
+    --code-bg: #131417; /* nền code tách biệt rõ với nền trang, thay vì gần như trùng màu */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-void);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 30%),
+        radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.08), transparent 30%);
+    background-attachment: fixed;
+    line-height: 1.6;
+}
+
+/* Glassmorphism Utilities */
+.tech-glass {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Cyber Scrollbar */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-cyan);
+}
+
+/* Sidebar Active State - bớt text-shadow phát sáng, dùng nền đặc để dễ nhận biết hơn */
+.sidebar-btn-active {
+    background-color: rgba(34, 211, 238, 0.12);
+    color: var(--accent-cyan);
+    border-right: 2px solid var(--accent-cyan);
+    font-weight: 600;
+}
+.sidebar-btn-inactive {
+    color: var(--text-muted);
+    background-color: transparent;
+    border-right: 2px solid transparent;
+}
+.sidebar-btn-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: var(--text-main);
+}
+
+/* Document Sidebar (Knowledge Review) */
+.doc-sidebar-item-active {
+    background-color: rgba(34, 211, 238, 0.08);
+    border-left: 2px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+.doc-sidebar-item-inactive {
+    border-left: 2px solid transparent;
+    color: var(--text-muted);
+}
+.doc-sidebar-item-inactive:hover {
+    color: var(--text-main);
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Document Subtabs */
+.subtab-active {
+    border-bottom: 2px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+.subtab-inactive {
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+}
+.subtab-inactive:hover {
+    color: var(--text-main);
+}
+
+/* High-contrast Tech Code Blocks */
+pre, code {
+    font-family: 'Fira Code', monospace;
+}
+.zen-code {
+    background-color: #000000;
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+.zen-code::before {
+    content: "C#";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--accent-cyan);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-bottom-left-radius: 8px;
+    font-weight: bold;
+}
+
+/* EIU Exam paper replica - giữ nguyên trắng/đen giống đề thi thật để đối chiếu chính xác */
+.eiu-exam-paper {
+    font-family: 'Times New Roman', Times, serif;
+    /* !important bắt buộc: element này luôn bị gắn kèm class Tailwind "bg-transparent"
+       (lỗi có sẵn trong app.js, cùng độ ưu tiên CSS) đè mất nền trắng, làm chữ đen
+       biến mất trên nền tối của trang. */
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    line-height: 1.5;
+    font-size: 15px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
+}
+.eiu-exam-paper table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.eiu-exam-paper th,
+.eiu-exam-paper td {
+    border: 1px solid #9ca3af !important;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 14px;
+    color: #000;
+}
+.eiu-exam-paper th {
+    background-color: #f3f4f6 !important;
+    font-weight: bold;
+}
+
+/* Text Selection Glow */
+::selection {
+    background: rgba(6, 182, 212, 0.3);
+    color: white;
+}
+
+/* Gradient Text Utility */
+.text-gradient {
+    background: linear-gradient(to right, #06b6d4, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Segmented Control Buttons */
+.segment-active {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+}
+.segment-inactive {
+    color: #a1a1aa;
+}
+.segment-inactive:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+}
+
+/* ==========================================================================
+   ĐỌC DỄ HƠN — vùng nội dung học (Lý thuyết / Code mẫu / Tránh bẫy / Lời giải /
+   Cheat sheet / Quiz) đang dùng text-xs (12px) + màu quá mờ nên khó đọc lâu.
+   Các selector dưới đây ghi đè nhờ có độ ưu tiên cao hơn (id + class), không
+   cần đụng vào app.js.
+   ========================================================================== */
+#topic-viewport-body .text-xs,
+#solutions-container .text-xs,
+#cheatsheet-container .text-xs,
+#quiz-question-container .text-xs,
+#quiz-results .text-xs {
+    font-size: 0.875rem; /* 14px thay vì 12px */
+    line-height: 1.7;
+}
+
+#topic-viewport-body .text-gray-500,
+#solutions-container .text-gray-500,
+#cheatsheet-container .text-gray-500,
+#quiz-question-container .text-gray-500,
+#quiz-results .text-gray-500 {
+    color: var(--text-muted);
+}
+
+#topic-viewport-body p,
+#topic-viewport-body li {
+    margin-bottom: 0.4em;
+}
+#topic-viewport-body h3 {
+    font-size: 1.05rem;
+}
+#topic-viewport-body h4 {
+    font-size: 0.95rem;
+}
+
+/* Khối code: nền tách biệt rõ khỏi nền trang, chữ đủ lớn để đọc và gõ theo */
+#topic-viewport-body pre,
+#solutions-container pre,
+#cheatsheet-container pre {
+    background-color: var(--code-bg) !important;
+    font-size: 13px;
+    line-height: 1.65;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Nút Copy: viền/màu mặc định quá mờ trên nền tối, khó thấy nút ở đâu */
+button[onclick^="copyToClipboard"] {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: var(--text-main) !important;
+}
+button[onclick^="copyToClipboard"]:hover {
+    background-color: rgba(34, 211, 238, 0.15) !important;
+    border-color: var(--accent-cyan) !important;
+    color: var(--accent-cyan) !important;
+}
+
+/* Trắc nghiệm: chữ câu hỏi/đáp án lớn hơn cho dễ đọc khi ôn thi */
+#quiz-question-container h4 {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+#quiz-question-container label {
+    font-size: 0.9rem;
+}
+
+/* Thanh tiến trình quiz: bớt glow, giữ rõ ràng là đủ */
+#quiz-progress {
+    box-shadow: none !important;
+}
+
+/* Printing styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #exam-paper-container,
+    #exam-paper-container * {
+        visibility: visible;
+    }
+    #exam-paper-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: none !important;
+        background: white !important;
+        color: black !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+}

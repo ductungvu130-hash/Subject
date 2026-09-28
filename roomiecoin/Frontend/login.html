@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="vi" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Đăng nhập - RoomieCoin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#0075d6",
+                    "on-background": "#121c28",
+                    "primary": "#705d00",
+                    "on-surface": "#121c28",
+                    "on-secondary-fixed": "#001c3a",
+                    "primary-fixed": "#ffe16d",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-tertiary-container": "#5e5f60",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed-variant": "#004786",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#eef4ff",
+                    "primary-fixed-dim": "#e9c400",
+                    "surface-container": "#e5eeff",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#a5c8ff",
+                    "on-surface-variant": "#4d4732",
+                    "inverse-primary": "#e9c400",
+                    "on-error-container": "#93000a",
+                    "outline": "#7e775f",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#705e00",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#221b00",
+                    "inverse-surface": "#27313e",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#544600",
+                    "surface-container-highest": "#d9e3f4",
+                    "surface-variant": "#d9e3f4",
+                    "inverse-on-surface": "#eaf1ff",
+                    "background": "#f8f9ff",
+                    "surface-dim": "#d1dbec",
+                    "surface-tint": "#705d00",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "primary-container": "#ffd700",
+                    "outline-variant": "#d0c6ab",
+                    "tertiary": "#5d5f5f",
+                    "surface": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "tertiary-container": "#d9dada",
+                    "surface-container-high": "#dfe9fa",
+                    "secondary-fixed": "#d4e3ff",
+                    "secondary": "#005cab",
+                    "on-secondary-container": "#fefcff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "column-count": "12",
+                    "base": "8px",
+                    "container-max": "1280px",
+                    "margin-desktop": "40px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex items-center justify-center p-4 md:p-0">
+<script src="app.js"></script>
+<main class="w-full h-full md:h-screen flex flex-col md:flex-row overflow-hidden bg-surface-container-lowest max-w-container-max mx-auto shadow-2xl md:shadow-none md:rounded-none rounded-xl">
+<!-- Left Side: Visual / Brand (Hidden on mobile) -->
+<div class="hidden md:flex relative w-full md:w-1/2 lg:w-5/12 flex-col justify-between p-12 overflow-hidden">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0" data-alt="A bright, welcoming shared apartment living room scene bathed in soft, natural morning light. The aesthetic is modern and aspirational, featuring light wood floors, minimal contemporary furniture, and vibrant indoor plants. Subtle architectural details suggest a high-end urban flat. The color palette leans towards warm whites, soft grays, and natural wood tones, accented by gentle hints of gold and sunny yellow to reflect the RoomieCoin brand. The overall mood is optimistic, clean, and collaborative, perfectly capturing the essence of harmonious shared living and transparent finances." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQljKjAOnB-6AlZCoEC5bqKCTrc4tJ3SkHijOEQMzydQ0P36v_zUhNb-ZhUJXz0MEyN9mXlF11sF4hEpx740v1ZMKRlbX2LEJ7U8rabd7eeu7xzVi-emdfovbOh9wjbxUplgwTLM0n2llNA7mStjcfbo6TPmq7a60GQ4YowNLIq8fgm7jwGGwsBVK4hKwx5uQrx7Nh0V7WMdl_6xONFb6f2shwxcMDEdFcu4jEKP3Xd43SUOvkJ7OjmYK_Wk9dFEcqIX0yAQ1M_nqc')">
+</div>
+<!-- Gradient Overlay to ensure text readability while keeping brand colors -->
+<div class="absolute inset-0 z-10 bg-gradient-to-br from-primary-fixed/90 via-primary-container/80 to-surface-container/90 mix-blend-multiply"></div>
+<div class="absolute inset-0 z-10 bg-gradient-to-t from-surface-tint/60 to-transparent"></div>
+<!-- Content -->
+
+
+</div>
+<!-- Right Side: Login Form -->
+<div class="w-full md:w-1/2 lg:w-7/12 flex flex-col justify-center items-center p-6 sm:p-12 md:p-16 bg-surface-container-lowest">
+<!-- Mobile Logo (Visible only on small screens) -->
+<div class="md:hidden flex items-center justify-center gap-2 mb-10">
+<span class="material-symbols-outlined text-headline-lg text-primary" style="font-variation-settings: 'FILL' 1;">generating_tokens</span>
+<a href="index.html" style="text-decoration:none;"><h1 class="font-headline-lg text-headline-lg text-on-surface font-black">RoomieCoin</h1></a>
+</div>
+<div class="w-full max-w-md">
+<!-- Header -->
+<div class="mb-10 text-center md:text-left"><div class="flex items-center gap-2 mb-6 justify-center md:justify-start"><img src="https://lh3.googleusercontent.com/aida/AP1WRLuzu7CkrjHDoUb0D4Si00u6gsKuKPRL1ftB5zmS_U9n3Vjbn9WJiqAyQUPmfQT8Ts-n3OZYyBSpnBYJqvAuGovwYgFvkCul2_4NoEa3vRDWH-auvFQbfRRZrd3C6_b69dMn0G__wrjFFcD_dR94kdWIy152LAAbZZNpaPvcDR2ZLt6jbZ871J4w3RkGwGzdkMy3St0K3luREB19nucT6GDxVi8nyi4wEJ9LmqM-IGT7w6fHHdX_ourSX0A1" alt="RoomieCoin Logo" class="h-16 w-auto object-contain"><span class="text-[32px] md:text-[40px] text-on-surface font-black tracking-tight">RoomieCoin</span></div>
+<h2 class="font-display-lg text-[32px] md:text-[40px] text-on-surface font-bold tracking-tight mb-3">Đăng nhập</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Chào mừng trở lại! Vui lòng nhập thông tin của bạn.</p>
+</div>
+<!-- Form -->
+<form class="space-y-6" onsubmit="event.preventDefault(); window.location.href='index.html';">
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface block" for="email">Email</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 20px;">mail</span>
+</div>
+<input class="w-full pl-11 pr-4 py-3.5 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-secondary-container focus:border-secondary-container transition-all duration-200" id="email" name="email" placeholder="nguyenvana@example.com" required="" type="email">
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface block" for="password">Mật khẩu</label>
+<a class="font-label-sm text-label-sm text-secondary hover:text-secondary-container transition-colors" href="#" onclick="event.preventDefault(); rcForgotPassword();">Quên mật khẩu?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 20px;">lock</span>
+</div>
+<input class="w-full pl-11 pr-12 py-3.5 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-secondary-container focus:border-secondary-container transition-all duration-200" id="password" name="password" placeholder="••••••••" required="" type="password">
+<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none" type="button" onclick="rcTogglePassword(this)">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-3.5 px-4 bg-primary-container hover:bg-primary-fixed text-on-primary-container font-label-md text-label-md rounded-xl transition-all duration-200 shadow-sm hover:shadow flex justify-center items-center gap-2 mt-2" type="submit">
+                        Đăng nhập
+                        <span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="my-8 flex items-center justify-center">
+<div class="flex-grow border-t border-outline-variant/50"></div>
+<span class="px-4 font-body-sm text-body-sm text-on-surface-variant bg-surface-container-lowest">hoặc</span>
+<div class="flex-grow border-t border-outline-variant/50"></div>
+</div>
+<!-- Google Login -->
+<button class="w-full py-3.5 px-4 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container-low text-on-surface font-label-md text-label-md rounded-xl transition-all duration-200 flex justify-center items-center gap-3" type="button" onclick='window.location.href="index.html"'>
+<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                    Đăng nhập với Google
+                </button>
+<!-- Footer Links -->
+<div class="mt-10 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+
+<span class="flex items-center gap-2 mt-2 sm:mt-0">
+
+<span class="text-outline-variant text-sm">•</span>
+
+</span>
+</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+function rcForgotPassword() {
+  const email = prompt('Nhập email để nhận liên kết đặt lại mật khẩu:');
+  if (email && email.trim()) {
+    RC.toast('Đã gửi email đặt lại mật khẩu tới ' + email.trim() + ' (mô phỏng)');
+  }
+}
+function rcTogglePassword(btn) {
+  const input = document.getElementById('password');
+  const icon = btn.querySelector('.material-symbols-outlined');
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.textContent = 'visibility';
+  } else {
+    input.type = 'password';
+    icon.textContent = 'visibility_off';
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="vi" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Hồ sơ cá nhân - RoomieCoin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#7e775f",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#d9dada",
+                        "on-secondary-fixed": "#001c3a",
+                        "surface-container-highest": "#d9e3f4",
+                        "background": "#f8f9ff",
+                        "secondary-container": "#0075d6",
+                        "primary-container": "#ffd700",
+                        "on-surface-variant": "#4d4732",
+                        "on-primary-fixed": "#221b00",
+                        "on-primary-fixed-variant": "#544600",
+                        "surface-bright": "#f8f9ff",
+                        "primary-fixed-dim": "#e9c400",
+                        "outline-variant": "#d0c6ab",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-dim": "#d1dbec",
+                        "surface-container-low": "#eef4ff",
+                        "inverse-primary": "#e9c400",
+                        "on-primary-container": "#705e00",
+                        "secondary": "#005cab",
+                        "surface-container": "#e5eeff",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#27313e",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#705d00",
+                        "tertiary": "#5d5f5f",
+                        "on-secondary-container": "#fefcff",
+                        "primary-fixed": "#ffe16d",
+                        "on-background": "#121c28",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#d9e3f4",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#dfe9fa",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#5e5f60",
+                        "on-surface": "#121c28",
+                        "on-secondary-fixed-variant": "#004786",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#705d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "column-count": "12",
+                        "container-max": "1280px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<script src="app.js"></script>
+<!-- SideNavBar -->
+<nav class="bg-surface shadow-sm h-screen w-64 fixed left-0 top-0 flex flex-col h-full border-r border-outline-variant z-20">
+<div class="p-6 bg-transparent">
+<h1 class="text-headline-md font-headline-lg font-bold text-primary"><div class="flex items-center gap-2"><img alt="RoomieCoin Logo" class="h-8 w-auto object-contain bg-transparent" src="https://lh3.googleusercontent.com/aida/AP1WRLuzu7CkrjHDoUb0D4Si00u6gsKuKPRL1ftB5zmS_U9n3Vjbn9WJiqAyQUPmfQT8Ts-n3OZYyBSpnBYJqvAuGovwYgFvkCul2_4NoEa3vRDWH-auvFQbfRRZrd3C6_b69dMn0G__wrjFFcD_dR94kdWIy152LAAbZZNpaPvcDR2ZLt6jbZ871J4w3RkGwGzdkMy3St0K3luREB19nucT6GDxVi8nyi4wEJ9LmqM-IGT7w6fHHdX_ourSX0A1"><span class="">RoomieCoin</span></div></h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Quản lý chi tiêu chung</p>
+</div>
+<ul class="flex-1 flex flex-col gap-1 px-4 text-label-md font-label-md"><li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+                    Tổng quan
+                </a>
+</li><li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg" href="room.html">
+<span class="material-symbols-outlined">home</span>
+                    Phòng của bạn
+                </a>
+</li><li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg" href="add-expense.html">
+<span class="material-symbols-outlined">add_circle</span>
+                    Thêm chi phí
+                </a>
+</li>
+
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg" href="settle.html">
+<span class="material-symbols-outlined">payments</span>
+                    Tất toán
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg" href="history.html">
+<span class="material-symbols-outlined">history</span>
+                    Lịch sử chi tiêu
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg" href="chores.html">
+<span class="material-symbols-outlined">data_check</span>
+                    Việc nhà
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant bg-secondary-fixed rounded-lg font-bold transition-all duration-200 active:scale-95" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+                    Cá nhân
+                </a>
+</li></ul>
+</nav>
+<!-- Main Content Area -->
+<div class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface-bright border-b border-outline-variant docked full-width top-0 sticky flex justify-between items-center h-16 w-[calc(100%-16rem)] z-10 transition-opacity duration-150 ease-in-out pl-8 pr-2">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-on-surface-variant mr-4 cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-colors" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface w-64 placeholder-on-surface-variant" placeholder="Tìm kiếm..." type="text">
+</div>
+<div class="flex items-center gap-4"><button onclick='window.location.href="notifications.html"' class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button><button onclick='window.location.href="settings.html"' class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="settings">settings</span></button><div class="flex items-center gap-2 ml-2 cursor-pointer hover:bg-surface-container-low p-1 rounded-lg transition-colors group" onclick='window.location.href="profile.html"'><span class="text-label-md font-label-md text-on-surface-variant">Nguyễn Văn A</span><img alt="Ảnh đại diện người dùng" class="w-8 h-8 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsu3TCO15rqcDueFEUJWHlYnqZ6SUjdQPBsTS1Nw9-M1U5Qi5KcJUntZUc7q2OVyTyXyFEvFye9c6yxWukVeZsVVCnEYjlwkohFIICaorM_6WflyMsoBY1OAadnURG0fH5JsxMY78O1qFQQdFoZ0uddJEi1Pw6oWEcW24TRSzT32UOi6DNAsmXPazfNRu1J_dqIDgd5w2Os1p0f5gtnBUSEUclqaWmx6ygyuBun8w1gD_5BZOCy9a72ENkPsQS9znlSNX1sPox7Ufa"></div></div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-8">
+<div class="max-w-[1000px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column (Profile & Roommates) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Profile Header Card -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-surface-variant flex items-center gap-6">
+<div class="relative">
+<img class="w-24 h-24 rounded-full object-cover border-4 border-surface" data-alt="A close-up, highly detailed portrait of a Vietnamese user in a well-lit modern apartment. The person looks approachable and professional. The aesthetic is clean, bright, and optimistic, matching a modern financial app profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNVW4nAg32nHxO-8pvz_K9miWyw0qav-us81R8dk-Mb3I4TRTvcS7rsQacfOanNoSGJSJQoGntdpRNAJbLI1jLVDB6OFlTn6NFZqwrMHMs4MTmVhxYSi7oxp_IPHRF7l0by4M5pcvXu--Iduj6pHbDDe7JSRhj1c0fdMp8lrtoUwkPhnxp_3Xx8O9RimrKc9ijmkaYdfYXkQBL8BMT_TDUAWfclIUdNTN9EDfpDG7PguZZo7I2JSxTbfQ7uSTGgnKR-o9S0xkN8a-r">
+<button class="absolute bottom-0 right-0 bg-surface-container-low text-on-surface-variant p-2 rounded-full shadow-sm border border-surface-variant hover:bg-surface-container-highest transition-colors" onclick="window.location.href='edit-profile.html'">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface mb-1" id="profile-name">Nguyễn Văn A</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-3" id="profile-email">nguyenvana@example.com</p><div class="flex items-center gap-2 mb-3"><span class="text-label-md font-label-md text-on-surface-variant">ID: #RC202401</span><button class="text-secondary hover:text-secondary-container transition-colors flex items-center" onclick='RC.copy("RC202401","Đã sao chép mã ID!")'><span class="material-symbols-outlined text-[18px]">content_copy</span></button></div>
+<span class="inline-flex items-center gap-1 bg-surface-container-high px-3 py-1 rounded-full text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">home</span> Phòng 402, Landmark 81
+                            </span>
+</div>
+</div>
+<!-- Roommates Section -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-surface-variant">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Thành viên trong phòng</h3>
+<button class="text-secondary font-label-md text-label-md flex items-center gap-1 hover:underline" onclick='window.location.href="room.html"'>
+                                Xem tất cả
+                            </button>
+</div>
+<ul class="flex flex-col gap-4 mb-6">
+<li class="flex items-center justify-between p-4 rounded-lg border border-surface-variant hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a young male roommate, casual attire, bright ambient lighting, neutral expression. Clean modern UI aesthetic, warm tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwqyD9B3JSgLzovhoc0uVi2Kb6bXahjru4S52bqqDgy9tJvHsVJmVR_hvSIbyqM8t4CGNHBJTbAFBHkzHNt-qmhBgnJiPAQh-b5IKgxsjCn4vWDg7UY52SAPQqnWKFdDHizznuobyiymcNlqb2QPAzJ23pofp2ouhHLQeItv_2VzggTmPpSrVmmQeGuEzAGeaLvXOfrM2YdeBchopBdP4mmQlCs0OJEzrOaR_Pl3ic8xYY8XJv7eXvMGmefeK9v1aOpIVmMf2qW6y-">
+<div>
+<p class="text-label-md font-label-md text-on-surface">Trần Thị B</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Tham gia: 01/10/2023</p>
+</div>
+</div>
+<span class="text-on-surface-variant" onclick="event.stopPropagation(); RC.toast('Đang xem hồ sơ Trần Thị B', 'info')"><span class="material-symbols-outlined">more_vert</span></span>
+</li>
+<li class="flex items-center justify-between p-4 rounded-lg border border-surface-variant hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a young female roommate, smiling brightly, warm indoor lighting, modern apartment setting. Clean modern UI aesthetic, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_k8cTftfp8GEEOZoTDjt7t6UjhHiDtkeTn-S724lllA8Nxx71UH-YYu5GoJLL9gG3n3Uu1qzrbNZy-19_sS8Y8cSQh2dA1lHoPuCSLJ-b4Fpu8EsPssFX23hFDKYVvkMCH8VgRk8rnPaHB-0bXh_wvsG6Spx99zsqBmFAapXqqNIJ2fhrV33Ica_D8MlbMBYnqKBPZVA68XwEicenS9E8Yy8I56PIWwN3K-o70LeUyFODE2jteT8tXFBbGxQKGDzubO0o0lskoeQ7">
+<div>
+<p class="text-label-md font-label-md text-on-surface">Lê Văn C</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Tham gia: 15/10/2023</p>
+</div>
+</div>
+<span class="text-on-surface-variant" onclick="event.stopPropagation(); RC.toast('Đang xem hồ sơ Lê Văn C', 'info')"><span class="material-symbols-outlined">more_vert</span></span>
+</li>
+</ul>
+<div class="bg-surface-container-low p-6 rounded-lg border border-surface-variant flex flex-col items-center justify-center text-center">
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">Mời thêm thành viên vào phòng của bạn</p>
+<div class="flex items-center gap-4 w-full">
+<div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-lg p-3 flex justify-between items-center">
+<span class="text-headline-sm font-headline-sm tracking-widest text-on-surface font-mono">RX-7890</span>
+<button class="text-secondary hover:text-secondary-container transition-colors" onclick='RC.copy("RX-7890","Đã sao chép mã mời!")'><span class="material-symbols-outlined">content_copy</span></button>
+</div>
+<button class="bg-[#1E90FF] text-white px-6 py-3 rounded-lg font-label-md text-label-md hover:bg-secondary-container transition-colors shadow-sm" onclick='RC.copy("RX-7890","Đã sao chép mã mời — gửi cho bạn cùng phòng để họ tham gia!")'>
+                                    Mời thành viên
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Settings & Payment) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Payment Methods -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-surface-variant">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">account_balance</span>
+                            Phương thức thanh toán
+                        </h3>
+<div class="space-y-4">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Ngân hàng</label>
+<select id="profile-bank" class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 text-body-md font-body-md text-on-surface focus:border-[#1E90FF] focus:ring-1 focus:ring-[#1E90FF] transition-all">
+<option>Vietcombank</option>
+<option>Techcombank</option>
+<option>MB Bank</option>
+</select>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Số tài khoản</label>
+<input id="profile-account" class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 text-body-md font-body-md text-on-surface focus:border-[#1E90FF] focus:ring-1 focus:ring-[#1E90FF] transition-all" type="text" value="0123456789">
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">QR Code Nhận Tiền</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-surface-container-low transition-colors cursor-pointer" onclick="rcUploadQr()">
+<span class="material-symbols-outlined text-outline text-[32px] mb-2">qr_code_scanner</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Tải lên hoặc kéo thả mã QR</p>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-3 rounded-lg hover:bg-primary-fixed-dim transition-colors mt-2" onclick="rcSavePayment()">
+                                Lưu thay đổi
+                            </button>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-error-container relative overflow-hidden">
+<div class="absolute inset-0 bg-error/5 z-0"></div>
+<div class="relative z-10">
+<h3 class="text-headline-sm font-headline-sm text-error mb-2 flex items-center gap-2">Rời khỏi phòng hiện tại</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">
+                                Khi rời khỏi phòng, bạn sẽ không thể xem hoặc chỉnh sửa các khoản chi tiêu chung. Hành động này không thể hoàn tác.
+                            </p>
+<button class="w-full border border-error text-error font-label-md text-label-md py-3 rounded-lg hover:bg-error hover:text-on-error transition-colors" onclick="rcLeaveRoom()">
+                                Rời khỏi phòng
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+function rcLoadProfile() {
+  const p = RC.getProfile();
+  document.getElementById('profile-name').textContent = p.name;
+  document.getElementById('profile-email').textContent = p.email;
+  document.getElementById('profile-account').value = p.account;
+  const bankNames = { vcb: 'Vietcombank', tcb: 'Techcombank', mbb: 'MB Bank', acb: 'ACB' };
+  const sel = document.getElementById('profile-bank');
+  const wanted = bankNames[p.bank] || 'Techcombank';
+  for (const opt of sel.options) { if (opt.textContent === wanted) { opt.selected = true; break; } }
+}
+function rcSavePayment() {
+  const p = RC.getProfile();
+  p.account = document.getElementById('profile-account').value.trim();
+  const sel = document.getElementById('profile-bank');
+  const codeMap = { Vietcombank: 'vcb', Techcombank: 'tcb', 'MB Bank': 'mbb', ACB: 'acb' };
+  p.bank = codeMap[sel.value] || p.bank;
+  RC.setProfile(p);
+  RC.toast('Đã lưu phương thức thanh toán!');
+}
+function rcUploadQr() {
+  RC.pickImage(function () { RC.toast('Đã tải lên mã QR (mô phỏng)!'); });
+}
+function rcLeaveRoom() {
+  if (!confirm('Bạn chắc chắn muốn rời khỏi phòng hiện tại? Hành động này không thể hoàn tác.')) return;
+  RC.toast('Đã rời khỏi phòng', 'info');
+  setTimeout(function () { window.location.href = 'login.html'; }, 700);
+}
+document.addEventListener('DOMContentLoaded', rcLoadProfile);
+</script>
+
+
+
+
+
+
+
+</body></html>

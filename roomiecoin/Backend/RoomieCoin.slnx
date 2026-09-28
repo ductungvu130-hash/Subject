@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="RoomieCoin.API/RoomieCoin.API.csproj" />
+  <Project Path="RoomieCoin.Application/RoomieCoin.Application.csproj" />
+  <Project Path="RoomieCoin.Core/RoomieCoin.Core.csproj" />
+  <Project Path="RoomieCoin.Infrastructure/RoomieCoin.Infrastructure.csproj" />
+  <Project Path="RoomieCoin.Tests/RoomieCoin.Tests.csproj" />
+</Solution>

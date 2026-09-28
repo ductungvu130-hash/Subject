@@ -1,0 +1,427 @@
+<!DOCTYPE html><html class="light" lang="vi" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Thêm chi phí - RoomieCoin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#7e775f",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#d9dada",
+                        "on-secondary-fixed": "#001c3a",
+                        "surface-container-highest": "#d9e3f4",
+                        "background": "#f8f9ff",
+                        "secondary-container": "#0075d6",
+                        "primary-container": "#ffd700",
+                        "on-surface-variant": "#4d4732",
+                        "on-primary-fixed": "#221b00",
+                        "on-primary-fixed-variant": "#544600",
+                        "surface-bright": "#f8f9ff",
+                        "primary-fixed-dim": "#e9c400",
+                        "outline-variant": "#d0c6ab",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-dim": "#d1dbec",
+                        "surface-container-low": "#eef4ff",
+                        "inverse-primary": "#e9c400",
+                        "on-primary-container": "#705e00",
+                        "secondary": "#005cab",
+                        "surface-container": "#e5eeff",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#27313e",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#705d00",
+                        "tertiary": "#5d5f5f",
+                        "on-secondary-container": "#fefcff",
+                        "primary-fixed": "#ffe16d",
+                        "on-background": "#121c28",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#d9e3f4",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#dfe9fa",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#5e5f60",
+                        "on-surface": "#121c28",
+                        "on-secondary-fixed-variant": "#004786",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#705d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "column-count": "12",
+                        "container-max": "1280px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter", "sans-serif"],
+                        "body-sm": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "display-lg": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+        
+        .currency-input {
+            all: unset;
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #121c28;
+            background: transparent;
+            border: none;
+            outline: none;
+            caret-color: #0075d6;
+        }
+        .currency-input::placeholder { color: #d1dbec; }
+        
+        .category-btn.active {
+            background-color: #eef4ff;
+            border-color: #0075d6;
+            color: #005cab;
+        }
+        
+        .split-toggle.active {
+            background-color: #121c28;
+            color: white;
+        }
+    </style>
+</head>
+<body class="text-on-background min-h-screen flex">
+<script src="app.js"></script>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface shadow-sm border-r border-outline-variant dark:border-outline z-20">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8"><div class="w-10 h-10 flex items-center justify-center flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida/AP1WRLuzu7CkrjHDoUb0D4Si00u6gsKuKPRL1ftB5zmS_U9n3Vjbn9WJiqAyQUPmfQT8Ts-n3OZYyBSpnBYJqvAuGovwYgFvkCul2_4NoEa3vRDWH-auvFQbfRRZrd3C6_b69dMn0G__wrjFFcD_dR94kdWIy152LAAbZZNpaPvcDR2ZLt6jbZ871J4w3RkGwGzdkMy3St0K3luREB19nucT6GDxVi8nyi4wEJ9LmqM-IGT7w6fHHdX_ourSX0A1" alt="RoomieCoin Logo" class="w-full h-full object-contain"></div><div><a href="index.html" style="text-decoration:none;"><h1 class="text-headline-sm font-bold text-on-surface">RoomieCoin</h1></a><p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Quản lý chi tiêu chung</p></div></div>
+
+<ul class="space-y-2"><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg font-label-md transition-all duration-200 active:scale-95" href="index.html"><span class="material-symbols-outlined">dashboard</span>Tổng quan</a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg font-label-md transition-all duration-200 active:scale-95" href="room.html"><span class="material-symbols-outlined">home</span>Phòng của bạn</a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant bg-secondary-fixed dark:bg-secondary-container rounded-lg font-bold font-label-md transition-all duration-200 active:scale-95" href="add-expense.html"><span class="material-symbols-outlined filled">add_circle</span>Thém chi phí</a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg font-label-md transition-all duration-200 active:scale-95" href="settle.html"><span class="material-symbols-outlined">payments</span>Tất toán</a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg font-label-md transition-all duration-200 active:scale-95" href="history.html"><span class="material-symbols-outlined">history</span>Lịch sử chi tiéu</a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg font-label-md transition-all duration-200 active:scale-95" href="chores.html"><span class="material-symbols-outlined">data_check</span>Việc nhà</a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-lg font-label-md transition-all duration-200 active:scale-95" href="profile.html"><span class="material-symbols-outlined">person</span>Cá nhân</a></li></ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky bg-surface-bright dark:bg-surface-dim border-b border-outline-variant flex justify-between items-center h-16 px-margin-desktop z-10">
+<div class="flex-1">
+<!-- Search bar on left -->
+<div class="relative max-w-md hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container pl-10 pr-4 py-2 rounded-full border-none focus:ring-2 focus:ring-secondary text-body-sm font-body-sm" placeholder="Tìm kiếm chi phí, người dùng..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button onclick='window.location.href="notifications.html"' class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-opacity duration-150 ease-in-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button onclick='window.location.href="settings.html"' class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-opacity duration-150 ease-in-out">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="flex items-center gap-3 cursor-pointer p-1 rounded-lg hover:bg-surface-container-high transition-colors ml-2" onclick='window.location.href="profile.html"'><img alt="Ảnh đại diện người dùng" class="w-8 h-8 rounded-full object-cover border border-outline-variant shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-1nqQ1fHDIFSG2JpDBMc1c46Mjs01BPQliJhNxCykIburGb10wnX7TpqKpfv2uKAtkoxxJa68-7AuHL5nR9W2tqAwpqDQX7iNk0df4JBEyX0p_u4g9W1QNMYbufLaRohlEodf59EFJghto-FS_mYP453Z_PG7Y_IYPXmY__ckIYj0Ze_YocLti0AkycP4mEMVkDCHFSWkfsk1O61e-XvcS_Zk26tCHBM6SqZH3I6pgBdUVxC9So-2Ybqe7XV_0UHmN-sPIF0sbn3c"><div class="hidden lg:block"><p class="text-label-sm font-label-sm text-on-surface">Tuấn</p></div><span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span></div></div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-8 md:p-12 overflow-y-auto">
+<div class="max-w-3xl mx-auto">
+<div class="mb-8">
+<button class="flex items-center text-on-surface-variant hover:text-on-surface mb-4 transition-colors font-label-md" onclick='history.back()'>
+<span class="material-symbols-outlined text-sm mr-1">arrow_back</span>
+                        Quay lại
+                    </button>
+<h2 class="text-display-lg font-display-lg">Thêm chi phí mới</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">Ghi lại khoản chi tiêu để chia sẻ cùng các thành viên.</p>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-tertiary-fixed overflow-hidden">
+<!-- Massive Amount Input -->
+<div class="p-8 md:p-12 bg-surface-container-low text-center border-b border-surface-variant relative overflow-hidden">
+<!-- Decorative background elements -->
+<div class="absolute -top-24 -left-24 w-48 h-48 bg-primary-container rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+<div class="absolute -bottom-24 -right-24 w-48 h-48 bg-secondary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+<div class="relative z-10">
+<label class="text-label-md font-label-md text-on-surface-variant block mb-4 uppercase tracking-wider">Số tiền (VNĐ)</label>
+<div class="flex items-center justify-center">
+<span class="text-headline-md text-on-surface-variant mr-2">₫</span>
+<input autocomplete="off" class="currency-input" id="amount-input" placeholder="0" type="text">
+</div>
+<div class="w-32 h-1 bg-surface-variant mx-auto mt-4 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-0 transition-all duration-300" id="amount-indicator"></div>
+</div>
+</div>
+</div>
+<div class="p-8 md:p-12 space-y-10">
+<!-- Description -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-3">Nội dung chi tiêu</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">edit_note</span>
+<input id="expense-desc" class="w-full pl-12 pr-4 py-4 rounded-xl border border-tertiary-fixed focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-surface text-body-md font-body-md transition-all shadow-sm" placeholder="VD: Tiền điện tháng 10, Đi siêu thị cuối tuần..." type="text">
+</div>
+</div>
+<!-- Category Grid -->
+<div>
+<label class="text-label-md font-label-md text-on-surface block mb-3">Danh mục</label>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<button class="category-btn active flex flex-col items-center justify-center p-4 rounded-xl border border-tertiary-fixed bg-surface hover:bg-surface-container transition-all text-on-surface-variant" type="button">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-secondary">restaurant</span>
+</div>
+<span class="font-label-sm">Ăn uống</span>
+</button>
+<button class="category-btn flex flex-col items-center justify-center p-4 rounded-xl border border-tertiary-fixed bg-surface hover:bg-surface-container transition-all text-on-surface-variant" type="button">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-surface-variant">bolt</span>
+</div>
+<span class="font-label-sm">Điện nước</span>
+</button>
+<button class="category-btn flex flex-col items-center justify-center p-4 rounded-xl border border-tertiary-fixed bg-surface hover:bg-surface-container transition-all text-on-surface-variant" type="button">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-surface-variant">home</span>
+</div>
+<span class="font-label-sm">Tiền nhà</span>
+</button>
+<button class="category-btn flex flex-col items-center justify-center p-4 rounded-xl border border-tertiary-fixed bg-surface hover:bg-surface-container transition-all text-on-surface-variant" type="button">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-surface-variant">category</span>
+</div>
+<span class="font-label-sm">Khác</span>
+</button>
+</div>
+</div>
+<div class="h-px w-full bg-surface-variant"></div>
+<!-- Split Logic -->
+<div class="space-y-4 mb-10">
+<label class="text-label-md font-label-md text-on-surface block">Đính kèm hóa đơn (Tùy chọn)</label>
+<div class="flex gap-4 items-start">
+<div class="flex-1 border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary mb-2">cloud_upload</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-center">Kéo thả hoặc <span class="text-secondary font-bold">chọn ảnh</span> hóa đơn</p>
+</div>
+<div class="relative w-20 h-20 rounded-lg overflow-hidden border border-outline-variant shadow-sm flex-shrink-0">
+<img alt="Hóa đơn đã tải lên" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxOYB9QN7qjrfoR_MVBuz1xhDzEDB4ZfIjQDEIJNkVs6jGMlWpVwLpTU2QmcejxM1QIAWA94QeIHzJS3yvKq8krTiPmB2wihrPdQfs2va_ntc1hpHS7hXtHduOyyZAl99t8FtI84FCw2astsrDr5cQEufTASOWn1sj9lKGdNc3H-i8Xz6sVdTnYhffaOAbU1uqZKtOj-WzKFSjHX6kQLG3gCewnhAnSsHjZrxX2RSN2fxUPHPZtSNPma-7aOUoNbgHhVN5gfnsEsNA">
+<button class="absolute top-1 right-1 w-5 h-5 bg-error/80 text-white rounded-full flex items-center justify-center hover:bg-error transition-colors" onclick="rcRemoveBillPreview(this)" type="button">
+<span class="material-symbols-outlined text-[12px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-px w-full bg-surface-variant mb-10"></div><div class="space-y-6">
+<div class="flex items-center justify-between">
+<label class="text-label-md font-label-md text-on-surface">Chia tiền với ai?</label>
+<div class="bg-surface-variant p-1 rounded-lg inline-flex">
+<button type="button" id="split-equal-btn" class="split-toggle active px-4 py-1.5 rounded-md text-label-sm font-label-sm transition-all" onclick="rcSetSplitMode(true)">Chia đều</button>
+<button type="button" id="split-custom-btn" class="split-toggle px-4 py-1.5 rounded-md text-label-sm font-label-sm text-on-surface-variant transition-all hover:text-on-surface" onclick="rcSetSplitMode(false)">Tùy chỉnh</button>
+</div>
+</div>
+<!-- Roommate Checklist -->
+<div class="space-y-3">
+<!-- You -->
+<label class="flex items-center justify-between p-4 rounded-xl border border-secondary bg-surface-container-low cursor-pointer hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<img alt="Bạn" class="w-10 h-10 rounded-full object-cover border-2 border-white" data-alt="A close-up portrait of a cheerful young Vietnamese professional in bright natural lighting, set against a modern, minimalist apartment background with soft white walls and light wood accents, perfect for an avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-1nqQ1fHDIFSG2JpDBMc1c46Mjs01BPQliJhNxCykIburGb10wnX7TpqKpfv2uKAtkoxxJa68-7AuHL5nR9W2tqAwpqDQX7iNk0df4JBEyX0p_u4g9W1QNMYbufLaRohlEodf59EFJghto-FS_mYP453Z_PG7Y_IYPXmY__ckIYj0Ze_YocLti0AkycP4mEMVkDCHFSWkfsk1O61e-XvcS_Zk26tCHBM6SqZH3I6pgBdUVxC9So-2Ybqe7XV_0UHmN-sPIF0sbn3c">
+<div>
+<p class="font-label-md text-on-surface">Bạn (Minh Tran)</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Người trả tiền</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-md text-secondary" id="split-you">0 ₫</span>
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm">check</span>
+</div>
+</div>
+</label>
+<!-- Roommate 1 -->
+<label class="flex items-center justify-between p-4 rounded-xl border border-tertiary-fixed bg-surface cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<input checked="" id="split-check-r1" class="w-5 h-5 rounded border-tertiary-fixed text-secondary focus:ring-secondary/50" type="checkbox" onchange="rcRecalcSplit()">
+<img alt="Hoang Nguyen" class="w-10 h-10 rounded-full object-cover border border-surface-variant" data-alt="A clear, modern portrait of a friendly young Vietnamese man with short dark hair, wearing a casual t-shirt, brightly lit against a clean white background, suitable for a UI profile icon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsiOpKY5vZ8xgFqhEZD1HgxumiHcQWDF2dbURHliVD2umiZBca1iyuL6vk1t8CZDKFNV1pt8LOZ-EG-useLlyrF7iluB__oehQ6gTorw866jtLBlbwafHGiuVUZxXcbwA-czFTzuArwRjzW2Q38WubZWrI0TgkhFGd-733XxKIY6zqfmMxZTQSMiy-yckNJ6mmochXwJ6c39-XZKEuf2z8viGm6Mv4NSAv7yQlrS1tM56jteoPfacV0Rbj4VrEshLU7WbQd7rfhipD">
+<div>
+<p class="font-label-md text-on-surface">Hoang Nguyen</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Phòng 302</p>
+</div>
+</div>
+<span class="font-label-md text-on-surface-variant" id="split-r1">0 ₫</span>
+</label>
+<!-- Roommate 2 -->
+<label class="flex items-center justify-between p-4 rounded-xl border border-tertiary-fixed bg-surface cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<input checked="" id="split-check-r2" class="w-5 h-5 rounded border-tertiary-fixed text-secondary focus:ring-secondary/50" type="checkbox" onchange="rcRecalcSplit()">
+<img alt="Linh Pham" class="w-10 h-10 rounded-full object-cover border border-surface-variant" data-alt="A clear, modern portrait of a friendly young Vietnamese woman with long dark hair, wearing a casual light blouse, brightly lit against a clean white background, suitable for a UI profile icon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrY2l3YzlO1Kuv-c4e2GOT__6-qI-bFyZIDzL763oGikKnwpN1dedwRKlJOPXFTqjX5iI3dy7yGxxrshUbLjKZG22qwNHk7wT9LpZcKBlAS_XSe1vGOOdf3AGhu9jwG-0ti_t5ecNFCZ4cgRff2ZiQZsgRUahyj_dfIDe7heW5yuK5DUF1pN4keg0Og3eAnY09Uo1w1ddmG-9fDwoDT1VvzRxjt9lMeqrg1SjTYGGTDYIkyLxZPcJOVD3ePLoXx0rF_zN_PG8kpEqK">
+<div>
+<p class="font-label-md text-on-surface">Linh Pham</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Phòng 301</p>
+</div>
+</div>
+<span class="font-label-md text-on-surface-variant" id="split-r2">0 ₫</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="p-6 md:p-8 bg-surface border-t border-surface-variant flex justify-end gap-4 items-center">
+<button type="button" class="px-6 py-3 rounded-xl font-label-md text-on-surface-variant hover:bg-surface-container transition-colors" onclick="history.back()">Hủy</button>
+<button type="button" class="px-8 py-3 rounded-xl font-label-md font-bold text-on-primary-fixed bg-primary-fixed hover:bg-primary-fixed-dim transition-all shadow-sm flex items-center gap-2" onclick="rcSaveExpense()">
+<span class="material-symbols-outlined">save</span>
+                            Lưu chi phí
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+        // Simple micro-interactions for input
+        const amountInput = document.getElementById('amount-input');
+        const indicator = document.getElementById('amount-indicator');
+        let splitEqual = true;
+
+        amountInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value !== '') {
+                let width = Math.min((value.length / 8) * 100, 100);
+                indicator.style.width = `${width}%`;
+                value = parseInt(value).toLocaleString('vi-VN');
+                e.target.value = value;
+            } else {
+                indicator.style.width = '0%';
+            }
+            rcRecalcSplit();
+        });
+
+        function rcRecalcSplit() {
+            let rawAmount = RC.parseVND(amountInput.value);
+            let checkedCount = 1; // "Bạn" is always included
+            if (document.getElementById('split-check-r1').checked) checkedCount++;
+            if (document.getElementById('split-check-r2').checked) checkedCount++;
+            let splitAmount = checkedCount > 0 ? Math.floor(rawAmount / checkedCount) : 0;
+            document.getElementById('split-you').textContent = splitAmount.toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('split-r1').textContent = (document.getElementById('split-check-r1').checked ? splitAmount : 0).toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('split-r2').textContent = (document.getElementById('split-check-r2').checked ? splitAmount : 0).toLocaleString('vi-VN') + ' ₫';
+        }
+
+        function rcSetSplitMode(equal) {
+            splitEqual = equal;
+            document.getElementById('split-equal-btn').classList.toggle('active', equal);
+            document.getElementById('split-custom-btn').classList.toggle('active', !equal);
+            document.getElementById('split-check-r1').disabled = equal;
+            document.getElementById('split-check-r2').disabled = equal;
+            if (equal) {
+                document.getElementById('split-check-r1').checked = true;
+                document.getElementById('split-check-r2').checked = true;
+            }
+            rcRecalcSplit();
+            RC.toast(equal ? 'Chia đều cho tất cả thành viên' : 'Chọn thành viên muốn chia — bỏ chọn để loại khỏi khoản chi', 'info');
+        }
+
+        function rcRemoveBillPreview(btn) {
+            const wrap = btn.closest('.relative');
+            if (wrap) wrap.remove();
+            RC.toast('Đã xoá ảnh hóa đơn');
+        }
+
+        function rcSaveExpense() {
+            const rawAmount = RC.parseVND(amountInput.value);
+            const desc = document.getElementById('expense-desc').value.trim();
+            const activeCat = document.querySelector('.category-btn.active span.font-label-sm');
+            const category = activeCat ? activeCat.textContent : 'Khác';
+            if (rawAmount <= 0) { RC.toast('Vui lòng nhập số tiền', 'error'); amountInput.focus(); return; }
+            if (!desc) { RC.toast('Vui lòng nhập nội dung chi tiêu', 'error'); document.getElementById('expense-desc').focus(); return; }
+            RC.addExpense({
+                desc: desc,
+                category: category,
+                amount: rawAmount,
+                date: new Date().toLocaleDateString('vi-VN'),
+                payer: 'Bạn (Minh Tran)'
+            });
+            RC.toast('Đã lưu chi phí "' + desc + '"!');
+            setTimeout(function () { window.location.href = 'history.html'; }, 700);
+        }
+
+        // Category selection
+        const catBtns = document.querySelectorAll('.category-btn');
+        catBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                catBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.classList.add('border-tertiary-fixed');
+                    b.classList.remove('border-secondary', 'bg-surface-container-low');
+                    b.querySelector('.material-symbols-outlined').classList.remove('text-secondary');
+                    b.querySelector('.material-symbols-outlined').classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('active', 'border-secondary', 'bg-surface-container-low');
+                btn.classList.remove('border-tertiary-fixed');
+                btn.querySelector('.material-symbols-outlined').classList.add('text-secondary');
+                btn.querySelector('.material-symbols-outlined').classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

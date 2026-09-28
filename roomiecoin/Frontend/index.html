@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="vi" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RoomieCoin - Tổng quan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#7e775f",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#d9dada",
+                        "on-secondary-fixed": "#001c3a",
+                        "surface-container-highest": "#d9e3f4",
+                        "background": "#f8f9ff",
+                        "secondary-container": "#0075d6",
+                        "primary-container": "#ffd700",
+                        "on-surface-variant": "#4d4732",
+                        "on-primary-fixed": "#221b00",
+                        "on-primary-fixed-variant": "#544600",
+                        "surface-bright": "#f8f9ff",
+                        "primary-fixed-dim": "#e9c400",
+                        "outline-variant": "#d0c6ab",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-dim": "#d1dbec",
+                        "surface-container-low": "#eef4ff",
+                        "inverse-primary": "#e9c400",
+                        "on-primary-container": "#705e00",
+                        "secondary": "#005cab",
+                        "surface-container": "#e5eeff",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#27313e",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#705d00",
+                        "tertiary": "#5d5f5f",
+                        "on-secondary-container": "#fefcff",
+                        "primary-fixed": "#ffe16d",
+                        "on-background": "#121c28",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#d9e3f4",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#dfe9fa",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#5e5f60",
+                        "on-surface": "#121c28",
+                        "on-secondary-fixed-variant": "#004786",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#705d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "column-count": "12",
+                        "container-max": "1280px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<script src="app.js"></script>
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface shadow-sm z-50 flex flex-col border-r border-outline-variant dark:border-outline">
+<div class="p-gutter border-b border-outline-variant dark:border-outline">
+<a href="index.html" style="text-decoration:none;"><h1 class="text-headline-md font-headline-lg font-bold text-primary dark:text-primary-fixed flex items-center"><img src="https://lh3.googleusercontent.com/aida/AP1WRLuzu7CkrjHDoUb0D4Si00u6gsKuKPRL1ftB5zmS_U9n3Vjbn9WJiqAyQUPmfQT8Ts-n3OZYyBSpnBYJqvAuGovwYgFvkCul2_4NoEa3vRDWH-auvFQbfRRZrd3C6_b69dMn0G__wrjFFcD_dR94kdWIy152LAAbZZNpaPvcDR2ZLt6jbZ871J4w3RkGwGzdkMy3St0K3luREB19nucT6GDxVi8nyi4wEJ9LmqM-IGT7w6fHHdX_ourSX0A1" alt="RoomieCoin Logo" class="h-8 w-8 mr-2 object-contain">RoomieCoin</h1></a>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Quản lý chi tiêu chung</p>
+</div>
+<div class="flex-1 py-4 flex flex-col gap-2 px-4 overflow-y-auto"><a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant bg-secondary-fixed dark:bg-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95" href="index.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span><span class="text-label-md font-label-md">Tổng quan</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="room.html"><span class="material-symbols-outlined">home</span><span class="text-label-md font-label-md">Phòng của bạn</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="add-expense.html"><span class="material-symbols-outlined">add_circle</span><span class="text-label-md font-label-md">Thêm chi phí</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="settle.html"><span class="material-symbols-outlined">payments</span><span class="text-label-md font-label-md">Tất toán</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="history.html"><span class="material-symbols-outlined">history</span><span class="text-label-md font-label-md">Lịch sử chi tiêu</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="chores.html"><span class="material-symbols-outlined">data_check</span><span class="text-label-md font-label-md">Việc nhà</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg" href="profile.html"><span class="material-symbols-outlined">person</span><span class="text-label-md font-label-md">Cá nhân</span></a></div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky bg-surface-bright dark:bg-surface-dim flex justify-between items-center h-16 px-margin-desktop shadow-sm z-40 transition-opacity duration-150 ease-in-out">
+<div class="flex items-center flex-1">
+<div class="relative w-96 hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-sm font-body-sm focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container transition-all" placeholder="Tìm kiếm giao dịch..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4"><button onclick='window.location.href="notifications.html"' class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface p-2 rounded-full transition-colors relative"><span class="material-symbols-outlined">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><button onclick='window.location.href="settings.html"' class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface p-2 rounded-full transition-colors"><span class="material-symbols-outlined">settings</span></button><div class="flex items-center gap-2 ml-2 cursor-pointer hover:bg-surface-container-low p-1 rounded-lg transition-colors group" onclick='window.location.href="profile.html"'>
+  <div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+    <img alt="Ảnh đại diện người dùng" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFEX30EQlN6jQWh0k7hjvWm_XyS9I-qKB5xO2TnKbyQWQ5NJ_gyaq7vAN_xpzBaoQ6nUHNvJPwMYabC-8BcWXDzp4WxOGKpLtUObSQUA0z1DF0V3n_7hkmb3CSlGsVIpbDTr8qsOFyPsuQ2FZz1ymJGqWH4gzgNN8__iBz4af-SHxuaQs2gBqi9HQgYxRv-wym00G5H9ACi6math3P9pJcOXzcdjA9brpCoWok4qncb_0g1WcUoKpt1bCc2lNCQPc613naNnngY2GZ">
+  </div>
+  <div class="flex items-center gap-1 hidden md:flex">
+    <span class="text-label-md font-label-md text-on-surface">Tuấn</span>
+    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">expand_more</span>
+  </div>
+</div></div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-gutter md:p-margin-desktop overflow-y-auto w-full max-w-container-max mx-auto">
+<div class="mb-8">
+<h2 class="text-headline-lg font-headline-lg text-on-background mb-2">Xin chào, Tuấn! 👋</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Đây là tình hình thu chi chung của phòng bạn.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Large Balance Card -->
+<div class="col-span-1 md:col-span-8 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-container rounded-full opacity-20 blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
+<div class="absolute -left-20 -bottom-20 w-64 h-64 bg-secondary-container rounded-full opacity-10 blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Số dư của bạn</span>
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-label-sm font-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                Tốt
+                            </span>
+</div>
+<h3 class="text-[56px] leading-tight font-bold text-on-background tracking-tight mb-2">
+<span class="text-secondary-container">+</span> 1,250,000 đ
+                        </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Phòng nợ bạn. Sẵn sàng tất toán.</p>
+</div>
+<div class="relative z-10 mt-8 flex gap-4">
+<button class="bg-secondary-container text-white px-6 py-2.5 rounded-lg text-label-md font-label-md font-semibold hover:bg-secondary transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+                            Yêu cầu tất toán
+                        </button>
+</div>
+</div>
+<!-- Monthly Spend Summary -->
+<div class="col-span-1 md:col-span-4 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 flex flex-col justify-between">
+<div>
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider block mb-4">Tổng chi tiêu phòng tháng này</span>
+<h3 class="text-headline-md font-headline-md text-on-background mb-1">8,450,000 đ</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-[16px]">arrow_upward</span>
+<span class="text-error font-medium">12%</span> so với tháng trước
+                        </p>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-end mb-2">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Tiến độ quỹ chung</span>
+<span class="text-label-md font-label-md text-on-background">65%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div><div class="col-span-1 md:col-span-12 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6">
+<div class="flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex-1">
+<h3 class="text-headline-sm font-headline-sm text-on-background mb-2">Phân bổ chi tiêu</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">Tỷ lệ các hạng mục chi tiêu trong tháng này của phòng.</p>
+<div class="flex items-center gap-8">
+<!-- Donut Chart Simulation -->
+<div class="relative w-32 h-32">
+<svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#ba1a1a" stroke-dasharray="30 70" stroke-dashoffset="0" stroke-width="3.8"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#ffd700" stroke-dasharray="30 70" stroke-dashoffset="-30" stroke-width="3.8"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#0075d6" stroke-dasharray="40 60" stroke-dashoffset="-60" stroke-width="3.8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="text-label-sm font-bold text-on-background">Tổng</span>
+<span class="text-[10px] text-on-surface-variant">100%</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary-container"></div>
+<span class="text-body-sm font-medium text-on-background">Ăn uống</span>
+<span class="text-label-sm text-on-surface-variant ml-auto">40%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<span class="text-body-sm font-medium text-on-background">Điện nước</span>
+<span class="text-label-sm text-on-surface-variant ml-auto">30%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="text-body-sm font-medium text-on-background">Khác</span>
+<span class="text-label-sm text-on-surface-variant ml-auto">30%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden md:block w-px h-32 bg-outline-variant opacity-50"></div>
+<div class="flex-1">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<h4 class="text-label-md font-bold text-on-background mb-2">Gợi ý tiết kiệm</h4>
+<p class="text-body-sm text-on-surface-variant">Chi phí ăn uống đang chiếm tỷ trọng cao nhất. Hãy thử nấu ăn tại nhà nhiều hơn để giảm 10% ngân sách tháng tới.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Stats row -->
+<div class="col-span-1 md:col-span-6 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-5 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div class="flex-1">
+<h4 class="text-label-md font-label-md text-on-surface-variant">Hóa đơn tiếp theo</h4>
+<p class="text-headline-sm font-headline-sm text-on-background">Tiền điện</p>
+</div>
+<div class="text-right">
+<p class="text-body-md font-body-md font-semibold text-error">~850,000 đ</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Trong 3 ngày</p>
+</div>
+</div>
+<div class="col-span-1 md:col-span-6 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-5 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<div class="flex-1">
+<h4 class="text-label-md font-label-md text-on-surface-variant">Đã thanh toán</h4>
+<p class="text-headline-sm font-headline-sm text-on-background">Tháng 10</p>
+</div>
+<div class="text-right">
+<p class="text-body-md font-body-md font-semibold text-secondary-container">100%</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Hoàn tất</p>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="col-span-1 md:col-span-12 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-background">Hoạt động gần đây</h3>
+<button class="text-label-md font-label-md text-secondary-container hover:text-secondary transition-colors bg-transparent" onclick='window.location.href="history.html"'>Xem tất cả</button>
+</div>
+<div class="space-y-1">
+<!-- Item 1: Food -->
+<div class="flex items-center p-3 hover:bg-surface-container-lowest transition-colors rounded-lg border-b border-outline-variant last:border-0 group cursor-pointer" onclick='window.location.href="history.html"'>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary mr-4 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md font-body-md font-semibold text-on-background">Ăn uống (Bữa tối lẩu)</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant flex items-center gap-2">
+                                    Hôm nay <span class="w-1 h-1 rounded-full bg-outline-variant"></span> Mai thêm
+                                </p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full border border-white" data-alt="Small circular profile picture of a young asian woman smiling, bright lighting, soft modern background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX6JMbZI11n6zolFf0g_scdbj1iILIHfUxJ4nOw60tlPZTkOYiRonlfXcnYL7hDG0xtkzPNIRDig-bNcxJT0Wb0-R3V9hCucpd5CgUp_lIj-L6z83a8dT8fWVVc3C7EsXLAEH2Nv0lMUACpq4x1CvEM4Pz77puieVoMH1dyZFY6shUJSC21pGalFSKtJuiJNvWh6rWJvt0zddyrOwU06B0QypERKsEBcgtD6fp-kiINColVoC5AIkoRW_GlJB1NNU5a9c7Z1w61m_X">
+<img alt="Avatar" class="w-6 h-6 rounded-full border border-white" data-alt="Small circular profile picture of a young asian man with glasses, bright lighting, soft modern background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyC2TAKLS2IWYl90p6eZZU76flLd4MAstIykNRVhqytLizIHIMcHjEw-u1CccIuDk_i5QekIYG7limtCDOE0fLSEy5yid9XG9tr_xzxA61r8qykuronHgpW5I6COGCc4GSlhfdOiHg32X_sGVR3LvEoTXSKIX-pfOEBgmotiUxBLNfd_o3skHHuMZDUsNE-yPcFGjl6fMpSkwTnz-DAUtzGx9a7sY8KruVA39vXmDL30NS1a129QLMA2lF_UG2RQoLIoR9WDbZwnCz">
+</div>
+<span class="text-body-md font-body-md font-bold text-on-background w-24 text-right">450,000 đ</span>
+</div>
+</div>
+<!-- Item 2: Electricity -->
+<div class="flex items-center p-3 hover:bg-surface-container-lowest transition-colors rounded-lg border-b border-outline-variant last:border-0 group cursor-pointer" onclick='window.location.href="history.html"'>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-secondary mr-4 group-hover:bg-secondary-fixed group-hover:text-on-secondary-fixed-variant transition-colors">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md font-body-md font-semibold text-on-background">Điện (Tháng 9)</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant flex items-center gap-2">
+                                    Hôm qua <span class="w-1 h-1 rounded-full bg-outline-variant"></span> Lan thêm
+                                </p>
+</div>
+<div class="flex items-center gap-3">
+<div class="px-2 py-0.5 rounded-full bg-surface-variant text-label-sm font-label-sm text-on-surface-variant">Chia đều (4)</div>
+<span class="text-body-md font-body-md font-bold text-on-background w-24 text-right">820,000 đ</span>
+</div>
+</div>
+<!-- Item 3: Internet -->
+<div class="flex items-center p-3 hover:bg-surface-container-lowest transition-colors rounded-lg border-b border-outline-variant last:border-0 group cursor-pointer" onclick='window.location.href="history.html"'>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-tertiary mr-4 group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-fixed-variant transition-colors">
+<span class="material-symbols-outlined">wifi</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md font-body-md font-semibold text-on-background">Internet (FPT 6 tháng)</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant flex items-center gap-2">
+                                    2 ngày trước <span class="w-1 h-1 rounded-full bg-outline-variant"></span> Tuấn thêm
+                                </p>
+</div>
+<div class="flex items-center gap-3">
+<div class="px-2 py-0.5 rounded-full bg-surface-variant text-label-sm font-label-sm text-on-surface-variant">Chia đều (4)</div>
+<span class="text-body-md font-body-md font-bold text-on-background w-24 text-right">1,650,000 đ</span>
+</div>
+</div>
+<!-- Item 4: Rent -->
+<div class="flex items-center p-3 hover:bg-surface-container-lowest transition-colors rounded-lg border-b border-outline-variant last:border-0 group cursor-pointer opacity-75" onclick='window.location.href="history.html"'>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface mr-4 group-hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">real_estate_agent</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md font-body-md font-semibold text-on-background line-through">Tiền thuê nhà (Tháng 10)</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant flex items-center gap-2">
+                                    5 ngày trước <span class="w-1 h-1 rounded-full bg-outline-variant"></span> Đã thanh toán
+                                </p>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 bg-[#e6f4ea] text-[#137333] rounded-full text-label-sm font-label-sm">Đã thanh toán</span>
+<span class="text-body-md font-body-md font-bold text-on-surface-variant w-24 text-right">12,000,000 đ</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

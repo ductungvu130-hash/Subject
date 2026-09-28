@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bí Kíp Ôn Thi CSW306 - Backend Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark-reasonable.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code { font-family: 'JetBrains Mono', monospace; }
+        html { scroll-behavior: smooth; }
+        .sidebar-link.active {
+            background-color: #eff6ff; /* blue-50 */
+            color: #1d4ed8; /* blue-700 */
+            border-right: 3px solid #2563eb; /* blue-600 */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white border-r border-gray-200 flex-shrink-0 overflow-y-auto h-full shadow-sm z-10">
+        <div class="p-6 border-b border-gray-100">
+            <h1 class="text-xl font-bold text-gray-800">CSW306 Exam</h1>
+            <p class="text-sm text-gray-500 mt-1">Backend Development</p>
+        </div>
+        <nav class="p-4 space-y-1" id="nav-menu">
+            <a href="#tong-quan" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors active">1. Tổng quan 2 đề</a>
+            <a href="#kien-thuc-co-ban" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors text-blue-600 font-medium">2. Kiến thức cốt lõi (Slide)</a>
+            <a href="#database-models" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">3. Database & Models</a>
+            <a href="#dbcontext" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">4. DbContext & Config</a>
+            <a href="#repository" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">5. Repository Layer</a>
+            <a href="#controllers" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">6. API Controllers</a>
+            <a href="#order-logic" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">7. Logic Đặt Hàng (Khó)</a>
+            <a href="#security" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">8. JWT & Authorization</a>
+            <a href="#lab7" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">9. Ôn Lab 7 (Unit/Integration Test)</a>
+            <a href="#lab8" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">10. Ôn Lab 8 (Generic IRepository)</a>
+            <a href="#checklist" class="sidebar-link block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded transition-colors">11. Checklist Nộp Bài</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-8 relative">
+        <div class="max-w-4xl mx-auto space-y-12 pb-20">
+
+            <!-- Tiêu đề chính -->
+            <header class="border-b border-gray-200 pb-8">
+                <div class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold mb-4">Tài liệu ôn thi cuối kì</div>
+                <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Cẩm nang giải đề CSW306 (ASP.NET Core API)</h1>
+                <p class="text-lg text-gray-600 mt-4">Phân tích chi tiết và code mẫu chuẩn dựa trên đề thi <strong>Quarter 1 (Fruit Store)</strong>, <strong>Quarter 3 (Pet Store)</strong> và tóm tắt kiến thức từ các bài giảng (Testing, Security, SignalR...).</p>
+            </header>
+
+            <!-- 1. Tổng quan -->
+            <section id="tong-quan" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">1</span> Tổng quan 2 đề thi</h2>
+                
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-gray-50 text-gray-700">
+                            <tr>
+                                <th class="px-6 py-4 font-semibold border-b">Thành phần</th>
+                                <th class="px-6 py-4 font-semibold border-b text-orange-600">Quarter 1 (Fruit Store)</th>
+                                <th class="px-6 py-4 font-semibold border-b text-emerald-600">Quarter 3 (Pet Store)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-600">
+                            <tr>
+                                <td class="px-6 py-4 font-medium">Entities Chính</td>
+                                <td class="px-6 py-4"><code>Fruit</code>, <code>Category</code>, <code>User</code>, <code>Order</code>, <code>OrderItem</code></td>
+                                <td class="px-6 py-4"><code>Pet</code>, <code>PetCategory</code>, <code>User</code>, <code>PurchaseOrder</code>, <code>PurchaseItem</code></td>
+                            </tr>
+                            <tr class="bg-gray-50/50">
+                                <td class="px-6 py-4 font-medium">Roles</td>
+                                <td class="px-6 py-4">Admin / User</td>
+                                <td class="px-6 py-4">Admin / Customer</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium">Cấu trúc điểm</td>
+                                <td class="px-6 py-4">
+                                    Q1: Model (30đ)<br>
+                                    Q2: Repository (30đ)<br>
+                                    Q3: API Controller (40đ)
+                                </td>
+                                <td class="px-6 py-4">
+                                    Q1: Model (30đ)<br>
+                                    Q2: Repository (30đ)<br>
+                                    Q3: API + Security (30đ)<br>
+                                    <strong class="text-red-500">Q4: Report Docx (10đ)</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 text-amber-800 rounded">
+                    <strong>💡 Nhận xét:</strong> Cả hai đề thực chất dùng <strong>chung 1 pattern kiến trúc</strong>. Chỉ thay đổi tên Entity (Fruit -> Pet) và thêm một số trường dữ liệu nhỏ. Nắm vững khung sườn là làm được 100%.
+                </div>
+            </section>
+
+            <!-- 2. Kiến thức cơ bản (Thêm từ Slide) -->
+            <section id="kien-thuc-co-ban" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">2</span> Kiến thức cốt lõi (Từ Slide Bài Giảng)</h2>
+                
+                <div class="space-y-6">
+                    <!-- Async / Await -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-blue-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            1. Lập trình Bất đồng bộ (Async/Await)
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">Đề thi bắt buộc sử dụng <code>async/await</code> trong Repository và Controller để không block thread chính, cải thiện hiệu năng xử lý (I/O-bound operations).</p>
+                        <ul class="list-disc pl-5 text-sm text-gray-700 space-y-2">
+                            <li><strong>Task / Task&lt;T&gt;:</strong> Đại diện cho một hành động bất đồng bộ. Thay vì trả về <code>List&lt;Book&gt;</code>, ta khai báo trả về <code>Task&lt;List&lt;Book&gt;&gt;</code>.</li>
+                            <li><strong>async:</strong> Từ khóa đặt trước tên hàm báo hiệu hàm này chứa xử lý bất đồng bộ. (VD: <code>public async Task&lt;IActionResult&gt; GetAll()</code>)</li>
+                            <li><strong>await:</strong> Đợi một Task hoàn thành mà không block hệ thống. Chỉ được dùng bên trong một hàm <code>async</code>. (VD: <code>await _context.SaveChangesAsync();</code>)</li>
+                        </ul>
+                    </div>
+
+                    <!-- EF Core & Migrations -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-emerald-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                            2. Entity Framework Core & Migrations
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">EF Core là Object-Relational Mapper (ORM) giúp lập trình viên thao tác với DB bằng C# objects (Code-First Approach) thay vì viết SQL thuần.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Data Annotations (Bắt buộc nhớ)</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li><code>[Key]</code>: Đánh dấu Khóa chính (Primary Key). Mặc định <code>Id</code> đã là PK.</li>
+                                    <li><code>[Required]</code>: Bắt buộc nhập (NOT NULL).</li>
+                                    <li><code>[MaxLength(100)]</code> / <code>[StringLength(100)]</code>: Độ dài chuỗi tối đa.</li>
+                                    <li><code>[Range(0, 100)]</code>: Giới hạn giá trị của số.</li>
+                                    <li><code>[EmailAddress]</code>: Validate định dạng Email.</li>
+                                    <li><code>[Column("Name")]</code>: Đổi tên cột mapping xuống DB.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Lệnh Migration</strong>
+                                <p class="text-xs text-gray-500 mb-2 mt-1">Giúp đồng bộ cấu trúc Model (C#) xuống Database (SQL Server).</p>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 space-y-2">
+                                    <li><code>dotnet ef migrations add &lt;Name&gt;</code><br><span class="text-xs text-gray-500">Tạo bản snapshot cấu trúc DB.</span></li>
+                                    <li><code>dotnet ef database update</code><br><span class="text-xs text-gray-500">Thực thi migration sinh ra các bảng trong DB.</span></li>
+                                    <li><code>dotnet ef migrations remove</code><br><span class="text-xs text-gray-500">Xóa/rollback migration gần nhất chưa update.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-emerald-50 text-emerald-800 text-sm rounded">
+                            <strong>Lưu ý Inheritance (TPH):</strong> Trong EF Core, pattern <em>Table-per-Hierarchy (TPH)</em> gom các class có quan hệ cha-con (VD: <code>Book</code> cha, <code>EBook</code> con) vào chung 1 bảng và phân biệt bằng cột <code>Discriminator</code>.
+                        </div>
+                    </div>
+
+                    <!-- Web API & DI -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-purple-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            3. Dependency Injection (DI) & API Controllers
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">Cơ chế quản lý Dependency và thiết kế RESTful API.</p>
+                        <ul class="list-disc pl-5 text-sm text-gray-700 space-y-2">
+                            <li><strong>Dependency Injection (DI):</strong> Pattern giúp giảm phụ thuộc cứng (loose coupling) giữa các class. Thay vì <code>new Repository()</code>, ta dùng <em>Constructor Injection</em> để tiêm các Service vào Controller. Cấu hình tại <code>Program.cs</code>:
+                                <br><span class="inline-block mt-1 px-2 py-1 bg-gray-100 rounded text-xs font-mono">builder.Services.AddScoped&lt;IRepository, Repository&gt;();</span>
+                            </li>
+                            <li><strong>Controller:</strong> Là class xử lý request từ Client, kế thừa <code>ControllerBase</code>, cần có Attribute <code>[ApiController]</code> và <code>[Route("api/[controller]")]</code>.</li>
+                            <li><strong>HTTP Methods:</strong> <code>[HttpGet]</code> (Lấy dữ liệu), <code>[HttpPost]</code> (Tạo mới), <code>[HttpPut]</code> (Cập nhật), <code>[HttpDelete]</code> (Xóa).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Auth -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-red-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            4. Authentication & Authorization (Bảo mật)
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">Các khái niệm cốt lõi bảo vệ ứng dụng (Rất hay hỏi lý thuyết).</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Khái niệm cốt lõi</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li><strong>Authentication (Xác thực):</strong> Xác định người dùng là ai (Bạn là ai?). Ví dụ đăng nhập bằng JWT hoặc Cookie. Lỗi nếu sai: <code>401 Unauthorized</code> (tương ứng với lệnh <code>Challenge</code>).</li>
+                                    <li><strong>Authorization (Phân quyền):</strong> Xác định người dùng được phép làm gì (Bạn được làm gì?). Lỗi nếu sai: <code>403 Forbidden</code> (tương ứng với lệnh <code>Forbid</code>).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Cơ chế Authorization thường dùng</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li><strong>Role-based:</strong> Dựa trên vai trò. VD: <code>[Authorize(Roles = "Admin")]</code>.</li>
+                                    <li><strong>Claim-based / Policy-based:</strong> Phân quyền chi tiết hơn dựa trên thông tin cụ thể (vd: Tuổi > 18, Thuộc phòng ban IT).</li>
+                                    <li>Lưu ý thứ tự Middleware: <code>UseAuthentication()</code> phải luôn đặt trước <code>UseAuthorization()</code>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testing -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-teal-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            5. Kiểm thử phần mềm (Testing)
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Unit Test (Kiểm thử đơn vị)</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li>Chiếm khoảng 70% lượng test. Test một thành phần nhỏ nhất (Class/Method).</li>
+                                    <li>Chạy cực nhanh, <strong>KHÔNG</strong> gọi Database thật hay API bên ngoài.</li>
+                                    <li><strong>Công cụ:</strong> <code>xUnit</code> (Framework test), <code>Moq</code> (Giả lập/Mock các lớp phụ thuộc như IRepository), <code>FluentAssertions</code>.</li>
+                                    <li><strong>Mô hình AAA:</strong> <em>Arrange</em> (Chuẩn bị data/mock) -> <em>Act</em> (Gọi hàm cần test) -> <em>Assert</em> (Kiểm tra kết quả).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Integration Test (Kiểm thử tích hợp)</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li>Chiếm khoảng 30%. Test sự phối hợp giữa các layer: <code>Controller -> Service -> Database</code>.</li>
+                                    <li>Chạy chậm hơn Unit Test. Thường dùng DB ảo (In-Memory / SQLite) để tránh ghi rác vào DB thật.</li>
+                                    <li><strong>Công cụ:</strong> <code>WebApplicationFactory</code> để tạo một TestServer giả lập môi trường gọi API thực tế.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced / SignalR -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-orange-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            6. Kiến thức nâng cao (SignalR & Lỗ hổng bảo mật)
+                        </h3>
+                        <ul class="list-disc pl-5 text-sm text-gray-700 space-y-2">
+                            <li><strong>SignalR (Real-time):</strong> Thư viện hỗ trợ giao tiếp thời gian thực trên ASP.NET Core (Ứng dụng Live Chat, Live Dashboard). Trọng tâm sử dụng mô hình <strong>Hub-based</strong>. Tự động tìm cơ chế kết nối tốt nhất: <em>WebSockets -> Server-Sent Events (SSE) -> Long Polling</em>.</li>
+                            <li><strong>Các lỗ hổng bảo mật hay gặp:</strong>
+                                <ul class="list-circle pl-5 mt-1 space-y-1 text-gray-600">
+                                    <li><em>SQL Injection:</em> Chèn mã SQL độc hại. <strong>Cách phòng:</strong> Dùng ORM (như Entity Framework) hoặc Parameterized queries.</li>
+                                    <li><em>XSS (Cross-Site Scripting):</em> Chèn script độc (JS) vào giao diện. <strong>Cách phòng:</strong> Escape output HTML, dùng thẻ bảo mật (CSP).</li>
+                                    <li><em>CSRF (Cross-Site Request Forgery):</em> Giả mạo yêu cầu từ user đã login. <strong>Cách phòng:</strong> Dùng <code>[ValidateAntiForgeryToken]</code>.</li>
+                                    <li><em>Broken Authentication:</em> Lộ mật khẩu. <strong>Cách phòng:</strong> Băm mật khẩu (bcrypt, PBKDF2), giới hạn thời gian (Expiration) cho JWT Token.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- OOP Fundamentals -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-indigo-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            7. C# OOP Cơ Bản (Nền tảng viết Model/Controller)
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">Model, Repository, Controller trong đề thi đều là class C# chuẩn OOP — nắm chắc phần này để không bị lúng túng khi code Property, Constructor hay kế thừa.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Class, Object & Access Modifier</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li><strong>Class</strong> là khuôn mẫu (template); <strong>Object</strong> là thể hiện (instance) được tạo từ class bằng <code>new</code>.</li>
+                                    <li><strong>Field</strong> (biến trong class) và <strong>Method</strong> gọi chung là Class Members.</li>
+                                    <li><code>public</code>: truy cập được từ mọi nơi. <code>private</code>: chỉ truy cập trong chính class đó — dùng để hiện thực <strong>Encapsulation</strong> (che giấu dữ liệu nhạy cảm).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Property (get/set) & Constructor</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li><strong>Property</strong> = kết hợp field + method, có <code>get</code>/<code>set</code>. Auto-property (<code>public string Name { get; set; }</code>) là cách viết tắt không cần khai báo field riêng — chính là cú pháp dùng trong toàn bộ Model của đề thi.</li>
+                                    <li><strong>Constructor</strong>: method đặc biệt trùng tên class, chạy khi <code>new</code> object, dùng để gán giá trị khởi tạo (VD: constructor nhận <code>AppDbContext</code> qua Dependency Injection trong Repository/Controller).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Inheritance & Polymorphism</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li><strong>Inheritance</strong>: dùng dấu <code>:</code> để kế thừa. VD <code>ControllerBase</code> là base class, <code>ItemsController : ControllerBase</code> là derived class.</li>
+                                    <li><strong>Polymorphism</strong>: override method của lớp cha bằng cặp từ khóa <code>virtual</code> (lớp cha) / <code>override</code> (lớp con).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-sm text-gray-800 border-b border-gray-200 pb-1 mb-2 inline-block">Abstract Class vs Interface</strong>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
+                                    <li><strong>Abstract class</strong>: không tạo object trực tiếp được, có thể chứa cả method có thân (body) lẫn method trừu tượng (không có thân, bắt buộc lớp con hiện thực).</li>
+                                    <li><strong>Interface</strong>: chỉ chứa "chữ ký" method/property, không có thân — đúng bản chất của <code>IItemRepository</code>, <code>IRepository&lt;T&gt;</code> trong đề thi (định nghĩa hợp đồng, class thật implement).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DI Service Lifetimes -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-cyan-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            8. Vòng đời Service trong Dependency Injection
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">Khi đăng ký DI trong Program.cs (<code>builder.Services.Add...</code>), phải chọn đúng vòng đời — chọn sai <code>AppDbContext</code> là <code>Singleton</code> sẽ gây lỗi nghiêm trọng khi nhiều request truy cập đồng thời.</p>
+                        <ul class="list-disc pl-5 text-sm text-gray-700 space-y-2">
+                            <li><code>AddTransient&lt;T&gt;</code>: Tạo <strong>object mới mỗi lần</strong> được inject — dùng cho service nhẹ, không giữ state.</li>
+                            <li><code>AddScoped&lt;T&gt;</code>: Tạo <strong>1 object dùng chung trong 1 HTTP request</strong> — đây là lifetime chuẩn cho <code>AppDbContext</code> và Repository trong đề thi.</li>
+                            <li><code>AddSingleton&lt;T&gt;</code>: Tạo <strong>1 object duy nhất dùng chung cho toàn bộ ứng dụng</strong> — dùng cho service không đổi theo request (VD: cấu hình, cache tĩnh). <strong>Không</strong> dùng cho DbContext.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Client-Server & Platform overview -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"></path></svg>
+                            9. Client-Server & ASP.NET Core Platform
+                        </h3>
+                        <ul class="list-disc pl-5 text-sm text-gray-700 space-y-2">
+                            <li><strong>Client-Server:</strong> Client gửi Request → Server xử lý/truy vấn dữ liệu → Server trả về Response. Giao tiếp qua HTTP/HTTPS, thường dùng REST API + JSON — đúng mô hình đề thi yêu cầu xây dựng.</li>
+                            <li><strong>.NET Framework vs .NET Core:</strong> .NET Framework chỉ chạy Windows, đóng nguồn, DI phải dùng thư viện ngoài (Unity/Ninject). .NET Core đa nền tảng (Windows/macOS/Linux), mã nguồn mở, có <strong>DI tích hợp sẵn</strong>, middleware pipeline linh hoạt — đây là nền tảng ASP.NET Core Web API dùng trong toàn bộ đề thi.</li>
+                            <li><strong>Model trong EF Core</strong> gọi là <strong>POCO class</strong> (Plain Old CLR Object) — class thuần chỉ chứa property, không phụ thuộc trực tiếp vào EF Core.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="database-models" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">3</span> Database & Models (Thực hành đề thi)</h2>
+                
+                <p class="text-gray-600 mb-4">Các class bắt buộc phải sử dụng Data Annotations (<code>[Required]</code>, <code>[MaxLength]</code>, <code>[Range]</code>) để sinh ra cấu trúc bảng tương ứng.</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">1. Product Entity (Pet / Fruit)</h3>
+                        <p class="text-sm text-gray-500 mb-2">Lưu ý sự khác biệt nhỏ: Fruit dùng <code>StockQuantity (FLOAT)</code>, Pet dùng <code>Quantity (INT)</code>, <code>Breed</code>, <code>Age</code>.</p>
+<pre><code class="language-csharp">public class Pet // Tương đương Fruit
+{
+    public int Id { get; set; }
+
+    [Required]
+    [MaxLength(100)]
+    public string Name { get; set; }
+
+    // Dành riêng cho Pet Store
+    [Required]
+    [MaxLength(100)]
+    public string Breed { get; set; }
+    
+    // Validate số dương
+    [Range(0, int.MaxValue)]
+    public int Age { get; set; }
+
+    [Required]
+    [Range(0.01, double.MaxValue)] // Phải là số dương
+    public decimal Price { get; set; }
+
+    public int Quantity { get; set; } = 0; // Kì 1 Fruit dùng: public float StockQuantity { get; set; } = 0;
+
+    [Required]
+    public int CategoryId { get; set; }
+
+    [ForeignKey("CategoryId")]
+    public PetCategory Category { get; set; } // Khai báo Navigation Property
+
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+}</code></pre>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">2. User Entity</h3>
+<pre><code class="language-csharp">public class User
+{
+    public int Id { get; set; }
+
+    [Required]
+    [MaxLength(200)]
+    public string FullName { get; set; }
+
+    [Required]
+    [EmailAddress] // Validate định dạng Email
+    [MaxLength(255)]
+    public string Email { get; set; }
+
+    [Required]
+    public string Password { get; set; } // Đề cho phép lưu plain text
+
+    [Required]
+    [MaxLength(20)]
+    public string Role { get; set; } // 'Admin' hoặc 'Customer' / 'User'
+
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+}</code></pre>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">3. PurchaseOrder & PurchaseItem (Order 2 tầng)</h3>
+                        <div class="bg-red-50 text-red-700 p-3 rounded mb-3 text-sm border border-red-100">
+                            ⚠️ <strong>Quan trọng:</strong> Điều kiện <em>"OrderDate cannot be in the future"</em> KHÔNG có DataAnnotation tích hợp sẵn. Phải xử lý logic tay trong Controller khi Create Order.
+                        </div>
+<pre><code class="language-csharp">public class PurchaseOrder // Tương đương Order
+{
+    public int Id { get; set; }
+
+    [Required]
+    public int UserId { get; set; }
+    [ForeignKey("UserId")]
+    public User User { get; set; }
+
+    [Required]
+    public DateTime OrderDate { get; set; }
+
+    public decimal TotalAmount { get; set; } // Calculated field
+
+    [MaxLength(20)]
+    public string Status { get; set; } = "Pending"; // 'Pending', 'Completed', 'Cancelled'
+
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+    public ICollection&lt;PurchaseItem&gt; PurchaseItems { get; set; } = new List&lt;PurchaseItem&gt;();
+}
+
+public class PurchaseItem // Tương đương OrderItem
+{
+    public int Id { get; set; }
+
+    [Required]
+    public int PurchaseOrderId { get; set; }
+    [ForeignKey("PurchaseOrderId")]
+    public PurchaseOrder PurchaseOrder { get; set; }
+
+    [Required]
+    public int PetId { get; set; } // FruitId
+    [ForeignKey("PetId")]
+    public Pet Pet { get; set; }
+
+    [Required]
+    [Range(1, int.MaxValue)]
+    public int Quantity { get; set; }
+
+    public decimal UnitPrice { get; set; } // Giá lấy tại thời điểm đặt
+
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. DbContext -->
+            <section id="dbcontext" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">4</span> AppDbContext & Cấu hình</h2>
+                
+<pre><code class="language-csharp">public class AppDbContext : DbContext
+{
+    public AppDbContext(DbContextOptions&lt;AppDbContext&gt; options) : base(options) { }
+
+    public DbSet&lt;Pet&gt; Pets { get; set; } // Tương ứng DbSet&lt;Fruit&gt;
+    public DbSet&lt;PetCategory&gt; PetCategories { get; set; }
+    public DbSet&lt;User&gt; Users { get; set; }
+    public DbSet&lt;PurchaseOrder&gt; PurchaseOrders { get; set; }
+    public DbSet&lt;PurchaseItem&gt; PurchaseItems { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Đề yêu cầu Email và Category Name phải UNIQUE
+        modelBuilder.Entity&lt;User&gt;()
+            .HasIndex(u =&gt; u.Email).IsUnique();
+
+        modelBuilder.Entity&lt;PetCategory&gt;()
+            .HasIndex(c =&gt; c.Name).IsUnique();
+
+        base.OnModelCreating(modelBuilder);
+    }
+}</code></pre>
+                
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Đăng ký trong Program.cs & Chạy Migration</h3>
+<pre><code class="language-csharp">// Program.cs
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Command line (Package Manager Console)
+// Add-Migration InitialCreate
+// Update-Database
+</code></pre>
+            </section>
+
+            <!-- 5. Repository -->
+            <section id="repository" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">5</span> Repository Layer</h2>
+                <p class="text-gray-600 mb-4">Các method chuẩn bắt buộc dùng lập trình bất đồng bộ (<code>async / await</code>). Nhớ Include các Navigation Properties khi cần.</p>
+<pre><code class="language-csharp">public interface IPetRepository // Kì 1: IFruitRepository
+{
+    Task&lt;List&lt;Pet&gt;&gt; GetAll();
+    Task&lt;Pet?&gt; GetById(int id);
+    Task Add(Pet pet);
+    Task Update(Pet pet);
+    Task Delete(int id);
+    Task&lt;List&lt;Pet&gt;&gt; GetByCategoryId(int categoryId);
+}
+
+public class PetRepository : IPetRepository
+{
+    private readonly AppDbContext _context;
+    public PetRepository(AppDbContext context) =&gt; _context = context;
+
+    public async Task&lt;List&lt;Pet&gt;&gt; GetAll() =&gt;
+        await _context.Pets.Include(p =&gt; p.Category).ToListAsync();
+
+    public async Task&lt;Pet?&gt; GetById(int id) =&gt;
+        await _context.Pets.Include(p =&gt; p.Category)
+            .FirstOrDefaultAsync(p =&gt; p.Id == id);
+
+    public async Task Add(Pet pet)
+    {
+        _context.Pets.Add(pet);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task Update(Pet pet)
+    {
+        _context.Pets.Update(pet);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task Delete(int id)
+    {
+        var pet = await _context.Pets.FindAsync(id);
+        if (pet != null)
+        {
+            _context.Pets.Remove(pet);
+            await _context.SaveChangesAsync();
+        }
+    }
+
+    public async Task&lt;List&lt;Pet&gt;&gt; GetByCategoryId(int categoryId) =&gt;
+        await _context.Pets.Where(p =&gt; p.CategoryId == categoryId).ToListAsync();
+}</code></pre>
+            </section>
+
+            <!-- 6. Controllers -->
+            <section id="controllers" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">6</span> API Controllers & Routing</h2>
+                <p class="text-gray-600 mb-4">Đề yêu cầu validate Foreign Key (CategoryId) khi Create/Update. Trả về <code>400 Bad Request</code> nếu lỗi, <code>404 Not Found</code> nếu không tìm thấy.</p>
+<pre><code class="language-csharp">[ApiController]
+[Route("api/[controller]")]
+public class PetsController : ControllerBase // Kì 1: FruitsController
+{
+    private readonly IPetRepository _repo;
+    private readonly AppDbContext _context; // Dùng để check FK tồn tại
+    
+    public PetsController(IPetRepository repo, AppDbContext context)
+    {
+        _repo = repo;
+        _context = context;
+    }
+
+    [HttpGet]
+    [AllowAnonymous] // Public access
+    public async Task&lt;IActionResult&gt; GetAll()
+    {
+        var pets = await _repo.GetAll();
+        
+        // Đề Kì 1 yêu cầu trả về theo định dạng Nested hoặc Flat.
+        // Format Flat dễ làm hơn:
+        var result = pets.Select(p =&gt; new
+        {
+            id = p.Id,
+            name = p.Name,
+            breed = p.Breed,
+            price = p.Price,
+            categoryId = p.CategoryId,
+            categoryName = p.Category?.Name
+        });
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public async Task&lt;IActionResult&gt; Create([FromBody] Pet pet)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        // Validate CategoryId exist
+        if (!await _context.PetCategories.AnyAsync(c =&gt; c.Id == pet.CategoryId))
+            return BadRequest("CategoryId does not exist.");
+
+        await _repo.Add(pet);
+        return CreatedAtAction(nameof(GetById), new { id = pet.Id }, pet);
+    }
+
+    [HttpGet("{id}")]
+    [AllowAnonymous]
+    public async Task&lt;IActionResult&gt; GetById(int id)
+    {
+        var pet = await _repo.GetById(id);
+        if (pet == null) return NotFound();
+        return Ok(pet);
+    }
+
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task&lt;IActionResult&gt; Update(int id, [FromBody] Pet pet)
+    {
+        if (id != pet.Id) return BadRequest("Id không khớp.");
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        var existing = await _repo.GetById(id);
+        if (existing == null) return NotFound();
+
+        if (!await _context.PetCategories.AnyAsync(c =&gt; c.Id == pet.CategoryId))
+            return BadRequest("CategoryId does not exist.");
+
+        await _repo.Update(pet);
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task&lt;IActionResult&gt; Delete(int id)
+    {
+        var existing = await _repo.GetById(id);
+        if (existing == null) return NotFound();
+
+        await _repo.Delete(id);
+        return NoContent();
+    }
+}</code></pre>
+
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">CategoriesController (public, chỉ GET)</h3>
+<pre><code class="language-csharp">[ApiController]
+[Route("api/[controller]")]
+public class CategoriesController : ControllerBase
+{
+    private readonly AppDbContext _context;
+    public CategoriesController(AppDbContext context) =&gt; _context = context;
+
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task&lt;IActionResult&gt; GetAll()
+    {
+        var categories = await _context.PetCategories.ToListAsync();
+        return Ok(categories);
+    }
+}</code></pre>
+
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Đăng ký DI trong Program.cs</h3>
+<pre><code class="language-csharp">builder.Services.AddScoped&lt;IPetRepository, PetRepository&gt;();
+// Kì 1: builder.Services.AddScoped&lt;IFruitRepository, FruitRepository&gt;();</code></pre>
+            </section>
+
+            <!-- 7. Order Logic -->
+            <section id="order-logic" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">7</span> Logic tạo Order (Nơi dễ mất điểm nhất)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-100">
+                        <h4 class="font-bold text-indigo-900 mb-3">Các bước bắt buộc phải code (Create)</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-indigo-800 text-sm">
+                            <li>Extract <code>UserId</code> từ JWT Token (không lấy từ Body)</li>
+                            <li>Gán <code>OrderDate</code> = thời gian server hiện tại</li>
+                            <li>Gán <code>Status</code> = "Pending"</li>
+                            <li>Lấy <code>UnitPrice</code> từ Product hiện tại</li>
+                            <li>Tự động tính <code>TotalAmount</code> = sum(Qty * UnitPrice)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-5 rounded-xl border border-red-100">
+                        <h4 class="font-bold text-red-900 mb-3">Các Validate bắt buộc (Create & Get)</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-red-800 text-sm">
+                            <li>Product/Pet/Fruit ID phải tồn tại trong DB</li>
+                            <li>Quantity mua phải &gt; 0</li>
+                            <li>Số lượng hàng tồn (Stock/Quantity) phải đủ</li>
+                            <li><strong>Quan trọng (GET):</strong> User chỉ được xem order của chính mình (check role + userId)</li>
+                        </ul>
+                    </div>
+                </div>
+
+<pre><code class="language-csharp">[HttpPost]
+[Authorize] // Yêu cầu đã đăng nhập (Admin hoặc Customer đều được)
+public async Task&lt;IActionResult&gt; CreateOrder([FromBody] CreateOrderDto dto)
+{
+    // 1. Extract UserId từ JWT
+    var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    if (string.IsNullOrEmpty(userIdClaim)) return Unauthorized();
+    int userId = int.Parse(userIdClaim);
+
+    // 2. Khởi tạo Order
+    var order = new PurchaseOrder
+    {
+        UserId = userId,
+        OrderDate = DateTime.Now,
+        Status = "Pending"
+    };
+
+    decimal totalAmount = 0;
+
+    // 3. Xử lý từng Item
+    foreach (var itemDto in dto.Items)
+    {
+        var pet = await _context.Pets.FindAsync(itemDto.PetId);
+        
+        // Validate tồn tại
+        if (pet == null) return BadRequest($"Pet ID {itemDto.PetId} không tồn tại.");
+        
+        // Validate số lượng yêu cầu
+        if (itemDto.Quantity &lt;= 0) return BadRequest("Số lượng phải &gt; 0.");
+        
+        // Validate hàng tồn
+        if (pet.Quantity &lt; itemDto.Quantity) return BadRequest($"Không đủ hàng cho {pet.Name}.");
+
+        var orderItem = new PurchaseItem
+        {
+            PetId = pet.Id,
+            Quantity = itemDto.Quantity,
+            UnitPrice = pet.Price // Lấy giá lúc đặt
+        };
+
+        totalAmount += orderItem.Quantity * orderItem.UnitPrice;
+        order.PurchaseItems.Add(orderItem);
+
+        // (Tùy chọn) Trừ số lượng tồn kho
+        pet.Quantity -= itemDto.Quantity; 
+    }
+
+    order.TotalAmount = totalAmount;
+
+    _context.PurchaseOrders.Add(order);
+    await _context.SaveChangesAsync();
+
+    // 4. Trả 201 Created (không phải 200 Ok)
+    // Slide Testing (Chapter 6, demo PostOrder_Returns201Created) assert đúng HttpStatusCode.Created
+    return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order);
+}
+
+[HttpGet("{id}")]
+[Authorize]
+public async Task&lt;IActionResult&gt; GetOrderById(int id)
+{
+    var order = await _context.PurchaseOrders
+        .Include(o =&gt; o.PurchaseItems)
+        .FirstOrDefaultAsync(o =&gt; o.Id == id);
+    if (order == null) return NotFound();
+    return Ok(order);
+}
+
+// DTO Classes
+public class CreateOrderDto
+{
+    public List&lt;OrderItemDto&gt; Items { get; set; }
+}
+public class OrderItemDto
+{
+    public int PetId { get; set; }
+    public int Quantity { get; set; }
+}</code></pre>
+            
+            <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Endpoint GET /api/orders (Admin xem tất cả)</h3>
+<pre><code class="language-csharp">[HttpGet]
+[Authorize(Roles = "Admin")] // đề: "Admin can view all orders (GET /api/orders)"
+public async Task&lt;IActionResult&gt; GetAllOrders()
+{
+    var orders = await _context.PurchaseOrders
+        .Include(o =&gt; o.PurchaseItems)
+        .ToListAsync();
+    return Ok(orders);
+}</code></pre>
+
+            <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Endpoint GET /api/orders/user/{userId} (chỉ xem đơn của chính mình)</h3>
+            <div class="bg-red-50 text-red-700 p-3 rounded mb-3 text-sm border border-red-100">
+                ⚠️ Đề Q3 ghi rõ: <em>"userId in route must match userId in JWT token"</em> — không có ngoại lệ cho Admin ở route này. Admin xem toàn bộ đơn qua route riêng <code>GET /api/orders</code> ở trên, KHÔNG bypass check ở route này.
+            </div>
+<pre><code class="language-csharp">[HttpGet("user/{userId}")]
+[Authorize]
+public async Task&lt;IActionResult&gt; GetOrdersByUser(int userId)
+{
+    var tokenUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Chỉ chính User đó mới được xem (không có ngoại lệ Admin ở route này)
+    if (tokenUserId != userId.ToString())
+    {
+        return Forbid(); // Trả về 403
+    }
+
+    var orders = await _context.PurchaseOrders
+        .Include(o =&gt; o.PurchaseItems)
+        .Where(o =&gt; o.UserId == userId)
+        .ToListAsync();
+
+    return Ok(orders);
+}</code></pre>
+            </section>
+
+            <!-- 8. Security -->
+            <section id="security" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">8</span> JWT Authentication & Authorization</h2>
+                
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">AuthController (Login)</h3>
+                <p class="text-gray-600 mb-4">Đề bài cho phép lưu password dưới dạng Plain Text để test. Chú ý Claim <code>NameIdentifier</code> dùng để lưu UserId.</p>
+<pre><code class="language-csharp">[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
+{
+    private readonly AppDbContext _context;
+    private readonly IConfiguration _config;
+
+    public AuthController(AppDbContext context, IConfiguration config)
+    {
+        _context = context; _config = config;
+    }
+
+    [HttpPost("login")]
+    public async Task&lt;IActionResult&gt; Login([FromBody] LoginDto dto)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u =&gt; u.Email == dto.Email &amp;&amp; u.Password == dto.Password);
+        if (user == null) return BadRequest("Sai email hoặc password.");
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.Role) // Dùng để Authorize
+        };
+
+        var token = new JwtSecurityToken(
+            issuer: _config["Jwt:Issuer"],
+            audience: _config["Jwt:Audience"],
+            claims: claims,
+            expires: DateTime.Now.AddHours(1),
+            signingCredentials: creds
+        );
+
+        return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+    }
+}</code></pre>
+            </section>
+
+            <!-- 9. Lab 7 -->
+            <section id="lab7" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">9</span> Ôn Lab 7: Unit Test & Integration Test</h2>
+                <p class="text-gray-600 mb-4">Lab 7 là Chapter 6 (Testing) áp dụng thực tế trên <strong>Library Management System</strong> (BooksController). 3 phần: Unit Test (40đ) + Integration Test (40đ) + Auth Test (bonus 20đ).</p>
+
+                <div class="bg-amber-50 border-l-4 border-amber-500 text-amber-800 p-4 rounded mb-6 text-sm">
+                    <strong>💡 Nhắc lại kiến thức nền (Chapter 6):</strong> Unit Test = test 1 class/method, KHÔNG đụng DB thật, dùng <code>Moq</code> để giả lập dependency. Integration Test = test cả pipeline Controller → Service → DB (in-memory), dùng <code>WebApplicationFactory</code>. Tỷ lệ chuẩn trong thực tế: Unit 70% / Integration 30%.
+                </div>
+
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Exercise 1: Unit Test BooksController (Moq + xUnit)</h3>
+                <p class="text-gray-600 text-sm mb-3">Mock <code>IRepository&lt;Book&gt;</code> (hoặc DbContext), KHÔNG gọi DB thật. Theo đúng mô hình AAA đã học: Arrange (setup mock) → Act (gọi method) → Assert (kiểm tra kết quả).</p>
+<pre><code class="language-csharp">public class BooksControllerTests
+{
+    private readonly Mock&lt;IRepository&lt;Book&gt;&gt; _mockRepo;
+    private readonly BooksController _controller;
+
+    public BooksControllerTests()
+    {
+        _mockRepo = new Mock&lt;IRepository&lt;Book&gt;&gt;();
+        _controller = new BooksController(_mockRepo.Object);
+    }
+
+    // ---- GetBookById ----
+    [Fact]
+    public async Task GetBookById_BookExists_ReturnsOkWithBook()
+    {
+        // Arrange
+        var book = new Book { Id = 1, Title = "Clean Code" };
+        _mockRepo.Setup(r =&gt; r.GetByIdAsync(1)).ReturnsAsync(book);
+
+        // Act
+        var result = await _controller.GetBookById(1);
+
+        // Assert
+        var okResult = Assert.IsType&lt;OkObjectResult&gt;(result);
+        Assert.Equal(book, okResult.Value);
+    }
+
+    [Fact]
+    public async Task GetBookById_BookNotFound_ReturnsNotFound()
+    {
+        _mockRepo.Setup(r =&gt; r.GetByIdAsync(99)).ReturnsAsync((Book?)null);
+
+        var result = await _controller.GetBookById(99);
+
+        Assert.IsType&lt;NotFoundResult&gt;(result);
+    }
+
+    // ---- GetAllBooks ----
+    [Fact]
+    public async Task GetAllBooks_NoBooks_ReturnsEmptyList()
+    {
+        _mockRepo.Setup(r =&gt; r.GetAllAsync()).ReturnsAsync(new List&lt;Book&gt;());
+
+        var result = await _controller.GetAllBooks();
+
+        var okResult = Assert.IsType&lt;OkObjectResult&gt;(result);
+        var books = Assert.IsAssignableFrom&lt;IEnumerable&lt;Book&gt;&gt;(okResult.Value);
+        Assert.Empty(books);
+    }
+
+    // ---- CreateBook ----
+    [Fact]
+    public async Task CreateBook_ValidBook_ReturnsCreatedAtAction()
+    {
+        var newBook = new Book { Id = 1, Title = "New Book" };
+        _mockRepo.Setup(r =&gt; r.AddAsync(It.IsAny&lt;Book&gt;())).ReturnsAsync(newBook);
+
+        var result = await _controller.CreateBook(newBook);
+
+        var createdResult = Assert.IsType&lt;CreatedAtActionResult&gt;(result);
+        Assert.Equal(newBook, createdResult.Value);
+    }
+
+    [Fact]
+    public async Task CreateBook_InvalidBook_ReturnsBadRequest()
+    {
+        _controller.ModelState.AddModelError("Title", "Required");
+
+        var result = await _controller.CreateBook(new Book());
+
+        Assert.IsType&lt;BadRequestObjectResult&gt;(result);
+    }
+
+    // ---- DeleteBook ----
+    [Fact]
+    public async Task DeleteBook_BookExists_ReturnsNoContent()
+    {
+        _mockRepo.Setup(r =&gt; r.DeleteAsync(1)).ReturnsAsync(true);
+
+        var result = await _controller.DeleteBook(1);
+
+        Assert.IsType&lt;NoContentResult&gt;(result);
+    }
+
+    [Fact]
+    public async Task DeleteBook_BookNotFound_ReturnsNotFound()
+    {
+        _mockRepo.Setup(r =&gt; r.DeleteAsync(99)).ReturnsAsync(false);
+
+        var result = await _controller.DeleteBook(99);
+
+        Assert.IsType&lt;NotFoundResult&gt;(result);
+    }
+}</code></pre>
+
+                <div class="bg-red-50 text-red-700 p-3 rounded mb-3 text-sm border border-red-100">
+                    ⚠️ Đề Lab 7 ghi "Use Moq to mock LibraryDbContext" nhưng nếu Lab 8 đã refactor sang <code>IRepository&lt;T&gt;</code> thì mock thẳng <code>IRepository&lt;Book&gt;</code> sẽ gọn hơn nhiều (không cần setup DbSet ảo phức tạp). Ưu tiên mock interface repository nếu controller đã dùng DI qua interface.
+                </div>
+
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Exercise 2: Integration Test (WebApplicationFactory)</h3>
+                <p class="text-gray-600 text-sm mb-3">Đúng như slide Chapter 6: dùng <code>WebApplicationFactory&lt;Program&gt;</code> tạo TestServer thật, override DbContext sang In-Memory, gửi HTTP request thật qua <code>HttpClient</code>.</p>
+<pre><code class="language-csharp">public class CustomWebApplicationFactory : WebApplicationFactory&lt;Program&gt;
+{
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.ConfigureServices(services =&gt;
+        {
+            // Gỡ AppDbContext cấu hình SQL Server thật
+            var descriptor = services.SingleOrDefault(
+                d =&gt; d.ServiceType == typeof(DbContextOptions&lt;AppDbContext&gt;));
+            if (descriptor != null) services.Remove(descriptor);
+
+            // Thay bằng In-Memory DB
+            services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
+                options.UseInMemoryDatabase("TestDb"));
+
+            // Seed dữ liệu test
+            var sp = services.BuildServiceProvider();
+            using var scope = sp.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService&lt;AppDbContext&gt;();
+            db.Database.EnsureCreated();
+            db.Books.Add(new Book { Id = 1, Title = "Seeded Book", Author = "A", Year = 2020 });
+            db.SaveChanges();
+        });
+    }
+}
+
+public class BooksApiIntegrationTests : IClassFixture&lt;CustomWebApplicationFactory&gt;
+{
+    private readonly HttpClient _client;
+
+    public BooksApiIntegrationTests(CustomWebApplicationFactory factory)
+    {
+        _client = factory.CreateClient();
+    }
+
+    [Fact]
+    public async Task GetBooks_ReturnsOk()
+    {
+        var response = await _client.GetAsync("/api/books");
+        response.EnsureSuccessStatusCode();
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task GetBookById_NotFound_Returns404()
+    {
+        var response = await _client.GetAsync("/api/books/999");
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task PostBook_ValidData_Returns201Created()
+    {
+        var newBook = new Book { Title = "New Book", Author = "B", Year = 2024 };
+
+        var response = await _client.PostAsJsonAsync("/api/books", newBook);
+
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task DeleteBook_Existing_Returns204NoContent()
+    {
+        var response = await _client.DeleteAsync("/api/books/1");
+        Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+    }
+}</code></pre>
+
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Exercise 3: Auth Testing (bonus)</h3>
+                <p class="text-gray-600 text-sm mb-3">Test end-to-end: login lấy token → gắn token vào header → gọi endpoint bảo vệ.</p>
+<pre><code class="language-csharp">[Fact]
+public async Task Login_ValidCredentials_ReturnsToken()
+{
+    var response = await _client.PostAsJsonAsync("/api/auth/login",
+        new { email = "admin@test.com", password = "admin123" });
+
+    response.EnsureSuccessStatusCode();
+    var body = await response.Content.ReadFromJsonAsync&lt;JsonElement&gt;();
+    Assert.True(body.TryGetProperty("token", out _));
+}
+
+[Fact]
+public async Task ProtectedEndpoint_NoToken_Returns401()
+{
+    var response = await _client.PostAsync("/api/books", null);
+    Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+}
+
+[Fact]
+public async Task AdminEndpoint_RegularUserToken_Returns403()
+{
+    _client.DefaultRequestHeaders.Authorization =
+        new AuthenticationHeaderValue("Bearer", _userToken); // token role "User"
+
+    var response = await _client.DeleteAsync("/api/books/1"); // yêu cầu role Admin
+
+    Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
+}</code></pre>
+
+                <div class="bg-emerald-50 text-emerald-800 p-3 rounded text-sm mt-4">
+                    <strong>Chấm điểm 20% "Testing Best Practices":</strong> mỗi test chỉ nên có <b>1 Assert chính</b> (One Assert Per Test), đặt tên test theo mẫu <code>MethodName_Condition_ExpectedResult</code>, và luôn giữ cấu trúc Arrange–Act–Assert rõ ràng — đúng những gì Chapter 6 nhấn mạnh.
+                </div>
+            </section>
+
+            <!-- 10. Lab 8 -->
+            <section id="lab8" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">10</span> Ôn Lab 8: Generic IRepository&lt;T&gt;</h2>
+                <p class="text-gray-600 mb-4">Khác với Repository Layer ở đề thi (viết riêng <code>IPetRepository</code> cho từng entity), Lab 8 dạy pattern <strong>generic</strong> — 1 interface dùng chung cho mọi entity. Nắm cả 2 kiểu vì đề thi có thể hỏi 1 trong 2.</p>
+
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Book Model</h3>
+<pre><code class="language-csharp">public class Book
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int Year { get; set; }
+    public string Genre { get; set; }
+}</code></pre>
+
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">IRepository&lt;T&gt; — Interface generic (khác Repository Layer đề thi)</h3>
+                <div class="bg-amber-50 border-l-4 border-amber-500 text-amber-800 p-3 rounded mb-3 text-sm">
+                    So sánh: đề thi (Q1/Q3) yêu cầu <code>IFruitRepository</code>/<code>IPetRepository</code> viết tay từng method cho 1 entity. Lab 8 dùng <code>where T : class</code> để 1 interface áp dụng được cho <b>bất kỳ</b> entity (Book, Author, Category...) mà không cần viết lại.
+                </div>
+<pre><code class="language-csharp">public interface IRepository&lt;T&gt; where T : class
+{
+    Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync();
+    Task&lt;T?&gt; GetByIdAsync(int id);
+    Task&lt;T&gt; AddAsync(T entity);
+    Task&lt;T?&gt; UpdateAsync(int id, T entity);
+    Task&lt;bool&gt; DeleteAsync(int id);
+}</code></pre>
+
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">BookRepository — implement generic interface</h3>
+<pre><code class="language-csharp">public class BookRepository : IRepository&lt;Book&gt;
+{
+    private readonly AppDbContext _context;
+    public BookRepository(AppDbContext context) =&gt; _context = context;
+
+    public async Task&lt;IEnumerable&lt;Book&gt;&gt; GetAllAsync() =&gt;
+        await _context.Books.ToListAsync();
+
+    public async Task&lt;Book?&gt; GetByIdAsync(int id) =&gt;
+        await _context.Books.FindAsync(id);
+
+    public async Task&lt;Book&gt; AddAsync(Book entity)
+    {
+        _context.Books.Add(entity);
+        await _context.SaveChangesAsync();
+        return entity;
+    }
+
+    public async Task&lt;Book?&gt; UpdateAsync(int id, Book entity)
+    {
+        var existing = await _context.Books.FindAsync(id);
+        if (existing == null) return null;
+
+        // Cập nhật từng field (không Update() nguyên object để tránh ghi đè Id)
+        existing.Title = entity.Title;
+        existing.Author = entity.Author;
+        existing.Year = entity.Year;
+        existing.Genre = entity.Genre;
+
+        await _context.SaveChangesAsync();
+        return existing;
+    }
+
+    public async Task&lt;bool&gt; DeleteAsync(int id)
+    {
+        var existing = await _context.Books.FindAsync(id);
+        if (existing == null) return false;
+
+        _context.Books.Remove(existing);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+}</code></pre>
+
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Đăng ký DI (chú ý cú pháp generic)</h3>
+<pre><code class="language-csharp">// Program.cs
+builder.Services.AddScoped&lt;IRepository&lt;Book&gt;, BookRepository&gt;();</code></pre>
+
+                <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">BooksController dùng IRepository&lt;Book&gt;</h3>
+<pre><code class="language-csharp">[ApiController]
+[Route("api/[controller]")]
+public class BooksController : ControllerBase
+{
+    private readonly IRepository&lt;Book&gt; _repo;
+    public BooksController(IRepository&lt;Book&gt; repo) =&gt; _repo = repo;
+
+    [HttpGet]
+    public async Task&lt;IActionResult&gt; GetAllBooks()
+    {
+        var books = await _repo.GetAllAsync();
+        return Ok(books);
+    }
+
+    [HttpGet("{id}")]
+    public async Task&lt;IActionResult&gt; GetBookById(int id)
+    {
+        var book = await _repo.GetByIdAsync(id);
+        if (book == null) return NotFound();
+        return Ok(book);
+    }
+
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; CreateBook([FromBody] Book book)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        var created = await _repo.AddAsync(book);
+        return CreatedAtAction(nameof(GetBookById), new { id = created.Id }, created);
+    }
+
+    [HttpPut("{id}")]
+    public async Task&lt;IActionResult&gt; UpdateBook(int id, [FromBody] Book book)
+    {
+        var updated = await _repo.UpdateAsync(id, book);
+        if (updated == null) return NotFound();
+        return Ok(updated);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task&lt;IActionResult&gt; DeleteBook(int id)
+    {
+        var deleted = await _repo.DeleteAsync(id);
+        if (!deleted) return NotFound();
+        return NoContent();
+    }
+}</code></pre>
+
+                <div class="bg-red-50 text-red-700 p-3 rounded text-sm mt-4 border border-red-100">
+                    ⚠️ Lỗi hay gặp ở Lab 8: quên ràng buộc <code>where T : class</code> trên interface (EF Core <code>DbSet&lt;T&gt;.Set&lt;T&gt;()</code> yêu cầu T là reference type) → compile lỗi. Ngoài ra <code>UpdateAsync</code> nên cập nhật từng field thay vì <code>_context.Update(entity)</code> nguyên khối, tránh trường hợp entity gửi lên thiếu field làm mất dữ liệu.
+                </div>
+            </section>
+
+            <!-- 11. Checklist -->
+            <section id="checklist" class="scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><span class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center mr-3 text-lg">11</span> Checklist Nộp Bài & Lưu Ý Khác</h2>
+                
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <div>
+                                <strong class="text-gray-800 block">Quy tắc đặt tên dự án:</strong> 
+                                <span class="text-gray-600 text-sm"><code>DDMMYYYY_BE_HoTen</code> (Ví dụ: 18062026_BE_NguyenXuanCuong).</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <div>
+                                <strong class="text-gray-800 block">Dữ liệu Test (Insert thủ công qua SSMS/SQL Server):</strong> 
+                                <span class="text-gray-600 text-sm">Ít nhất 1 tài khoản Role "Admin" (vd: admin@test.com) và 1 tài khoản Role "User"/"Customer" (vd: customer@test.com).</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <div>
+                                <strong class="text-gray-800 block">File Backup Database (*.bak):</strong> 
+                                <span class="text-gray-600 text-sm">Nhớ backup lại CSDL <strong>sau khi</strong> đã insert data mẫu để nén chung với Source code.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <div>
+                                <strong class="text-gray-800 block">File Report Documentation (.docx) (Chỉ đề Q3 yêu cầu):</strong> 
+                                <span class="text-gray-600 text-sm block mt-1">Đừng để mất 10 điểm đáng tiếc! Bao gồm 3 phần chụp màn hình:</span>
+                                <ul class="list-disc pl-5 mt-1 text-sm text-gray-600">
+                                    <li><strong>Section 1:</strong> DB Tables, Relationships, Sample Data.</li>
+                                    <li><strong>Section 2:</strong> Cấu trúc thư mục (Solution Explorer), Models, Controllers.</li>
+                                    <li><strong>Section 3:</strong> API Testing Result (Postman / Swagger) cho các case: Login, CRUD, Post Order, test Auth.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // Code highlight script injection
+        hljs.highlightAll();
+
+        // Scroll spy cho Navigation
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".sidebar-link");
+
+        const observerOptions = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach((link) => {
+                        link.classList.remove("active");
+                        if (link.getAttribute("href").substring(1) === entry.target.id) {
+                            link.classList.add("active");
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

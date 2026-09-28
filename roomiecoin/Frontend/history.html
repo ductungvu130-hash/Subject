@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="vi" style=""><head>
+<title>Lịch sử chi phí - RoomieCoin</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#544600",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#d0c6ab",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed": "#221b00",
+                        "surface-container-highest": "#d9e3f4",
+                        "primary-fixed": "#ffe16d",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "outline": "#7e775f",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#e9c400",
+                        "on-background": "#121c28",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary": "#005cab",
+                        "on-primary-container": "#705e00",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-dim": "#d1dbec",
+                        "on-surface-variant": "#4d4732",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#705d00",
+                        "tertiary": "#5d5f5f",
+                        "on-secondary-fixed-variant": "#004786",
+                        "on-surface": "#121c28",
+                        "on-secondary-container": "#fefcff",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#705d00",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ffd700",
+                        "inverse-primary": "#e9c400",
+                        "surface-container-low": "#eef4ff",
+                        "surface-container-high": "#dfe9fa",
+                        "on-tertiary-container": "#5e5f60",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-container": "#0075d6",
+                        "on-secondary-fixed": "#001c3a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#27313e",
+                        "tertiary-container": "#d9dada",
+                        "surface-variant": "#d9e3f4",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "column-count": "12",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script><meta charset="utf-8"></head><body class="bg-surface text-on-surface flex min-h-screen">
+<script src="app.js"></script>
+<!-- SideNavBar (JSON Anchor) -->
+<nav class="bg-surface dark:bg-inverse-surface shadow-sm h-screen w-64 fixed left-0 top-0 flex flex-col h-full border-r border-outline-variant dark:border-outline z-20 hidden md:flex">
+<div class="p-6 pb-2"><div class="flex items-center gap-3 mb-1"><img src="https://lh3.googleusercontent.com/aida/AP1WRLuzu7CkrjHDoUb0D4Si00u6gsKuKPRL1ftB5zmS_U9n3Vjbn9WJiqAyQUPmfQT8Ts-n3OZYyBSpnBYJqvAuGovwYgFvkCul2_4NoEa3vRDWH-auvFQbfRRZrd3C6_b69dMn0G__wrjFFcD_dR94kdWIy152LAAbZZNpaPvcDR2ZLt6jbZ871J4w3RkGwGzdkMy3St0K3luREB19nucT6GDxVi8nyi4wEJ9LmqM-IGT7w6fHHdX_ourSX0A1" alt="RoomieCoin Logo" class="h-8 w-auto object-contain"><a href="index.html" style="text-decoration:none;"><h1 class="text-headline-md font-headline-md text-secondary">RoomieCoin</h1></a></div><p class="text-label-md font-label-md text-on-surface-variant">Quản lý chi tiêu chung</p></div>
+
+<ul class="flex-1 mt-6 space-y-1"><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95 mx-2 rounded-lg" href="index.html"><span class="material-symbols-outlined">dashboard</span><span class="text-label-md font-label-md">Tổng quan</span></a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95 mx-2 rounded-lg" href="room.html"><span class="material-symbols-outlined">house</span><span class="text-label-md font-label-md">Phòng của bạn</span></a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95 mx-2 rounded-lg" href="add-expense.html"><span class="material-symbols-outlined">add_circle</span><span class="text-label-md font-label-md">Thêm chi phí</span></a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95 mx-2 rounded-lg" href="settle.html"><span class="material-symbols-outlined">payments</span><span class="text-label-md font-label-md">Tất toán</span></a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant bg-secondary-fixed dark:bg-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95 mx-2 shadow-sm" href="history.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span><span class="text-label-md font-label-md">Lịch sử chi tiêu</span></a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95 mx-2 rounded-lg" href="chores.html"><span class="material-symbols-outlined">data_check</span><span class="text-label-md font-label-md">Việc nhà</span></a></li><li class=""><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95 mx-2 rounded-lg" href="profile.html"><span class="material-symbols-outlined">person</span><span class="text-label-md font-label-md">Cá nhân</span></a></li></ul>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen bg-background relative">
+<!-- TopAppBar (JSON Anchor) -->
+<header class="bg-surface-bright dark:bg-surface-dim border-b border-outline-variant docked full-width top-0 sticky z-10 hidden md:flex justify-between items-center h-16 px-gutter transition-opacity duration-150 ease-in-out">
+<div class="flex items-center bg-surface-container-low rounded-full px-4 py-2 border border-outline-variant w-96 focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/20 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input type="text" placeholder="Tìm kiếm chi phí..." class="bg-transparent border-none focus:ring-0 text-body-md text-on-surface w-full placeholder-on-surface-variant/70">
+</div>
+<div class="flex items-center gap-4">
+<button onclick='window.location.href="notifications.html"' class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button onclick='window.location.href="settings.html"' class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-inverse-surface p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex items-center gap-3 hover:bg-surface-container-low p-1.5 rounded-full transition-colors pr-4" onclick='window.location.href="profile.html"'><img alt="Ảnh đại diện người dùng" class="w-8 h-8 rounded-full object-cover border border-outline-variant shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzP3DSGYX8jJS5hlZ2wumWlm9Wb2TzhxHG9dBvNCV5QYyFnttsb3INsbpKP0FuNv7i1qA0hYdBti994Ls28kRg-sNzsiXhL_cXO5eFhR6Y94oPVUahJi8mquKi2dsMj3RWkEcXGBk-vhbHGDStGtdpjsBIKgqGF5GkNDkScX7jl3OOh_PSEuSzOWhABLq3h9G8WKaq0PgMSZdXHESRLPtpexldNMPdcsvyAuv3W7r3B52-hlydlegx-2Obn0MwXwNY9aCahtg0jLxg"><span class="text-label-md font-label-md hidden md:block">Tuấn</span><span class="material-symbols-outlined text-on-surface-variant text-sm hidden md:block">expand_more</span></button>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-gutter pb-32">
+<!-- Page Header & Filters -->
+<div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Lịch sử chi tiêu</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">Theo dõi và quản lý mọi giao dịch chung của nhà.</p>
+</div>
+<div class="flex gap-3">
+<!-- Dropdown: Tháng -->
+<div class="relative">
+<select id="filter-month" class="appearance-none bg-surface border border-outline-variant rounded-lg px-4 py-2 pr-10 text-body-sm font-body-sm text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all cursor-pointer shadow-sm" onchange="rcApplyFilters()">
+<option>Tháng 10, 2023</option>
+<option>Tháng 9, 2023</option>
+<option>Tháng 8, 2023</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+<!-- Dropdown: Danh mục -->
+<div class="relative">
+<select id="filter-category" class="appearance-none bg-surface border border-outline-variant rounded-lg px-4 py-2 pr-10 text-body-sm font-body-sm text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all cursor-pointer shadow-sm" onchange="rcApplyFilters()">
+<option>Tất cả danh mục</option>
+<option>Điện / Nước</option>
+<option>Siêu thị</option>
+<option>Ăn uống</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+<!-- Dropdown: Người chi -->
+<div class="relative">
+<select id="filter-payer" class="appearance-none bg-surface border border-outline-variant rounded-lg px-4 py-2 pr-10 text-body-sm font-body-sm text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all cursor-pointer shadow-sm" onchange="rcApplyFilters()">
+<option>Mọi người</option>
+<option>Tuấn Anh</option>
+<option>Minh Trang</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant">
+<th class="px-6 py-4 text-label-md font-label-md text-on-surface-variant whitespace-nowrap">Ngày</th>
+<th class="px-6 py-4 text-label-md font-label-md text-on-surface-variant">Nội dung</th>
+<th class="px-6 py-4 text-label-md font-label-md text-on-surface-variant">Danh mục</th>
+<th class="px-6 py-4 text-label-md font-label-md text-on-surface-variant">Người chi</th>
+<th class="px-6 py-4 text-label-md font-label-md text-on-surface-variant text-right">Số tiền (VNĐ)</th>
+<th class="px-6 py-4 text-label-md font-label-md text-on-surface-variant text-center">Trạng thái</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-body-md font-body-md text-on-surface bg-surface-container-lowest" id="history-tbody">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group cursor-pointer" data-category="Điện / Nước" data-payer="Tuấn Anh">
+<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant text-body-sm">24/10/2023</td>
+<td class="px-6 py-4 font-medium">Tiền điện tháng 10</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="p-1.5 rounded bg-primary-fixed-dim/20 text-on-primary-container">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+</div>
+<span class="">Điện / Nước</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-surface-variant">
+<img alt="Tuấn Anh" class="w-full h-full object-cover" data-alt="A tiny profile picture showing a young Asian male with a bright smile. Clean white background. Professional friendly aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl8qD-zVKH3eWKoprTkbdlS3b2JYdMw6gYGP5u8wWv86_nC7wawSfN03Z8bnwEuLStmmNz3gFSm_lImP_jHamtdUAHwvj2p_ozYjXyHr6uwcF7bDhkuBk1tCiXxyOIbiB5Wz3CxUF6D9zJ928dbs9SgcSI2mwkW2hJ6OtBgjqEvVhGj1GgFFt7hJTpL811kTCK6V0JhvFBiSIGydk6H5_K9CpavihB-g-0297_geg3zPUHVLUcD_7S-5bBNSz-vTbVC4RVEGjbOo8n">
+</div>
+<span class="">Tuấn Anh</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-semibold">1,250,000</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#e8f5e9] text-[#2e7d32]">
+                                        Đã thanh toán
+                                    </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group cursor-pointer bg-surface/50" data-category="Siêu thị" data-payer="Minh Trang">
+<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant text-body-sm">22/10/2023</td>
+<td class="px-6 py-4 font-medium">Mua đồ siêu thị (Bột giặt, giấy)</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="p-1.5 rounded bg-secondary-fixed/50 text-secondary">
+<span class="material-symbols-outlined text-[16px]">shopping_cart</span>
+</div>
+<span class="">Siêu thị</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-surface-variant">
+<img alt="Minh Trang" class="w-full h-full object-cover" data-alt="A tiny profile picture of an Asian female with short hair, smiling lightly. Warm inviting lighting, light-mode background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr3hbWCU-VGHJFqT_m8XBCJEGYruF__SD3eT5bKFKfK7Qhp_YHxNcoYfNXSsmX7Z0Qmx8M53A63cG2_gJnPAGbpnK7RKKLiKbW-O2SRfvxEBBaR6zXLgs93lTR7xM78mJmwjMVRcZd-9uezciKpzvTUJjJdLpDLrOBbc--ByaaVvOOo1K_fH5jx83J2nPTA3F_11txwnZGKOUgLjoqhBm-65CiLxmRfwXFI3H1e6TTMJvM1ixvz7LxxI9nvfYCjvPaaEBuPSxZGwg9">
+</div>
+<span class="">Minh Trang</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-semibold">450,000</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#ffebee] text-[#c62828]">
+                                        Chưa thanh toán
+                                    </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group cursor-pointer" data-category="Bảo trì" data-payer="Tuấn Anh">
+<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant text-body-sm">18/10/2023</td>
+<td class="px-6 py-4 font-medium">Sửa ống nước bếp</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="p-1.5 rounded bg-tertiary-container/50 text-tertiary">
+<span class="material-symbols-outlined text-[16px]">plumbing</span>
+</div>
+<span class="">Bảo trì</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-surface-variant">
+<img alt="Tuấn Anh" class="w-full h-full object-cover" data-alt="A tiny profile picture showing a young Asian male with a bright smile. Clean white background. Professional friendly aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp7o24MnuzHC5KDJ00WBLZihWv2-q9Ql8PDFYjK4JWBN3IQ9SGrG08CJUI9bNnK6arlUkjdAivYpfjbvCZ8xklok17mlt0nJGMngo9E_LDZxeSHylGU6xEXI4XQsIFWtM-Ak3SZ2XzxW2HuoYVxLBH-tNflPPEoRt6oVAqm5E6T6V64848ijJXRAVmKcrq4hscLnyTJxZh3aWm1LKZvSoEwEhy_gdq7PeXidj3y5YgcmXQFu9SbFOSsAPgjODVdC0JY-mz-PW1U4YJ">
+</div>
+<span class="">Tuấn Anh</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-semibold">300,000</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#fff8e1] text-[#f57f17]">
+                                        Đang xử lý
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-surface-bright border-t border-outline-variant flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant">Hiển thị 1-10 của 45 giao dịch</span>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded hover:bg-surface-container-high text-on-surface-variant transition-colors disabled:opacity-50" disabled="" onclick="rcGoPage(-1)">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-secondary text-white font-label-sm flex items-center justify-center shadow-sm" onclick="rcGoPage(1)">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-high text-on-surface font-label-sm flex items-center justify-center transition-colors" onclick="rcGoPage(2)">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-high text-on-surface font-label-sm flex items-center justify-center transition-colors" onclick="rcGoPage(3)">3</button>
+<span class="px-1 text-on-surface-variant">...</span>
+<button class="p-2 rounded hover:bg-surface-container-high text-on-surface-variant transition-colors" onclick="rcGoPage(2)">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+function rcRenderDynamicExpenses() {
+  const tbody = document.getElementById('history-tbody');
+  const list = RC.getExpenses();
+  list.slice().reverse().forEach(function (e) {
+    const icon = RC.CATEGORY_ICON[e.category] || 'category';
+    const tr = document.createElement('tr');
+    tr.className = 'hover:bg-surface-container-lowest transition-colors group cursor-pointer';
+    tr.setAttribute('data-category', e.category);
+    tr.setAttribute('data-payer', e.payer);
+    tr.innerHTML =
+      '<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant text-body-sm">' + e.date + '</td>' +
+      '<td class="px-6 py-4 font-medium">' + e.desc + '</td>' +
+      '<td class="px-6 py-4"><div class="flex items-center gap-2"><div class="p-1.5 rounded bg-secondary-fixed/50 text-secondary"><span class="material-symbols-outlined text-[16px]">' + icon + '</span></div><span>' + e.category + '</span></div></td>' +
+      '<td class="px-6 py-4"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-[10px] font-bold text-on-surface-variant">B</div><span>' + e.payer + '</span></div></td>' +
+      '<td class="px-6 py-4 text-right font-semibold">' + e.amount.toLocaleString('vi-VN') + '</td>' +
+      '<td class="px-6 py-4 text-center"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#fff8e1] text-[#f57f17]">Mới thêm</span></td>';
+    tbody.insertBefore(tr, tbody.firstChild);
+  });
+}
+function rcApplyFilters() {
+  const cat = document.getElementById('filter-category').value;
+  const payer = document.getElementById('filter-payer').value;
+  const rows = document.querySelectorAll('#history-tbody tr');
+  rows.forEach(function (row) {
+    const okCat = cat === 'Tất cả danh mục' || row.getAttribute('data-category') === cat;
+    const okPayer = payer === 'Mọi người' || row.getAttribute('data-payer') === payer;
+    row.style.display = (okCat && okPayer) ? '' : 'none';
+  });
+  RC.toast('Đã áp dụng bộ lọc', 'info');
+}
+function rcGoPage(n) {
+  RC.toast('Đây là bản demo tĩnh — dữ liệu chỉ hiển thị trang 1', 'info');
+}
+document.addEventListener('DOMContentLoaded', rcRenderDynamicExpenses);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

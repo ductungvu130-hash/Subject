@@ -1,0 +1,465 @@
+<!DOCTYPE html><html class="light" lang="vi" style=""><head>
+<title>Phòng của bạn - RoomieCoin</title><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f8f9ff",
+                      "tertiary-container": "#d9dada",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "error": "#ba1a1a",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-tertiary-container": "#5e5f60",
+                      "primary-fixed-dim": "#e9c400",
+                      "primary": "#705d00",
+                      "surface-container-low": "#eef4ff",
+                      "on-primary-container": "#705e00",
+                      "inverse-surface": "#27313e",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#dfe9fa",
+                      "secondary": "#005cab",
+                      "on-surface": "#121c28",
+                      "on-primary-fixed": "#221b00",
+                      "tertiary-fixed": "#e2e2e2",
+                      "surface-dim": "#d1dbec",
+                      "inverse-primary": "#e9c400",
+                      "surface": "#f8f9ff",
+                      "secondary-container": "#0075d6",
+                      "on-background": "#121c28",
+                      "secondary-fixed-dim": "#a5c8ff",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-secondary-fixed-variant": "#004786",
+                      "on-secondary-fixed": "#001c3a",
+                      "on-secondary-container": "#fefcff",
+                      "surface-bright": "#f8f9ff",
+                      "on-surface-variant": "#4d4732",
+                      "surface-container-highest": "#d9e3f4",
+                      "primary-container": "#ffd700",
+                      "outline": "#7e775f",
+                      "outline-variant": "#d0c6ab",
+                      "tertiary": "#5d5f5f",
+                      "surface-container": "#e5eeff",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#d9e3f4",
+                      "surface-tint": "#705d00",
+                      "primary-fixed": "#ffe16d",
+                      "on-primary-fixed-variant": "#544600",
+                      "secondary-fixed": "#d4e3ff",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "container-max": "1280px",
+                      "gutter": "24px",
+                      "column-count": "12",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.25",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      }catch(_e){}</script><meta charset="utf-8"></head><body class="bg-background text-on-surface font-body-md antialiased h-screen overflow-hidden flex selection:bg-primary-container selection:text-on-primary-container">
+<script src="app.js"></script>
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface shadow-sm flex flex-col border-r border-outline-variant dark:border-outline z-20">
+<div class="px-6 py-8 flex flex-col items-center justify-center border-outline-variant dark:border-outline bg-transparent"><div class="flex items-center gap-3 mb-2"><img alt="RoomieCoin Logo" class="h-8 w-auto object-contain bg-transparent" src="https://lh3.googleusercontent.com/aida/AP1WRLuzu7CkrjHDoUb0D4Si00u6gsKuKPRL1ftB5zmS_U9n3Vjbn9WJiqAyQUPmfQT8Ts-n3OZYyBSpnBYJqvAuGovwYgFvkCul2_4NoEa3vRDWH-auvFQbfRRZrd3C6_b69dMn0G__wrjFFcD_dR94kdWIy152LAAbZZNpaPvcDR2ZLt6jbZ871J4w3RkGwGzdkMy3St0K3luREB19nucT6GDxVi8nyi4wEJ9LmqM-IGT7w6fHHdX_ourSX0A1"><a href="index.html" style="text-decoration:none;"><h1 class="text-headline-sm font-headline-sm text-on-surface">RoomieCoin</h1></a></div><p class="text-label-sm font-label-sm text-on-surface-variant">Quản lý chi tiêu chung</p></div>
+<div class="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-2"><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors rounded-lg group" href="index.html"><span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span><span class="text-label-md font-label-md">Tổng quan</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant bg-secondary-fixed dark:bg-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95 shadow-sm" href="room.html"><span class="material-symbols-outlined text-secondary">house</span><span class="text-label-md font-label-md">Phòng của bạn</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors rounded-lg group" href="add-expense.html"><span class="material-symbols-outlined group-hover:text-primary transition-colors">add_circle</span><span class="text-label-md font-label-md">Thêm chi phí</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors rounded-lg group" href="settle.html"><span class="material-symbols-outlined group-hover:text-primary transition-colors">payments</span><span class="text-label-md font-label-md">Tất toán</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors rounded-lg group" href="history.html"><span class="material-symbols-outlined group-hover:text-primary transition-colors">history</span><span class="text-label-md font-label-md">Lịch sử chi tiêu</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors rounded-lg group" href="chores.html"><span class="material-symbols-outlined group-hover:text-primary transition-colors">data_check</span><span class="text-label-md font-label-md">Việc nhà</span></a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors rounded-lg group" href="profile.html"><span class="material-symbols-outlined group-hover:text-primary transition-colors">person</span><span class="text-label-md font-label-md">Cá nhân</span></a></div>
+<div class="p-4 border-t border-outline-variant dark:border-outline bg-surface-container-low">
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-margin-desktop w-full bg-surface-bright dark:bg-surface-dim border-b border-outline-variant sticky top-0 z-10 transition-opacity duration-150 ease-in-out">
+<div class="flex items-center bg-surface-container-high rounded-full px-4 py-2 w-96 border border-transparent focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary-fixed transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" data-weight="outline">search</span>
+<input class="bg-transparent border-none outline-none w-full text-body-md font-body-md placeholder:text-on-surface-variant/70 focus:ring-0 p-0 text-on-surface" placeholder="Tìm kiếm thành viên, chi phí..." type="text">
+</div>
+<div class="flex items-center gap-6">
+<button onclick='window.location.href="notifications.html"' class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-weight="outline">notifications</span>
+<span class="absolute top-0 right-0 w-2.5 h-2.5 bg-error rounded-full border-2 border-surface-bright"></span>
+</button>
+<button onclick='window.location.href="settings.html"' class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-weight="outline">settings</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<button class="flex items-center gap-3 hover:bg-surface-container-low p-1.5 rounded-full transition-colors pr-4" onclick='window.location.href="profile.html"'><img alt="Ảnh đại diện người dùng" class="w-8 h-8 rounded-full object-cover border border-outline-variant shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfqAqTM_vHXMDbbCGvaCZxXrus4busUJ2FNtPkj2I1p1ymviO8tPfTFJg8FERNzFciQiJoji1MzkUptaE8bBvPdHfh4KnTotNQnzUXw8YfqmwjITsCBwiK0JFJBLRIivQYGGWCfKl3L6CQtkoSVGQjElt3PbpSbnMZGHdIDEzcRGmdE2Um5s-8q87t-HxAxE5EGhyNF_mdT4p-Bl69cmieAoUxNbTIXc9-7bTr0RVK8zkeZRiOejrrucLAnX6ola5kOopkyKTtErvh"><span class="text-label-md font-label-md hidden md:block">Tuấn</span><span class="material-symbols-outlined text-on-surface-variant text-sm hidden md:block">expand_more</span></button>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="flex-1 overflow-y-auto p-8 lg:px-margin-desktop lg:py-10 bg-background">
+<div class="max-w-container-max mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h2 class="text-display-lg font-display-lg text-on-surface mb-2">Thông tin phòng</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Quản lý thành viên và thiết lập phòng chung</p>
+</div>
+<div class="flex gap-3"><button class="px-5 py-2.5 border border-primary text-primary bg-surface rounded-lg text-label-md font-label-md flex items-center gap-2 hover:bg-primary-container transition-all active:scale-95" onclick='window.location.href="create-room.html"'><span class="material-symbols-outlined text-sm">add_home</span>Tạo phòng mới</button>
+<button class="px-5 py-2.5 bg-secondary text-on-secondary rounded-lg text-label-md font-label-md flex items-center gap-2 hover:bg-secondary-container hover:shadow-md transition-all active:scale-95" onclick="rcInviteMember()">
+<span class="material-symbols-outlined text-sm">person_add</span>
+                            Mời thành viên
+                        </button>
+<button class="px-5 py-2.5 border border-outline bg-surface rounded-lg text-label-md font-label-md flex items-center gap-2 hover:bg-surface-container-high transition-all active:scale-95 text-on-surface" onclick="rcEditRoomInfo()">
+<span class="material-symbols-outlined text-sm">edit</span>
+                            Chỉnh sửa
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Room Summary Card (Left Column) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Members Count Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex items-center justify-between relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-container rounded-full opacity-20 blur-xl group-hover:bg-primary transition-colors duration-500"></div>
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant mb-1 uppercase tracking-wider">Số lượng thành viên</p>
+<div class="flex items-baseline gap-2">
+<span class="text-display-lg font-display-lg text-on-surface" id="members-count">4</span>
+<span class="text-body-md font-body-md text-on-surface-variant">/ 6 tối đa</span>
+</div>
+</div>
+<div class="w-14 h-14 bg-secondary-fixed rounded-full flex items-center justify-center shadow-inner z-10">
+<span class="material-symbols-outlined text-secondary text-headline-lg" data-weight="fill">groups</span>
+</div>
+</div>
+<!-- Room Details Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-6 border-b border-outline-variant pb-4">Chi tiết phòng</h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">apartment</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-0.5">Tên phòng / Căn hộ</p>
+<p class="text-body-md font-body-md text-on-surface font-semibold" id="room-name-text">Căn hộ 402 - Sunrise City</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">event</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-0.5">Ngày thành lập</p>
+<p class="text-body-md font-body-md text-on-surface">15/08/2023</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">payments</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-0.5">Chu kỳ chốt sổ</p>
+<p class="text-body-md font-body-md text-on-surface">Ngày 5 hàng tháng</p>
+</div>
+</li>
+</ul>
+</div><div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant"><h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">Mã mời phòng</h3><div class="flex items-center justify-between bg-surface-container-low p-4 rounded-lg border border-outline-variant"><span class="text-headline-md font-bold tracking-widest text-primary">ROOM24</span><button class="flex items-center gap-1 text-secondary hover:text-primary transition-colors font-label-md" onclick='RC.copy("ROOM24","Đã sao chép mã mời phòng!")'><span class="material-symbols-outlined text-sm">content_copy</span>Sao chép</button></div><p class="text-body-sm text-on-surface-variant mt-3">Chia sẻ mã này để mời thành viên mới tham gia phòng của bạn.</p></div>
+</div>
+<!-- Members List (Right Column) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant flex flex-col overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+<h3 class="text-headline-md font-headline-md text-on-surface">Danh sách thành viên</h3>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant" onclick="rcSortMembers()">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low text-label-md font-label-md text-on-surface-variant">
+<tr>
+<th class="py-4 px-6 font-semibold">Thành viên</th>
+<th class="py-4 px-6 font-semibold">Vai trò</th>
+<th class="py-4 px-6 font-semibold">Trạng thái</th>
+<th class="py-4 px-6 font-semibold text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant" id="members-tbody">
+<!-- Member 1: Admin -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover border-2 border-primary-container shadow-sm" data-alt="A portrait of a confident young Vietnamese man with glasses, looking directly at the camera, brightly lit, modern office environment, functioning as an avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfqAqTM_vHXMDbbCGvaCZxXrus4busUJ2FNtPkj2I1p1ymviO8tPfTFJg8FERNzFciQiJoji1MzkUptaE8bBvPdHfh4KnTotNQnzUXw8YfqmwjITsCBwiK0JFJBLRIivQYGGWCfKl3L6CQtkoSVGQjElt3PbpSbnMZGHdIDEzcRGmdE2Um5s-8q87t-HxAxE5EGhyNF_mdT4p-Bl69cmieAoUxNbTIXc9-7bTr0RVK8zkeZRiOejrrucLAnX6ola5kOopkyKTtErvh">
+<div class="absolute -bottom-1 -right-1 bg-primary text-on-primary rounded-full w-5 h-5 flex items-center justify-center border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-[12px]" data-weight="fill">shield_person</span>
+</div>
+</div>
+<div>
+<p class="text-body-md font-body-md font-semibold text-on-surface">Minh Tuấn (Bạn)</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">tuan.minh@example.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-label-sm font-label-sm font-bold border border-primary-fixed-dim">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                                                Trưởng phòng
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]"></span>
+<span class="text-body-sm font-body-sm text-on-surface">Online</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 rounded-full hover:bg-surface-container-highest text-on-surface-variant transition-colors opacity-0 group-hover:opacity-100" onclick="rcMemberMenu(this,'Minh Tuấn (Bạn)')">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Member 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a smiling young Vietnamese woman with long dark hair, wearing a casual light-colored blouse, plain background, profile picture style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAekYP6EhyRokOidE4hoXz2EF3uQRlSMnuk1dDrB8-SpAuajfk3rkbMucEGN89jD8Lnkgk-nSaq2svXdY162gRZG-Z6lz4OwAd_jWYQYgcOtZSfYeCLxFVUJDUg2AEZPLWbpEaVV_9DqXU79WvN6kJga0P5xSv7o9HnwnjnGRBy-z1YwxSGW8uB68xJHP8LmH9qOwJMKmhz7g1GEU6vom9ZoliyUbINtO765bdx_1bOma-gAkL0iVkUcvLxsYYUgZki11IgOCizcy2B">
+<div>
+<p class="text-body-md font-body-md font-semibold text-on-surface">Hải Yến</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">yen.hai@example.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex px-3 py-1 rounded-full bg-surface-variant text-on-surface-variant text-label-sm font-label-sm">
+                                                Thành viên
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]"></span>
+<span class="text-body-sm font-body-sm text-on-surface">Online</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right"><button class="p-2 rounded-full hover:bg-error-container hover:text-error text-on-surface-variant transition-colors opacity-0 group-hover:opacity-100 mr-2" onclick="rcRemoveMember(this,'Hải Yến')"><span class="material-symbols-outlined">person_remove</span></button>
+<button class="p-2 rounded-full hover:bg-surface-container-highest text-on-surface-variant transition-colors opacity-0 group-hover:opacity-100" onclick="rcMemberMenu(this,'Hải Yến')">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Member 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant" data-alt="Avatar portrait of a young male university student in Vietnam, casual t-shirt, relaxed expression, softly lit indoor setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX238A4fgPjQXyhoKJggJQb7W9mBMrg_rcJmq3gUEvv7qvJMP_4WwG2q4LpthzZG6GVcezgqspD9vMVTkvPLym69Ru-1iE7B4FuJev0eEEMjfy14jQ_ufyCUfXgH1wBpKh2RTDP8wBNqqRmKb70SAcoW18dpv6ORMFDqO4Hht9AWItdJR686qXmYyiR68yqvbYTLzDvxh-g9mayZyYp_ndqCbR2EmELnjr2H1elLaPrMjsu79yBrsWztTXDq9YdpMDoMfj1_e9BYPr">
+<div>
+<p class="text-body-md font-body-md font-semibold text-on-surface">Quốc Bảo</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">bao.quoc@example.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex px-3 py-1 rounded-full bg-surface-variant text-on-surface-variant text-label-sm font-label-sm">
+                                                Thành viên
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-outline-variant"></span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Offline (2h trước)</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right"><button class="p-2 rounded-full hover:bg-error-container hover:text-error text-on-surface-variant transition-colors opacity-0 group-hover:opacity-100 mr-2" onclick="rcRemoveMember(this,'Quốc Bảo')"><span class="material-symbols-outlined">person_remove</span></button>
+<button class="p-2 rounded-full hover:bg-surface-container-highest text-on-surface-variant transition-colors opacity-0 group-hover:opacity-100" onclick="rcMemberMenu(this,'Quốc Bảo')">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Member 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-headline-sm font-headline-sm font-bold shadow-sm">
+                                                    L
+                                                </div>
+<div>
+<p class="text-body-md font-body-md font-semibold text-on-surface">Linh Đan</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">dan.linh@example.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex px-3 py-1 rounded-full bg-surface-variant text-on-surface-variant text-label-sm font-label-sm">
+                                                Thành viên
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-outline-variant"></span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Offline (1 ngày trước)</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right"><button class="p-2 rounded-full hover:bg-error-container hover:text-error text-on-surface-variant transition-colors opacity-0 group-hover:opacity-100 mr-2" onclick="rcRemoveMember(this,'Linh Đan')"><span class="material-symbols-outlined">person_remove</span></button>
+<button class="p-2 rounded-full hover:bg-surface-container-highest text-on-surface-variant transition-colors opacity-0 group-hover:opacity-100" onclick="rcMemberMenu(this,'Linh Đan')">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+function rcInviteMember() {
+  RC.copy('ROOM24', 'Đã sao chép mã mời — gửi mã ROOM24 cho bạn cùng phòng để họ tham gia!');
+}
+function rcEditRoomInfo() {
+  var el = document.getElementById('room-name-text');
+  var current = el.textContent.trim();
+  var next = prompt('Tên phòng / Căn hộ:', current);
+  if (next && next.trim() && next.trim() !== current) {
+    el.textContent = next.trim();
+    RC.toast('Đã cập nhật thông tin phòng!');
+  }
+}
+function rcSortMembers() {
+  var tbody = document.getElementById('members-tbody');
+  var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+  rows.sort(function (a, b) {
+    var aOnline = /Online/.test(a.textContent) ? 0 : 1;
+    var bOnline = /Online/.test(b.textContent) ? 0 : 1;
+    return aOnline - bOnline;
+  });
+  rows.forEach(function (r) { tbody.appendChild(r); });
+  RC.toast('Đã sắp xếp: thành viên online lên trước');
+}
+function rcMemberMenu(btn, name) {
+  RC.openMenu(btn, [
+    { label: 'Xem hồ sơ ' + name, onClick: function () { RC.toast('Đang xem hồ sơ ' + name, 'info'); } },
+    { label: 'Nhắn tin cho ' + name, onClick: function () { RC.toast('Đã mở khung chat với ' + name, 'info'); } }
+  ]);
+}
+function rcRemoveMember(btn, name) {
+  if (!confirm('Xoá ' + name + ' khỏi phòng?')) return;
+  var row = btn.closest('tr');
+  if (row) row.remove();
+  var countEl = document.getElementById('members-count');
+  var n = parseInt(countEl.textContent, 10) || 1;
+  countEl.textContent = Math.max(0, n - 1);
+  RC.toast('Đã xoá ' + name + ' khỏi phòng');
+}
+</script>
+
+
+
+
+
+
+
+</body></html>

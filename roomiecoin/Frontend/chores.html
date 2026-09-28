@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="vi" style=""><head>
+<title>Việc nhà - RoomieCoin</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#544600",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#d0c6ab",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed": "#221b00",
+                        "surface-container-highest": "#d9e3f4",
+                        "primary-fixed": "#ffe16d",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "outline": "#7e775f",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#e9c400",
+                        "on-background": "#121c28",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary": "#005cab",
+                        "on-primary-container": "#705e00",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-dim": "#d1dbec",
+                        "on-surface-variant": "#4d4732",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#705d00",
+                        "tertiary": "#5d5f5f",
+                        "on-secondary-fixed-variant": "#004786",
+                        "on-surface": "#121c28",
+                        "on-secondary-container": "#fefcff",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#705d00",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ffd700",
+                        "inverse-primary": "#e9c400",
+                        "surface-container-low": "#eef4ff",
+                        "surface-container-high": "#dfe9fa",
+                        "on-tertiary-container": "#5e5f60",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-container": "#0075d6",
+                        "on-secondary-fixed": "#001c3a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#27313e",
+                        "tertiary-container": "#d9dada",
+                        "surface-variant": "#d9e3f4",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "column-count": "12",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><meta charset="utf-8"></head><body class="bg-background text-on-background font-body-md min-h-screen">
+<script src="app.js"></script>
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface shadow-sm flex flex-col border-r border-outline-variant z-20 hidden md:flex">
+<!-- Brand -->
+<div class="px-6 py-8 border-b border-outline-variant/30 flex items-center gap-3"><div class="flex items-center gap-3"><img src="https://lh3.googleusercontent.com/aida/AP1WRLuzu7CkrjHDoUb0D4Si00u6gsKuKPRL1ftB5zmS_U9n3Vjbn9WJiqAyQUPmfQT8Ts-n3OZYyBSpnBYJqvAuGovwYgFvkCul2_4NoEa3vRDWH-auvFQbfRRZrd3C6_b69dMn0G__wrjFFcD_dR94kdWIy152LAAbZZNpaPvcDR2ZLt6jbZ871J4w3RkGwGzdkMy3St0K3luREB19nucT6GDxVi8nyi4wEJ9LmqM-IGT7w6fHHdX_ourSX0A1" alt="RoomieCoin Logo" class="h-10 w-10 object-contain rounded-md"><div><a href="index.html" style="text-decoration:none;"><h1 class="text-headline-sm font-headline-sm text-primary">RoomieCoin</h1></a><p class="text-label-sm font-label-sm text-on-surface-variant">Quản lý chi tiêu chung</p></div></div></div>
+<!-- CTA -->
+
+<!-- Navigation Links -->
+<div class="flex-1 px-3 space-y-1 overflow-y-auto"><!-- Tổng quan -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg group" href="index.html">
+<span class="material-symbols-outlined text-tertiary group-hover:text-primary transition-colors" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Tổng quan</span>
+</a>
+<!-- Phòng của bạn -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg group" href="room.html">
+<span class="material-symbols-outlined text-tertiary group-hover:text-primary transition-colors" data-icon="home">home</span>
+<span class="text-label-md font-label-md">Phòng của bạn</span>
+</a>
+<!-- Thêm chi phí -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg group" href="add-expense.html">
+<span class="material-symbols-outlined text-tertiary group-hover:text-primary transition-colors" data-icon="add_circle">add_circle</span>
+<span class="text-label-md font-label-md">Thêm chi phí</span>
+</a>
+<!-- Tất toán -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg group" href="settle.html">
+<span class="material-symbols-outlined text-tertiary group-hover:text-primary transition-colors" data-icon="payments">payments</span>
+<span class="text-label-md font-label-md">Tất toán</span>
+</a>
+<!-- Lịch sử chi tiêu -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg group" href="history.html">
+<span class="material-symbols-outlined text-tertiary group-hover:text-primary transition-colors" data-icon="history">history</span>
+<span class="text-label-md font-label-md">Lịch sử chi tiêu</span>
+</a>
+<!-- Việc nhà (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant bg-secondary-fixed rounded-lg font-bold transition-all duration-200 active:scale-95" href="chores.html">
+<span class="material-symbols-outlined fill" data-icon="data_check" data-weight="fill">data_check</span>
+<span class="text-label-md font-label-md">Việc nhà</span>
+</a>
+<!-- Cá nhân -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-95 rounded-lg group" href="profile.html">
+<span class="material-symbols-outlined text-tertiary group-hover:text-primary transition-colors" data-icon="person">person</span>
+<span class="text-label-md font-label-md">Cá nhân</span>
+</a></div>
+<!-- User Profile Mini -->
+<div class="p-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-3">
+
+<div>
+
+
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="md:ml-64 flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky bg-surface-bright border-b border-outline-variant flex justify-between items-center h-16 px-margin-desktop w-full z-10">
+<!-- Left side / Search -->
+<div class="flex items-center gap-4 flex-1">
+<!-- Mobile Menu Button (hidden on desktop) -->
+<button class="md:hidden text-on-surface-variant p-2 -ml-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h2 class="text-headline-md font-headline-md text-primary hidden md:block">Việc nhà</h2>
+<div class="relative max-w-md w-full md:ml-8 hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-body-md focus:ring-2 focus:ring-secondary focus:bg-surface transition-all placeholder:text-on-surface-variant" placeholder="Tìm kiếm công việc..." type="text">
+</div>
+</div>
+<!-- Right Side / Actions -->
+<div class="flex items-center gap-2">
+<button onclick='window.location.href="notifications.html"' class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-surface-bright"></span>
+</button>
+<button onclick='window.location.href="settings.html"' class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+
+<div class="flex items-center gap-3 ml-2 pl-2 border-l border-outline-variant/30" onclick='window.location.href="profile.html"' style="cursor:pointer;"><span class="text-label-md font-label-md text-on-surface hidden lg:block">Tuấn</span><img alt="User Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant shadow-sm cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVlWmFwy9uovsdRKnFWZm-6LMNmec0JCaRsrQp5K5PDO1DDnE2Ef8H9N8pbo9_7BwQ_m2lUoo1nqlzCc-ER_UlavAq0WEAHOFaheuOCK53mp-7cruZT3mijrTeeK89IaG0cRW2R9QOastluphb0xGDvEnRKtkQdHK-aVYPEQYqKEiO2jeQ15l7Or4jKiI8Tneqo2LNbLHvsMwp2f-5xwP5Q63Xk__D-jazbUu8U88finy8rY70GQHV9SBO2sTntTUR_539qSHLCSYI"><span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="expand_more">expand_more</span></div></div>
+</header>
+<!-- Main Workspace (Kanban Board) -->
+<main class="flex-1 p-6 md:p-8 bg-background overflow-x-hidden">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-background mb-1">Quản lý việc nhà</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Theo dõi và phân công công việc chung trong tuần này.</p>
+</div>
+<div class="flex items-center gap-3">
+<!-- Avatar Group -->
+<div class="flex -space-x-2">
+<img alt="" class="w-10 h-10 rounded-full border-2 border-surface object-cover shadow-sm" data-alt="Portrait of a young Asian man wearing round glasses, casual modern style, well lit." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVlWmFwy9uovsdRKnFWZm-6LMNmec0JCaRsrQp5K5PDO1DDnE2Ef8H9N8pbo9_7BwQ_m2lUoo1nqlzCc-ER_UlavAq0WEAHOFaheuOCK53mp-7cruZT3mijrTeeK89IaG0cRW2R9QOastluphb0xGDvEnRKtkQdHK-aVYPEQYqKEiO2jeQ15l7Or4jKiI8Tneqo2LNbLHvsMwp2f-5xwP5Q63Xk__D-jazbUu8U88finy8rY70GQHV9SBO2sTntTUR_539qSHLCSYI">
+<img alt="" class="w-10 h-10 rounded-full border-2 border-surface object-cover shadow-sm" data-alt="Portrait of a young Asian woman with short hair, smiling gently, bright background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJn1pClproImfIYH-mLdvHXdXEmUk6XuCG1CJ27BvnNPCvxSqUf95Dn5wuj2NHQ7y_qQmT7xJ3i738qacL5PsjPyLfIo7dbU6gigkdpBG8EngVlJJFH4xrB-jazi-yvgZvWPzDK8GGQQY3o0yKp4pmN21ntry4OiqIaSW8Be1azpAIl7R5fIBL90Et1HvoJoYHFOIbOzdGoXCFcFt-UDBNw__RvuLhNc19ORCc0EzKgrPXSFM3ozCJvR4SjwMtEPu1bZWdwXrFpYwB">
+<img alt="" class="w-10 h-10 rounded-full border-2 border-surface object-cover shadow-sm" data-alt="Portrait of an Asian guy with a casual beanie, friendly expression, soft daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOYV44bSGzHnPvRwYdi8pP6NPEKoghVarpHKHc6Vb9XnqX2froftBCM3YxHFJHzTTuv60B23cHnEHbp8W1RBaTy3zZbKmQdwPeMYGvBsmrOij2_uMiUaVOUh4vnGj0gse0ZzchqlXmZtXd69YRnj-_nvBaNIZYbAGlJJlx04Vm1PwCf8YdtlVoa11ZtHJhAPXHxpEtVz5L80KwYuJjuM8ol-BqizhZ7gf9iKwEbRHc7_hcSZMbHi1ZCSXXmZQM06r7G0CA5bj-BuMk">
+<button class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-sm hover:bg-surface-variant transition-colors shadow-sm" onclick="window.location.href='room.html'">
+                            +2
+                        </button>
+</div>
+<button class="bg-secondary text-white px-4 py-2 rounded-lg font-label-md flex items-center gap-2 hover:bg-secondary-container transition-colors shadow-[0_4px_14px_rgba(0,92,171,0.25)]" onclick="rcAddChore()">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                        Thêm việc mới
+                    </button>
+</div>
+</div>
+<!-- Kanban Board Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-[calc(100vh-220px)] min-h-[600px]">
+<!-- Column: Cần làm (To Do) -->
+<div class="bg-surface-bright rounded-xl border border-outline-variant/30 flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden" id="todo-column">
+<!-- Column Header -->
+<div class="p-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface/50">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Cần làm</h3>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded-full text-label-sm ml-1" id="todo-count">3</span>
+</div>
+<button class="text-tertiary hover:text-on-surface transition-colors p-1" onclick="RC.toast('Tuỳ chọn cột đang được phát triển', 'info')">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<!-- Column Content (Cards) -->
+<div class="p-4 flex-1 overflow-y-auto kanban-col space-y-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/40 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all cursor-grab group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<label class="relative flex items-start cursor-pointer mt-0.5">
+<input class="peer sr-only" type="checkbox" onchange="rcToggleChore(this)">
+<div class="w-5 h-5 rounded border-2 border-outline-variant peer-checked:bg-primary peer-checked:border-primary transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100 transition-opacity" data-icon="check">check</span>
+</div>
+</label>
+<div>
+<h4 class="text-body-md font-headline-sm text-on-surface group-hover:text-secondary transition-colors">Đổ rác</h4>
+<p class="text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Gom rác nhà bếp và phòng khách mang xuống sảnh.</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex gap-2">
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded-md text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="schedule">schedule</span>
+                                        Hôm nay
+                                    </span>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-1 rounded-md text-[11px] font-semibold">Bếp</span>
+</div>
+<img alt="Assignee" class="w-7 h-7 rounded-full object-cover ring-2 ring-surface-bright" data-alt="Portrait of a young Asian man wearing round glasses, casual modern style, well lit." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcVoanAJIo_BoCRREhqBv0z9nO8zNGf-V7XxenHgUsZVXj0q6O6MORvarrglv3iYF8Zyhw5-8GC5WQwtkhsRAiiCYBFs64968p6mbrZnRj3BqTp4ElA39ilRM8whIXv3oV0_hYaOmfcW96njY_Es3EyRgYavcD1ld90x57mXJHbuCyoWrqLfyhUTB6v0KThYQtIrNzlBRmPCIpaBqdnYzSnu2ZMWL6Pw4Pv-r2wr32qWkGgUS2dCOojR864JXxPmFjX9uQDQwRe6Db">
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/40 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all cursor-grab group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<label class="relative flex items-start cursor-pointer mt-0.5">
+<input class="peer sr-only" type="checkbox" onchange="rcToggleChore(this)">
+<div class="w-5 h-5 rounded border-2 border-outline-variant peer-checked:bg-primary peer-checked:border-primary transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100 transition-opacity" data-icon="check">check</span>
+</div>
+</label>
+<div>
+<h4 class="text-body-md font-headline-sm text-on-surface group-hover:text-secondary transition-colors">Quét nhà &amp; Lau nhà</h4>
+<p class="text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Khu vực sinh hoạt chung và hành lang.</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex gap-2">
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded-md text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="calendar_today">calendar_today</span>
+                                        Mai
+                                    </span>
+</div>
+<img alt="Assignee" class="w-7 h-7 rounded-full object-cover ring-2 ring-surface-bright" data-alt="Portrait of a young Asian woman with short hair, smiling gently, bright background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4uWmpKznpe0woH1OO77jHEH09uWX_pgC6-gNhrULeyV-HRJtxRKnofM4XFy7__m1YEYz4iPQ7Xgld0upgTRbNKAsdnmgJqsDNCtBrGgCVQkFK-hT7eI_4pNPSy1hZY7vTya7nTgsPfzrvevh_nVXBK7-N124Wxyt-mhnpEtcauABs8r35MLNZh5WnGkX6AUDTdYv6SKxGBNaapEWEnWKACQkODsgd-SaM7bh-riPBHjf9pkV7vaaISR-faQvilLu5wkhtN4yVRidg">
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/40 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all cursor-grab group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<label class="relative flex items-start cursor-pointer mt-0.5">
+<input class="peer sr-only" type="checkbox" onchange="rcToggleChore(this)">
+<div class="w-5 h-5 rounded border-2 border-outline-variant peer-checked:bg-primary peer-checked:border-primary transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100 transition-opacity" data-icon="check">check</span>
+</div>
+</label>
+<div>
+<h4 class="text-body-md font-headline-sm text-on-surface group-hover:text-secondary transition-colors">Lau bếp</h4>
+<p class="text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Lau mặt bếp ga và khu vực bồn rửa chén.</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex gap-2">
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded-md text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="calendar_today">calendar_today</span>
+                                        T6, 24/10
+                                    </span>
+</div>
+<img alt="Assignee" class="w-7 h-7 rounded-full object-cover ring-2 ring-surface-bright" data-alt="Portrait of an Asian guy with a casual beanie, friendly expression, soft daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBQ2SNyGcNuL983FyomoFD8zXVOjrHjzlb72YzkoyYi3-IDHgUSCYLNSEtZ9XqEdehZSjVljVFMtcDmf4W6ZmHJb-Nj8uq6YR1mj1vpcTaK13EeAUj6PKC1R96axd8QMgfzBiaXUDTtH1X3lmi3ZK2yD1HlKMz_kNqEwL8EbuzbQK797XoNZRTKKNOMBPklctphqTepesDS4zUcla9nEKsAYL3tb8VN_oH5RJUxcm1vZGWn5tjZQGZ3HcZfeKbnUT1FMvy5u2fjdUU">
+</div>
+</div>
+</div>
+<!-- Add Task Quick Input -->
+<div class="p-3 border-t border-outline-variant/20 bg-surface/30">
+<button class="w-full py-2 flex items-center justify-center gap-2 text-on-surface-variant hover:text-secondary hover:bg-surface-container-lowest rounded-lg transition-colors font-label-md" onclick="rcAddChore()">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                            Thêm thẻ
+                        </button>
+</div>
+</div>
+<!-- Column: Đã xong (Done) -->
+<div class="bg-surface-bright rounded-xl border border-outline-variant/30 flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden opacity-90" id="done-column">
+<!-- Column Header -->
+<div class="p-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface/50">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Đã xong</h3>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded-full text-label-sm ml-1" id="done-count">2</span>
+</div>
+<button class="text-tertiary hover:text-on-surface transition-colors p-1" onclick="RC.toast('Tuỳ chọn cột đang được phát triển', 'info')">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<!-- Column Content (Cards) -->
+<div class="p-4 flex-1 overflow-y-auto kanban-col space-y-4">
+<!-- Done Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/20 shadow-sm opacity-70 hover:opacity-100 transition-opacity group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<label class="relative flex items-start cursor-pointer mt-0.5">
+<input checked="" class="peer sr-only" disabled="" type="checkbox">
+<div class="w-5 h-5 rounded border-2 border-primary bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[16px]" data-icon="check">check</span>
+</div>
+</label>
+<div>
+<h4 class="text-body-md font-headline-sm text-on-surface line-through text-on-surface-variant">Thanh toán tiền điện</h4>
+<p class="text-body-sm text-on-surface-variant line-clamp-1 mt-0.5 line-through">Tháng 9/2023</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex gap-2">
+<span class="bg-[#e6f4ea] text-[#1e8e3e] px-2 py-1 rounded-md text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="done_all">done_all</span>
+                                        Hoàn thành
+                                    </span>
+</div>
+<img alt="Assignee" class="w-7 h-7 rounded-full object-cover ring-2 ring-surface-bright grayscale" data-alt="A close up portrait of a young professional Vietnamese woman smiling in a bright, modern indoor environment with soft natural lighting, warm aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdV_vbJgLRIVEyDvvKmWaHMc5rqcp1qgQDu_F456ANFA6MKmAk6WIaqI7-YolIbDvbn3bV6uSiMuVNcv4X1BdI17xcvLLiwce7RWKtp5xvtDkIM21_nDGG67AUYwt8BLlPappbkCG_syMCLolKcW810joIcbWFqDW1Drht6Znz0Sp2om99I9Ymgn3PZiEVu-D-mMbi3g9OyD6aIWB4qUPcqo5rTyDdqXSzIgwX5Fm_BdssEE4LufB_pcuubvJUt991a2WpfaJdksKs">
+</div>
+</div>
+<!-- Done Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/20 shadow-sm opacity-70 hover:opacity-100 transition-opacity group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<label class="relative flex items-start cursor-pointer mt-0.5">
+<input checked="" class="peer sr-only" disabled="" type="checkbox">
+<div class="w-5 h-5 rounded border-2 border-primary bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[16px]" data-icon="check">check</span>
+</div>
+</label>
+<div>
+<h4 class="text-body-md font-headline-sm text-on-surface line-through text-on-surface-variant">Giặt rèm cửa</h4>
+<p class="text-body-sm text-on-surface-variant line-clamp-1 mt-0.5 line-through">Phòng khách và phòng ngủ 1</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex gap-2">
+<span class="bg-[#e6f4ea] text-[#1e8e3e] px-2 py-1 rounded-md text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="done_all">done_all</span>
+                                        Hoàn thành
+                                    </span>
+</div>
+<img alt="Assignee" class="w-7 h-7 rounded-full object-cover ring-2 ring-surface-bright grayscale" data-alt="Portrait of a young Asian man wearing round glasses, casual modern style, well lit." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv5hUyKXs-SNRucV3k6graOgvFuaIJfFB_kvaDr8CzafTfz4oBQzk-wXoU4CggQsgW2wexsoSUpwDsIAM-UZVVDl5jvvi_BgdsKydpFGYNevyIrjHKx-BdFPoM8dx_ah2V_noG5N0Ebpbu2-w8ZTAMCD3El36x-w3hkT7USPE5_3A_HMT7Iv7z7HWizYuHrEZLZ6tXqv3OuJzZJQ0rGmjF2baXU1Z3nz7wSzMab_FFpjY0Vakr4VMXrpwA_97sK87MCCXeWZwfonJ-">
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+function rcUpdateCounts() {
+  document.getElementById('todo-count').textContent = document.querySelectorAll('#todo-column .kanban-col > div').length;
+  document.getElementById('done-count').textContent = document.querySelectorAll('#done-column .kanban-col > div').length;
+}
+function rcToggleChore(checkbox) {
+  const card = checkbox.closest('.group');
+  if (!card || !checkbox.checked) return;
+  const title = card.querySelector('h4');
+  const desc = card.querySelector('p');
+  if (title) { title.classList.add('line-through', 'text-on-surface-variant'); }
+  if (desc) { desc.classList.add('line-through'); }
+  checkbox.disabled = true;
+  card.classList.add('opacity-70');
+  setTimeout(function () {
+    document.getElementById('done-column').querySelector('.kanban-col').appendChild(card);
+    rcUpdateCounts();
+    RC.toast('Đã hoàn thành: ' + (title ? title.textContent : 'công việc'));
+  }, 350);
+}
+function rcAddChore() {
+  const title = prompt('Tên công việc mới:');
+  if (!title || !title.trim()) return;
+  const col = document.getElementById('todo-column').querySelector('.kanban-col');
+  const card = document.createElement('div');
+  card.className = 'bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/40 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all cursor-grab group';
+  card.innerHTML =
+    '<div class="flex justify-between items-start mb-3"><div class="flex gap-3">' +
+    '<label class="relative flex items-start cursor-pointer mt-0.5"><input class="peer sr-only" type="checkbox" onchange="rcToggleChore(this)">' +
+    '<div class="w-5 h-5 rounded border-2 border-outline-variant peer-checked:bg-primary peer-checked:border-primary transition-all flex items-center justify-center">' +
+    '<span class="material-symbols-outlined text-white text-[16px] opacity-0 peer-checked:opacity-100 transition-opacity">check</span></div></label>' +
+    '<div><h4 class="text-body-md font-headline-sm text-on-surface group-hover:text-secondary transition-colors">' + title.trim() + '</h4>' +
+    '<p class="text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Việc mới thêm</p></div></div></div>' +
+    '<div class="flex justify-between items-center mt-4"><div class="flex gap-2">' +
+    '<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded-md text-[11px] font-semibold">Chưa xếp lịch</span></div></div>';
+  col.appendChild(card);
+  rcUpdateCounts();
+  RC.toast('Đã thêm việc: ' + title.trim());
+}
+</script>
+<!-- Bottom Navigation (Mobile Only - Fallback if implemented in responsive design, though prompt focuses on desktop layout style mostly, adding for completeness of standard app structure) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface-bright border-t border-outline-variant z-20 pb-safe">
+<div class="flex justify-around items-center h-16">
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant" href="index.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant" href="settle.html">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-secondary" href="chores.html">
+<span class="material-symbols-outlined fill" data-icon="cleaning_services" data-weight="fill">cleaning_services</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant" href="profile.html">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</a>
+</div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
